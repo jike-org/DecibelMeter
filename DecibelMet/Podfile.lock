@@ -1,0 +1,26 @@
+PODS:
+  - Charts (4.0.2):
+    - Charts/Core (= 4.0.2)
+  - Charts/Core (4.0.2):
+    - SwiftAlgorithms (~> 1.0)
+  - KDCircularProgress (1.5.4)
+  - SwiftAlgorithms (1.0.0)
+
+DEPENDENCIES:
+  - Charts
+  - KDCircularProgress
+
+SPEC REPOS:
+  trunk:
+    - Charts
+    - KDCircularProgress
+    - SwiftAlgorithms
+
+SPEC CHECKSUMS:
+  Charts: cfa4e911e6dc289582c2fe011a0e87c03d96727f
+  KDCircularProgress: 98200c6b8e85d22bc04eb644721d3b1e12b0686b
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+
+PODFILE CHECKSUM: f09e563025841b88e57ae8c981d190b71350c441
+
+COCOAPODS: 1.11.2
