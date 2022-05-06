@@ -18,7 +18,9 @@
 		01A259A42823DCD300EBA84C /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A32823DCD200EBA84C /* TabBar.swift */; };
 		01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A52823DCFD00EBA84C /* CameraController.swift */; };
 		01A259A82823DD0900EBA84C /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A72823DD0900EBA84C /* SaveController.swift */; };
-		01A259AA2823DD1500EBA84C /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A92823DD1500EBA84C /* SettingController.swift */; };
+		01A259AC2823FD8400EBA84C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259AB2823FD8400EBA84C /* SettingViewController.swift */; };
+		01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259AE2823FD9C00EBA84C /* SettingCell.swift */; };
+		01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259B02823FDDA00EBA84C /* ImageView.swift */; };
 		01B3EB7B2822BE8B004001C1 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B3EB7A2822BE8B004001C1 /* UILabel.swift */; };
 		01D2DCE128229BC7003AB953 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE028229BC7003AB953 /* AppDelegate.swift */; };
 		01D2DCE328229BC7003AB953 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE228229BC7003AB953 /* SceneDelegate.swift */; };
@@ -40,7 +42,9 @@
 		01A259A32823DCD200EBA84C /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		01A259A52823DCFD00EBA84C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		01A259A72823DD0900EBA84C /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
-		01A259A92823DD1500EBA84C /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		01A259AB2823FD8400EBA84C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		01A259AE2823FD9C00EBA84C /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		01A259B02823FDDA00EBA84C /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		01B3EB7A2822BE8B004001C1 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		01D2DCDD28229BC7003AB953 /* DecibelMet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecibelMet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D2DCE028229BC7003AB953 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +91,15 @@
 			path = UserInterface;
 			sourceTree = "<group>";
 		};
+		01A259AD2823FD8A00EBA84C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				01A259AB2823FD8400EBA84C /* SettingViewController.swift */,
+				01A259AE2823FD9C00EBA84C /* SettingCell.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		01D2DCD428229BC7003AB953 = {
 			isa = PBXGroup;
 			children = (
@@ -113,8 +126,9 @@
 				01D2DCE428229BC7003AB953 /* RecordView.swift */,
 				01A259A32823DCD200EBA84C /* TabBar.swift */,
 				01A259A52823DCFD00EBA84C /* CameraController.swift */,
+				01A259B02823FDDA00EBA84C /* ImageView.swift */,
+				01A259AD2823FD8A00EBA84C /* Setting */,
 				01A259A72823DD0900EBA84C /* SaveController.swift */,
-				01A259A92823DD1500EBA84C /* SettingController.swift */,
 				0180CE3A2822C93D00E80380 /* UserInterface */,
 				0180CE332822C20C00E80380 /* RecorderInfo.swift */,
 				0180CE352822C2EB00E80380 /* Constants.swift */,
@@ -258,12 +272,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0180CE322822C1ED00E80380 /* Recorder.swift in Sources */,
+				01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */,
 				0180CE362822C2EB00E80380 /* Constants.swift in Sources */,
 				01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */,
 				0180CE2E2822C19200E80380 /* Button.swift in Sources */,
-				01A259AA2823DD1500EBA84C /* SettingController.swift in Sources */,
+				01A259AC2823FD8400EBA84C /* SettingViewController.swift in Sources */,
 				0180CE2A2822C10C00E80380 /* AvgMinMaxBar.swift in Sources */,
 				01A259A82823DD0900EBA84C /* SaveController.swift in Sources */,
+				01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */,
 				0180CE382822C73400E80380 /* Player.swift in Sources */,
 				01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */,
 				01D2DCE128229BC7003AB953 /* AppDelegate.swift in Sources */,

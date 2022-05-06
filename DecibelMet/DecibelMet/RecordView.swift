@@ -23,6 +23,7 @@ class RecordView: UIViewController {
     lazy var decibelLabel   = Label(style: .decibelHeading, "0")
     lazy var timeLabel      = Label(style: .time, "00:00")
 //    lazy var timeTitleLabel = Label(style: .timeTitle, "TIME")
+    lazy var titleViewController = Label(style: .heading, "Decibel Meter")
     
     lazy var progress = KDCircularProgress(
         frame: CGRect(x: 0, y: 0, width: view.frame.width / 1.2, height: view.frame.width / 1.2)
@@ -309,7 +310,7 @@ extension RecordView {
         resetButton.addTarget(self, action: #selector(resetAction), for: .touchUpInside)
         
         setupCircleView()
-        
+        view.addSubview(titleViewController)
         view.addSubview(progress)
         view.addSubview(verticalStack)
         verticalStack.addArrangedSubview(decibelLabel)
@@ -351,7 +352,11 @@ extension RecordView {
             resetButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             
             playOrPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            playOrPauseButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
+            playOrPauseButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            
+            titleViewController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            titleViewController.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            titleViewController.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ]
         
         let constraintsForSmallDisplay = [

@@ -7,11 +7,14 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 class CameraController: UIViewController {
+    
+    lazy var cameraViewController = Label(style: .heading, "Camera")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .yellow
+        view.backgroundColor = .orange
         tabBarController?.tabBar.isHidden = true
         setup()
     }
@@ -29,11 +32,7 @@ class CameraController: UIViewController {
         
         return button
     }()
-    
-    
-    
 }
-
 
 extension CameraController {
     
@@ -48,10 +47,14 @@ extension CameraController {
     
     func setup() {
         view.addSubview(backButton)
+        view.addSubview(cameraViewController)
         backButton.addTarget(self, action: #selector(backButtonCamera), for: .touchUpInside)
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            cameraViewController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            cameraViewController.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            
         ])
     }
 }

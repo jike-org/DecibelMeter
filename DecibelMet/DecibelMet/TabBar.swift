@@ -45,7 +45,7 @@ extension TabBar {
         )
         home.tabBarItem = homeIcon
         
-        let settings     = settingController()
+        let settings     = SettingsView()
         let settingsIcon = UITabBarItem(
             title: "Settings",
             image: UIImage(systemName: "seal"),
