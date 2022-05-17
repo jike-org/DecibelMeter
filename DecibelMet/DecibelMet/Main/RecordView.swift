@@ -23,7 +23,6 @@ class RecordView: UIViewController {
     lazy var decibelLabel   = Label(style: .decibelHeading, "0")
     lazy var timeLabel      = Label(style: .time, "00:00")
 //    lazy var timeTitleLabel = Label(style: .timeTitle, "TIME")
-    lazy var titleViewController = Label(style: .heading, "Decibel Meter")
     
     lazy var progress = KDCircularProgress(
         frame: CGRect(x: 0, y: 0, width: view.frame.width / 1.2, height: view.frame.width / 1.2)
@@ -60,23 +59,27 @@ class RecordView: UIViewController {
         chart.xAxis.drawLabelsEnabled = false
         
         chart.leftAxis.axisMinimum = 0.0
-        chart.leftAxis.axisMaximum = 150.0
+        chart.leftAxis.axisMaximum = 100.0
         
         chart.translatesAutoresizingMaskIntoConstraints = false
         
         return chart
     }()
     
-//    lazy var recordButton = Button(style: .record, nil)
-//    lazy var playOrPauseButton = Button(style: .playOrPause, nil)
-//    lazy var continueButton = Button(style: ._continue, nil)
+    lazy var backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.1176470444, green: 0.1176470444, blue: 0.1176470444, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 18
+        return view
+    }()
     
-    lazy var playOrPauseButton: UIButton = {
+    lazy var saveButton: UIButton = {
         let button = UIButton()
         let radius: CGFloat = 20
         let size: CGFloat = 45
-        button.backgroundColor = .systemGray
         button.layer.cornerRadius = radius
+        button.setImage(UIImage(named: "button3-3"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -88,8 +91,8 @@ class RecordView: UIViewController {
         let button = UIButton()
         let radius: CGFloat = 20
         let size: CGFloat = 45
-        button.backgroundColor = .systemGray
         button.layer.cornerRadius = radius
+        button.setImage(UIImage(named: "button3-2"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -99,10 +102,10 @@ class RecordView: UIViewController {
     
     lazy var recordButton: UIButton = {
         let button = UIButton()
-        let radius: CGFloat = 20
-        let size: CGFloat = 45
-        button.backgroundColor = .systemGray
+        let radius: CGFloat = 130
+        let size: CGFloat = 130
         button.layer.cornerRadius = radius
+        button.setImage(UIImage(named: "button3"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -168,7 +171,9 @@ class RecordView: UIViewController {
         recorder.delegate = self
         recorder.avDelegate = self
         
-        setupView()
+//        setupView()
+        tabBarController?.tabBar.isHidden = false
+        setupConstraint()
         
         if Constants().isRecordingAtLaunchEnabled {
             isRecording = true
@@ -196,7 +201,6 @@ class RecordView: UIViewController {
     }
 }
 
-
 // MARK: Record/stop button action
 extension RecordView {
     
@@ -221,9 +225,6 @@ extension RecordView {
     }
     
 }
-
-
-
 
 // MARK: Start/stop recording
 extension RecordView {
@@ -298,25 +299,69 @@ extension RecordView {
         }
 }
 
-
 // MARK: Setup view
+extension RecordView {
+    func setupConstraint() {
+        
+        setupCircleView()
+        view.addSubview(chart)
+        view.addSubview(progress)
+        view.addSubview(progress)
+        view.addSubview(avgBar)
+        view.addSubview(verticalStack)
+        view.addSubview(backView)
+        backView.addSubview(recordButton)
+        backView.addSubview(resetButton)
+        backView.addSubview(saveButton)
+        verticalStack.addArrangedSubview(decibelLabel)
+        verticalStack.addArrangedSubview(timeLabel)
+        
+        NSLayoutConstraint.activate([
+            verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor, constant: -30),
+            verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
+            
+            chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            chart.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            chart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            chart.heightAnchor.constraint(equalToConstant: 200),
+            
+            avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            avgBar.centerYAnchor.constraint(equalTo: progress.centerYAnchor, constant: 60),
+            
+            backView.topAnchor.constraint(equalTo: avgBar.topAnchor, constant: 90),
+            backView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            backView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
+            
+            recordButton.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
+            recordButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
+            
+            resetButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
+            resetButton.leadingAnchor.constraint(equalTo: backView.safeAreaLayoutGuide.leadingAnchor, constant: 73.5),
+            resetButton.trailingAnchor.constraint(equalTo: recordButton.leadingAnchor, constant: -24),
+
+            saveButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
+            saveButton.trailingAnchor.constraint(equalTo: backView.safeAreaLayoutGuide.trailingAnchor, constant: -73.5),
+            saveButton.leadingAnchor.constraint(equalTo: recordButton.trailingAnchor, constant: 24),
+            
+            
+            
+        ])
+    }
+}
+
 extension RecordView {
     
     private func setupView() {
         view.backgroundColor = .black
-        
-        recordButton.addTarget(self, action: #selector(startOrStopRecordAction), for: .touchUpInside)
-        playOrPauseButton.addTarget(self, action: #selector(playOrPauseAction), for: .touchUpInside)
-        resetButton.addTarget(self, action: #selector(resetAction), for: .touchUpInside)
-        
+
         setupCircleView()
-        view.addSubview(titleViewController)
         view.addSubview(progress)
         view.addSubview(verticalStack)
         verticalStack.addArrangedSubview(decibelLabel)
         verticalStack.addArrangedSubview(timeLabel)
 //        verticalStack.addArrangedSubview(timeTitleLabel)
-        
+
         if Constants().isBig {
             view.addSubview(avgBar)
             view.addSubview(chart)
@@ -324,86 +369,88 @@ extension RecordView {
             view.addSubview(containerForSmallDisplay)
             containerForSmallDisplay.addSubview(avgBar)
         }
-    
+
         view.addSubview(recordButton)
-        view.addSubview(playOrPauseButton)
+        
         view.addSubview(resetButton)
-        
+
         verticalStack.setCustomSpacing(10, after: decibelLabel)
-        
+
         let constraints: [NSLayoutConstraint]
-        
+
         let constraintsForBigDisplay = [
             verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
             verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
-            
+
             avgBar.topAnchor.constraint(equalTo: progress.bottomAnchor, constant: 5),
             avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            chart.topAnchor.constraint(equalTo: avgBar.bottomAnchor, constant: 30),
+
+            chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             chart.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             chart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            chart.bottomAnchor.constraint(equalTo: recordButton.topAnchor, constant: -30),
-            
+            chart.heightAnchor.constraint(equalToConstant: 10),
+
+            progress.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 40),
+            progress.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            progress.heightAnchor.constraint(equalToConstant: 150),
+
             recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
             resetButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             resetButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            
-            playOrPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            playOrPauseButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            
-            titleViewController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            titleViewController.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            titleViewController.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
+
+           
+
         ]
-        
+
         let constraintsForSmallDisplay = [
             verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
             verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
-            
+
             containerForSmallDisplay.topAnchor.constraint(equalTo: progress.bottomAnchor),
             containerForSmallDisplay.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             containerForSmallDisplay.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             containerForSmallDisplay.bottomAnchor.constraint(equalTo: recordButton.topAnchor),
-            
+
             avgBar.centerXAnchor.constraint(equalTo: containerForSmallDisplay.centerXAnchor),
             avgBar.centerYAnchor.constraint(equalTo: containerForSmallDisplay.centerYAnchor, constant: -20),
-            
+
             recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
-        
+
         if Constants().isBig {
             constraints = constraintsForBigDisplay
         } else {
             constraints = constraintsForSmallDisplay
         }
-        
+
         NSLayoutConstraint.activate(constraints)
     }
     
     // MARK: Setup circle view
     private func setupCircleView() {
-        progress.startAngle = -270
-        progress.progressThickness = 0.4
-        progress.trackThickness = 0.6
+        progress.startAngle = -180
+        progress.angle = 0
+        progress.progressThickness = 0.5
+        progress.trackThickness = 0.9
         progress.clockwise = true
         progress.roundedCorners = true
         progress.glowMode = .noGlow
-        progress.trackColor = UIColor(named: "BackgroundColorTabBar")!
-        progress.set(colors: UIColor.red, UIColor.red, UIColor.orange, UIColor.orange, UIColor.green )
+        progress.trackColor = .black
+        progress.set(colors:UIColor.purple, UIColor.blue, UIColor.blue, UIColor.purple)
         
-        if Constants().screenSize.height <= 667 {
-            progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.9)
-        } else {
-            progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.5)
-        }
-        
-        if Constants().isBig {
-            progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.9)
-        }
+//        if Constants().screenSize.height <= 667 {
+//            progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.9)
+//        } else {
+//            progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.5)
+//        }
+//
+//        if Constants().isBig {
+//            progress.center = CGPoint(x: view.center.x, y: view.center.y / 2)
+//        }
+        progress.center = CGPoint(x: view.center.x, y: view.center.y / 0.9 )
     }
     
     func updateChartData() {
@@ -415,20 +462,18 @@ extension RecordView {
         let data = BarChartData(dataSet: set)
         chart.data = data
         
-        set.colors = [UIColor(named: "Color")!]
+        set.colors = [.purple, .purple, .purple]
         
         chart.barData?.setDrawValues(false)
     }
     
 }
 
-
 // MARK: Recorder delegate
 extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
     func recorder(_ recorder: Recorder, didFinishRecording info: RecordInfo) {
         // FIXME: Unusual
     }
-    
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         print("Record finished")
@@ -465,7 +510,7 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
     }
     
     func recorder(_ recorder: Recorder, didCaptureDecibels decibels: Int) {
-        let degree = 360 / 96
+        let degree = 180 / 110
         
         guard let min = recorder.min else { return }
         guard let max = recorder.max else { return }
@@ -499,5 +544,3 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
     }
     
 }
-
-

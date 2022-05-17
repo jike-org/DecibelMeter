@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01443A4D2830E09100E4D413 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01443A4C2830E09100E4D413 /* OnBoardingView.swift */; };
+		01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01443A502830E0BC00E4D413 /* OnBoardingManager.swift */; };
+		01658FA128324191001336A4 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA028324191001336A4 /* Collection.swift */; };
+		01658FA328324363001336A4 /* FirstListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA228324363001336A4 /* FirstListView.swift */; };
+		01658FA5283245C5001336A4 /* SecondListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA4283245C5001336A4 /* SecondListView.swift */; };
+		01658FA7283245D4001336A4 /* ThirdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA6283245D4001336A4 /* ThirdListView.swift */; };
+		01658FA9283245E0001336A4 /* SubscribeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA8283245DF001336A4 /* SubscribeOneView.swift */; };
+		01658FAB283245EB001336A4 /* SubscribeTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FAA283245EB001336A4 /* SubscribeTwoView.swift */; };
 		0180CE2A2822C10C00E80380 /* AvgMinMaxBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE292822C10C00E80380 /* AvgMinMaxBar.swift */; };
 		0180CE2C2822C13100E80380 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE2B2822C13100E80380 /* StackView.swift */; };
 		0180CE2E2822C19200E80380 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE2D2822C19200E80380 /* Button.swift */; };
@@ -27,10 +35,19 @@
 		01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE428229BC7003AB953 /* RecordView.swift */; };
 		01D2DCEA28229BC9003AB953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D2DCE928229BC9003AB953 /* Assets.xcassets */; };
 		01D2DCED28229BC9003AB953 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01D2DCEB28229BC9003AB953 /* LaunchScreen.storyboard */; };
+		01E166832832C6D600DBC846 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E166822832C6D600DBC846 /* Image.swift */; };
 		4EC87BAD9DFCFD84A4994908 /* Pods_DecibelMet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C1D095B34E5EC19331170E /* Pods_DecibelMet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01443A4C2830E09100E4D413 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		01443A502830E0BC00E4D413 /* OnBoardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingManager.swift; sourceTree = "<group>"; };
+		01658FA028324191001336A4 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		01658FA228324363001336A4 /* FirstListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListView.swift; sourceTree = "<group>"; };
+		01658FA4283245C5001336A4 /* SecondListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondListView.swift; sourceTree = "<group>"; };
+		01658FA6283245D4001336A4 /* ThirdListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdListView.swift; sourceTree = "<group>"; };
+		01658FA8283245DF001336A4 /* SubscribeOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOneView.swift; sourceTree = "<group>"; };
+		01658FAA283245EB001336A4 /* SubscribeTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeTwoView.swift; sourceTree = "<group>"; };
 		0180CE292822C10C00E80380 /* AvgMinMaxBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgMinMaxBar.swift; sourceTree = "<group>"; };
 		0180CE2B2822C13100E80380 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		0180CE2D2822C19200E80380 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -53,6 +70,7 @@
 		01D2DCE928229BC9003AB953 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01D2DCEC28229BC9003AB953 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01D2DCEE28229BC9003AB953 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01E166822832C6D600DBC846 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		3C681B5B5084E0F76E435C81 /* Pods-DecibelMet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecibelMet.debug.xcconfig"; path = "Target Support Files/Pods-DecibelMet/Pods-DecibelMet.debug.xcconfig"; sourceTree = "<group>"; };
 		4AE006C25E5A7D0E30A64E83 /* Pods-DecibelMet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecibelMet.release.xcconfig"; path = "Target Support Files/Pods-DecibelMet/Pods-DecibelMet.release.xcconfig"; sourceTree = "<group>"; };
 		D2C1D095B34E5EC19331170E /* Pods_DecibelMet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecibelMet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +88,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01443A4E2830E0A200E4D413 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				01443A4C2830E09100E4D413 /* OnBoardingView.swift */,
+				01443A502830E0BC00E4D413 /* OnBoardingManager.swift */,
+				01443A4F2830E0A900E4D413 /* List */,
+				01658FA028324191001336A4 /* Collection.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		01443A4F2830E0A900E4D413 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				01658FA228324363001336A4 /* FirstListView.swift */,
+				01658FA4283245C5001336A4 /* SecondListView.swift */,
+				01658FA6283245D4001336A4 /* ThirdListView.swift */,
+				01658FA8283245DF001336A4 /* SubscribeOneView.swift */,
+				01658FAA283245EB001336A4 /* SubscribeTwoView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		0180CE392822C75800E80380 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +128,7 @@
 				0180CE2B2822C13100E80380 /* StackView.swift */,
 				0180CE2D2822C19200E80380 /* Button.swift */,
 				01B3EB7A2822BE8B004001C1 /* UILabel.swift */,
+				01E166822832C6D600DBC846 /* Image.swift */,
 			);
 			path = UserInterface;
 			sourceTree = "<group>";
@@ -158,6 +200,7 @@
 			children = (
 				01D2DCE028229BC7003AB953 /* AppDelegate.swift */,
 				01D2DCE228229BC7003AB953 /* SceneDelegate.swift */,
+				01443A4E2830E0A200E4D413 /* OnBoarding */,
 				01B77DF02826935600E0F59F /* Main */,
 				01B77DED2826932400E0F59F /* Support files */,
 				01B77DEF2826934900E0F59F /* Camera */,
@@ -304,18 +347,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				0180CE322822C1ED00E80380 /* Recorder.swift in Sources */,
+				01E166832832C6D600DBC846 /* Image.swift in Sources */,
 				01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */,
 				0180CE362822C2EB00E80380 /* Constants.swift in Sources */,
 				01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */,
 				0180CE2E2822C19200E80380 /* Button.swift in Sources */,
 				01A259AC2823FD8400EBA84C /* SettingViewController.swift in Sources */,
+				01658FAB283245EB001336A4 /* SubscribeTwoView.swift in Sources */,
 				0180CE2A2822C10C00E80380 /* AvgMinMaxBar.swift in Sources */,
+				01658FA328324363001336A4 /* FirstListView.swift in Sources */,
 				01A259A82823DD0900EBA84C /* SaveController.swift in Sources */,
+				01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */,
 				01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */,
 				0180CE382822C73400E80380 /* Player.swift in Sources */,
+				01443A4D2830E09100E4D413 /* OnBoardingView.swift in Sources */,
+				01658FA9283245E0001336A4 /* SubscribeOneView.swift in Sources */,
+				01658FA128324191001336A4 /* Collection.swift in Sources */,
 				01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */,
 				01D2DCE128229BC7003AB953 /* AppDelegate.swift in Sources */,
+				01658FA7283245D4001336A4 /* ThirdListView.swift in Sources */,
 				01B3EB7B2822BE8B004001C1 /* UILabel.swift in Sources */,
+				01658FA5283245C5001336A4 /* SecondListView.swift in Sources */,
 				01D2DCE328229BC7003AB953 /* SceneDelegate.swift in Sources */,
 				01A259A42823DCD300EBA84C /* TabBar.swift in Sources */,
 				0180CE342822C20C00E80380 /* RecorderInfo.swift in Sources */,

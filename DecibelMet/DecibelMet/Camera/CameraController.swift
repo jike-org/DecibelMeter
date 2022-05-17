@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import AVFoundation
+import AVKit
+import MobileCoreServices
 class CameraController: UIViewController {
     
     lazy var cameraViewController = Label(style: .heading, "Camera")
@@ -43,6 +45,7 @@ extension CameraController {
         present(vc, animated: true, completion: nil)
     }
 }
+
 extension CameraController {
     
     func setup() {

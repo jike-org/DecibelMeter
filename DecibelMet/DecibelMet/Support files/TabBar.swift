@@ -20,7 +20,7 @@ class TabBar: UITabBarController {
         super.viewWillAppear(animated)
         
         setupView()
-        selectedIndex = 1
+        selectedIndex = 2
     }
     
 }
@@ -31,37 +31,45 @@ extension TabBar {
     private func setupView() {
         let saved = SaveController()
         let savedIcon = UITabBarItem(
-            title: "Saved",
-            image: UIImage(systemName: "square.and.arrow.down"),
-            selectedImage: UIImage(systemName: "square.and.arrow.down")
+            title: "",
+            image: UIImage(named: "saved"),
+            selectedImage: UIImage(named: "saved")
         )
         saved.tabBarItem = savedIcon
         
         let home     = RecordView()
         let homeIcon = UITabBarItem(
-            title: "Home",
-            image: UIImage(systemName: "house"),
-            selectedImage: UIImage(systemName: "house")
+            title: "",
+            image: UIImage(named: "home")?.withRenderingMode(.alwaysOriginal),
+            selectedImage: UIImage(named: "Home")?.withRenderingMode(.alwaysOriginal)
         )
         home.tabBarItem = homeIcon
         
         let settings     = SettingsView()
         let settingsIcon = UITabBarItem(
-            title: "Settings",
-            image: UIImage(systemName: "seal"),
-            selectedImage: UIImage(systemName: "seal")
+            title: "",
+            image: UIImage(named: "setting")?.withRenderingMode(.alwaysOriginal),
+            selectedImage: UIImage(named: "setting")?.withRenderingMode(.alwaysOriginal)
         )
         settings.tabBarItem = settingsIcon
         
         let camera = CameraController()
         let cameraIcon = UITabBarItem(
-            title: "Camera",
-            image: UIImage(systemName: "camera"),
-            selectedImage: UIImage(systemName: "camera")
+            title: "",
+            image: UIImage(named: "camera"),
+            selectedImage: UIImage(named: "camera")
         )
         camera.tabBarItem = cameraIcon
         
-        let views = [saved, home, camera, settings]
+        let faq = CameraController()
+        let faqIcon = UITabBarItem(
+            title: "",
+            image: UIImage(named: "faq"),
+            selectedImage: UIImage(named: "faq")
+        )
+        faq.tabBarItem = faqIcon
+        
+        let views = [faq, camera,home, saved, settings]
         
         viewControllers = views
         

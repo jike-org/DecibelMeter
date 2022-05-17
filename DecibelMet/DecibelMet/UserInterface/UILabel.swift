@@ -18,6 +18,7 @@ class Label: UILabel {
         case timeTitle
         case time
         case avgMinMax
+        case avgMinMaxWord
         case tableLabel
         case titleLabel
         case tableTopText
@@ -29,27 +30,27 @@ class Label: UILabel {
         
         self.text     = text
         textColor     = .white
-        numberOfLines = 0
+        numberOfLines = 1
         textAlignment = .center
         
         translatesAutoresizingMaskIntoConstraints = false
         
         switch style {
         case .heading:
-            font = UIFont(name: "OpenSans-Bold", size: 18)
+            font = UIFont.systemFont(ofSize: 27)
         case .body:
             font = UIFont(name: "OpenSans-Regular", size: 15)
         case .separator:
             font = UIFont(name: "OpenSans-Regular", size: 12)
             self.text = "|"
         case .decibelHeading:
-            font = UIFont(name: "OpenSans-Bold", size: 50)
+            font = UIFont.systemFont(ofSize: 43)
         case .timeTitle:
-            font = UIFont(name: "OpenSans-SemiBold", size: 10)
+            font = UIFont.systemFont(ofSize: 10)
         case .time:
-            font = UIFont(name: "OpenSans-Bold", size: 20)
+            font = UIFont.systemFont(ofSize: 10)
         case .avgMinMax:
-            font = UIFont(name: "OpenSans-Bold", size: 15)
+            font = UIFont.systemFont(ofSize: 10)
         case .tableLabel:
             font = UIFont(name: "OpenSans-SemiBold", size: 15)
             textAlignment = .left
@@ -59,6 +60,9 @@ class Label: UILabel {
             font = UIFont(name: "OpenSans-Regular", size: 14)
         case .tableBottomText:
             font = UIFont(name: "OpenSans-Regular", size: 10)
+        case .avgMinMaxWord:
+            font = UIFont.systemFont(ofSize: 25)
+            textColor = .purple
         }
     }
     

@@ -20,8 +20,8 @@ class Gradient {
     }
     
     init() {
-        let topColor    = UIColor(named: "GradientTopColor")!.cgColor
-        let bottomColor = UIColor(named: "GradientBottomColor")!.cgColor
+        let topColor    = #colorLiteral(red: 0, green: 0.5594989061, blue: 0.987998426, alpha: 1).cgColor
+        let bottomColor = #colorLiteral(red: 0.1541146636, green: 0, blue: 0.9970051646, alpha: 1).cgColor
         
         self.gradient           = CAGradientLayer()
         self.gradient.colors    = [topColor, bottomColor]

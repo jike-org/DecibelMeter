@@ -10,9 +10,9 @@ import UIKit
 
 class AvgMinMaxBar: UIView {
     
-    lazy var avgDecibelLabel = Label(style: .avgMinMax, "0")
-    lazy var minDecibelLabel = Label(style: .avgMinMax, "0")
-    lazy var maxDecibelLabel = Label(style: .avgMinMax, "0")
+    lazy var avgDecibelLabel = Label(style: .avgMinMaxWord, "0")
+    lazy var minDecibelLabel = Label(style: .avgMinMaxWord, "0")
+    lazy var maxDecibelLabel = Label(style: .avgMinMaxWord, "0")
 
     lazy var avgLabel = Label(style: .avgMinMax, "AVG")
     lazy var minLabel = Label(style: .avgMinMax, "MIN")
@@ -24,7 +24,7 @@ class AvgMinMaxBar: UIView {
         s.axis         = .horizontal
         s.alignment    = .fill
         s.distribution = .fillProportionally
-        s.spacing      = 50
+        s.spacing      = 100
         
         s.translatesAutoresizingMaskIntoConstraints = false
         

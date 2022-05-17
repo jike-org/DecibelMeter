@@ -88,7 +88,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = SettingsCell(
             reuseIdentifier: "cell",
-            icon: ImageView(image: .documentIcon),
+            icon: ImageView(image: .lock),
             label: Label(style: .tableLabel, "User agreement"),
             isUsingSwitch: false
         )
@@ -97,50 +97,50 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
         case 0:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
-                icon: ImageView(image: .feedbackIcon),
-                label: Label(style: .tableLabel, "FAQ"),
+                icon: ImageView(image: .lock),
+                label: Label(style: .tableLabel, "Unlock all features"),
                 isUsingSwitch: false
             )
         case 1:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
-                icon: ImageView(image: .shareIcon),
-                label: Label(style: .tableLabel, "Rate US"),
+                icon: ImageView(image: .faq),
+                label: Label(style: .tableLabel, "FAQ"),
                 isUsingSwitch: false
             )
         case 2:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
-                icon: ImageView(image: .privacyIcon),
-                label: Label(style: .tableLabel, "Support"),
+                icon: ImageView(image: .rate),
+                label: Label(style: .tableLabel, "Rate us"),
                 isUsingSwitch: false
             )
         case 3:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
-                icon: ImageView(image: .documentIcon),
-                label: Label(style: .tableLabel, "Privacy Police"),
+                icon: ImageView(image: .support),
+                label: Label(style: .tableLabel, "Support"),
                 isUsingSwitch: false
             )
         case 4:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
-                icon: ImageView(image: .playIcon),
-                label: Label(style: .tableLabel, "Terms of use"),
+                icon: ImageView(image: .privacy),
+                label: Label(style: .tableLabel, "Privacy police"),
                 isUsingSwitch: false
             )
         case 5:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
-                icon: ImageView(image: .playIcon),
-                label: Label(style: .tableLabel, "Share with friends"),
+                icon: ImageView(image: .terms),
+                label: Label(style: .tableLabel, "Terms of use"),
                 isUsingSwitch: false
             )
         case 6:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
-                icon: ImageView(image: .playIcon),
-                label: Label(style: .tableLabel, "Auto-Start on launch"),
+                icon: ImageView(image: .share),
+                label: Label(style: .tableLabel, "Share with friends"),
                 isUsingSwitch: true
             )
         default:

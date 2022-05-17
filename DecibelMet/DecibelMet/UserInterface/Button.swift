@@ -44,7 +44,7 @@ class Button: UIButton {
         case .link:
             setTitle(text, for: .normal)
             setTitleColor(.gray, for: .normal)
-            titleLabel?.font = UIFont(name: "OpenSans-Regular", size: 12)!
+            titleLabel?.font = UIFont.systemFont(ofSize: 12)
         case .record:
             setImage(UIImage(named: "Microphone"), for: .normal)
             backgroundColor = UIColor(named: "RecordButtonColor")
