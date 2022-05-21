@@ -5,22 +5,26 @@ PODS:
     - SwiftAlgorithms (~> 1.0)
   - KDCircularProgress (1.5.4)
   - SwiftAlgorithms (1.0.0)
+  - SwiftyCam (4.0.0)
 
 DEPENDENCIES:
   - Charts
   - KDCircularProgress
+  - SwiftyCam
 
 SPEC REPOS:
   trunk:
     - Charts
     - KDCircularProgress
     - SwiftAlgorithms
+    - SwiftyCam
 
 SPEC CHECKSUMS:
   Charts: cfa4e911e6dc289582c2fe011a0e87c03d96727f
   KDCircularProgress: 98200c6b8e85d22bc04eb644721d3b1e12b0686b
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+  SwiftyCam: 6e57914771d972fbe508e759dc9d0150a44a93fd
 
-PODFILE CHECKSUM: f09e563025841b88e57ae8c981d190b71350c441
+PODFILE CHECKSUM: ddad1a81211407dd1d49526c996a5438ed22dc66
 
 COCOAPODS: 1.11.2

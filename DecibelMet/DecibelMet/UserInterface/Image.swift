@@ -30,7 +30,7 @@ class ImageView: UIImageView {
         case .lock:
             self.image = UIImage(named: "lock")
         case .faq:
-            self.image = UIImage(named: "faq")
+            self.image = UIImage(named: "FAQ")
         case .rate:
             self.image = UIImage(named: "rate")
         case .support:
@@ -38,7 +38,7 @@ class ImageView: UIImageView {
         case .privacy:
             self.image = UIImage(named: "privacy")
         case .terms:
-            self.image = UIImage(named: "terms")
+            self.image = UIImage(named: "privacy")
         case .share:
             self.image = UIImage(named: "share")
         }

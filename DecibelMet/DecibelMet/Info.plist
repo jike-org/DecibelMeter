@@ -6,6 +6,10 @@
 	<string>Access</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Access</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Test</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>test1</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

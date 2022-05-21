@@ -52,10 +52,11 @@ class Label: UILabel {
         case .avgMinMax:
             font = UIFont.systemFont(ofSize: 10)
         case .tableLabel:
-            font = UIFont(name: "OpenSans-SemiBold", size: 15)
-            textAlignment = .left
+            font = UIFont(name: "OpenSans-SemiBold", size: 17)
+            textAlignment = .right
         case .titleLabel:
             font = UIFont(name: "OpenSans-SemiBold", size: 17)
+            textAlignment = .left
         case .tableTopText:
             font = UIFont(name: "OpenSans-Regular", size: 14)
         case .tableBottomText:

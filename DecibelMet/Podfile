@@ -8,4 +8,5 @@ target 'DecibelMet' do
   # Pods for DecibelMet
   pod 'KDCircularProgress'
   pod 'Charts'
+  pod 'SwiftyCam'
 end

@@ -35,6 +35,7 @@
 		01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE428229BC7003AB953 /* RecordView.swift */; };
 		01D2DCEA28229BC9003AB953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D2DCE928229BC9003AB953 /* Assets.xcassets */; };
 		01D2DCED28229BC9003AB953 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01D2DCEB28229BC9003AB953 /* LaunchScreen.storyboard */; };
+		01DDF4822833D6A100CCFDF9 /* SaveControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */; };
 		01E166832832C6D600DBC846 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E166822832C6D600DBC846 /* Image.swift */; };
 		4EC87BAD9DFCFD84A4994908 /* Pods_DecibelMet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C1D095B34E5EC19331170E /* Pods_DecibelMet.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		01D2DCE928229BC9003AB953 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01D2DCEC28229BC9003AB953 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01D2DCEE28229BC9003AB953 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveControllerInfo.swift; sourceTree = "<group>"; };
 		01E166822832C6D600DBC846 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		3C681B5B5084E0F76E435C81 /* Pods-DecibelMet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecibelMet.debug.xcconfig"; path = "Target Support Files/Pods-DecibelMet/Pods-DecibelMet.debug.xcconfig"; sourceTree = "<group>"; };
 		4AE006C25E5A7D0E30A64E83 /* Pods-DecibelMet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecibelMet.release.xcconfig"; path = "Target Support Files/Pods-DecibelMet/Pods-DecibelMet.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				01A259A72823DD0900EBA84C /* SaveController.swift */,
+				01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */,
 			);
 			path = Save;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				01658FA7283245D4001336A4 /* ThirdListView.swift in Sources */,
 				01B3EB7B2822BE8B004001C1 /* UILabel.swift in Sources */,
 				01658FA5283245C5001336A4 /* SecondListView.swift in Sources */,
+				01DDF4822833D6A100CCFDF9 /* SaveControllerInfo.swift in Sources */,
 				01D2DCE328229BC7003AB953 /* SceneDelegate.swift in Sources */,
 				01A259A42823DCD300EBA84C /* TabBar.swift in Sources */,
 				0180CE342822C20C00E80380 /* RecorderInfo.swift in Sources */,

@@ -10,15 +10,17 @@ import UIKit
 import AVFoundation
 import AVKit
 import MobileCoreServices
-class CameraController: UIViewController {
+class CameraController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
+    var controller = UIImagePickerController()
+    let videoFileName = "/video.mp4"
     lazy var cameraViewController = Label(style: .heading, "Camera")
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .orange
         tabBarController?.tabBar.isHidden = true
         setup()
+        openVideoCamera()
     }
     
     lazy var backButton: UIButton = {
@@ -34,6 +36,32 @@ class CameraController: UIViewController {
         
         return button
     }()
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedVideo:URL = (info[UIImagePickerController.InfoKey.mediaURL] as? URL) {
+            // Save video to the main photo album
+            let selectorToCall = #selector(CameraController.videoSaved(_:didFinishSavingWithError:context:))
+            UISaveVideoAtPathToSavedPhotosAlbum(selectedVideo.relativePath, self, selectorToCall, nil)
+            
+            // Save the video to the app directory so we can play it later
+            let videoData = try? Data(contentsOf: selectedVideo)
+            let paths = NSSearchPathForDirectoriesInDomains(
+                FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+            let documentsDirectory: URL = URL(fileURLWithPath: paths[0])
+            let dataPath = documentsDirectory.appendingPathComponent(videoFileName)
+            try! videoData?.write(to: dataPath, options: [])
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func videoSaved(_ video: String, didFinishSavingWithError error: NSError!, context: UnsafeMutableRawPointer){
+        if let theError = error {
+            print("error saving the video = \(theError)")
+        } else {
+            DispatchQueue.main.async(execute: { () -> Void in
+            })
+        }
+    }
 }
 
 extension CameraController {
@@ -44,6 +72,22 @@ extension CameraController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
+    
+    func openVideoCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            
+            // 2 Present UIImagePickerController to take video
+            controller.sourceType = .camera
+            controller.mediaTypes = [kUTTypeMovie as String]
+            controller.delegate = self
+            
+            present(controller, animated: true, completion: nil)
+        }
+        else {
+            print("Camera is not available")
+        }
+    }
+ 
 }
 
 extension CameraController {
