@@ -19,6 +19,7 @@
 		017A4ADD283E458800D4092C /* RecordClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4ADC283E458800D4092C /* RecordClass.swift */; };
 		017A4ADF283E45B400D4092C /* RecordProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4ADE283E45B400D4092C /* RecordProperty.swift */; };
 		017A4AE1283E45CC00D4092C /* RecordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4AE0283E45CC00D4092C /* RecordInfo.swift */; };
+		017A4AE8283E503F00D4092C /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4AE7283E503F00D4092C /* SaveController.swift */; };
 		0180CE2A2822C10C00E80380 /* AvgMinMaxBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE292822C10C00E80380 /* AvgMinMaxBar.swift */; };
 		0180CE2C2822C13100E80380 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE2B2822C13100E80380 /* StackView.swift */; };
 		0180CE2E2822C19200E80380 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE2D2822C19200E80380 /* Button.swift */; };
@@ -29,7 +30,7 @@
 		0180CE382822C73400E80380 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE372822C73400E80380 /* Player.swift */; };
 		01A259A42823DCD300EBA84C /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A32823DCD200EBA84C /* TabBar.swift */; };
 		01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A52823DCFD00EBA84C /* CameraController.swift */; };
-		01A259A82823DD0900EBA84C /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A72823DD0900EBA84C /* SaveController.swift */; };
+		01A259A82823DD0900EBA84C /* SaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A72823DD0900EBA84C /* SaveCell.swift */; };
 		01A259AC2823FD8400EBA84C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259AB2823FD8400EBA84C /* SettingViewController.swift */; };
 		01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259AE2823FD9C00EBA84C /* SettingCell.swift */; };
 		01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259B02823FDDA00EBA84C /* ImageView.swift */; };
@@ -57,6 +58,7 @@
 		017A4ADC283E458800D4092C /* RecordClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordClass.swift; sourceTree = "<group>"; };
 		017A4ADE283E45B400D4092C /* RecordProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordProperty.swift; sourceTree = "<group>"; };
 		017A4AE0283E45CC00D4092C /* RecordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInfo.swift; sourceTree = "<group>"; };
+		017A4AE7283E503F00D4092C /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
 		0180CE292822C10C00E80380 /* AvgMinMaxBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgMinMaxBar.swift; sourceTree = "<group>"; };
 		0180CE2B2822C13100E80380 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		0180CE2D2822C19200E80380 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 		0180CE372822C73400E80380 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		01A259A32823DCD200EBA84C /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		01A259A52823DCFD00EBA84C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
-		01A259A72823DD0900EBA84C /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
+		01A259A72823DD0900EBA84C /* SaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCell.swift; sourceTree = "<group>"; };
 		01A259AB2823FD8400EBA84C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		01A259AE2823FD9C00EBA84C /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		01A259B02823FDDA00EBA84C /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -125,11 +127,27 @@
 			isa = PBXGroup;
 			children = (
 				017A4ADA283E455900D4092C /* Persist.swift */,
+				017A4AE5283E4F3D00D4092C /* Model */,
+			);
+			path = Persist;
+			sourceTree = "<group>";
+		};
+		017A4AE5283E4F3D00D4092C /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				017A4ADC283E458800D4092C /* RecordClass.swift */,
 				017A4ADE283E45B400D4092C /* RecordProperty.swift */,
 				017A4AE0283E45CC00D4092C /* RecordInfo.swift */,
 			);
-			path = Persist;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		017A4AE6283E4F7000D4092C /* SavedInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */,
+			);
+			path = SavedInfoView;
 			sourceTree = "<group>";
 		};
 		0180CE392822C75800E80380 /* Sound */ = {
@@ -177,8 +195,9 @@
 		01B77DEE2826933E00E0F59F /* Save */ = {
 			isa = PBXGroup;
 			children = (
-				01A259A72823DD0900EBA84C /* SaveController.swift */,
-				01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */,
+				01A259A72823DD0900EBA84C /* SaveCell.swift */,
+				017A4AE7283E503F00D4092C /* SaveController.swift */,
+				017A4AE6283E4F7000D4092C /* SavedInfoView */,
 			);
 			path = Save;
 			sourceTree = "<group>";
@@ -380,7 +399,7 @@
 				01658FAB283245EB001336A4 /* SubscribeTwoView.swift in Sources */,
 				0180CE2A2822C10C00E80380 /* AvgMinMaxBar.swift in Sources */,
 				01658FA328324363001336A4 /* FirstListView.swift in Sources */,
-				01A259A82823DD0900EBA84C /* SaveController.swift in Sources */,
+				01A259A82823DD0900EBA84C /* SaveCell.swift in Sources */,
 				017A4ADD283E458800D4092C /* RecordClass.swift in Sources */,
 				01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */,
 				01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */,
@@ -395,6 +414,7 @@
 				01B3EB7B2822BE8B004001C1 /* UILabel.swift in Sources */,
 				01658FA5283245C5001336A4 /* SecondListView.swift in Sources */,
 				01DDF4822833D6A100CCFDF9 /* SaveControllerInfo.swift in Sources */,
+				017A4AE8283E503F00D4092C /* SaveController.swift in Sources */,
 				01D2DCE328229BC7003AB953 /* SceneDelegate.swift in Sources */,
 				01A259A42823DCD300EBA84C /* TabBar.swift in Sources */,
 				017A4ADB283E455900D4092C /* Persist.swift in Sources */,

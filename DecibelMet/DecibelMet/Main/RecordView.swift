@@ -16,7 +16,7 @@ class RecordView: UIViewController {
     
     // MARK: Audio recorder & persist
     let recorder = Recorder()
-//    let persist = Persist()
+    let persist = Persist()
     var info: RecordInfo!
     
     // MARK: UI elements
@@ -281,7 +281,7 @@ extension RecordView {
                         self.info.name = name
                     }
                     
-//                    self.persist.saveAudio(info: self.info)
+                    self.persist.saveAudio(info: self.info)
                 }
             )
             
