@@ -29,7 +29,7 @@ class TabBar: UITabBarController {
 extension TabBar {
     
     private func setupView() {
-        let saved = SaveControllerInfo()
+        let saved = SaveController()
         let savedIcon = UITabBarItem(
             title: "",
             image: UIImage(named: "saved"),

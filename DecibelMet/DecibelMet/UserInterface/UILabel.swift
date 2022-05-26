@@ -23,6 +23,7 @@ class Label: UILabel {
         case titleLabel
         case tableTopText
         case tableBottomText
+        case avg
     }
     
     init(style: LabelStyle, _ text: String?) {
@@ -60,10 +61,13 @@ class Label: UILabel {
         case .tableTopText:
             font = UIFont(name: "OpenSans-Regular", size: 14)
         case .tableBottomText:
-            font = UIFont(name: "OpenSans-Regular", size: 10)
+            font = UIFont.systemFont(ofSize: 8)
         case .avgMinMaxWord:
-            font = UIFont.systemFont(ofSize: 25)
-            textColor = .purple
+            font = UIFont(name: "Montserrat-Light", size: 30.0)
+            textColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
+        case .avg:
+            font = UIFont.boldSystemFont(ofSize: 30)
+            textColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
         }
     }
     

@@ -22,8 +22,7 @@ class SavedCell: UITableViewCell {
     private lazy var soundName   = Label(style: .tableTopText, "26.01.2022, 20:43")
     
     private lazy var topPodstack = StackView(axis: .horizontal)
-    private lazy var timeIcon    = ImageView(image: .rate)
-    private lazy var timeLabel   = Label(style: .tableTopText, "01:25")
+    private lazy var timeLabel   = Label(style: .tableBottomText, "01:25")
     
     private lazy var bottomStack = StackView(axis: .horizontal)
     private lazy var min         = Label(style: .tableBottomText, "MIN 20")
@@ -63,8 +62,6 @@ class SavedCell: UITableViewCell {
         selectedBackgroundView = selectionBackground
         
         stack.distribution = .fill
-        timeIcon.frame.size.height = 10
-        timeIcon.frame.size.width = 10
         
         contentView.addSubview(playButton)
         
@@ -73,15 +70,13 @@ class SavedCell: UITableViewCell {
         stack.addArrangedSubview(topStack)
         topStack.addArrangedSubview(soundName)
         topStack.addArrangedSubview(topPodstack)
-        topPodstack.addArrangedSubview(timeIcon)
         topPodstack.addArrangedSubview(timeLabel)
         
         stack.addArrangedSubview(bottomStack)
         bottomStack.addArrangedSubview(min)
         bottomStack.addArrangedSubview(max)
         bottomStack.addArrangedSubview(avg)
-        
-        topPodstack.setCustomSpacing(5, after: timeIcon)
+     
         
         addSubview(chevron)
         

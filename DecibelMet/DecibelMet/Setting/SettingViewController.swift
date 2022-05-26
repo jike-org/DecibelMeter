@@ -12,7 +12,7 @@ import UIKit
 class SettingsView: UIViewController {
     
     lazy var titleLabel = Label(style: .titleLabel, "Settings")
-    let cellSpacingHeight: CGFloat = 20
+    let cellSpacingHeight: CGFloat = 40
     
     lazy var tableView: UITableView = {
         let t = UITableView()
@@ -76,7 +76,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -141,6 +141,13 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .share),
                 label: Label(style: .tableLabel, "Share with friends"),
+                isUsingSwitch: false
+            )
+        case 7:
+            cell = SettingsCell(
+                reuseIdentifier: "cell",
+                icon: ImageView(image: .share),
+                label: Label(style: .tableLabel, "Dark theme"),
                 isUsingSwitch: true
             )
         default:

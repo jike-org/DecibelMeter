@@ -9,6 +9,7 @@ import UIKit
 import AVFAudio
 import KDCircularProgress
 import Charts
+import CoreData
 
 class RecordView: UIViewController {
 
@@ -41,10 +42,10 @@ class RecordView: UIViewController {
     
     lazy var chart: BarChartView = {
         let chart = BarChartView()
-        chart.noDataTextColor = .white
+        chart.noDataTextColor = .secondarySystemBackground
         chart.noDataText = "Tap the record button to start monitoring."
         
-        chart.dragEnabled = false
+        chart.dragEnabled = true
         chart.pinchZoomEnabled = false
         chart.highlightPerTapEnabled = false
         chart.doubleTapToZoomEnabled = false
@@ -79,7 +80,7 @@ class RecordView: UIViewController {
         let radius: CGFloat = 20
         let size: CGFloat = 45
         button.layer.cornerRadius = radius
-        button.setImage(UIImage(named: "button3-3"), for: .normal)
+        button.setImage(UIImage(named: "button3-2"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -92,7 +93,7 @@ class RecordView: UIViewController {
         let radius: CGFloat = 20
         let size: CGFloat = 45
         button.layer.cornerRadius = radius
-        button.setImage(UIImage(named: "button3-2"), for: .normal)
+        button.setImage(UIImage(named: "button3-3"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -106,59 +107,6 @@ class RecordView: UIViewController {
         let size: CGFloat = 130
         button.layer.cornerRadius = radius
         button.setImage(UIImage(named: "button3"), for: .normal)
-        button.heightAnchor.constraint(equalToConstant: size).isActive = true
-        button.widthAnchor.constraint(equalToConstant: size).isActive = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    // menu
-    lazy var mainMenuButton: UIButton = {
-        let button = UIButton()
-        let radius: CGFloat = 20
-        let size: CGFloat = 45
-        button.backgroundColor = .systemGray
-        button.layer.cornerRadius = radius
-        button.heightAnchor.constraint(equalToConstant: size).isActive = true
-        button.widthAnchor.constraint(equalToConstant: size).isActive = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    lazy var cameraModeButton: UIButton = {
-        let button = UIButton()
-        let radius: CGFloat = 20
-        let size: CGFloat = 45
-        button.backgroundColor = .systemGray
-        button.layer.cornerRadius = radius
-        button.heightAnchor.constraint(equalToConstant: size).isActive = true
-        button.widthAnchor.constraint(equalToConstant: size).isActive = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    lazy var recordSaveButton: UIButton = {
-        let button = UIButton()
-        let radius: CGFloat = 20
-        let size: CGFloat = 45
-        button.backgroundColor = .systemGray
-        button.layer.cornerRadius = radius
-        button.heightAnchor.constraint(equalToConstant: size).isActive = true
-        button.widthAnchor.constraint(equalToConstant: size).isActive = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    lazy var settingButton: UIButton = {
-        let button = UIButton()
-        let radius: CGFloat = 20
-        let size: CGFloat = 45
-        button.backgroundColor = .systemGray
-        button.layer.cornerRadius = radius
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -208,11 +156,11 @@ extension RecordView {
         if isRecording {
             isRecording = false
             stopRecordingAudio()
-            recordButton.setImage(UIImage(named: "Microphone"), for: .normal)
+//            recordButton.setImage(UIImage(named: "Microphone"), for: .normal)
         } else {
             isRecording = true
             startRecordingAudio()
-            recordButton.setImage(UIImage(named: "Stop"), for: .normal)
+//            recordButton.setImage(UIImage(named: "Stop"), for: .normal)
         }
     }
     
@@ -299,6 +247,21 @@ extension RecordView {
         }
 }
 
+extension RecordView {
+    
+    @objc func startOrStopRecord() {
+        if isRecording {
+            isRecording = false
+            stopRecordingAudio()
+//            recordButton.setImage(UIImage(named: "Microphone"), for: .normal)
+        } else {
+            isRecording = true
+            startRecordingAudio()
+//            recordButton.setImage(UIImage(named: "Stop"), for: .normal)
+        }
+    }
+}
+
 // MARK: Setup view
 extension RecordView {
     func setupConstraint() {
@@ -315,6 +278,8 @@ extension RecordView {
         backView.addSubview(saveButton)
         verticalStack.addArrangedSubview(decibelLabel)
         verticalStack.addArrangedSubview(timeLabel)
+        
+        recordButton.addTarget(self, action: #selector(startOrStopRecord), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor, constant: -30),
@@ -455,15 +420,14 @@ extension RecordView {
     
     func updateChartData() {
         var entries = [BarChartDataEntry]()
-        for i in 0..<recorder.decibels.count {
+        for i in 5..<45 {
             entries.append(BarChartDataEntry(x: Double(i), y: Double(recorder.decibels[i])))
         }
         let set = BarChartDataSet(entries: entries)
         let data = BarChartData(dataSet: set)
         chart.data = data
         
-        set.colors = [.purple, .purple, .purple]
-        
+        set.colors = [.systemPurple]
         chart.barData?.setDrawValues(false)
     }
     
