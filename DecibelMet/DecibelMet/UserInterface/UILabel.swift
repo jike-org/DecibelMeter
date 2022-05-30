@@ -24,6 +24,9 @@ class Label: UILabel {
         case tableTopText
         case tableBottomText
         case avg
+        case cellDate
+        case minMaxAvgCell
+        case recordCell
     }
     
     init(style: LabelStyle, _ text: String?) {
@@ -59,7 +62,7 @@ class Label: UILabel {
             font = UIFont(name: "OpenSans-SemiBold", size: 17)
             textAlignment = .left
         case .tableTopText:
-            font = UIFont(name: "OpenSans-Regular", size: 14)
+            font = UIFont(name: "OpenSans-Regular", size: 20)
         case .tableBottomText:
             font = UIFont.systemFont(ofSize: 8)
         case .avgMinMaxWord:
@@ -68,6 +71,16 @@ class Label: UILabel {
         case .avg:
             font = UIFont.boldSystemFont(ofSize: 30)
             textColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
+        case .cellDate:
+            font = UIFont.boldSystemFont(ofSize: 12)
+            textAlignment = .right
+        case .minMaxAvgCell:
+            font = UIFont.systemFont(ofSize: 12)
+            textAlignment = .left
+            textColor = #colorLiteral(red: 1, green: 0.9999999404, blue: 0.9999999404, alpha: 1)
+            layer.opacity = 0.7
+        case .recordCell:
+            font = UIFont.boldSystemFont(ofSize: 20)
         }
     }
     

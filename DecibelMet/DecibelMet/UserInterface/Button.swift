@@ -11,7 +11,8 @@ import UIKit
 class Button: UIButton {
     
     let gradient = Gradient()
-    
+    let radius: CGFloat = 100
+    let size: CGFloat = 100
     var uuid: UUID? = nil
     
     enum ButtonStyle {
@@ -20,6 +21,7 @@ class Button: UIButton {
         case record
         case close
         case playOrPause
+        case playOrPauseCell
     }
     
     public func setUUID(_ uuid: UUID) {
@@ -49,6 +51,7 @@ class Button: UIButton {
             setImage(UIImage(named: "Microphone"), for: .normal)
             backgroundColor = UIColor(named: "RecordButtonColor")
             
+            
             let radius: CGFloat
             let size: CGFloat
             
@@ -68,9 +71,14 @@ class Button: UIButton {
             heightAnchor.constraint(equalToConstant: 25).isActive = true
             widthAnchor.constraint(equalToConstant: 25).isActive = true
         case .playOrPause:
-            setImage(UIImage(named: "Play"), for: .normal)
+            setImage(UIImage(named: "button3"), for: .normal)
             heightAnchor.constraint(equalToConstant: 30).isActive = true
             widthAnchor.constraint(equalToConstant: 30).isActive = true
+            
+        case .playOrPauseCell:
+            setImage(UIImage(named: "png"), for: .normal)
+            heightAnchor.constraint(equalToConstant: 50).isActive = true
+            widthAnchor.constraint(equalToConstant: 50).isActive = true
         }
     }
     

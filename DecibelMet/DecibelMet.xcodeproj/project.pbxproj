@@ -15,6 +15,8 @@
 		01658FA7283245D4001336A4 /* ThirdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA6283245D4001336A4 /* ThirdListView.swift */; };
 		01658FA9283245E0001336A4 /* SubscribeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA8283245DF001336A4 /* SubscribeOneView.swift */; };
 		01658FAB283245EB001336A4 /* SubscribeTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FAA283245EB001336A4 /* SubscribeTwoView.swift */; };
+		0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176C5B92840F9830074B8D5 /* CollectionViewSave.swift */; };
+		0176C5BC284101F60074B8D5 /* CustomSaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176C5BB284101F60074B8D5 /* CustomSaveCell.swift */; };
 		0178FA8A283E6084006C03CC /* DecibelMet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0178FA88283E6084006C03CC /* DecibelMet.xcdatamodeld */; };
 		017A4ADB283E455900D4092C /* Persist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4ADA283E455900D4092C /* Persist.swift */; };
 		017A4ADD283E458800D4092C /* RecordClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4ADC283E458800D4092C /* RecordClass.swift */; };
@@ -54,6 +56,8 @@
 		01658FA6283245D4001336A4 /* ThirdListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdListView.swift; sourceTree = "<group>"; };
 		01658FA8283245DF001336A4 /* SubscribeOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOneView.swift; sourceTree = "<group>"; };
 		01658FAA283245EB001336A4 /* SubscribeTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeTwoView.swift; sourceTree = "<group>"; };
+		0176C5B92840F9830074B8D5 /* CollectionViewSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSave.swift; sourceTree = "<group>"; };
+		0176C5BB284101F60074B8D5 /* CustomSaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSaveCell.swift; sourceTree = "<group>"; };
 		0178FA89283E6084006C03CC /* DecibelMet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DecibelMet.xcdatamodel; sourceTree = "<group>"; };
 		017A4ADA283E455900D4092C /* Persist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persist.swift; sourceTree = "<group>"; };
 		017A4ADC283E458800D4092C /* RecordClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecordClass.swift; path = DecibelMet/Persist/Model/RecordClass.swift; sourceTree = SOURCE_ROOT; };
@@ -196,6 +200,8 @@
 			children = (
 				01A259A72823DD0900EBA84C /* SaveCell.swift */,
 				017A4AE7283E503F00D4092C /* SaveController.swift */,
+				0176C5B92840F9830074B8D5 /* CollectionViewSave.swift */,
+				0176C5BB284101F60074B8D5 /* CustomSaveCell.swift */,
 				017A4AE6283E4F7000D4092C /* SavedInfoView */,
 			);
 			path = Save;
@@ -410,6 +416,7 @@
 				01658FA128324191001336A4 /* Collection.swift in Sources */,
 				01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */,
 				01D2DCE128229BC7003AB953 /* AppDelegate.swift in Sources */,
+				0176C5BC284101F60074B8D5 /* CustomSaveCell.swift in Sources */,
 				01658FA7283245D4001336A4 /* ThirdListView.swift in Sources */,
 				017A4AE1283E45CC00D4092C /* RecordInfo.swift in Sources */,
 				01B3EB7B2822BE8B004001C1 /* UILabel.swift in Sources */,
@@ -419,6 +426,7 @@
 				01D2DCE328229BC7003AB953 /* SceneDelegate.swift in Sources */,
 				01A259A42823DCD300EBA84C /* TabBar.swift in Sources */,
 				017A4ADB283E455900D4092C /* Persist.swift in Sources */,
+				0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */,
 				0180CE2C2822C13100E80380 /* StackView.swift in Sources */,
 				0180CE302822C1B100E80380 /* Gradient.swift in Sources */,
 			);
