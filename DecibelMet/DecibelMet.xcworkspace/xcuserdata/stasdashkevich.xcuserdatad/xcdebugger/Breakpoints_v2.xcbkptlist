@@ -48,8 +48,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
             endingLineNumber = "156"
-            landmarkName = "startOrStopRecordAction()"
-            landmarkType = "7">
+            landmarkName = "settingButton"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "232"
             endingLineNumber = "232"
-            landmarkName = "stopRecordingAudio()"
+            landmarkName = "startRecordingAudio()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
