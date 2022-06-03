@@ -17,9 +17,14 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate & UINa
     lazy var cameraViewController = Label(style: .heading, "Camera")
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = true
         setup()
+//        openVideoCamera()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         openVideoCamera()
     }
     
@@ -82,6 +87,7 @@ extension CameraController {
             controller.delegate = self
             
             present(controller, animated: true, completion: nil)
+            controller.dismiss(animated: true)
         }
         else {
             print("Camera is not available")

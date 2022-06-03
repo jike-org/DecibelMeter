@@ -61,13 +61,6 @@ class CustomSaveCell: UICollectionViewCell {
         contentView.addSubview(soundTime)
         contentView.addSubview(dateName)
         contentView.addSubview(recordName)
-        
-        playButton.translatesAutoresizingMaskIntoConstraints = false
-        recordName.translatesAutoresizingMaskIntoConstraints = false
-        dateName.translatesAutoresizingMaskIntoConstraints   = false
-        min.translatesAutoresizingMaskIntoConstraints        = false
-        avg.translatesAutoresizingMaskIntoConstraints        = false
-        max.translatesAutoresizingMaskIntoConstraints        = false
     }
     
     required init?(coder: NSCoder) {
@@ -98,12 +91,12 @@ class CustomSaveCell: UICollectionViewCell {
             min.heightAnchor.constraint(equalToConstant: 15),
             
             avg.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            avg.leadingAnchor.constraint(equalTo: min.trailingAnchor, constant: 44),
+            avg.leadingAnchor.constraint(equalTo: min.trailingAnchor, constant: 24),
             avg.widthAnchor.constraint(equalToConstant: 46),
             avg.heightAnchor.constraint(equalToConstant: 15),
             
             max.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            max.leadingAnchor.constraint(equalTo: avg.trailingAnchor, constant: 44),
+            max.leadingAnchor.constraint(equalTo: avg.trailingAnchor, constant: 24),
             max.widthAnchor.constraint(equalToConstant: 46),
             max.heightAnchor.constraint(equalToConstant: 15),
             

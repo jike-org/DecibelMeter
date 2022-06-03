@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01443A4D2830E09100E4D413 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01443A4C2830E09100E4D413 /* OnBoardingView.swift */; };
 		01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01443A502830E0BC00E4D413 /* OnBoardingManager.swift */; };
+		01476EBC284A549C0007C006 /* DosimetreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01476EBB284A549C0007C006 /* DosimetreCell.swift */; };
 		01658FA128324191001336A4 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA028324191001336A4 /* Collection.swift */; };
 		01658FA328324363001336A4 /* FirstListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA228324363001336A4 /* FirstListView.swift */; };
 		01658FA5283245C5001336A4 /* SecondListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA4283245C5001336A4 /* SecondListView.swift */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		01443A4C2830E09100E4D413 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		01443A502830E0BC00E4D413 /* OnBoardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingManager.swift; sourceTree = "<group>"; };
+		01476EBB284A549C0007C006 /* DosimetreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosimetreCell.swift; sourceTree = "<group>"; };
 		01658FA028324191001336A4 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		01658FA228324363001336A4 /* FirstListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListView.swift; sourceTree = "<group>"; };
 		01658FA4283245C5001336A4 /* SecondListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondListView.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				017379D22844FA9C00A77E83 /* Dosimeter.swift */,
 				01D2DCE428229BC7003AB953 /* RecordView.swift */,
+				01476EBB284A549C0007C006 /* DosimetreCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -249,9 +252,9 @@
 			children = (
 				01D2DCE028229BC7003AB953 /* AppDelegate.swift */,
 				01D2DCE228229BC7003AB953 /* SceneDelegate.swift */,
+				01B77DF02826935600E0F59F /* Main */,
 				017A4AD9283E454900D4092C /* Persist */,
 				01443A4E2830E0A200E4D413 /* OnBoarding */,
-				01B77DF02826935600E0F59F /* Main */,
 				01B77DED2826932400E0F59F /* Support files */,
 				01B77DEF2826934900E0F59F /* Camera */,
 				01A259AD2823FD8A00EBA84C /* Setting */,
@@ -409,6 +412,7 @@
 				01A259AC2823FD8400EBA84C /* SettingViewController.swift in Sources */,
 				01658FAB283245EB001336A4 /* SubscribeTwoView.swift in Sources */,
 				0180CE2A2822C10C00E80380 /* AvgMinMaxBar.swift in Sources */,
+				01476EBC284A549C0007C006 /* DosimetreCell.swift in Sources */,
 				01658FA328324363001336A4 /* FirstListView.swift in Sources */,
 				01A259A82823DD0900EBA84C /* SaveCell.swift in Sources */,
 				017A4ADD283E458800D4092C /* RecordClass.swift in Sources */,

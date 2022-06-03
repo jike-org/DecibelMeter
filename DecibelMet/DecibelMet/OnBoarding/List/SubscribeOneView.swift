@@ -14,6 +14,7 @@ class SubscribeViewController: UICollectionViewCell {
     lazy var headingLabel = Label(style: .heading, "UNLOCK")
     lazy var headingLabelAll = Label(style: .heading, "ALL ACCESS")
     lazy var underLabel = Label(style: .time, "Start with a 7 day trial, then 7.99$ per week")
+
     public static let identifier = "SubscribeOne"
     
     lazy var backImage = UIImageView(image: UIImage(named: "04"))

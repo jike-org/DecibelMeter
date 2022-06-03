@@ -19,7 +19,7 @@ class TabBar: UITabBarController {
         super.viewWillAppear(animated)
         
         setupView()
-        selectedIndex = 2
+        selectedIndex = 5
     }
     
 }

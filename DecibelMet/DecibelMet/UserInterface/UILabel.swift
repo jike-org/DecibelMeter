@@ -27,6 +27,14 @@ class Label: UILabel {
         case cellDate
         case minMaxAvgCell
         case recordCell
+        case dosimeterHeader
+        case dosimetreTime
+        case dosimetreProcentLabel
+        case dosimetreProcentImage
+        case dosimetredb
+        case dosimetreDecibelLabel
+        case dbTitel
+        case dbImage
     }
     
     init(style: LabelStyle, _ text: String?) {
@@ -81,6 +89,22 @@ class Label: UILabel {
             layer.opacity = 0.7
         case .recordCell:
             font = UIFont.boldSystemFont(ofSize: 20)
+        case .dosimeterHeader:
+            font = UIFont.boldSystemFont(ofSize: 20)
+        case .dosimetreTime:
+            font = UIFont.systemFont(ofSize: 18)
+        case .dosimetreProcentLabel:
+            font = UIFont.boldSystemFont(ofSize: 45)
+        case .dosimetreProcentImage:
+            font = UIFont.boldSystemFont(ofSize: 17)
+        case .dosimetredb:
+            font = UIFont.systemFont(ofSize: 13)
+        case .dosimetreDecibelLabel:
+            font = UIFont.systemFont(ofSize: 25)
+        case .dbTitel:
+            font = UIFont.systemFont(ofSize: 18)
+        case .dbImage:
+            font = UIFont.systemFont(ofSize: 10)
         }
     }
     

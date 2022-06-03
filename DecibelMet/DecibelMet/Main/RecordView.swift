@@ -106,7 +106,7 @@ class RecordView: UIViewController {
         let radius: CGFloat = 130
         let size: CGFloat = 130
         button.layer.cornerRadius = radius
-        button.setImage(UIImage(named: "button3"), for: .normal)
+        button.setImage(UIImage(named: "png"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -283,7 +283,7 @@ extension RecordView {
             verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor, constant: -30),
             verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
             
-            chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             chart.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             chart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             chart.heightAnchor.constraint(equalToConstant: 200),
@@ -397,11 +397,12 @@ extension RecordView {
         progress.startAngle = -180
         progress.angle = 0
         progress.progressThickness = 0.5
-        progress.trackThickness = 0.9
+        progress.trackThickness = 0.7
         progress.clockwise = true
         progress.roundedCorners = true
         progress.glowMode = .noGlow
         progress.trackColor = .black
+
         progress.set(colors:UIColor.purple, UIColor.blue, UIColor.blue, UIColor.purple)
         progress.center = CGPoint(x: view.center.x, y: view.center.y / 0.9 )
     }

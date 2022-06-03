@@ -69,12 +69,10 @@ extension OnboardingView {
         
         separatorOne.textAlignment = .center
         separatorOne.textColor = .black
-        separatorOne.text = "|"
         separatorOne.font = UIFont(name: "OpenSans-Regular", size: 13)
         
         separatorTwo.textAlignment = .center
         separatorTwo.textColor = .black
-        separatorTwo.text = "|"
         separatorTwo.font = UIFont(name: "OpenSans-Regular", size: 13)
         
         closeButton.isHidden = true
@@ -138,17 +136,17 @@ extension OnboardingView {
 extension OnboardingView {
     
     @objc func closeOnboarding() {
-        guard let optionalWindow = app?.window else { return }
-        guard let window = optionalWindow else { return }
-        
-        window.rootViewController = TabBar()
-        
-        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: { completed in
-            print("Close onboarding animation ends")
-        })
-        
-        OnboardingManager.shared.isFirstLaunch = true
-        
+//        guard let optionalWindow = app?.window else { return }
+//        guard let window = optionalWindow else { return }
+//
+//        window.rootViewController = TabBar()
+//
+//        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: { completed in
+//            print("Close onboarding animation ends")
+//        })
+//
+//        OnboardingManager.shared.isFirstLaunch = true
+//        
         let vc = TabBar()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
@@ -157,6 +155,8 @@ extension OnboardingView {
     @objc func nextPage() {
         if currentIndex.row < 3 {
             collectionView.scrollToItem(at: IndexPath(arrayLiteral: 0, currentIndex.row + 1), at: .centeredHorizontally, animated: true)
+        } else if currentIndex.row == 4 {
+            closeOnboarding()
         } else {
             closeOnboarding()
         }
@@ -165,14 +165,14 @@ extension OnboardingView {
     @objc func getTermsOfUse() {
         print("Terms of use")
         
-        let url = URL(string: "https://www.google.com/")
+        let url = URL(string: "https://www.mindateq.io/terms-of-use")
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     @objc func getPrivacyPolicy() {
         print("Privacy policy")
         
-        let url = URL(string: "https://www.google.com/")
+        let url = URL(string: "https://www.mindateq.io/privacy-policy")
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
@@ -218,6 +218,9 @@ extension OnboardingView: UICollectionViewDataSource {
             restorePurchaseButton.isHidden = true
         case 3:
             slide = SubscribeViewController.identifier
+            privacyPolicyButton.isHidden = false
+            termsOfUseButton.isHidden = false
+            restorePurchaseButton.isHidden = false
         default:
             slide = FirstListViewController.identifier
             termsOfUseButton.isHidden = true

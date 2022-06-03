@@ -66,9 +66,9 @@ class SaveController: UIViewController {
         super.viewDidLoad()
         
         collection?.reloadData()
-        
-        self.tabBarController?.tabBar.tintColor = UIColor.white
-        self.tabBarController?.tabBar.barTintColor = UIColor.black
+        tabBarController?.tabBar.isHidden = false
+//        self.tabBarController?.tabBar.tintColor = UIColor.white
+//        self.tabBarController?.tabBar.barTintColor = UIColor.black
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -91,7 +91,7 @@ class SaveController: UIViewController {
             collection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
         ])
         buttonToogler()
 
@@ -101,7 +101,7 @@ class SaveController: UIViewController {
 
 extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 9
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

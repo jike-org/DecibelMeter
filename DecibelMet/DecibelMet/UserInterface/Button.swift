@@ -22,6 +22,8 @@ class Button: UIButton {
         case close
         case playOrPause
         case playOrPauseCell
+        case refresh
+        case noise
     }
     
     public func setUUID(_ uuid: UUID) {
@@ -67,7 +69,7 @@ class Button: UIButton {
             heightAnchor.constraint(equalToConstant: size).isActive = true
             widthAnchor.constraint(equalToConstant: size).isActive = true
         case .close:
-            setImage(UIImage(named: "Exit"), for: .normal)
+            setImage(UIImage(named: "exit"), for: .normal)
             heightAnchor.constraint(equalToConstant: 25).isActive = true
             widthAnchor.constraint(equalToConstant: 25).isActive = true
         case .playOrPause:
@@ -79,6 +81,18 @@ class Button: UIButton {
             setImage(UIImage(named: "png"), for: .normal)
             heightAnchor.constraint(equalToConstant: 50).isActive = true
             widthAnchor.constraint(equalToConstant: 50).isActive = true
+        case .refresh:
+            setImage(UIImage(named: "refresh"), for: .normal)
+            backgroundColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
+            heightAnchor.constraint(equalToConstant: 50).isActive = true
+            widthAnchor.constraint(equalToConstant: 50).isActive = true
+            layer.cornerRadius = 20
+        case .noise:
+            backgroundColor = #colorLiteral(red: 0.1608400345, green: 0.1607262492, blue: 0.1650899053, alpha: 1)
+            heightAnchor.constraint(equalToConstant: 50).isActive = true
+            widthAnchor.constraint(equalToConstant: 100).isActive = true
+            layer.cornerRadius = 20
+            tintColor = .white
         }
     }
     

@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-
+import StoreKit
+import MessageUI
 
 class SettingsView: UIViewController {
     
@@ -52,9 +53,7 @@ extension SettingsView {
         
         let constraints = [
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 40),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -160,27 +159,34 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            if let url = URL(string: "https://www.google.com") {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
+            let vc = OnboardingView()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
         case 1:
             if let url = URL(string: "https://www.google.com") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         case 2:
-            if let url = URL(string: "https://www.google.com") {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
+            SKStoreReviewController.requestReview()
         case 3:
-            if let url = URL(string: "https://www.google.com") {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
+                if MFMailComposeViewController.canSendMail() {
+                    let mail = MFMailComposeViewController()
+                    mail.mailComposeDelegate = self
+                    mail.setToRecipients(["support@mindateq.io"])
+                    mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+
+                    present(mail, animated: true)
+                } else {
+                    // show failure alert
+                }
+            
+
         case 4:
-            if let url = URL(string: "https://www.google.com") {
+            if let url = URL(string: "https://www.mindateq.io/privacy-policy") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         case 5:
-            if let url = URL(string: "https://www.google.com") {
+            if let url = URL(string: "https://www.mindateq.io/terms-of-use") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         default:
@@ -191,6 +197,13 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     }
     
     
+}
+
+extension SettingsView: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
 }
 
 
