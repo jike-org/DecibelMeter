@@ -141,12 +141,10 @@ class RecordView: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        recorder.stopMonitoring()
+//        recorder.stopMonitoring()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+   
 }
 
 // MARK: Record/stop button action
@@ -405,16 +403,6 @@ extension RecordView {
         progress.glowMode = .noGlow
         progress.trackColor = .black
         progress.set(colors:UIColor.purple, UIColor.blue, UIColor.blue, UIColor.purple)
-        
-//        if Constants().screenSize.height <= 667 {
-//            progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.9)
-//        } else {
-//            progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.5)
-//        }
-//
-//        if Constants().isBig {
-//            progress.center = CGPoint(x: view.center.x, y: view.center.y / 2)
-//        }
         progress.center = CGPoint(x: view.center.x, y: view.center.y / 0.9 )
     }
     

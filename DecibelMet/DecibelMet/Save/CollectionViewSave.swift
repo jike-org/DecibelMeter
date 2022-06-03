@@ -20,8 +20,52 @@ class SaveController: UIViewController {
         var tagPlaying: Int?
         var tags: [Int] = []
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        buttonToogler()
+    }
+    
+    func buttonToogler() {
+        for tag in tags {
+            let tmp = self.collection?.cellForItem(at: [0, tag]) as! CustomSaveCell
+            
+            if tmp.isPlaying {
+                if let tagPlaying = tagPlaying {
+                    if tmp.tag == 0 {
+                        if tmp.isPlaying {
+                            print("wrong")
+                            tmp.isPlaying = false
+                            tmp.playButton.setImage(UIImage(named: "png"), for: .normal)
+                            if player.player.isPlaying {
+                                player.player.stop()
+                            }
+                        } else {
+                            print("true")
+                            tmp.isPlaying = true
+                            tmp.playButton.setImage(UIImage(named: "button3"), for: .normal)
+                        }
+                    } else if tmp.tag == tagPlaying {
+                        print("true")
+                        tmp.isPlaying = true
+                        tmp.playButton.setImage(UIImage(named: "button3"), for: .normal)
+                    } else {
+                        print("wrong")
+                        tmp.isPlaying = false
+                        tmp.playButton.setImage(UIImage(named: "png"), for: .normal)
+                        if player.player.isPlaying {
+                            player.player.stop()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collection?.reloadData()
         
         self.tabBarController?.tabBar.tintColor = UIColor.white
         self.tabBarController?.tabBar.barTintColor = UIColor.black
@@ -49,7 +93,10 @@ class SaveController: UIViewController {
             collection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        buttonToogler()
+
     }
+    
 }
 
 extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -63,6 +110,14 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.layer.masksToBounds = true
         cell.contentView.backgroundColor = #colorLiteral(red: 0.1490753889, green: 0.1489614546, blue: 0.1533248723, alpha: 1)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedItem = collectionView.cellForItem(at: indexPath)
+        
+        selectedItem?.layer.borderColor = UIColor.red.cgColor
+        
+        print(1)
     }
     
     

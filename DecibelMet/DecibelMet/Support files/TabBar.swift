@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class TabBar: UITabBarController {
     
     override func viewDidLoad() {
@@ -37,7 +36,7 @@ extension TabBar {
         )
         saved.tabBarItem = savedIcon
         
-        let home     = RecordView()
+        let home = RecordView()
         let homeIcon = UITabBarItem(
             title: "",
             image: UIImage(named: "home")?.withRenderingMode(.alwaysOriginal),
@@ -45,7 +44,7 @@ extension TabBar {
         )
         home.tabBarItem = homeIcon
         
-        let settings     = SettingsView()
+        let settings = SettingsView()
         let settingsIcon = UITabBarItem(
             title: "",
             image: UIImage(named: "setting")?.withRenderingMode(.alwaysOriginal),
@@ -61,7 +60,7 @@ extension TabBar {
         )
         camera.tabBarItem = cameraIcon
         
-        let faq = CameraController()
+        let faq = Dosimeter()
         let faqIcon = UITabBarItem(
             title: "",
             image: UIImage(named: "faq"),

@@ -15,6 +15,7 @@
 		01658FA7283245D4001336A4 /* ThirdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA6283245D4001336A4 /* ThirdListView.swift */; };
 		01658FA9283245E0001336A4 /* SubscribeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA8283245DF001336A4 /* SubscribeOneView.swift */; };
 		01658FAB283245EB001336A4 /* SubscribeTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FAA283245EB001336A4 /* SubscribeTwoView.swift */; };
+		017379D32844FA9C00A77E83 /* Dosimeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017379D22844FA9C00A77E83 /* Dosimeter.swift */; };
 		0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176C5B92840F9830074B8D5 /* CollectionViewSave.swift */; };
 		0176C5BC284101F60074B8D5 /* CustomSaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176C5BB284101F60074B8D5 /* CustomSaveCell.swift */; };
 		0178FA8A283E6084006C03CC /* DecibelMet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0178FA88283E6084006C03CC /* DecibelMet.xcdatamodeld */; };
@@ -56,6 +57,7 @@
 		01658FA6283245D4001336A4 /* ThirdListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdListView.swift; sourceTree = "<group>"; };
 		01658FA8283245DF001336A4 /* SubscribeOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOneView.swift; sourceTree = "<group>"; };
 		01658FAA283245EB001336A4 /* SubscribeTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeTwoView.swift; sourceTree = "<group>"; };
+		017379D22844FA9C00A77E83 /* Dosimeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dosimeter.swift; sourceTree = "<group>"; };
 		0176C5B92840F9830074B8D5 /* CollectionViewSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSave.swift; sourceTree = "<group>"; };
 		0176C5BB284101F60074B8D5 /* CustomSaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSaveCell.swift; sourceTree = "<group>"; };
 		0178FA89283E6084006C03CC /* DecibelMet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DecibelMet.xcdatamodel; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		01B77DF02826935600E0F59F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				017379D22844FA9C00A77E83 /* Dosimeter.swift */,
 				01D2DCE428229BC7003AB953 /* RecordView.swift */,
 			);
 			path = Main;
@@ -394,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				017379D32844FA9C00A77E83 /* Dosimeter.swift in Sources */,
 				0180CE322822C1ED00E80380 /* Recorder.swift in Sources */,
 				01E166832832C6D600DBC846 /* Image.swift in Sources */,
 				01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */,
