@@ -43,23 +43,14 @@ import AVFAudio
          setup()
          setUpCollection()
          requestPermissions()
-        startRecordingAudio()
-         
-         
+         startRecordingAudio()
      }
-
-     
+ 
      private func requestPermissions() {
          if !Constants().isFirstLaunch {
              AVAudioSession.sharedInstance().requestRecordPermission { granted in }
              Constants().isFirstLaunch = true
          }
-     }
-     
-     override func viewWillDisappear(_ animated: Bool) {
-         super.viewWillDisappear(animated)
-         
-//         recorder.stopMonitoring()
      }
 }
 
@@ -194,7 +185,6 @@ extension Dosimeter {
         progress.set(colors:UIColor.green,UIColor.yellow,UIColor.yellow, UIColor.orange)
         progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.8)
     }
-
 }
 
 extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {

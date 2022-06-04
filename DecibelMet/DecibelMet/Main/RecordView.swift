@@ -169,7 +169,6 @@ extension RecordView {
     @objc func playOrPauseAction() {
         print (2)
     }
-    
 }
 
 // MARK: Start/stop recording
@@ -226,7 +225,6 @@ extension RecordView {
                     } else {
                         self.info.name = name
                     }
-                    
                     self.persist.saveAudio(info: self.info)
                 }
             )
@@ -242,7 +240,7 @@ extension RecordView {
             
             present(alert, animated: true, completion: nil)
         }
-        }
+    }
 }
 
 extension RecordView {
@@ -251,11 +249,9 @@ extension RecordView {
         if isRecording {
             isRecording = false
             stopRecordingAudio()
-//            recordButton.setImage(UIImage(named: "Microphone"), for: .normal)
         } else {
             isRecording = true
             startRecordingAudio()
-//            recordButton.setImage(UIImage(named: "Stop"), for: .normal)
         }
     }
 }
@@ -306,9 +302,6 @@ extension RecordView {
             saveButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
             saveButton.trailingAnchor.constraint(equalTo: backView.safeAreaLayoutGuide.trailingAnchor, constant: -73.5),
             saveButton.leadingAnchor.constraint(equalTo: recordButton.trailingAnchor, constant: 24),
-            
-            
-            
         ])
     }
 }
@@ -362,9 +355,6 @@ extension RecordView {
 
             resetButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             resetButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-
-           
-
         ]
 
         let constraintsForSmallDisplay = [
@@ -495,5 +485,4 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
         progress.animate(toAngle: Double(degree * decibels), duration: 0.4, completion: nil)
         updateChartData()
     }
-    
 }
