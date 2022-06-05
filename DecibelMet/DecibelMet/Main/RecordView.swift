@@ -141,7 +141,6 @@ class RecordView: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-//        recorder.stopMonitoring()
     }
     
    
@@ -154,11 +153,10 @@ extension RecordView {
         if isRecording {
             isRecording = false
             stopRecordingAudio()
-//            recordButton.setImage(UIImage(named: "Microphone"), for: .normal)
         } else {
             isRecording = true
             startRecordingAudio()
-//            recordButton.setImage(UIImage(named: "Stop"), for: .normal)
+            
         }
     }
     
