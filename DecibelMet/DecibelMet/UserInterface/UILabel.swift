@@ -35,6 +35,7 @@ class Label: UILabel {
         case dosimetreDecibelLabel
         case dbTitel
         case dbImage
+        case subscribeSmall
     }
     
     init(style: LabelStyle, _ text: String?) {
@@ -49,18 +50,18 @@ class Label: UILabel {
         
         switch style {
         case .heading:
-            font = UIFont.systemFont(ofSize: 27)
+            font = UIFont(name: "Montserrat-Bold", size: 24)
         case .body:
             font = UIFont(name: "OpenSans-Regular", size: 15)
         case .separator:
             font = UIFont(name: "OpenSans-Regular", size: 12)
             self.text = "|"
         case .decibelHeading:
-            font = UIFont.systemFont(ofSize: 43)
+            font = UIFont(name: "Montserrat-Medium", size: 40)
         case .timeTitle:
             font = UIFont.systemFont(ofSize: 10)
         case .time:
-            font = UIFont.systemFont(ofSize: 10)
+            font = UIFont(name: "Montserrat-Regular", size: 12)
         case .avgMinMax:
             font = UIFont.systemFont(ofSize: 10)
         case .tableLabel:
@@ -77,34 +78,36 @@ class Label: UILabel {
             font = UIFont(name: "Montserrat-Light", size: 30.0)
             textColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
         case .avg:
-            font = UIFont.boldSystemFont(ofSize: 30)
+            font = UIFont(name: "Montserrat-Bold", size: 30.0)
             textColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
         case .cellDate:
-            font = UIFont.boldSystemFont(ofSize: 12)
+            font = UIFont(name: "Montserrat-Regular", size: 12)
             textAlignment = .right
         case .minMaxAvgCell:
-            font = UIFont.systemFont(ofSize: 12)
+            font = UIFont(name: "Montserrat-Regular", size: 12)
             textAlignment = .left
             textColor = #colorLiteral(red: 1, green: 0.9999999404, blue: 0.9999999404, alpha: 1)
             layer.opacity = 0.7
         case .recordCell:
-            font = UIFont.boldSystemFont(ofSize: 20)
+            font = UIFont(name: "Montserrat-SemiBold", size: 16.0)
         case .dosimeterHeader:
             font = UIFont.boldSystemFont(ofSize: 20)
         case .dosimetreTime:
-            font = UIFont.systemFont(ofSize: 18)
+            font = UIFont(name: "Montserrat-Regular", size: 16)
         case .dosimetreProcentLabel:
-            font = UIFont.boldSystemFont(ofSize: 45)
+            font = UIFont(name: "Montserrat-Bold", size: 40)
         case .dosimetreProcentImage:
             font = UIFont.boldSystemFont(ofSize: 17)
         case .dosimetredb:
             font = UIFont.systemFont(ofSize: 13)
         case .dosimetreDecibelLabel:
-            font = UIFont.systemFont(ofSize: 25)
+            font = UIFont(name: "Montserrat-Regular", size: 20)
         case .dbTitel:
-            font = UIFont.systemFont(ofSize: 18)
+            font = UIFont(name: "Montserrat-SemiBold", size: 16.0)
         case .dbImage:
             font = UIFont.systemFont(ofSize: 10)
+        case .subscribeSmall:
+            font = UIFont(name: "Montserrat-Regular", size: 12.0)
         }
     }
     

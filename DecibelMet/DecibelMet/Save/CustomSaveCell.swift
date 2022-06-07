@@ -7,8 +7,9 @@
 
 import Foundation
 import UIKit
+import SwipeCellKit
 
-class CustomSaveCell: UICollectionViewCell {
+class CustomSaveCell: SwipeCollectionViewCell {
     
     static let id = "CustomSaveCell"
     
@@ -69,6 +70,7 @@ class CustomSaveCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        soundTime.textAlignment = .left
         recordName.textAlignment = .left
         NSLayoutConstraint.activate([
             playButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
@@ -85,25 +87,27 @@ class CustomSaveCell: UICollectionViewCell {
             recordName.leadingAnchor.constraint(equalTo: playButton.trailingAnchor, constant: 25),
             recordName.trailingAnchor.constraint(equalTo: dateName.leadingAnchor, constant: 10),
             
+            soundTime.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
+            soundTime.leadingAnchor.constraint(equalTo: playButton.trailingAnchor, constant: 25),
+            soundTime.widthAnchor.constraint(equalToConstant: 46),
+            soundTime.heightAnchor.constraint(equalToConstant: 15),
+            
             min.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            min.leadingAnchor.constraint(equalTo: playButton.trailingAnchor, constant: 25),
+            min.leadingAnchor.constraint(equalTo: soundTime.trailingAnchor, constant: 30),
             min.widthAnchor.constraint(equalToConstant: 46),
             min.heightAnchor.constraint(equalToConstant: 15),
             
             avg.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            avg.leadingAnchor.constraint(equalTo: min.trailingAnchor, constant: 24),
+            avg.trailingAnchor.constraint(equalTo: max.leadingAnchor, constant: -40),
             avg.widthAnchor.constraint(equalToConstant: 46),
             avg.heightAnchor.constraint(equalToConstant: 15),
             
             max.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            max.leadingAnchor.constraint(equalTo: avg.trailingAnchor, constant: 24),
+            max.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             max.widthAnchor.constraint(equalToConstant: 46),
             max.heightAnchor.constraint(equalToConstant: 15),
             
-            soundTime.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            soundTime.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            soundTime.widthAnchor.constraint(equalToConstant: 46),
-            soundTime.heightAnchor.constraint(equalToConstant: 15),
+           
             
             
 

@@ -6,11 +6,13 @@ PODS:
   - KDCircularProgress (1.5.4)
   - SwiftAlgorithms (1.0.0)
   - SwiftyCam (4.0.0)
+  - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - Charts
   - KDCircularProgress
   - SwiftyCam
+  - SwipeCellKit
 
 SPEC REPOS:
   trunk:
@@ -18,13 +20,15 @@ SPEC REPOS:
     - KDCircularProgress
     - SwiftAlgorithms
     - SwiftyCam
+    - SwipeCellKit
 
 SPEC CHECKSUMS:
   Charts: cfa4e911e6dc289582c2fe011a0e87c03d96727f
   KDCircularProgress: 98200c6b8e85d22bc04eb644721d3b1e12b0686b
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftyCam: 6e57914771d972fbe508e759dc9d0150a44a93fd
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: ddad1a81211407dd1d49526c996a5438ed22dc66
+PODFILE CHECKSUM: ee3b7c9bc387f7dd1eb53fe07790854c4cad56ef
 
 COCOAPODS: 1.11.2

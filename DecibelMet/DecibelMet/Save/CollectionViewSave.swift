@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import AVFAudio
+import SwipeCellKit
 
 class SaveController: UIViewController {
     
@@ -65,6 +66,9 @@ class SaveController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let result = persist.fetch() else { return }
+        recordings = result
+        
         collection?.reloadData()
         tabBarController?.tabBar.isHidden = false
 //        self.tabBarController?.tabBar.tintColor = UIColor.white
@@ -72,7 +76,7 @@ class SaveController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: (view.frame.size.width) - 40, height: 80)
+        layout.itemSize = CGSize(width: (view.frame.size.width) - 30, height: 80)
         layout.minimumLineSpacing = 10
         collection = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         
@@ -105,19 +109,60 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomSaveCell.id, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomSaveCell.id, for: indexPath) as! CustomSaveCell
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
         cell.contentView.backgroundColor = #colorLiteral(red: 0.1490753889, green: 0.1489614546, blue: 0.1533248723, alpha: 1)
+        cell.delegate = self
+        
+        
         return cell
     }
     
+   
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedItem = collectionView.cellForItem(at: indexPath)
         
         selectedItem?.layer.borderColor = UIColor.red.cgColor
         
         print(1)
+    }
+}
+
+extension SaveController: SwipeCollectionViewCellDelegate {
+    func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+            let deleteAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
+                // handle action by updating model with deletion
+            }
+        
+        let editAction = SwipeAction(style: .default, title: nil) { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        
+        let shareAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
+            // handle action by updating model with deletion
+        }
+
+            // customize the action appearance
+//            deleteAction.image = UIImage(named: "deleteIcon")
+//            editAction.image = UIImage(named: "deleteIcon")
+//            shareAction.image = UIImage(named: "deleteIcon")
+            deleteAction.backgroundColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
+            editAction.backgroundColor = #colorLiteral(red: 0.07074324042, green: 0.8220555186, blue: 0.6004908681, alpha: 1)
+            shareAction.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
+            deleteAction.image = UIImage(named: "delete")
+            editAction.image = UIImage(named: "edit")
+            shareAction.image = UIImage(named: "icons")
+            return [deleteAction,shareAction,editAction]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, editActionsOptionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        return options
     }
     
     

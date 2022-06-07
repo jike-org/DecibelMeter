@@ -9,4 +9,5 @@ target 'DecibelMet' do
   pod 'KDCircularProgress'
   pod 'Charts'
   pod 'SwiftyCam'
+  pod 'SwipeCellKit'
 end
