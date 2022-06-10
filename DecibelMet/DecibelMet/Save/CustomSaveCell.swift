@@ -38,13 +38,10 @@ class CustomSaveCell: SwipeCollectionViewCell {
         time: String,
         min: String,
         max: String,
-        avg: String,
-        date: String
+        avg: String
     ) {
         self.recordName.text = name
         self.soundTime.text = time
-        
-        self.dateName.text = date
         self.min.text = min
         self.max.text = max
         self.avg.text = avg
@@ -106,12 +103,7 @@ class CustomSaveCell: SwipeCollectionViewCell {
             max.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             max.widthAnchor.constraint(equalToConstant: 46),
             max.heightAnchor.constraint(equalToConstant: 15),
-            
-           
-            
-            
-
-            
+      
         ])
     }
     

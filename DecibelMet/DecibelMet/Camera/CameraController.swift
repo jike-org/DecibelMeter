@@ -20,7 +20,6 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate & UINa
         view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = true
         setup()
-//        openVideoCamera()
     }
     
     override func viewWillAppear(_ animated: Bool) {

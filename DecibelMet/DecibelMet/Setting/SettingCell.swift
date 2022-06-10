@@ -11,9 +11,10 @@ import UIKit
 
 class SettingsCell: UITableViewCell {
     
-    private var icon:   ImageView?
-    private var label:  Label?
+    private var icon: ImageView?
+    private var label: Label?
     public var _switch: UISwitch?
+    private lazy var chevron = ImageView(image: .chevron)
     
     @objc private func toogleAutoRecord(_ sender: UISwitch) {
         if sender.isOn {
@@ -28,8 +29,8 @@ class SettingsCell: UITableViewCell {
     init(reuseIdentifier: String, icon: ImageView, label: Label, isUsingSwitch: Bool) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
+        _switch?.backgroundColor = .blue
         backgroundColor = .clear
-        
         let selectedBackground = UIView()
         selectedBackground.backgroundColor = UIColor(named: "BackgroundColorTabBar")
         selectedBackgroundView = selectedBackground
@@ -38,11 +39,14 @@ class SettingsCell: UITableViewCell {
         self.label = label
         
         self.label?.textColor = .white
+        self.label?.font = UIFont(name: "Montserrat-Medium", size: 20)
         
         addSubview(self.icon!)
         addSubview(self.label!)
+        addSubview(chevron)
         
-        self.icon!.translatesAutoresizingMaskIntoConstraints  = false
+        self.chevron.translatesAutoresizingMaskIntoConstraints = false
+        self.icon!.translatesAutoresizingMaskIntoConstraints = false
         self.label!.translatesAutoresizingMaskIntoConstraints = false
         
         let constraints = [
@@ -52,7 +56,12 @@ class SettingsCell: UITableViewCell {
             self.icon!.heightAnchor.constraint(equalToConstant: 20),
             
             self.label!.leadingAnchor.constraint(equalTo: self.icon!.trailingAnchor, constant: 20),
-            self.label!.centerYAnchor.constraint(equalTo: centerYAnchor)
+            self.label!.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            self.chevron.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            self.chevron.centerYAnchor.constraint(equalTo: centerYAnchor),
+            self.chevron.widthAnchor.constraint(equalToConstant: 20),
+            self.chevron.heightAnchor.constraint(equalToConstant: 20)
         ]
         
         if isUsingSwitch {

@@ -20,16 +20,10 @@ class SaveController: UIViewController {
         var isPlaying: Bool = false
         var tagPlaying: Int?
         var tags: [Int] = []
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        buttonToogler()
-    }
-    
+ 
     func buttonToogler() {
         for tag in tags {
-            let tmp = self.collection?.cellForItem(at: [0, tag]) as! CustomSaveCell
+            guard let tmp = collection?.cellForItem(at: [0, tag]) as? CustomSaveCell else { return }
             
             if tmp.isPlaying {
                 if let tagPlaying = tagPlaying {
@@ -66,10 +60,6 @@ class SaveController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let result = persist.fetch() else { return }
-        recordings = result
-        
-        collection?.reloadData()
         tabBarController?.tabBar.isHidden = false
 //        self.tabBarController?.tabBar.tintColor = UIColor.white
 //        self.tabBarController?.tabBar.barTintColor = UIColor.black
@@ -98,14 +88,58 @@ class SaveController: UIViewController {
             collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
         ])
         buttonToogler()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard let result = persist.fetch() else { return }
+        recordings       = result
+        
+        collection?.reloadData()
+        buttonToogler()
+    }
+    
+    
+    @objc func playAudio(_ sender: UIButton) {
+        let cell = collection?.cellForItem(at: [0, sender.tag]) as? CustomSaveCell
 
+        if sender.tag == 0 {
+            tagPlaying = 0
+        }
+
+        buttonToogler()
+
+        if isPlaying == false {
+            let button = sender as! Button
+            guard let path = Persist().filePath(for: button.uuid!.uuidString) else { return }
+            isPlaying = true
+            cell?.isPlaying = true
+            sender.setImage(UIImage(named: "Pause"), for: .normal)
+            self.tagPlaying = sender.tag
+            player = Player()
+            player.play(path, delegate: self)
+        } else {
+            isPlaying = false
+            cell?.isPlaying = true
+            sender.setImage(UIImage(named: "Play"), for: .normal)
+            player.player.stop()
+            player.session = nil
+            self.tagPlaying = nil
+        }
     }
     
 }
 
 extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        
+        if self.recordings != nil {
+            self.tags = Array(0..<recordings!.count)
+            return recordings!.count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -115,18 +149,29 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.contentView.backgroundColor = #colorLiteral(red: 0.1490753889, green: 0.1489614546, blue: 0.1533248723, alpha: 1)
         cell.delegate = self
         
-        
+        if let recordings = self.recordings {
+            let recording = recordings[indexPath.row]
+            
+            cell.setValues(name: recording.name ?? "",
+                           time: recording.length ?? "",
+                           min: "MIN " + String(recording.min),
+                           max: "MAX " + String(recording.max),
+                           avg: "AVG " + String(recording.avg))
+                           
+            cell.audioID = recording.id
+            cell.playButton.uuid = recording.id
+            
+            cell.playButton.addTarget(self, action: #selector(playAudio(_:)), for: .touchUpInside)
+        }
+        cell.playButton.tag = indexPath.row
         return cell
     }
     
    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedItem = collectionView.cellForItem(at: indexPath)
-        
-        selectedItem?.layer.borderColor = UIColor.red.cgColor
-        
-        print(1)
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        collection?.deselectItem(at: indexPath, animated: true)
+//        print(1)
+//    }
 }
 
 extension SaveController: SwipeCollectionViewCellDelegate {
@@ -135,6 +180,7 @@ extension SaveController: SwipeCollectionViewCellDelegate {
 
             let deleteAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
                 // handle action by updating model with deletion
+                self.delete(indexPath: indexPath)
             }
         
         let editAction = SwipeAction(style: .default, title: nil) { action, indexPath in
@@ -145,10 +191,6 @@ extension SaveController: SwipeCollectionViewCellDelegate {
             // handle action by updating model with deletion
         }
 
-            // customize the action appearance
-//            deleteAction.image = UIImage(named: "deleteIcon")
-//            editAction.image = UIImage(named: "deleteIcon")
-//            shareAction.image = UIImage(named: "deleteIcon")
             deleteAction.backgroundColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
             editAction.backgroundColor = #colorLiteral(red: 0.07074324042, green: 0.8220555186, blue: 0.6004908681, alpha: 1)
             shareAction.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
@@ -164,8 +206,32 @@ extension SaveController: SwipeCollectionViewCellDelegate {
         options.transitionStyle = .border
         return options
     }
+}
+
+extension SaveController {
     
+    func delete(indexPath: IndexPath) {
+        persist.viewContext.delete(recordings![indexPath.row])
+        recordings!.remove(at: indexPath.row)
+        collection?.deleteItems(at: [indexPath])
+        do {
+            try persist.viewContext.save()
+        } catch {
+            print(error)
+        }
+    }
+}
+
+extension SaveController: AVAudioPlayerDelegate {
     
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag {
+            buttonToogler()
+            print("VRODE RABOTAET")
+        } else {
+            print("NE RABOTAEN BLYAT")
+        }
+    }
 }
 
 

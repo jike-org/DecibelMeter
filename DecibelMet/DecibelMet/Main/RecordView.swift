@@ -23,14 +23,11 @@ class RecordView: UIViewController {
     // MARK: UI elements
     lazy var decibelLabel   = Label(style: .decibelHeading, "0")
     lazy var timeLabel      = Label(style: .time, "00:00")
-//    lazy var timeTitleLabel = Label(style: .timeTitle, "TIME")
-    
     lazy var progress = KDCircularProgress(
         frame: CGRect(x: 0, y: 0, width: view.frame.width / 1.2, height: view.frame.width / 1.2)
     )
     
     lazy var verticalStack = StackView(axis: .vertical)
-    
     lazy var avgBar = AvgMinMaxBar()
     lazy var containerForSmallDisplay: UIView = {
         let v = UIView()
@@ -119,7 +116,6 @@ class RecordView: UIViewController {
         recorder.delegate = self
         recorder.avDelegate = self
         
-//        setupView()
         tabBarController?.tabBar.isHidden = false
         setupConstraint()
         
@@ -127,7 +123,6 @@ class RecordView: UIViewController {
             isRecording = true
             startRecordingAudio()
         }
-        
         requestPermissions()
     }
     
@@ -140,10 +135,7 @@ class RecordView: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
     }
-    
-   
 }
 
 // MARK: Record/stop button action
@@ -156,7 +148,6 @@ extension RecordView {
         } else {
             isRecording = true
             startRecordingAudio()
-            
         }
     }
     
@@ -256,8 +247,8 @@ extension RecordView {
 
 // MARK: Setup view
 extension RecordView {
+    
     func setupConstraint() {
-        
         setupCircleView()
         view.addSubview(chart)
         view.addSubview(progress)
@@ -308,13 +299,11 @@ extension RecordView {
     
     private func setupView() {
         view.backgroundColor = .black
-
         setupCircleView()
         view.addSubview(progress)
         view.addSubview(verticalStack)
         verticalStack.addArrangedSubview(decibelLabel)
         verticalStack.addArrangedSubview(timeLabel)
-//        verticalStack.addArrangedSubview(timeTitleLabel)
 
         if Constants().isBig {
             view.addSubview(avgBar)
@@ -397,7 +386,7 @@ extension RecordView {
     
     func updateChartData() {
         var entries = [BarChartDataEntry]()
-        for i in 5..<45 {
+        for i in 0..<45 {
             entries.append(BarChartDataEntry(x: Double(i), y: Double(recorder.decibels[i])))
         }
         let set = BarChartDataSet(entries: entries)
@@ -407,11 +396,11 @@ extension RecordView {
         set.colors = [.systemPurple]
         chart.barData?.setDrawValues(false)
     }
-    
 }
 
 // MARK: Recorder delegate
 extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
+    
     func recorder(_ recorder: Recorder, didFinishRecording info: RecordInfo) {
         // FIXME: Unusual
     }
@@ -438,7 +427,7 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
             title: "Settings",
             style: .default
         ) { _ in
-            UIApplication.shared.open(
+            UIApplication.shared.open( 
                 URL(string: UIApplication.openSettingsURLString)!,
                 options: [:],
                 completionHandler: nil)

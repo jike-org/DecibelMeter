@@ -25,7 +25,7 @@
 //
 //    // MARK: Player instance
 //    private var player: Player!
-//    
+//
 //    public var audioID: UUID!
 //    var isPlaying: Bool = false
 //

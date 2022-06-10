@@ -10,7 +10,7 @@ import KDCircularProgress
 import CoreData
 import AVFAudio
 
- class Dosimeter: UIViewController {
+final class Dosimeter: UIViewController {
      
      private var collection: UICollectionView?
      private var isTap = false
@@ -82,6 +82,7 @@ extension Dosimeter {
 }
 
 extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
     }
@@ -96,17 +97,13 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedItem = collectionView.cellForItem(at: indexPath)
-        
         selectedItem?.layer.borderColor = UIColor.red.cgColor
-        
         print(1)
     }
-    
-    
 }
 
-
 extension Dosimeter {
+    
     private func startRecordingAudio() {
         recorder.record(self)
         recorder.startMonitoring()
@@ -115,6 +112,7 @@ extension Dosimeter {
 
 //MARK: - Constreint Set Up
 extension Dosimeter {
+    
     private func setup() {
         noiseButton.setTitle("NOISE", for: .normal)
         noiseButton.addTarget(self, action: #selector(noiseTap), for: .touchUpInside)
@@ -160,6 +158,7 @@ extension Dosimeter {
     }
 
 extension Dosimeter {
+    
     @objc func noiseTap() {
         if isTap {
             noiseButton.setTitle("NOISE", for: .normal)
@@ -188,6 +187,7 @@ extension Dosimeter {
 }
 
 extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
+    
     func recorder(_ recorder: Recorder, didFinishRecording info: RecordInfo) {
         // FIXME: Unusual
     }
@@ -218,7 +218,6 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
     
     func recorder(_ recorder: Recorder, didCaptureDecibels decibels: Int) {
         let degree = 360/96
-        
         let minutes = (recorder.seconds - (recorder.seconds % 60)) / 60
         let seconds = recorder.seconds - (minutes * 60)
         

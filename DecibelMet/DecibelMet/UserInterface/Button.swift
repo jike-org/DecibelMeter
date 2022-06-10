@@ -24,6 +24,7 @@ class Button: UIButton {
         case playOrPauseCell
         case refresh
         case noise
+        case chevron
     }
     
     public func setUUID(_ uuid: UUID) {
@@ -93,6 +94,10 @@ class Button: UIButton {
             widthAnchor.constraint(equalToConstant: 100).isActive = true
             layer.cornerRadius = 20
             tintColor = .white
+        case .chevron:
+            setImage(UIImage(named: "chevron"), for: .normal)
+            heightAnchor.constraint(equalToConstant: 20).isActive = true
+            widthAnchor.constraint(equalToConstant: 20).isActive = true
         }
     }
     
