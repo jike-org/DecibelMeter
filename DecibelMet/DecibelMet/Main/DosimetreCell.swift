@@ -35,7 +35,6 @@ class DosimeterCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-    
     }
     
     required init?(coder: NSCoder) {
@@ -58,12 +57,12 @@ class DosimeterCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
 
             timeTitle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
-            timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 5),
+            timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 15),
             timeTitle.heightAnchor.constraint(equalToConstant: 20),
-            timeTitle.widthAnchor.constraint(equalToConstant: 110),
+            timeTitle.widthAnchor.constraint(equalToConstant: 130),
             
             dbTitel.topAnchor.constraint(equalTo: timeTitle.bottomAnchor,constant: 5),
-            dbTitel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            dbTitel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             dbTitel.heightAnchor.constraint(equalToConstant: 20),
             dbTitel.widthAnchor.constraint(equalToConstant: 30),
             

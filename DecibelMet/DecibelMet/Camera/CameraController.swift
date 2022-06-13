@@ -14,6 +14,9 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate & UINa
     
     var controller = UIImagePickerController()
     let videoFileName = "/video.mp4"
+    
+    var flag = true
+    var label = Label(style: .dosimetreProcentLabel, "TEST")
     lazy var cameraViewController = Label(style: .heading, "Camera")
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +27,11 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate & UINa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        openVideoCamera()
+        if flag {
+            openVideoCamera()
+            flag = false
+        }
+        
     }
     
     lazy var backButton: UIButton = {
@@ -87,6 +94,8 @@ extension CameraController {
             
             present(controller, animated: true, completion: nil)
             controller.dismiss(animated: true)
+            
+            
         }
         else {
             print("Camera is not available")
@@ -100,8 +109,12 @@ extension CameraController {
     func setup() {
         view.addSubview(backButton)
         view.addSubview(cameraViewController)
+        cameraViewController.addSubview(label)
         backButton.addTarget(self, action: #selector(backButtonCamera), for: .touchUpInside)
         NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: cameraViewController.centerXAnchor),
+            
+                label.centerYAnchor.constraint(equalTo: cameraViewController.centerYAnchor),
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             cameraViewController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

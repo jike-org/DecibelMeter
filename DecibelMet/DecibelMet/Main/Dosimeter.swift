@@ -88,10 +88,108 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DosimeterCell.id, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DosimeterCell.id, for: indexPath) as! DosimeterCell
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
         cell.contentView.backgroundColor = #colorLiteral(red: 0.1490753889, green: 0.1489614546, blue: 0.1533248723, alpha: 1)
+        
+        let minutes = (recorder.seconds - (recorder.seconds % 60)) / 60
+        let seconds = recorder.seconds - (minutes * 60)
+        
+        let strMinutes: String
+        let strSeconds: String
+        
+        if minutes <= 9 {
+            strMinutes = "0\(minutes)"
+        } else {
+            strMinutes = "\(minutes)"
+        }
+        
+        if seconds <= 9 {
+            strSeconds = "0\(seconds)"
+        } else {
+            strSeconds = "\(seconds)"
+        }
+        
+        
+
+        
+        switch indexPath.row {
+        case 0:
+            cell.dbTitel.text = "130"
+            cell.timeTitle.text = "MAX 1 min 52 sec"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+            
+        case 1:
+            cell.dbTitel.text = "125"
+            cell.timeTitle.text = "MAX 3 min 45 sec"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+           
+            
+        case 2:
+            cell.dbTitel.text = "120"
+            cell.timeTitle.text = "MAX 7 min 30 sec"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+            
+
+            
+        case 3:
+            cell.dbTitel.text = "115"
+            cell.timeTitle.text = "MAX 15 min 00 sec"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+           
+
+            
+        case 4:
+            cell.dbTitel.text = "110"
+            cell.timeTitle.text = "MAX 30 min 00 sec"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+           
+
+            
+        case 5:
+            cell.dbTitel.text = "105"
+            cell.timeTitle.text = "MAX 60 min 00 sec"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+            
+
+            
+        case 6:
+            cell.dbTitel.text = "100"
+            cell.timeTitle.text = "MAX 2 hour"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+            
+
+            
+        case 7:
+            cell.dbTitel.text = "95"
+            cell.timeTitle.text = "MAX 4 hour"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+            
+
+            
+        case 8:
+            cell.dbTitel.text = "90"
+            cell.timeTitle.text = "MAX 8 hour"
+            cell.procent.text = "0%"
+            cell.time.text = "\(strMinutes): \(strSeconds)"
+     
+            
+           
+          
+
+            
+        default:
+            break
+        }
         return cell
     }
     
@@ -236,6 +334,7 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
             strSeconds = "\(seconds)"
         }
         
+        collection?.reloadData()
         timeLabel.text = "\(strMinutes): \(strSeconds)"
         decibelLabel.text = "\(decibels)"
         progress.animate(toAngle: Double(degree * decibels), duration: 0.7, completion: nil)
