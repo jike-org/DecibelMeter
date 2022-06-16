@@ -6,4 +6,18 @@
 //
 
 import Foundation
+import CameraManager
 
+class DecibelMet: UIViewController {
+    
+    let cameraManager = CameraManager()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+}

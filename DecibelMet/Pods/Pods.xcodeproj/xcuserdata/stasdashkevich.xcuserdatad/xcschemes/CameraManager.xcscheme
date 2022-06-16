@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "64D8AA920E37251A430220E5E4088BDA"
-               BuildableName = "SwiftyCam.framework"
-               BlueprintName = "SwiftyCam"
+               BlueprintIdentifier = "8BB91AB80BFCF849745808EDF709B66D"
+               BuildableName = "CameraManager.framework"
+               BlueprintName = "CameraManager"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

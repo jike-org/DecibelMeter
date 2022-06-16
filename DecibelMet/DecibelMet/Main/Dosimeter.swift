@@ -20,6 +20,10 @@ final class Dosimeter: UIViewController {
      let recorder = Recorder()
      let persist = Persist()
      var info: RecordInfo!
+    
+    let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        print("Timer fired!")
+    }
      
     //MARK: - UI elements
     lazy var headerLabel = Label(style: .dosimeterHeader, "DOSIMETER")
@@ -44,6 +48,7 @@ final class Dosimeter: UIViewController {
          setUpCollection()
          requestPermissions()
          startRecordingAudio()
+         
      }
  
      private func requestPermissions() {
@@ -115,72 +120,102 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
 
         
         switch indexPath.row {
+            
+            
         case 0:
             cell.dbTitel.text = "130"
             cell.timeTitle.text = "MAX 1 min 52 sec"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 90 {
+                print("50")
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            } else {
+                cell.time.text = "nknalf"
+            }
+//            if Int(decibelLabel.text!)! >= 130 {
+//                cell.procent.text = "0%"
+//                cell.time.text = "\(strMinutes): \(strSeconds)"
+//            }
             
+            cell.procent.text = "0%"
+//            cell.time.text = "tete"
         case 1:
             cell.dbTitel.text = "125"
             cell.timeTitle.text = "MAX 3 min 45 sec"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 130 {
+                cell.procent.text = "0%"
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            }
            
             
         case 2:
             cell.dbTitel.text = "120"
             cell.timeTitle.text = "MAX 7 min 30 sec"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 130 {
+                cell.procent.text = "0%"
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            }
             
 
             
         case 3:
             cell.dbTitel.text = "115"
             cell.timeTitle.text = "MAX 15 min 00 sec"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 130 {
+                cell.procent.text = "0%"
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            }
            
 
             
         case 4:
             cell.dbTitel.text = "110"
             cell.timeTitle.text = "MAX 30 min 00 sec"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 80 {
+                cell.procent.text = "0%"
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            }
            
 
             
         case 5:
             cell.dbTitel.text = "105"
             cell.timeTitle.text = "MAX 60 min 00 sec"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 70 {
+                cell.procent.text = "0%"
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            }
             
 
             
         case 6:
             cell.dbTitel.text = "100"
             cell.timeTitle.text = "MAX 2 hour"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 60 {
+                cell.procent.text = "0%"
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            } else {
+                
+            }
             
 
             
         case 7:
             cell.dbTitel.text = "95"
             cell.timeTitle.text = "MAX 4 hour"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 50 {
+                cell.procent.text = "0%"
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            }
             
 
             
         case 8:
             cell.dbTitel.text = "90"
             cell.timeTitle.text = "MAX 8 hour"
-            cell.procent.text = "0%"
-            cell.time.text = "\(strMinutes): \(strSeconds)"
+            if Int(decibelLabel.text!)! >= 40 {
+                cell.procent.text = "0%"
+                cell.time.text = "\(strMinutes): \(strSeconds)"
+            }
      
             
            
@@ -338,6 +373,5 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         timeLabel.text = "\(strMinutes): \(strSeconds)"
         decibelLabel.text = "\(decibels)"
         progress.animate(toAngle: Double(degree * decibels), duration: 0.7, completion: nil)
-        
     }
 }

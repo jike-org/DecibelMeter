@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SwiftyCamVersionNumber;
-FOUNDATION_EXPORT const unsigned char SwiftyCamVersionString[];
+FOUNDATION_EXPORT double CameraManagerVersionNumber;
+FOUNDATION_EXPORT const unsigned char CameraManagerVersionString[];
 

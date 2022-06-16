@@ -63,7 +63,6 @@ class SaveController: UIViewController {
         tabBarController?.tabBar.isHidden = false
 //        self.tabBarController?.tabBar.tintColor = UIColor.white
 //        self.tabBarController?.tabBar.barTintColor = UIColor.black
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width) - 30, height: 80)
@@ -94,10 +93,9 @@ class SaveController: UIViewController {
         super.viewDidAppear(animated)
         
         guard let result = persist.fetch() else { return }
-        recordings       = result
-        
-        collection?.reloadData()
+        recordings = result
         buttonToogler()
+        self.collection?.reloadData()
     }
     
     
@@ -132,6 +130,11 @@ class SaveController: UIViewController {
 }
 
 extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if self.recordings != nil {
@@ -167,11 +170,6 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
     
-   
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        collection?.deselectItem(at: indexPath, animated: true)
-//        print(1)
-//    }
 }
 
 extension SaveController: SwipeCollectionViewCellDelegate {
@@ -211,16 +209,19 @@ extension SaveController: SwipeCollectionViewCellDelegate {
 extension SaveController {
     
     func delete(indexPath: IndexPath) {
-        persist.viewContext.delete(recordings![indexPath.row])
-        recordings!.remove(at: indexPath.row)
-        collection?.deleteItems(at: [indexPath])
+        DispatchQueue.main.async { [unowned self] in
+            persist.viewContext.delete(recordings![indexPath.row])
+            recordings?.remove(at: indexPath.row)
+        }
+        collection!.deleteItems(at: [indexPath])
         do {
             try persist.viewContext.save()
         } catch {
             print(error)
         }
     }
-}
+    }
+
 
 extension SaveController: AVAudioPlayerDelegate {
     
