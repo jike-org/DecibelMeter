@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class DosimeterCell: UICollectionViewCell {
     
@@ -32,22 +33,10 @@ class DosimeterCell: UICollectionViewCell {
     public var audioID: UUID!
     var isPlaying: Bool = false
     
+    private var subscriptions = Set<AnyCancellable>()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("ini coder ne rabotaet")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        timeTitle.textAlignment = .left
-        timeTitle.layer.opacity = 0.7
-        procent.layer.opacity = 0.7
-        time.layer.opacity = 0.7
-        viewColor.backgroundColor = .red
         contentView.addSubview(timeTitle)
         contentView.addSubview(dbTitel)
         contentView.addSubview(dbImage)
@@ -81,9 +70,44 @@ class DosimeterCell: UICollectionViewCell {
             viewColor.leadingAnchor.constraint(equalTo: dbImage.trailingAnchor, constant: 5),
             viewColor.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             viewColor.heightAnchor.constraint(equalToConstant: 5)
-            
-            
         ])
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("ini coder ne rabotaet")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        subscriptions.removeAll()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        timeTitle.textAlignment = .left
+        timeTitle.layer.opacity = 0.7
+        procent.layer.opacity = 0.7
+        time.layer.opacity = 0.7
+        viewColor.backgroundColor = .red
+    }
+    
+    func configure(item: Item) {
+        dbTitel.text = String(item.db)
+        timeTitle.text = item.timeTitle
+        item
+            .timeEvent
+            .compactMap { $0[item.db] }
+            .map { String($0) }
+            .assign(to: \.text, on: time)
+            .store(in: &subscriptions)
+    }
+}
+
+extension DosimeterCell {
+    struct Item {
+        let db: Int
+        let timeTitle: String
+        let timeEvent: AnyPublisher<[Int: Double], Never>
+    }
 }

@@ -157,12 +157,12 @@ extension Recorder {
 extension Recorder {
     
     /// Get average power in dBFS
-    private func getDecibels() -> Float {
+     func getDecibels() -> Float {
         recorder.updateMeters()
         return 96 - abs(recorder.averagePower(forChannel: 0))
     }
     
-    /// Starts printing dBFS
+    // Starts printing dBFS
     public func startMonitoring() {
         if recorder != nil {
             isMonitoring = true
