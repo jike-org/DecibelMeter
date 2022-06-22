@@ -66,7 +66,7 @@ class RecordView: UIViewController {
     
     lazy var backView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.1176470444, green: 0.1176470444, blue: 0.1176470444, alpha: 1)
+        view.backgroundColor = UIColor(named: "recordView")
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 18
         return view
@@ -111,14 +111,19 @@ class RecordView: UIViewController {
         return button
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         recorder.delegate = self
         recorder.avDelegate = self
-        
+        view.backgroundColor = UIColor(named: "backgroundColor")
         tabBarController?.tabBar.isHidden = false
         setupConstraint()
-        
+        setupView()
         if Constants().isRecordingAtLaunchEnabled {
             isRecording = true
             startRecordingAudio()
@@ -298,7 +303,6 @@ extension RecordView {
 extension RecordView {
     
     private func setupView() {
-        view.backgroundColor = UIColor(named: "backgroundColor")
         setupCircleView()
         view.addSubview(progress)
         view.addSubview(verticalStack)
@@ -378,8 +382,7 @@ extension RecordView {
         progress.clockwise = true
         progress.roundedCorners = true
         progress.glowMode = .noGlow
-        progress.trackColor = .black
-
+        progress.trackColor = UIColor(named: "backCircleRecord")!
         progress.set(colors:UIColor.purple, UIColor.blue, UIColor.blue, UIColor.purple)
         progress.center = CGPoint(x: view.center.x, y: view.center.y / 0.9 )
     }

@@ -89,11 +89,10 @@ class Button: UIButton {
             widthAnchor.constraint(equalToConstant: 50).isActive = true
             layer.cornerRadius = 20
         case .noise:
-            backgroundColor = #colorLiteral(red: 0.1608400345, green: 0.1607262492, blue: 0.1650899053, alpha: 1)
             heightAnchor.constraint(equalToConstant: 50).isActive = true
             widthAnchor.constraint(equalToConstant: 100).isActive = true
             layer.cornerRadius = 20
-            tintColor = .white
+            setTitleColor(.black, for: .normal)
         case .chevron:
             setImage(UIImage(named: "chevron"), for: .normal)
             heightAnchor.constraint(equalToConstant: 20).isActive = true

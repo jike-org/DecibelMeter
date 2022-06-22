@@ -68,14 +68,14 @@ class SaveController: UIViewController {
         layout.itemSize = CGSize(width: (view.frame.size.width) - 30, height: 80)
         layout.minimumLineSpacing = 10
         collection = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        
+        view.backgroundColor = UIColor(named: "backgroundColor")
         guard let collection = collection else {
             return
         }
         collection.register(CustomSaveCell.self, forCellWithReuseIdentifier: CustomSaveCell.id)
         collection.delegate = self
         collection.dataSource = self
-        collection.backgroundColor = .black
+        collection.backgroundColor = UIColor(named: "backgroundColor")
 //        collectionView.frame = view.bounds
         collection.translatesAutoresizingMaskIntoConstraints = false
         
@@ -149,7 +149,7 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomSaveCell.id, for: indexPath) as! CustomSaveCell
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
-        cell.contentView.backgroundColor = #colorLiteral(red: 0.1490753889, green: 0.1489614546, blue: 0.1533248723, alpha: 1)
+        cell.contentView.backgroundColor = UIColor(named: "backCell")
         cell.delegate = self
         
         if let recordings = self.recordings {

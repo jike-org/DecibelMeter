@@ -1,0 +1,138 @@
+"SoundMeterDosimeter" = "Sound Meter & Dosimeter";
+
+"DetectSoundLevel" = "Detect Sound Level";
+
+"MeasurementHistory" = "Measurement History";
+
+"UnlockAllAccess" = "Unlock All Access";
+
+"Trial7" = "Start with a 7-day free trial, then 7.99 per week";
+
+"Continue" = "Continue";
+
+"Terms" = "Terms of service and Privacy policy";
+
+"Records" = "Records";
+
+"Settings" = "Settings";
+
+"FAQ" = "FAQ";
+
+"Unlockallfeatures" = "Unlock all features";
+
+"Rateus" = "Rate us";
+
+"Support" = "Support";
+
+"Privacypolicy" = "Privacy policy";
+
+"Termsofuse" = "Terms of use";
+
+"Sharewithfriends" = "Share with friends";
+
+"Darktheme" = "Dark theme";
+
+"Dosimeter" = "Dosimeter";
+
+"Noise" = "Noise";
+
+"LikeApp" = "Do you like this app?";
+
+"Yes" = "Yes";
+
+"No" = "No";
+
+"UnlockAllAccess" = "Unlock All Access";
+
+"Week" = "Week";
+
+"Year" = "Year";
+
+"Month" = "Month";
+
+"Howtousetheapplication?" = "How to use the application?";
+
+"OSHA" = "OSHA";
+
+"Maximum" = "Maximum";
+
+"Average" = "Average";
+
+"Minimum" = "Minimum";
+
+"Minute" = "Minute";
+
+"Second" = "Second";
+
+"Hour" = "Hour";
+
+"Location" = "Location";
+
+"Date" = "Date";
+
+"Share" = "Share";
+
+"Delete" = "Delete";
+
+"Edit" = "Edit";
+
+"DecibelMicro" = "Decibel Meter” Would Like to Access the Microphone";
+
+"Required" = "Required for the app to work, in order to measure audio noise level";
+
+"Microphone" = "Microphone";
+
+"SetMicro" =  "Please set microphone usage permission in settings for work";
+
+"CameraAcces" = "Decibel Meter” Would Like to Access the Camera";
+
+"RequiredWork" = "Required for the app to work, in order to capture video and audio noise level";
+
+"Camerapermission" = "Camera permission";
+
+"CameraSet" = "Please set camera usage permission in settings for work";
+
+"AccessPhotos" = "Decibel Meter” Would Like to Access Your Photos";
+
+"RequiredVideo" = "Required for the app to work, in order to save video and audio noise level";
+
+"Photolibrarypermission" = "Photo library permission";
+
+"SetPhoto" = "Please set photo library usage permission in settings for work";
+
+"AllowLocation" = "Allow “Decibel Meter” to use your location?";
+
+"CaptureImage" = "Used to display city location in captured images";
+
+"Locationpermission" = "Location permission";
+
+"setLocation" = "Please set location usage permission in settings for work";
+
+"Enjoying" = "Enjoying Decibel Meter?";
+
+"appWil" = "This app will help you measure the noise level of your environment:";
+
+"HowToUse" = "How to use the application?";
+
+"FAQFirst" = "The sound level meter can measure ambient noise in real time, as well as record and play recordings. For the sound level meter to work and determine the level of detected noise, open access to the microphone of your device. The sound data read by the microphone is expressed in decibels (dB). On the main screen, there is the current measurement and multiple controls. The big blue record button (start of measurement) is in the middle.MAX — a maximum value in the current measurement.AVG — an average value in the current measurement.MIN — an minimum average value in the current measurement.";
+
+
+"Measure" = "Why doesn't the app measure the noise level and the main screen shows zero?";
+
+"If instead of measurements you see a zero on the main screen, then you have banned the sound level meter to access your microphone. Go to Settings > Privacy policy > Microphone and allow the program access to the microphone." = "If instead of measurements you see a zero on the main screen, then you have banned the sound level meter to access your microphone. Go to Settings > Privacy policy > Microphone and allow the program access to the microphone.;";
+
+"GeoLocation" = "Why doesn't the app store geo-location information while recording";
+
+"FAQThird" = "If the program does not save information on geographical position during recording, it means you have banned to access to geographical location data. Go to Settings > Privacy policy > Location Services and allow the program to access the data.";
+
+"Unlimitedrecording" = "Unlimited recording";
+
+"Unlimitedaccess" = "Unlimited access to the Dosimeter";
+
+"Unlimitedphotoandvideo" = "Unlimited photo and video";
+
+"NoiseMeasurement" = "Noise Measurement with Photo & Video";
+
+"RecordSaveMeasurements" = "Record & Save Measurements";
+
+

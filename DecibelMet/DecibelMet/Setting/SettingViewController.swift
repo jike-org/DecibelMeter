@@ -12,7 +12,8 @@ import MessageUI
 
 class SettingsView: UIViewController {
     
-    lazy var titleLabel = Label(style: .titleLabel, "Settings")
+    let settings = NSLocalizedString("test", comment: "")
+    lazy var titleLabel = Label(style: .titleLabel, settings)
     let cellSpacingHeight: CGFloat = 40
     
     lazy var tableView: UITableView = {
@@ -44,7 +45,7 @@ class SettingsView: UIViewController {
 extension SettingsView {
     
     private func setupView() {
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(named: "backgroundColor")
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         

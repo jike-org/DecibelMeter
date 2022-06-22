@@ -10,6 +10,8 @@
 		01443A4D2830E09100E4D413 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01443A4C2830E09100E4D413 /* OnBoardingView.swift */; };
 		01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01443A502830E0BC00E4D413 /* OnBoardingManager.swift */; };
 		01476EBC284A549C0007C006 /* DosimetreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01476EBB284A549C0007C006 /* DosimetreCell.swift */; };
+		0159FAA02863159A0021F895 /* darkLightMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159FA9F2863159A0021F895 /* darkLightMode.swift */; };
+		0159FAA22863164C0021F895 /* MTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159FAA12863164C0021F895 /* MTUserDefaults.swift */; };
 		01658FA128324191001336A4 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA028324191001336A4 /* Collection.swift */; };
 		01658FA328324363001336A4 /* FirstListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA228324363001336A4 /* FirstListView.swift */; };
 		01658FA5283245C5001336A4 /* SecondListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA4283245C5001336A4 /* SecondListView.swift */; };
@@ -17,6 +19,7 @@
 		01658FA9283245E0001336A4 /* SubscribeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FA8283245DF001336A4 /* SubscribeOneView.swift */; };
 		01658FAB283245EB001336A4 /* SubscribeTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FAA283245EB001336A4 /* SubscribeTwoView.swift */; };
 		017379D32844FA9C00A77E83 /* Dosimeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017379D22844FA9C00A77E83 /* Dosimeter.swift */; };
+		0175892E28638037008B4650 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0175893028638037008B4650 /* Localizable.strings */; };
 		0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176C5B92840F9830074B8D5 /* CollectionViewSave.swift */; };
 		0176C5BC284101F60074B8D5 /* CustomSaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176C5BB284101F60074B8D5 /* CustomSaveCell.swift */; };
 		0178FA8A283E6084006C03CC /* DecibelMet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0178FA88283E6084006C03CC /* DecibelMet.xcdatamodeld */; };
@@ -78,6 +81,8 @@
 		01443A4C2830E09100E4D413 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		01443A502830E0BC00E4D413 /* OnBoardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingManager.swift; sourceTree = "<group>"; };
 		01476EBB284A549C0007C006 /* DosimetreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosimetreCell.swift; sourceTree = "<group>"; };
+		0159FA9F2863159A0021F895 /* darkLightMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = darkLightMode.swift; sourceTree = "<group>"; };
+		0159FAA12863164C0021F895 /* MTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.swift; sourceTree = "<group>"; };
 		01658FA028324191001336A4 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		01658FA228324363001336A4 /* FirstListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListView.swift; sourceTree = "<group>"; };
 		01658FA4283245C5001336A4 /* SecondListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondListView.swift; sourceTree = "<group>"; };
@@ -85,6 +90,9 @@
 		01658FA8283245DF001336A4 /* SubscribeOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOneView.swift; sourceTree = "<group>"; };
 		01658FAA283245EB001336A4 /* SubscribeTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeTwoView.swift; sourceTree = "<group>"; };
 		017379D22844FA9C00A77E83 /* Dosimeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dosimeter.swift; sourceTree = "<group>"; };
+		0175892F28638037008B4650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0175893228638056008B4650 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0175893328638068008B4650 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0176C5B92840F9830074B8D5 /* CollectionViewSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSave.swift; sourceTree = "<group>"; };
 		0176C5BB284101F60074B8D5 /* CustomSaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSaveCell.swift; sourceTree = "<group>"; };
 		0178FA89283E6084006C03CC /* DecibelMet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DecibelMet.xcdatamodel; sourceTree = "<group>"; };
@@ -181,6 +189,14 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		0175892B2863801D008B4650 /* tran */ = {
+			isa = PBXGroup;
+			children = (
+				0175893028638037008B4650 /* Localizable.strings */,
+			);
+			path = tran;
+			sourceTree = "<group>";
+		};
 		017A4AD9283E454900D4092C /* Persist */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +261,8 @@
 				01A259B02823FDDA00EBA84C /* ImageView.swift */,
 				01A259A32823DCD200EBA84C /* TabBar.swift */,
 				0180CE352822C2EB00E80380 /* Constants.swift */,
+				0159FA9F2863159A0021F895 /* darkLightMode.swift */,
+				0159FAA12863164C0021F895 /* MTUserDefaults.swift */,
 			);
 			path = "Support files";
 			sourceTree = "<group>";
@@ -303,6 +321,7 @@
 		01D2DCDF28229BC7003AB953 /* DecibelMet */ = {
 			isa = PBXGroup;
 			children = (
+				0175892B2863801D008B4650 /* tran */,
 				01D2DCE028229BC7003AB953 /* AppDelegate.swift */,
 				01D2DCE228229BC7003AB953 /* SceneDelegate.swift */,
 				01B77DF02826935600E0F59F /* Main */,
@@ -421,6 +440,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				uk,
 			);
 			mainGroup = 01D2DCD428229BC7003AB953;
 			productRefGroup = 01D2DCDE28229BC7003AB953 /* Products */;
@@ -451,6 +472,7 @@
 				01D36707284F47C70061B7E4 /* Montserrat-LightItalic.ttf in Resources */,
 				01D36719284F47C70061B7E4 /* OFL.txt in Resources */,
 				01D36712284F47C70061B7E4 /* Montserrat-ExtraLightItalic.ttf in Resources */,
+				0175892E28638037008B4650 /* Localizable.strings in Resources */,
 				01D36711284F47C70061B7E4 /* Montserrat-SemiBold.ttf in Resources */,
 				01D3670D284F47C70061B7E4 /* Montserrat-Thin.ttf in Resources */,
 				01D3670E284F47C70061B7E4 /* Montserrat-Bold.ttf in Resources */,
@@ -529,6 +551,7 @@
 				0180CE2A2822C10C00E80380 /* AvgMinMaxBar.swift in Sources */,
 				01476EBC284A549C0007C006 /* DosimetreCell.swift in Sources */,
 				01658FA328324363001336A4 /* FirstListView.swift in Sources */,
+				0159FAA02863159A0021F895 /* darkLightMode.swift in Sources */,
 				01A259A82823DD0900EBA84C /* SaveCell.swift in Sources */,
 				017A4ADD283E458800D4092C /* RecordClass.swift in Sources */,
 				01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */,
@@ -551,6 +574,7 @@
 				01A259A42823DCD300EBA84C /* TabBar.swift in Sources */,
 				017A4ADB283E455900D4092C /* Persist.swift in Sources */,
 				0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */,
+				0159FAA22863164C0021F895 /* MTUserDefaults.swift in Sources */,
 				0180CE2C2822C13100E80380 /* StackView.swift in Sources */,
 				0180CE302822C1B100E80380 /* Gradient.swift in Sources */,
 			);
@@ -559,6 +583,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		0175893028638037008B4650 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0175892F28638037008B4650 /* en */,
+				0175893228638056008B4650 /* ru */,
+				0175893328638068008B4650 /* uk */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		01D2DCEB28229BC9003AB953 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -574,6 +608,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -635,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -694,7 +730,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P2NGCH9ANT;
+				DEVELOPMENT_TEAM = 48BKW53X67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -722,7 +758,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P2NGCH9ANT;
+				DEVELOPMENT_TEAM = 48BKW53X67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -18,11 +18,11 @@ class SettingsCell: UITableViewCell {
     
     @objc private func toogleAutoRecord(_ sender: UISwitch) {
         if sender.isOn {
-            Constants().isRecordingAtLaunchEnabled = true
-            print("on")
+            window?.overrideUserInterfaceStyle = .dark
+            print("dark")
         } else {
-            Constants().isRecordingAtLaunchEnabled = false
-            print("off")
+            window?.overrideUserInterfaceStyle = .light
+            print("light")
         }
     }
     
@@ -38,8 +38,9 @@ class SettingsCell: UITableViewCell {
         self.icon = icon
         self.label = label
         
-        self.label?.textColor = .white
+        self.label?.textColor = UIColor(named: "t")
         self.label?.font = UIFont(name: "Montserrat-Medium", size: 20)
+        self.label?.tintColor = UIColor(named: "tint")
         
         addSubview(self.icon!)
         addSubview(self.label!)

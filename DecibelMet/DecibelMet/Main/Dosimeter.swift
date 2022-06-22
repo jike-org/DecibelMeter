@@ -34,7 +34,8 @@ final class Dosimeter: UIViewController {
     var info: RecordInfo!
     
     //MARK: - UI elements
-    lazy var headerLabel = Label(style: .dosimeterHeader, "DOSIMETER")
+    let headerLabelText = NSLocalizedString("test", comment: "")
+    lazy var headerLabel = Label(style: .dosimeterHeader, headerLabelText)
     lazy var timeLabel = Label(style: .dosimetreTime, "00:00")
     lazy var procentLabel = Label(style: .dosimetreProcentLabel, "0")
     lazy var procentImage = Label(style: .dosimetreProcentImage, "%")
@@ -57,6 +58,10 @@ final class Dosimeter: UIViewController {
         requestPermissions()
         startRecordingAudio()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setup()
     }
     
     private func requestPermissions() {
@@ -83,7 +88,7 @@ extension Dosimeter {
         collection.dataSource = self
         collection.backgroundColor = .black
         collection.translatesAutoresizingMaskIntoConstraints = false
-        
+        collection.backgroundColor = UIColor(named: "backgroundColor")
         view.addSubview(collection)
         NSLayoutConstraint.activate([
             collection.topAnchor.constraint(equalTo: noiseButton.bottomAnchor, constant: 30),
@@ -118,7 +123,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DosimeterCell.id, for: indexPath) as! DosimeterCell
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.contentView.backgroundColor = #colorLiteral(red: 0.1490753889, green: 0.1489614546, blue: 0.1533248723, alpha: 1)
+        cell.contentView.backgroundColor = UIColor(named: "backCell")
         cell.configure(item: items[indexPath.row])
         return cell
     }
@@ -142,6 +147,7 @@ extension Dosimeter {
 extension Dosimeter {
     
     private func setup() {
+        view.backgroundColor = UIColor(named: "backgroundColor")
         noiseButton.setTitle("NOISE", for: .normal)
         noiseButton.addTarget(self, action: #selector(noiseTap), for: .touchUpInside)
         setupCircleView()
@@ -188,11 +194,13 @@ extension Dosimeter {
     @objc func noiseTap() {
         if isTap {
             noiseButton.setTitle("NOISE", for: .normal)
-            noiseButton.backgroundColor = #colorLiteral(red: 0.1608400345, green: 0.1607262492, blue: 0.1650899053, alpha: 1)
+            noiseButton.backgroundColor = UIColor(named: "nosha")
+            noiseButton.setTitleColor(UIColor(named: "noshaTitle"), for: .normal)
             isTap = false
         } else {
             noiseButton.setTitle("OSHA", for: .normal)
             noiseButton.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
+            noiseButton.setTitleColor(UIColor.white, for: .normal)
             isTap = true
         }
     }
@@ -206,7 +214,7 @@ extension Dosimeter {
         progress.trackThickness = 0.7
         progress.clockwise = true
         progress.glowMode = .noGlow
-        progress.trackColor = #colorLiteral(red: 0.1012228802, green: 0.1059223041, blue: 0.1145466045, alpha: 1)
+        progress.trackColor = UIColor(named: "backCircleDosimetre")!
         progress.set(colors:UIColor.green,UIColor.yellow,UIColor.yellow, UIColor.orange)
         progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.8)
     }

@@ -69,6 +69,7 @@ class CustomSaveCell: SwipeCollectionViewCell {
         super.layoutSubviews()
         soundTime.textAlignment = .left
         recordName.textAlignment = .left
+        recordName.textColor = UIColor(named: "saveCell")
         NSLayoutConstraint.activate([
             playButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             playButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),

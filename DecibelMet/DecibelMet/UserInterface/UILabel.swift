@@ -42,9 +42,10 @@ class Label: UILabel {
         super.init(frame: .zero)
         
         self.text     = text
-        textColor     = .white
+        textColor     = UIColor(named: "saveCell")
         numberOfLines = 1
         textAlignment = .center
+//        tintColor = UIColor(named: "t")
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -81,12 +82,12 @@ class Label: UILabel {
             font = UIFont(name: "Montserrat-Bold", size: 30.0)
             textColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
         case .cellDate:
+            textColor = UIColor(named: "saveCell")
             font = UIFont(name: "Montserrat-Regular", size: 12)
             textAlignment = .right
         case .minMaxAvgCell:
             font = UIFont(name: "Montserrat-Regular", size: 12)
             textAlignment = .left
-            textColor = #colorLiteral(red: 1, green: 0.9999999404, blue: 0.9999999404, alpha: 1)
             layer.opacity = 0.7
         case .recordCell:
             font = UIFont(name: "Montserrat-SemiBold", size: 16.0)
