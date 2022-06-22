@@ -18,7 +18,7 @@ class DosimeterCell: UICollectionViewCell {
     lazy var dbTitel = Label(style: .dbTitel, "115")
     lazy var dbImage = Label(style: .dbImage, "dB")
     lazy var procent = Label(style: .time, "100%")
-    lazy var time = Label(style: .time, "10:59")
+    lazy var time = Label(style: .time, "00:00")
     lazy var viewColor: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -74,7 +74,7 @@ class DosimeterCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("ini coder ne rabotaet")
+        fatalError("init coder ne rabotaet")
     }
     
     override func prepareForReuse() {
@@ -93,6 +93,7 @@ class DosimeterCell: UICollectionViewCell {
     }
     
     func configure(item: Item) {
+        procent.text = String(item.procent)
         dbTitel.text = String(item.db)
         timeTitle.text = item.timeTitle
         item
@@ -109,5 +110,6 @@ extension DosimeterCell {
         let db: Int
         let timeTitle: String
         let timeEvent: AnyPublisher<[Int: Double], Never>
+        let procent: String
     }
 }

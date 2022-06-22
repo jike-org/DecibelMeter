@@ -156,6 +156,15 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    private func shereAs() {
+        let textToShare = "DecibelMeter"
+        
+        if let myWebsite = NSURL(string: "https://www.google.com") {
+            let objectsToShare: [Any] = [textToShare, myWebsite]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        }
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
@@ -189,6 +198,8 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             if let url = URL(string: "https://www.mindateq.io/terms-of-use") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
+        case 6:
+            shereAs()
         default:
             break
         }

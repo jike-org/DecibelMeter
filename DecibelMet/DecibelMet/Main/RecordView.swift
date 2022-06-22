@@ -298,7 +298,7 @@ extension RecordView {
 extension RecordView {
     
     private func setupView() {
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(named: "backgroundColor")
         setupCircleView()
         view.addSubview(progress)
         view.addSubview(verticalStack)

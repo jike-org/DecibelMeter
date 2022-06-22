@@ -17,13 +17,17 @@ final class Dosimeter: UIViewController {
     private var isTap = false
     private var isRecording = true
     private let timeValueSubject = CurrentValueSubject<[Int: Double], Never>([:])
+    private var totalPrecent = 0
+    private var precent90 = 0
     
-    var timer: Timer?
-    var timer1: Timer?
-    var runCount1 = 0.0
-    var runCount2 = 0.0
-    var runCount3 = 0.0
-    
+    private var precent95 = 0
+    private var precent100 = 0
+    private var precent105 = 0
+    private var precent110 = 0
+    private var precent115 = 0
+    private var precent120 = 0
+    private var precent125 = 0
+    private var precent130 = 0
     //MARK: - Audio recorder / resist
     let recorder = Recorder()
     let persist = Persist()
@@ -32,7 +36,7 @@ final class Dosimeter: UIViewController {
     //MARK: - UI elements
     lazy var headerLabel = Label(style: .dosimeterHeader, "DOSIMETER")
     lazy var timeLabel = Label(style: .dosimetreTime, "00:00")
-    lazy var procentLabel = Label(style: .dosimetreProcentLabel, "72.5")
+    lazy var procentLabel = Label(style: .dosimetreProcentLabel, "0")
     lazy var procentImage = Label(style: .dosimetreProcentImage, "%")
     lazy var decibelLabel = Label(style: .dosimetreDecibelLabel, "132")
     lazy var dbImage = Label(style: .dosimetredb, "dB")
@@ -60,10 +64,6 @@ final class Dosimeter: UIViewController {
             AVAudioSession.sharedInstance().requestRecordPermission { granted in }
             Constants().isFirstLaunch = true
         }
-    }
-    
-    func test() {
-        print ("490uy1pu41")
     }
 }
 
@@ -102,16 +102,15 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
     
     var items: [DosimeterCell.Item] {
         [
-            .init(db: 130, timeTitle: "MAX 1 min 52 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 120, timeTitle: "MAX 1 min 53 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 110, timeTitle: "MAX 1 min 54 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 100, timeTitle: "MAX 1 min 55 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 90, timeTitle: "MAX 1 min 56 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 80, timeTitle: "MAX 1 min 57 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 70, timeTitle: "MAX 1 min 58 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 60, timeTitle: "MAX 1 min 59 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 50, timeTitle: "MAX 1 min 59 sec", timeEvent: timeValueSubject.eraseToAnyPublisher()),
-            .init(db: 40, timeTitle: "MAX 1 min 59 sec", timeEvent: timeValueSubject.eraseToAnyPublisher())
+            .init(db: 130, timeTitle: "MAX 1 min 52 sec", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent130)%"),
+            .init(db: 125, timeTitle: "MAX 3 min 45 sec", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent125)%"),
+            .init(db: 120, timeTitle: "MAX 7 min 30 sec", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent120)%"),
+            .init(db: 115, timeTitle: "MAX 15 minutes", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent115)%"),
+            .init(db: 110, timeTitle: "MAX 30 minutes", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent110)%"),
+            .init(db: 105, timeTitle: "MAX 1 hours", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent105)%"),
+            .init(db: 100, timeTitle: "MAX 2 hours", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent100)%"),
+            .init(db: 95, timeTitle: "MAX 3 hours",  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent95)%"),
+            .init(db: 90, timeTitle: "MAX 4 hours",  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent90)%"),
         ]
     }
     
@@ -121,176 +120,6 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.layer.masksToBounds = true
         cell.contentView.backgroundColor = #colorLiteral(red: 0.1490753889, green: 0.1489614546, blue: 0.1533248723, alpha: 1)
         cell.configure(item: items[indexPath.row])
-        
-//        switch indexPath.row {
-//        case 0:
-//            cell.dbTitel.text = "130"
-//            cell.timeTitle.text = "MAX 1 min 52 sec"
-//            if recorder.getDecibels() > 40 && recorder.getDecibels() < 50 {
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount1 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount1)"
-//                    if runCount1 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount1)
-//            }
-//        case 1:
-//            cell.dbTitel.text = "125"
-//            cell.timeTitle.text = "MAX 3 min 45 sec"
-//            if recorder.getDecibels() > 51 && recorder.getDecibels() < 60 {
-//                timer1 = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount2 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount2)"
-//                    if runCount2 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount2)
-//            }
-//
-//
-//        case 2:
-//            cell.dbTitel.text = "120"
-//            cell.timeTitle.text = "MAX 7 min 30 sec"
-//            if recorder.getDecibels() > 61 && recorder.getDecibels() < 70 {
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount3 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount3)"
-//                    if runCount3 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount3)
-//            }
-//
-//
-//
-//        case 3:
-//            cell.dbTitel.text = "115"
-//            cell.timeTitle.text = "MAX 15 min 00 sec"
-//            if recorder.getDecibels() > 80 && recorder.getDecibels() < 90 {
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount3 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount3)"
-//                    if runCount3 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount3)
-//            }
-//
-//
-//
-//        case 4:
-//            cell.dbTitel.text = "110"
-//            cell.timeTitle.text = "MAX 30 min 00 sec"
-//            if recorder.getDecibels() > 61 && recorder.getDecibels() < 70 {
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount3 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount3)"
-//                    if runCount3 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount3)
-//            }
-//
-//
-//
-//        case 5:
-//            cell.dbTitel.text = "105"
-//            cell.timeTitle.text = "MAX 60 min 00 sec"
-//            if recorder.getDecibels() > 61 && recorder.getDecibels() < 70 {
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount3 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount3)"
-//                    if runCount3 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount3)
-//            }
-//
-//
-//
-//        case 6:
-//            cell.dbTitel.text = "100"
-//            cell.timeTitle.text = "MAX 2 hour"
-//            if recorder.getDecibels() > 61 && recorder.getDecibels() < 70 {
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount3 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount3)"
-//                    if runCount3 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount3)
-//            }
-//
-//
-//
-//        case 7:
-//            cell.dbTitel.text = "95"
-//            cell.timeTitle.text = "MAX 4 hour"
-//            if recorder.getDecibels() > 61 && recorder.getDecibels() < 70 {
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount3 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount3)"
-//                    if runCount3 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount3)
-//            }
-//
-//
-//
-//        case 8:
-//            cell.dbTitel.text = "90"
-//            cell.timeTitle.text = "MAX 8 hour"
-//            if recorder.getDecibels() > 61 && recorder.getDecibels() < 70 {
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [unowned self] timer in
-//                    print("Timer fired!")
-//                    runCount3 += 1
-//                    timer.tolerance = 0.2
-//                    cell.time.text = "\(runCount3)"
-//                    if runCount3 == 20 {
-//                        timer.invalidate()
-//                    }
-//                }
-//            } else {
-//                cell.time.text = String(runCount3)
-//            }
-//
-//        default:
-//            break
-//        }
         return cell
     }
     
@@ -350,8 +179,6 @@ extension Dosimeter {
             
             noiseButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             noiseButton.topAnchor.constraint(equalTo: progress.bottomAnchor, constant: -60)
-            
-            
         ])
     }
 }
@@ -440,26 +267,37 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
             let value = dict[key]
             dict[key] = value == nil ? 0.5 : value! + 0.5
         }
-        
-        if (0..<40).contains(decibels) {
-            increaseDictValue(&timeDict, key: 40)
+        if (90..<95).contains(decibels) {
+            increaseDictValue(&timeDict, key: 95)
+            precent90 = Int((timeDict[95]!) / 14400 * 100)
+            procentLabel.text = String(totalPrecent)
         }
-        if (40..<50).contains(decibels) {
-            increaseDictValue(&timeDict, key: 50)
+        if (95..<100).contains(decibels) {
+            increaseDictValue(&timeDict, key: 100)
         }
-        if (50..<60).contains(decibels) {
-            increaseDictValue(&timeDict, key: 60)
+        if (100..<105).contains(decibels) {
+            increaseDictValue(&timeDict, key: 105)
         }
-        if (60..<70).contains(decibels) {
-            increaseDictValue(&timeDict, key: 70)
+        if (105..<110).contains(decibels) {
+            increaseDictValue(&timeDict, key: 110)
+           
         }
-        if (70..<80).contains(decibels) {
-            increaseDictValue(&timeDict, key: 80)
+        if (110..<115).contains(decibels) {
+            increaseDictValue(&timeDict, key: 115)
         }
-        if (80..<90).contains(decibels) {
-            increaseDictValue(&timeDict, key: 90)
+        if (115..<120).contains(decibels) {
+            increaseDictValue(&timeDict, key: 120)
         }
-
+        if (120..<125).contains(decibels) {
+            increaseDictValue(&timeDict, key: 125)
+        }
+        if (125..<130).contains(decibels) {
+            increaseDictValue(&timeDict, key: 130)
+        }
+        if (130..<200).contains(decibels) {
+            increaseDictValue(&timeDict, key: 200)
+        }
+        totalPrecent = (Int(precent90))
         timeValueSubject.send(timeDict)
         timeLabel.text = "\(strMinutes): \(strSeconds)"
         decibelLabel.text = "\(decibels)"

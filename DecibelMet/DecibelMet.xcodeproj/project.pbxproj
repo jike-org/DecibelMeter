@@ -32,7 +32,9 @@
 		0180CE322822C1ED00E80380 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE312822C1ED00E80380 /* Recorder.swift */; };
 		0180CE362822C2EB00E80380 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE352822C2EB00E80380 /* Constants.swift */; };
 		0180CE382822C73400E80380 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE372822C73400E80380 /* Player.swift */; };
-		0185016128579F8F0047F728 /* CameraDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185016028579F8F0047F728 /* CameraDB.swift */; };
+		0185016128579F8F0047F728 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185016028579F8F0047F728 /* PlayerViewController.swift */; };
+		01A1565A286074C8009F880B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A15659286074C8009F880B /* PickerViewController.swift */; };
+		01A1565C28607518009F880B /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1565B28607518009F880B /* VideoEditor.swift */; };
 		01A259A42823DCD300EBA84C /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A32823DCD200EBA84C /* TabBar.swift */; };
 		01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A52823DCFD00EBA84C /* CameraController.swift */; };
 		01A259A82823DD0900EBA84C /* SaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A72823DD0900EBA84C /* SaveCell.swift */; };
@@ -98,7 +100,9 @@
 		0180CE312822C1ED00E80380 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		0180CE352822C2EB00E80380 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0180CE372822C73400E80380 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		0185016028579F8F0047F728 /* CameraDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDB.swift; sourceTree = "<group>"; };
+		0185016028579F8F0047F728 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		01A15659286074C8009F880B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		01A1565B28607518009F880B /* VideoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
 		01A259A32823DCD200EBA84C /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		01A259A52823DCFD00EBA84C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		01A259A72823DD0900EBA84C /* SaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCell.swift; sourceTree = "<group>"; };
@@ -261,7 +265,9 @@
 			isa = PBXGroup;
 			children = (
 				01A259A52823DCFD00EBA84C /* CameraController.swift */,
-				0185016028579F8F0047F728 /* CameraDB.swift */,
+				0185016028579F8F0047F728 /* PlayerViewController.swift */,
+				01A15659286074C8009F880B /* PickerViewController.swift */,
+				01A1565B28607518009F880B /* VideoEditor.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -510,7 +516,9 @@
 				017379D32844FA9C00A77E83 /* Dosimeter.swift in Sources */,
 				0180CE322822C1ED00E80380 /* Recorder.swift in Sources */,
 				01E166832832C6D600DBC846 /* Image.swift in Sources */,
+				01A1565A286074C8009F880B /* PickerViewController.swift in Sources */,
 				01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */,
+				01A1565C28607518009F880B /* VideoEditor.swift in Sources */,
 				0180CE362822C2EB00E80380 /* Constants.swift in Sources */,
 				01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */,
 				0178FA8A283E6084006C03CC /* DecibelMet.xcdatamodeld in Sources */,
@@ -527,7 +535,7 @@
 				01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */,
 				0180CE382822C73400E80380 /* Player.swift in Sources */,
 				01443A4D2830E09100E4D413 /* OnBoardingView.swift in Sources */,
-				0185016128579F8F0047F728 /* CameraDB.swift in Sources */,
+				0185016128579F8F0047F728 /* PlayerViewController.swift in Sources */,
 				01658FA9283245E0001336A4 /* SubscribeOneView.swift in Sources */,
 				01658FA128324191001336A4 /* Collection.swift in Sources */,
 				01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */,
