@@ -17,10 +17,12 @@ class SaveController: UIViewController {
         let persist = Persist()
         var recordings: [Record]?
         var player: Player!
+        var info: RecordInfo!
         var isPlaying: Bool = false
         var tagPlaying: Int?
         var tags: [Int] = []
- 
+        var session: AVAudioSession!
+    
     func buttonToogler() {
         for tag in tags {
             guard let tmp = collection?.cellForItem(at: [0, tag]) as? CustomSaveCell else { return }
@@ -127,6 +129,13 @@ class SaveController: UIViewController {
         }
     }
     
+    
+    func shareAudio(_ sender: UIButton) {
+        let cell = collection?.cellForItem(at: [0, sender.tag]) as? CustomSaveCell
+        let button = sender as! Button
+        guard let path = Persist().filePath(for: button.uuid!.uuidString) else { return }
+        print(path)
+    }
 }
 
 extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -187,6 +196,7 @@ extension SaveController: SwipeCollectionViewCellDelegate {
         
         let shareAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
             // handle action by updating model with deletion
+            self.share(indexPath: indexPath)
         }
 
             deleteAction.backgroundColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
@@ -219,6 +229,15 @@ extension SaveController {
         } catch {
             print(error)
         }
+    }
+    
+    private func share(indexPath: IndexPath) {
+        let textToShare = "ShareAudioTest"
+        let test = "ne rabotaet audio"
+            let objectsToShare: [Any] = [textToShare, test]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        
     }
     }
 
