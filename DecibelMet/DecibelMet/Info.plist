@@ -14,6 +14,16 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Access</string>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string></string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>t</string>
+	<key>NSFileProviderPresenceUsageDescription</key>
+	<string></string>
+	<key>NSLocationUsageDescription</key>
+	<string></string>
+	<key>NSSystemExtensionUsageDescription</key>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Test</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

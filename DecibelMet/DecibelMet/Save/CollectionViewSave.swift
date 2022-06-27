@@ -9,19 +9,20 @@ import Foundation
 import UIKit
 import AVFAudio
 import SwipeCellKit
+import CoreData
 
 class SaveController: UIViewController {
     
     private var collection: UICollectionView?
     
-        let persist = Persist()
-        var recordings: [Record]?
-        var player: Player!
-        var info: RecordInfo!
-        var isPlaying: Bool = false
-        var tagPlaying: Int?
-        var tags: [Int] = []
-        var session: AVAudioSession!
+    let persist = Persist()
+    var recordings: [Record]?
+    var player: Player!
+    var info: RecordInfo!
+    var isPlaying: Bool = false
+    var tagPlaying: Int?
+    var tags: [Int] = []
+    var session: AVAudioSession!
     
     func buttonToogler() {
         for tag in tags {
@@ -61,10 +62,9 @@ class SaveController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tabBarController?.tabBar.isHidden = false
-//        self.tabBarController?.tabBar.tintColor = UIColor.white
-//        self.tabBarController?.tabBar.barTintColor = UIColor.black
+        //        self.tabBarController?.tabBar.tintColor = UIColor.white
+        //        self.tabBarController?.tabBar.barTintColor = UIColor.black
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width) - 30, height: 80)
@@ -78,7 +78,7 @@ class SaveController: UIViewController {
         collection.delegate = self
         collection.dataSource = self
         collection.backgroundColor = UIColor(named: "backgroundColor")
-//        collectionView.frame = view.bounds
+        //        collectionView.frame = view.bounds
         collection.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(collection)
@@ -89,6 +89,8 @@ class SaveController: UIViewController {
             collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
         ])
         buttonToogler()
+        let path = Bundle.main.path(forResource: "t", ofType: "m4a")
+        print(path)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,16 +105,17 @@ class SaveController: UIViewController {
     
     @objc func playAudio(_ sender: UIButton) {
         let cell = collection?.cellForItem(at: [0, sender.tag]) as? CustomSaveCell
-
+        
         if sender.tag == 0 {
             tagPlaying = 0
         }
-
+        
         buttonToogler()
-
+        
         if isPlaying == false {
             let button = sender as! Button
             guard let path = Persist().filePath(for: button.uuid!.uuidString) else { return }
+            print(path)
             isPlaying = true
             cell?.isPlaying = true
             sender.setImage(UIImage(named: "Pause"), for: .normal)
@@ -127,14 +130,6 @@ class SaveController: UIViewController {
             player.session = nil
             self.tagPlaying = nil
         }
-    }
-    
-    
-    func shareAudio(_ sender: UIButton) {
-        let cell = collection?.cellForItem(at: [0, sender.tag]) as? CustomSaveCell
-        let button = sender as! Button
-        guard let path = Persist().filePath(for: button.uuid!.uuidString) else { return }
-        print(path)
     }
 }
 
@@ -169,7 +164,7 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
                            min: "MIN " + String(recording.min),
                            max: "MAX " + String(recording.max),
                            avg: "AVG " + String(recording.avg))
-                           
+            
             cell.audioID = recording.id
             cell.playButton.uuid = recording.id
             
@@ -184,28 +179,28 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
 extension SaveController: SwipeCollectionViewCellDelegate {
     func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-
-            let deleteAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
-                // handle action by updating model with deletion
-                self.delete(indexPath: indexPath)
-            }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
+            // handle action by updating model with deletion
+            self.delete(indexPath: indexPath)
+        }
         
         let editAction = SwipeAction(style: .default, title: nil) { action, indexPath in
-            // handle action by updating model with deletion
+            self.rename(indexPath: indexPath)
         }
         
         let shareAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
             // handle action by updating model with deletion
             self.share(indexPath: indexPath)
         }
-
-            deleteAction.backgroundColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
-            editAction.backgroundColor = #colorLiteral(red: 0.07074324042, green: 0.8220555186, blue: 0.6004908681, alpha: 1)
-            shareAction.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
-            deleteAction.image = UIImage(named: "delete")
-            editAction.image = UIImage(named: "edit")
-            shareAction.image = UIImage(named: "icons")
-            return [deleteAction,shareAction,editAction]
+        
+        deleteAction.backgroundColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
+        editAction.backgroundColor = #colorLiteral(red: 0.07074324042, green: 0.8220555186, blue: 0.6004908681, alpha: 1)
+        shareAction.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
+        deleteAction.image = UIImage(named: "delete")
+        editAction.image = UIImage(named: "edit")
+        shareAction.image = UIImage(named: "icons")
+        return [deleteAction,shareAction,editAction]
     }
     
     func collectionView(_ collectionView: UICollectionView, editActionsOptionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
@@ -232,15 +227,57 @@ extension SaveController {
     }
     
     private func share(indexPath: IndexPath) {
-        let textToShare = "ShareAudioTest"
-        let test = "ne rabotaet audio"
-            let objectsToShare: [Any] = [textToShare, test]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
+        let cell = collection?.cellForItem(at: indexPath) as? CustomSaveCell
+        let t = URL(string: "file:///var/mobile/Containers/Data/Application/3702531B-9120-4247-BFFA-6C2DF71B9021/Documents/BEAAEBA4-D9AA-49B8-918B-E1B4DF8D9512.m4a")
+        let objectsToShare: [Any] = ["fck sharing", t]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    private func rename(indexPath: IndexPath) {
         
+        let alert = UIAlertController(
+            title: "Recording name",
+            message: nil, preferredStyle: .alert
+        )
+        
+        let cancel = UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil
+        )
+        
+        let save = UIAlertAction(
+            title: "Save",
+            style: .default,
+            handler: { _ in
+                let name = alert.textFields![0].text
+                
+                if name == "" {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+                    self.info.name = dateFormatter.string(from: self.info.date as Date)
+                } else {
+                    self.info.name = name
+                }
+                self.persist.saveAudio(info: self.info)
+                let url: URL = self.persist.filePath(for: self.info.id.uuidString)!
+                print(url)
+            }
+        )
+        
+        alert.addTextField { textField in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+            textField.placeholder = "write"
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(save)
+        
+        present(alert, animated: true, completion: nil)
     }
-    }
-
+}
 
 extension SaveController: AVAudioPlayerDelegate {
     

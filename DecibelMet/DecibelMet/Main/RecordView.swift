@@ -22,7 +22,7 @@ class RecordView: UIViewController {
     
     // MARK: UI elements
     lazy var decibelLabel   = Label(style: .decibelHeading, "0")
-    lazy var timeLabel      = Label(style: .time, "00:00")
+    lazy var timeLabel      = Label(style: .timeRecord, "00:00")
     lazy var progress = KDCircularProgress(
         frame: CGRect(x: 0, y: 0, width: view.frame.width / 1.2, height: view.frame.width / 1.2)
     )
@@ -66,9 +66,16 @@ class RecordView: UIViewController {
     
     lazy var backView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "recordView")
+        view.backgroundColor = #colorLiteral(red: 0.1608400345, green: 0.1607262492, blue: 0.1650899053, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 18
+        return view
+    }()
+    
+    lazy var lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(0.4)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -120,7 +127,8 @@ class RecordView: UIViewController {
         super.viewDidLoad()
         recorder.delegate = self
         recorder.avDelegate = self
-        view.backgroundColor = UIColor(named: "backgroundColor")
+//        view.backgroundColor = UIColor(named: "backgroundColor")
+        view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = false
         setupConstraint()
         setupView()
@@ -220,6 +228,8 @@ extension RecordView {
                         self.info.name = name
                     }
                     self.persist.saveAudio(info: self.info)
+                    let url: URL = self.persist.filePath(for: self.info.id.uuidString)!
+                    print(url)
                 }
             )
             
@@ -256,11 +266,13 @@ extension RecordView {
     func setupConstraint() {
         setupCircleView()
         view.addSubview(chart)
-        view.addSubview(progress)
-        view.addSubview(progress)
+//        view.addSubview(progress)
+        view.insertSubview(progress, at: 0)
         view.addSubview(avgBar)
         view.addSubview(verticalStack)
         view.addSubview(backView)
+        view.addSubview(lineView)
+        view.bringSubviewToFront(lineView)
         backView.addSubview(recordButton)
         backView.addSubview(resetButton)
         backView.addSubview(saveButton)
@@ -278,13 +290,13 @@ extension RecordView {
             chart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             chart.heightAnchor.constraint(equalToConstant: 200),
             
-            avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            avgBar.centerYAnchor.constraint(equalTo: progress.centerYAnchor, constant: 60),
-            
-            backView.topAnchor.constraint(equalTo: avgBar.topAnchor, constant: 90),
+            backView.heightAnchor.constraint(equalToConstant: 120),
             backView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             backView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             backView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
+            
+            avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            avgBar.bottomAnchor.constraint(equalTo: progress.bottomAnchor),
             
             recordButton.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
             recordButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
@@ -296,6 +308,11 @@ extension RecordView {
             saveButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
             saveButton.trailingAnchor.constraint(equalTo: backView.safeAreaLayoutGuide.trailingAnchor, constant: -73.5),
             saveButton.leadingAnchor.constraint(equalTo: recordButton.trailingAnchor, constant: 24),
+            
+            lineView.heightAnchor.constraint(equalToConstant: 1),
+            lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            lineView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            lineView.centerYAnchor.constraint(equalTo: progress.centerYAnchor, constant: 20)
         ])
     }
 }
@@ -329,7 +346,7 @@ extension RecordView {
             verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
             verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
 
-            avgBar.topAnchor.constraint(equalTo: progress.bottomAnchor, constant: 5),
+            avgBar.topAnchor.constraint(equalTo: backView.topAnchor, constant: 5),
             avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
@@ -337,9 +354,9 @@ extension RecordView {
             chart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             chart.heightAnchor.constraint(equalToConstant: 10),
 
-            progress.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 40),
+            progress.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 30),
             progress.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            progress.heightAnchor.constraint(equalToConstant: 150),
+            progress.heightAnchor.constraint(equalToConstant: 100),
 
             recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -382,9 +399,9 @@ extension RecordView {
         progress.clockwise = true
         progress.roundedCorners = true
         progress.glowMode = .noGlow
-        progress.trackColor = UIColor(named: "backCircleRecord")!
+        progress.trackColor = .black
         progress.set(colors:UIColor.purple, UIColor.blue, UIColor.blue, UIColor.purple)
-        progress.center = CGPoint(x: view.center.x, y: view.center.y / 0.9 )
+        progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.0 )
     }
     
     func updateChartData() {
