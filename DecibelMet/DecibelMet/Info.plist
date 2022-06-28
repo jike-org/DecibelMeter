@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Access</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Medium.ttf</string>
@@ -12,22 +10,6 @@
 		<string>Montserrat-Bold.ttf</string>
 		<string>Montserrat-SemiBold.ttf</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Access</string>
-	<key>NSFileProviderDomainUsageDescription</key>
-	<string></string>
-	<key>NSDocumentsFolderUsageDescription</key>
-	<string>t</string>
-	<key>NSFileProviderPresenceUsageDescription</key>
-	<string></string>
-	<key>NSLocationUsageDescription</key>
-	<string></string>
-	<key>NSSystemExtensionUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Test</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>test1</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -24,7 +24,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate & UINa
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        openVideoCamera()
+//        openVideoCamera()
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

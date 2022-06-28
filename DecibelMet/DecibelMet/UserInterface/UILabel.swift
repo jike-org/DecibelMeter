@@ -68,6 +68,7 @@ class Label: UILabel {
             textColor = UIColor(named: "cellTime")
         case .avgMinMax:
             font = UIFont.systemFont(ofSize: 10)
+            textColor = .white
         case .tableLabel:
             font = UIFont(name: "OpenSans-SemiBold", size: 17)
             textAlignment = .right

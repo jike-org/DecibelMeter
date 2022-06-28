@@ -733,6 +733,15 @@
 				DEVELOPMENT_TEAM = 48BKW53X67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = Access;
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = t;
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
+				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Access;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = test1;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Test;
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -742,7 +751,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = StasDashkevich.DecibelMet;
+				PRODUCT_BUNDLE_IDENTIFIER = stDa.DecibelMet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -761,6 +770,15 @@
 				DEVELOPMENT_TEAM = 48BKW53X67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = Access;
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = t;
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
+				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Access;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = test1;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Test;
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -770,7 +788,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = StasDashkevich.DecibelMet;
+				PRODUCT_BUNDLE_IDENTIFIER = stDa.DecibelMet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
