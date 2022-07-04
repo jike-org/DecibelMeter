@@ -21,7 +21,7 @@ class DosimeterCell: UICollectionViewCell {
     lazy var time = Label(style: .time, "00:00")
     lazy var viewColor: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .systemGray
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 3
         return view
@@ -89,7 +89,7 @@ class DosimeterCell: UICollectionViewCell {
         timeTitle.layer.opacity = 0.7
         procent.layer.opacity = 0.7
         time.layer.opacity = 0.7
-        viewColor.backgroundColor = .red
+        viewColor.backgroundColor = .systemGray
     }
     
     func configure(item: Item) {

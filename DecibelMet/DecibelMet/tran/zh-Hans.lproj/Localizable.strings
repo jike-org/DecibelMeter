@@ -1,0 +1,149 @@
+"SoundMeterDosimeter" = "测声计和剂量计";
+
+"DetectSoundLevel" = "检测声级";
+
+"MeasurementHistory" = "测量历史";
+
+"UnlockAllAccess" = "解锁所有访问";
+
+"Trial7" = "从7天免费试用开始，然后每周3.99";
+
+"Continue" = "继续";
+
+"Camera" = "相机";
+
+"Location" = "位置";
+
+"PhotoLibrary" = "图库";
+
+"Ok" = "好";
+ 
+"AllowOnce" = "允许一次";
+
+"AllowWhile" = "使用应用时允许";
+
+"and" = "和";
+
+"Allow" = "允许";
+
+"DontAllow" = "不允许";
+
+"TermsOfService" = "服务条款";
+
+"TermsOfUse" = "使用条款";
+
+"PrivacyPolice" = "隐私政策";
+
+"Start7Day" = "从7天免费试用开始";
+
+"Records" = "记录";
+
+"Settings" = "设置";
+
+"FAQ" = "常见问题解答";
+
+"Unlockallfeatures" = "解锁所有功能";
+
+"Rateus" = "给我们评分";
+
+"Support" = "支持";
+
+"Privacypolicy" = "隐私政策";
+
+"Sharewithfriends" = "与朋友分享";
+
+"Darktheme" = "深色主题";
+
+"Dosimeter" = "剂量计";
+
+"LikeApp" = "你喜欢本应用吗?";
+
+"Yes" = "是";
+
+"No" = "否";
+
+"UnlockAllAccess" = "解锁所有访问";
+
+"Week" = "周";
+
+"Year" = "年";
+
+"Month" = "月";
+
+"Restore" = "还原";
+
+"Maximum" = "最大";
+
+"Average" = "平均";
+
+"Minimum" = "最小";
+
+"Minute" = "分钟(分)";
+
+"Second" = "秒钟(秒)";
+
+"Hour" = "小时(时)";
+
+"Location" = "位置";
+
+"Date" = "日期";
+
+"Share" = "分享";
+
+"Delete" = "删除";
+
+"Edit" = "编辑";
+
+"DecibelMicro" = "分贝计” 要访问麦克风";
+
+"Required" = "本应用运行要求，目的是测量音频噪声水平";
+
+"Microphone" = "麦克风";
+
+"SetMicro" =  "请在设置中设置麦克风使用权限后才能运行";
+
+"CameraAcces" = "分贝计”想要访问相机";
+
+"RequiredWork" = "本应用运行要求，目的是获取视频和音频的噪音水平";
+
+"Camerapermission" = "相机权限";
+
+"CameraSet" = "请在设置中设置相机使用权限才能运行";
+
+"AccessPhotos" = "分贝计”想要访问您的照片";
+
+"RequiredVideo" = "本应用运行要求，目的是保存视频和音频的噪音水平";
+
+"Photolibrarypermission" = "图库权限";
+
+"SetPhoto" = "请在设置中设置图库使用权限才能运行";
+
+"AllowLocation" = "允许 “分贝计”使用你的位置?";
+
+"CaptureImage" = "用于显示所拍摄图像中城市的位置";
+
+"Locationpermission" = "位置权限";
+
+"setLocation" = "请在设置中设置位置使用权限才能运行";
+
+"appWil" = "本应用将帮你测量环境噪音水平:";
+
+"Unlimitedrecording" = "录制无限制";
+
+"Unlimitedaccess" = "访问剂量计无限制";
+
+"Unlimitedphotoandvideo" = "无限量照片和视频";
+
+"noiseData" = "噪声数据";
+
+"cancel" = "取消";
+
+"photo" = "照片";
+
+"video" = "视频";
+ 
+"DecibelMeter" = "分贝计";
+
+"recording" = "录制名称";
+
+"save" = "保存";

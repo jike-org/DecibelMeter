@@ -1,0 +1,149 @@
+"SoundMeterDosimeter" = "サウンドメーターと線量計";
+
+"DetectSoundLevel" = "サウンドレベルを検出";
+
+"MeasurementHistory" = "測定履歴";
+
+"UnlockAllAccess" = "すべてのアクセスを解除する";
+
+"Trial7" = "7日間の無料トライアルからスタートし、その後1週間ごとに3.99ドル";
+
+"Continue" = "継続";
+
+"Camera" = "カメラ";
+
+"Location" = "位置";
+
+"PhotoLibrary" = "フォトライブラリー";
+
+"Ok" = "OK";
+ 
+"AllowOnce" = "1回のみ許可";
+
+"AllowWhile" = "アプリ使用中の許可";
+
+"and" = "と";
+
+"Allow" = "許可";
+
+"DontAllow" = "禁止事項";
+
+"TermsOfService" = "利用規約";
+
+"TermsOfUse" = "利用規約";
+
+"PrivacyPolice" = "プライバシーポリシー";
+
+"Start7Day" = "7日間の無料トライアルからスタート";
+
+"Records" = "記録";
+
+"Settings" = "設定";
+
+"FAQ" = "FAQ";
+
+"Unlockallfeatures" = "全機能を解除する";
+
+"Rateus" = "評価をお願いします";
+
+"Support" = "サポート";
+
+"Privacypolicy" = "プライバシーポリシー";
+
+"Sharewithfriends" = "友達に紹介する";
+
+"Darktheme" = "ダークテーマ";
+
+"Dosimeter" = "線量計";
+
+"LikeApp" = "このアプリは気に入っていただけましたか？";
+
+"Yes" = "はい";
+
+"No" = "いいえ";
+
+"UnlockAllAccess" = "すべてのアクセスを解除する";
+
+"Week" = "週";
+
+"Year" = "年";
+
+"Month" = "月";
+
+"Restore" = "復元";
+
+"Maximum" = "最大値（MAX）";
+
+"Average" = "平均値（AVG）";
+
+"Minimum" = "最小値(MIN)";
+
+"Minute" = "分(min)";
+
+"Second" = "秒（sec）";
+
+"Hour" = "時間(hr)";
+
+"Location" = "位置";
+
+"Date" = "日付";
+
+"Share" = "シェア";
+
+"Delete" = "削除";
+
+"Edit" = "編集";
+
+"DecibelMicro" = "デシベルメーター\" マイクにアクセスしたい";
+
+"Required" = "音声のノイズレベルを測定するため、アプリの動作に必要です";
+
+"Microphone" = "マイク";
+
+"SetMicro" =  "作業用のマイク使用許可設定をお願いします";
+
+"CameraAcces" = "デシベルメーター\"カメラにアクセスしたい";
+
+"RequiredWork" = "アプリを動作させるために必要な、ビデオとオーディオのノイズレベルをキャプチャするため";
+
+"Camerapermission" = "カメラ使用許可";
+
+"CameraSet" = "仕事で使用する場合は、設定でカメラの使用を許可してください";
+
+"AccessPhotos" = "デシベルメーター\" あなたの写真にアクセスしたい";
+
+"RequiredVideo" = "アプリの動作に必要な、ビデオとオーディオのノイズレベルを保存するため";
+
+"Photolibrarypermission" = "フォトライブラリー使用許可";
+
+"SetPhoto" = "作業用のフォトライブラリの使用許可を設定する必要があります";
+
+"AllowLocation" = "「デシベルメーター」に位置情報の利用を許可しますか？";
+
+"CaptureImage" = "撮影した画像に都市の位置情報を表示するために使用します";
+
+"Locationpermission" = "位置情報許可";
+
+"setLocation" = "仕事で使う場合は、設定で位置情報の利用を許可してください";
+
+"appWil" = "このアプリは、あなたの環境の騒音レベルを測定するのに役立ちます：";
+
+"Unlimitedrecording" = "無制限収録";
+
+"Unlimitedaccess" = "線量計に無制限にアクセス可能";
+
+"Unlimitedphotoandvideo" = "写真・動画が無制限";
+
+"noiseData" = "騒音データ";
+
+"cancel" = "キャンセル";
+
+"photo" = "写真";
+
+"video" = "ビデオ";
+ 
+"DecibelMeter" = "デシベルメーター";
+
+"recording" = "収録名";
+
+"save" = "保存";

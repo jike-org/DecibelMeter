@@ -12,7 +12,7 @@ import Charts
 import CoreData
 
 class RecordView: UIViewController {
-
+    
     private var isRecording = false
     
     // MARK: Audio recorder & persist
@@ -120,18 +120,18 @@ class RecordView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        setupView()
+        //        setupView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         recorder.delegate = self
         recorder.avDelegate = self
-//        view.backgroundColor = UIColor(named: "backgroundColor")
+        //        view.backgroundColor = UIColor(named: "backgroundColor")
         view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = false
         setupConstraint()
-//        setupView()
+        //        setupView()
         if Constants().isRecordingAtLaunchEnabled {
             isRecording = true
             startRecordingAudio()
@@ -164,12 +164,64 @@ extension RecordView {
         }
     }
     
-    @objc func resetAction() {
-        print(1)
-    }
-    
-    @objc func playOrPauseAction() {
-        print (2)
+    @objc func saveButtonAction() {
+        
+        if recorder.min != nil, recorder.avg != nil, recorder.max != nil {
+            self.info = RecordInfo(
+                id: UUID(),
+                name: nil,
+                length: timeLabel.text!,
+                avg: UInt8(recorder.avg!),
+                min: UInt8(recorder.min!),
+                max: UInt8(recorder.max!),
+                date: Date()
+            )
+            
+            recorder.stopMonitoring()
+            recorder.stop()
+            updateChartData()
+            progress.animate(toAngle: 0, duration: 0.2, completion: nil)
+            decibelLabel.text = "0"
+            timeLabel.text = "00:00"
+            avgBar.maxDecibelLabel.text = "0"
+            avgBar.minDecibelLabel.text = "0"
+            avgBar.avgDecibelLabel.text = "0"
+            
+            let alert = UIAlertController(title: "save",
+                                          message: nil,
+                                          preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "Cancel",
+                                       style: .cancel,
+                                       handler: nil)
+            
+            let save = UIAlertAction(title: "Save",
+                                     style: .default) { _ in
+                let name = alert.textFields![0].text
+                
+                if name == "" {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+                    self.info.name = dateFormatter.string(from: self.info.date as Date)
+                } else {
+                    self.info.name = name
+                }
+                self.persist.saveAudio(info: self.info)
+                let url: URL = self.persist.filePath(for: self.info.id.uuidString)!
+                print(url)
+            }
+            
+            alert.addTextField { textField in
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+                textField.placeholder = "\(dateFormatter.string(from: self.info.date as Date))"
+                
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(save)
+            present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -258,6 +310,22 @@ extension RecordView {
             startRecordingAudio()
         }
     }
+    
+    @objc func resetButtonAction(){
+        if isRecording{
+            recorder.stopMonitoring()
+            recorder.stop()
+            updateChartData()
+            progress.animate(toAngle: 0, duration: 0.2, completion: nil)
+            decibelLabel.text = "0"
+            timeLabel.text = "00:00"
+            avgBar.maxDecibelLabel.text = "0"
+            avgBar.minDecibelLabel.text = "0"
+            avgBar.avgDecibelLabel.text = "0"
+        } else {
+            print("stop")
+        }
+    }
 }
 
 // MARK: Setup view
@@ -270,15 +338,17 @@ extension RecordView {
         view.addSubview(avgBar)
         view.addSubview(verticalStack)
         view.addSubview(backView)
-//        view.addSubview(lineView)
-//        view.bringSubviewToFront(lineView)
+        //        view.addSubview(lineView)
+        //        view.bringSubviewToFront(lineView)
         backView.addSubview(recordButton)
         backView.addSubview(resetButton)
         backView.addSubview(saveButton)
+        saveButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
         progress.addSubview(lineView)
         verticalStack.addArrangedSubview(decibelLabel)
         verticalStack.addArrangedSubview(timeLabel)
         
+        resetButton.addTarget(self, action: #selector(resetButtonAction), for: .touchUpInside)
         recordButton.addTarget(self, action: #selector(startOrStopRecord), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -304,12 +374,12 @@ extension RecordView {
             resetButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
             resetButton.leadingAnchor.constraint(equalTo: backView.safeAreaLayoutGuide.leadingAnchor, constant: 73.5),
             resetButton.trailingAnchor.constraint(equalTo: recordButton.leadingAnchor, constant: -24),
-
+            
             saveButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
             saveButton.trailingAnchor.constraint(equalTo: backView.safeAreaLayoutGuide.trailingAnchor, constant: -73.5),
             saveButton.leadingAnchor.constraint(equalTo: recordButton.trailingAnchor, constant: 24),
-
-            lineView.centerYAnchor.constraint(equalTo: progress.centerYAnchor, constant: 16),
+            
+            lineView.centerYAnchor.constraint(equalTo: progress.centerYAnchor, constant: 5),
             lineView.heightAnchor.constraint(equalToConstant: 1),
             lineView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
@@ -319,76 +389,76 @@ extension RecordView {
 
 extension RecordView {
     
-//    private func setupView() {
-//        setupCircleView()
-//        view.addSubview(progress)
-//        view.addSubview(verticalStack)
-//        verticalStack.addArrangedSubview(decibelLabel)
-//        verticalStack.addArrangedSubview(timeLabel)
-//
-//        if Constants().isBig {
-//            view.addSubview(avgBar)
-//            view.addSubview(chart)
-//        } else {
-//            view.addSubview(containerForSmallDisplay)
-//            containerForSmallDisplay.addSubview(avgBar)
-//        }
-//
-//        view.addSubview(recordButton)
-//
-//        view.addSubview(resetButton)
-//
-//        verticalStack.setCustomSpacing(10, after: decibelLabel)
-//
-//        let constraints: [NSLayoutConstraint]
-//
-//        let constraintsForBigDisplay = [
-//            verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
-//            verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
-//
-//            avgBar.topAnchor.constraint(equalTo: backView.topAnchor, constant: 5),
-//            avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//
-//            chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-//            chart.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-//            chart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            chart.heightAnchor.constraint(equalToConstant: 10),
-//
-//            progress.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 10),
-//            progress.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-////            progress.heightAnchor.constraint(equalToConstant: 100),
-//
-//            recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-//            recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//
-//            resetButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-//            resetButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-//        ]
-//
-//        let constraintsForSmallDisplay = [
-//            verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
-//            verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
-//
-//            containerForSmallDisplay.topAnchor.constraint(equalTo: progress.bottomAnchor),
-//            containerForSmallDisplay.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            containerForSmallDisplay.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            containerForSmallDisplay.bottomAnchor.constraint(equalTo: recordButton.topAnchor),
-//
-//            avgBar.centerXAnchor.constraint(equalTo: containerForSmallDisplay.centerXAnchor),
-//            avgBar.centerYAnchor.constraint(equalTo: containerForSmallDisplay.centerYAnchor, constant: -20),
-//
-//            recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-//            recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        ]
-//
-//        if Constants().isBig {
-//            constraints = constraintsForBigDisplay
-//        } else {
-//            constraints = constraintsForSmallDisplay
-//        }
-//
-//        NSLayoutConstraint.activate(constraints)
-//    }
+    //    private func setupView() {
+    //        setupCircleView()
+    //        view.addSubview(progress)
+    //        view.addSubview(verticalStack)
+    //        verticalStack.addArrangedSubview(decibelLabel)
+    //        verticalStack.addArrangedSubview(timeLabel)
+    //
+    //        if Constants().isBig {
+    //            view.addSubview(avgBar)
+    //            view.addSubview(chart)
+    //        } else {
+    //            view.addSubview(containerForSmallDisplay)
+    //            containerForSmallDisplay.addSubview(avgBar)
+    //        }
+    //
+    //        view.addSubview(recordButton)
+    //
+    //        view.addSubview(resetButton)
+    //
+    //        verticalStack.setCustomSpacing(10, after: decibelLabel)
+    //
+    //        let constraints: [NSLayoutConstraint]
+    //
+    //        let constraintsForBigDisplay = [
+    //            verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
+    //            verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
+    //
+    //            avgBar.topAnchor.constraint(equalTo: backView.topAnchor, constant: 5),
+    //            avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+    //
+    //            chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+    //            chart.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+    //            chart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+    //            chart.heightAnchor.constraint(equalToConstant: 10),
+    //
+    //            progress.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 10),
+    //            progress.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+    ////            progress.heightAnchor.constraint(equalToConstant: 100),
+    //
+    //            recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+    //            recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+    //
+    //            resetButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+    //            resetButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+    //        ]
+    //
+    //        let constraintsForSmallDisplay = [
+    //            verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
+    //            verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
+    //
+    //            containerForSmallDisplay.topAnchor.constraint(equalTo: progress.bottomAnchor),
+    //            containerForSmallDisplay.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+    //            containerForSmallDisplay.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+    //            containerForSmallDisplay.bottomAnchor.constraint(equalTo: recordButton.topAnchor),
+    //
+    //            avgBar.centerXAnchor.constraint(equalTo: containerForSmallDisplay.centerXAnchor),
+    //            avgBar.centerYAnchor.constraint(equalTo: containerForSmallDisplay.centerYAnchor, constant: -20),
+    //
+    //            recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+    //            recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+    //        ]
+    //
+    //        if Constants().isBig {
+    //            constraints = constraintsForBigDisplay
+    //        } else {
+    //            constraints = constraintsForSmallDisplay
+    //        }
+    //
+    //        NSLayoutConstraint.activate(constraints)
+    //    }
     
     // MARK: Setup circle view
     private func setupCircleView() {
@@ -436,26 +506,26 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
             message: "Microphone permissions have been denied for this app. You can change this by going to Settings",
             preferredStyle: .alert
         )
-
+        
         let cancelButton = UIAlertAction(
             title: "Cancel",
             style: .cancel,
             handler: nil
         )
-
+        
         let settingsAction = UIAlertAction(
             title: "Settings",
             style: .default
         ) { _ in
-            UIApplication.shared.open( 
+            UIApplication.shared.open(
                 URL(string: UIApplication.openSettingsURLString)!,
                 options: [:],
                 completionHandler: nil)
         }
-
+        
         alertController.addAction(cancelButton)
         alertController.addAction(settingsAction)
-
+        
         self.present(alertController, animated: true, completion: nil)
     }
     

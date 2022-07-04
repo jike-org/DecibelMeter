@@ -6,11 +6,35 @@
 
 "UnlockAllAccess" = "Unlock All Access";
 
-"Trial7" = "Start with a 7-day free trial, then 7.99 per week";
+"Trial7" = "Start with a 7-day free trial, then 3.99 per week";
 
 "Continue" = "Continue";
 
-"Terms" = "Terms of service and Privacy policy";
+"Camera" = "Camera";
+
+"Location" = "Location";
+
+"PhotoLibrary" = "Photo Library";
+
+"Ok" = "okay";
+ 
+"AllowOnce" = "Allow Once";
+
+"AllowWhile" = "Allow While Using App";
+
+"and" = "and";
+
+"Allow" = "Allow";
+
+"DontAllow" = "Don’t Allow";
+
+"TermsOfService" = "Terms of service";
+
+"TermsOfUse" = "Terms of use";
+
+"PrivacyPolice" = "Privacy policy";
+
+"Start7Day" = "Start with a 7-day free trial";
 
 "Records" = "Records";
 
@@ -26,15 +50,11 @@
 
 "Privacypolicy" = "Privacy policy";
 
-"Termsofuse" = "Terms of use";
-
 "Sharewithfriends" = "Share with friends";
 
 "Darktheme" = "Dark theme";
 
 "Dosimeter" = "Dosimeter";
-
-"Noise" = "Noise";
 
 "LikeApp" = "Do you like this app?";
 
@@ -50,21 +70,19 @@
 
 "Month" = "Month";
 
-"Howtousetheapplication?" = "How to use the application?";
+"Restore" = "Restore";
 
-"OSHA" = "OSHA";
+"Maximum" = "Maximum (MAX)";
 
-"Maximum" = "Maximum";
+"Average" = "Average (AVG)";
 
-"Average" = "Average";
+"Minimum" = "Minimum (MIN)";
 
-"Minimum" = "Minimum";
+"Minute" = "Minute (min)";
 
-"Minute" = "Minute";
+"Second" = "Second (sec)";
 
-"Second" = "Second";
-
-"Hour" = "Hour";
+"Hour" = "Hour (hr)";
 
 "Location" = "Location";
 
@@ -108,22 +126,7 @@
 
 "setLocation" = "Please set location usage permission in settings for work";
 
-"Enjoying" = "Enjoying Decibel Meter?";
-
 "appWil" = "This app will help you measure the noise level of your environment:";
-
-"HowToUse" = "How to use the application?";
-
-"FAQFirst" = "The sound level meter can measure ambient noise in real time, as well as record and play recordings. For the sound level meter to work and determine the level of detected noise, open access to the microphone of your device. The sound data read by the microphone is expressed in decibels (dB). On the main screen, there is the current measurement and multiple controls. The big blue record button (start of measurement) is in the middle.MAX — a maximum value in the current measurement.AVG — an average value in the current measurement.MIN — an minimum average value in the current measurement.";
-
-
-"Measure" = "Why doesn't the app measure the noise level and the main screen shows zero?";
-
-"If instead of measurements you see a zero on the main screen, then you have banned the sound level meter to access your microphone. Go to Settings > Privacy policy > Microphone and allow the program access to the microphone." = "If instead of measurements you see a zero on the main screen, then you have banned the sound level meter to access your microphone. Go to Settings > Privacy policy > Microphone and allow the program access to the microphone.;";
-
-"GeoLocation" = "Why doesn't the app store geo-location information while recording";
-
-"FAQThird" = "If the program does not save information on geographical position during recording, it means you have banned to access to geographical location data. Go to Settings > Privacy policy > Location Services and allow the program to access the data.";
 
 "Unlimitedrecording" = "Unlimited recording";
 
@@ -131,8 +134,16 @@
 
 "Unlimitedphotoandvideo" = "Unlimited photo and video";
 
-"NoiseMeasurement" = "Noise Measurement with Photo & Video";
+"noiseData" = "Noise Data";
 
-"RecordSaveMeasurements" = "Record & Save Measurements";
+"cancel" = "Cancel";
 
+"photo" = "PHOTO";
 
+"video" = "VIDEO";
+ 
+"DecibelMeter" = "Decibel Meter";
+
+"recording" = "Recording name";
+
+"save" = "Save";

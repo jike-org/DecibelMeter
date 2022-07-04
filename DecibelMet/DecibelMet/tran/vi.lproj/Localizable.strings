@@ -1,0 +1,149 @@
+"SoundMeterDosimeter" = "Máy đo âm thanh & Máy đo liều lượng";
+
+"DetectSoundLevel" = "Đo độ lớn âm thanh";
+
+"MeasurementHistory" = "Lịch sử đo";
+
+"UnlockAllAccess" = "Mở khóa mọi quyền truy cập";
+
+"Trial7" = "Bắt đầu dùng thử miễn phí 7 ngày, sau đó mức phí là 3,99 mỗi tuần";
+
+"Continue" = "Tiếp tục";
+
+"Camera" = "Máy ảnh";
+
+"Location" = "Vị trí";
+
+"PhotoLibrary" = "Thư viện ảnh";
+
+"Ok" = "Đồng ý";
+ 
+"AllowOnce" = "Cho phép một lần";
+
+"AllowWhile" = "Cho phép khi sử dụng ứng dụng";
+
+"and" = "và";
+
+"Allow" = "Cho phép";
+
+"DontAllow" = "Không cho phép";
+
+"TermsOfService" = "Điều khoản dịch vụ";
+
+"TermsOfUse" = "Điều khoản sử dụng";
+
+"PrivacyPolice" = "Chính sách bảo mật";
+
+"Start7Day" = "Bắt đầu dùng thử miễn phí 7 ngày";
+
+"Records" = "Các bản ghi";
+
+"Settings" = "Cài đặt";
+
+"FAQ" = "Câu hỏi thường gặp";
+
+"Unlockallfeatures" = "Mở khóa tất cả các tính năng";
+
+"Rateus" = "Đánh giá chúng tôi";
+
+"Support" = "Hỗ trợ";
+
+"Privacypolicy" = "Chính sách bảo mật";
+
+"Sharewithfriends" = "Chi sẻ với bạn bè";
+
+"Darktheme" = "Chủ đề tối";
+
+"Dosimeter" = "Máy đo liều lượng";
+
+"LikeApp" = "Bạn có thích ứng dụng này không?";
+
+"Yes" = "Có";
+
+"No" = "Không";
+
+"UnlockAllAccess" = "Mở khóa mọi quyền truy cập";
+
+"Week" = "Tuần";
+
+"Year" = "Năm";
+
+"Month" = "Tháng";
+
+"Restore" = "Khôi phục";
+
+"Maximum" = "Tối đa (MAX)";
+
+"Average" = "Trung bình (AVG)";
+
+"Minimum" = "Tối thiểu (MIN)";
+
+"Minute" = "Phút (min)";
+
+"Second" = "Giây (sec)";
+
+"Hour" = "Giờ (hr)";
+
+"Location" = "Vị trí";
+
+"Date" = "Ngày";
+
+"Share" = "Chia sẻ";
+
+"Delete" = "Xóa";
+
+"Edit" = "Chỉnh sửa";
+
+"DecibelMicro" = "Decibel Meter” muốn truy cập vào Micrô";
+
+"Required" = "Cần thiết để ứng dụng hoạt động, nhằm đo mức độ tiếng ồn của âm thanh";
+
+"Microphone" = "Micrô";
+
+"SetMicro" =  "Vui lòng đặt quyền sử dụng micrô trong phần cài đặt để ứng dụng có thể hoạt động";
+
+"CameraAcces" = "Decibel Meter\" muốn truy cập Máy ảnh";
+
+"RequiredWork" = "Cần thiết để ứng dụng hoạt động, nhằm thu hình và đo mức độ tiếng ồn của âm thanh";
+
+"Camerapermission" = "Quyền truy cập Máy ảnh";
+
+"CameraSet" = "Vui lòng đặt quyền sử dụng Máy ảnh trong cài đặt để ứng dụng có thể hoạt động";
+
+"AccessPhotos" = "Decibel Meter” muốn truy cập Ảnh của bạn";
+
+"RequiredVideo" = "Cần thiết để ứng dụng hoạt động, nhằm lưu video và mức độ tiếng ồn của âm thanh";
+
+"Photolibrarypermission" = "Quyền truy cập thư viện ảnh";
+
+"SetPhoto" = "Vui lòng đặt quyền sử dụng thư viện ảnh trong cài đặt để ứng dụng có thể hoạt động";
+
+"AllowLocation" = "Cho phép “Decibel Meter” sử dụng vị trí của bạn?";
+
+"CaptureImage" = "Sử dụng để hiển thị vị trí thành phố trong hình ảnh đã chụp";
+
+"Locationpermission" = "Quyền truy cập vị trí";
+
+"setLocation" = "Vui lòng đặt quyền sử dụng vị trí trong cài đặt để ứng dụng có thể hoạt động";
+
+"appWil" = "Ứng dụng này sẽ giúp bạn đo mức độ tiếng ồn trong môi trường của bạn:";
+
+"Unlimitedrecording" = "Ghi âm không giới hạn";
+
+"Unlimitedaccess" = "Truy cập không giới hạn Máy đo liều lượng";
+
+"Unlimitedphotoandvideo" = "Hình ảnh và video không giới hạn";
+
+"noiseData" = "Dữ liệu tiếng ồn";
+
+"cancel" = "Hủy bỏ";
+
+"photo" = "ẢNH";
+
+"video" = "VIDEO";
+ 
+"DecibelMeter" = "Decibel Meter";
+
+"recording" = "Tên bản ghi";
+
+"save" = "Lưu";

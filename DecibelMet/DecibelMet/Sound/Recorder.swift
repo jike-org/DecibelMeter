@@ -141,7 +141,8 @@ extension Recorder {
     
     /// Stop recorder
     public func stop() {
-        print(recorder.url)
+//        print(recorder.url)
+        guard recorder == nil else { return }
         recorder.stop()
         recorder = nil
         session  = nil

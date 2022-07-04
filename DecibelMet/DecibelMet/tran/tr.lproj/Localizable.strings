@@ -1,0 +1,149 @@
+"SoundMeterDosimeter" = "Ses Ölçer ve Dozimetre";
+
+"DetectSoundLevel" = "Ses Seviyesini Tespit Edin";
+
+"MeasurementHistory" = "Ölçüm Geçmişi";
+
+"UnlockAllAccess" = "Tüm Erişimin Kilidini Aç";
+
+"Trial7" = "7 günlük deneme sürümüyle başlayın, sonra haftada 3,99 ödeyin";
+
+"Continue" = "Devam";
+
+"Camera" = "Kamera";
+
+"Location" = "Konum";
+
+"PhotoLibrary" = "Fotoğraf Kitaplığı";
+
+"Ok" = "tamam";
+ 
+"AllowOnce" = "Bir Kez İzin Ver";
+
+"AllowWhile" = "Uygulamayı Kullanırken İzin Ver";
+
+"and" = "ve";
+
+"Allow" = "İzin Ver";
+
+"DontAllow" = "İzin Verme";
+
+"TermsOfService" = "Hizmet koşulları";
+
+"TermsOfUse" = "Kullanım koşulları";
+
+"PrivacyPolice" = "Gizlilik politikası";
+
+"Start7Day" = "7 günlük deneme sürümünü başlatın";
+
+"Records" = "Kayıtlar";
+
+"Settings" = "Ayarlar";
+
+"FAQ" = "SSS";
+
+"Unlockallfeatures" = "Tüm özelliklerin kilidini aç";
+
+"Rateus" = "Bize puan verin";
+
+"Support" = "Destek";
+
+"Privacypolicy" = "Gizlilik politikası";
+
+"Sharewithfriends" = "Arkadaşlarla paylaş";
+
+"Darktheme" = "Karanlık tema";
+
+"Dosimeter" = "Dozimetre";
+
+"LikeApp" = "Bu uygulamayı sevdiniz mi?";
+
+"Yes" = "Evet";
+
+"No" = "Hayır";
+
+"UnlockAllAccess" = "Tüm Erişimin Kilidini Aç";
+
+"Week" = "Hafta";
+
+"Year" = "Yıl";
+
+"Month" = "Ay";
+
+"Restore" = "Geri Yükle";
+
+"Maximum" = "Maksimum (MAKS)";
+
+"Average" = "Ortalama (ORT)";
+
+"Minimum" = "Minimum (MİN)";
+
+"Minute" = "Dakika (dk)";
+
+"Second" = "Saniye (sn)";
+
+"Hour" = "Saat (sa)";
+
+"Location" = "Konum";
+
+"Date" = "Tarih";
+
+"Share" = "Paylaş";
+
+"Delete" = "Sil";
+
+"Edit" = "Düzenle";
+
+"DecibelMicro" = "Desibel Ölçer” Mikrofonunuza Erişmek İstiyor";
+
+"Required" = "Uygulamanın ses gürültü seviyesini ölçebilmesi için gereklidir";
+
+"Microphone" = "Mikrofon";
+
+"SetMicro" =  "İşlemin yapılması için lütfen ayarlara giderek mikrofon kullanıma izin verin";
+
+"CameraAcces" = "Desibel Ölçer” Kameranıza Erişmek İstiyor";
+
+"RequiredWork" = "Uygulamanın video çekebilmesi ve ses gürültü seviyesini ölçebilmesi için gereklidir";
+
+"Camerapermission" = "Kamera izni";
+
+"CameraSet" = "İşlemin yapılması için lütfen ayarlara giderek kamera kullanımına izin verin";
+
+"AccessPhotos" = "Desibel Ölçer” Fotoğraflarınıza Erişmek İstiyor";
+
+"RequiredVideo" = "Uygulamanın video kaydedebilmesi ve ses gürültü seviyesini ölçebilmesi için gereklidir";
+
+"Photolibrarypermission" = "Fotoğraf kitaplığı izni";
+
+"SetPhoto" = "İşlemin yapılması için lütfen ayarlara giderek fotoğraf kitaplığı kullanımına izin verin";
+
+"AllowLocation" = "“Desibel Ölçer” uygulamasına konumunuzu kullanma izni verilsin mi?";
+
+"CaptureImage" = "Çekilen görüntülerde şehir konumunu görüntülemek için kullanılır";
+
+"Locationpermission" = "Konum izni";
+
+"setLocation" = "İşlemin yapılması için lütfen ayarlara giderek konum kullanımına izin verin";
+
+"appWil" = "Bu uygulama ortamınızdaki gürültü seviyesini ölçmenize yardımcı olacak:";
+
+"Unlimitedrecording" = "Sınırsız kayıt";
+
+"Unlimitedaccess" = "Dozimetreye sınırsız erişim";
+
+"Unlimitedphotoandvideo" = "Sınırsız fotoğraf ve video";
+
+"noiseData" = "Gürültü Verisi";
+
+"cancel" = "İptal";
+
+"photo" = "FOTOĞRAF";
+
+"video" = "VİDEO";
+ 
+"DecibelMeter" = "Desibel Ölçer";
+
+"recording" = "Kayıt adı";
+
+"save" = "Kaydet";

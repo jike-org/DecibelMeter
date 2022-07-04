@@ -16,6 +16,7 @@ class SaveController: UIViewController {
     private var collection: UICollectionView?
     
     let persist = Persist()
+    let recorder = Recorder()
     var recordings: [Record]?
     var player: Player!
     var info: RecordInfo!
@@ -62,9 +63,10 @@ class SaveController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tabBarController?.tabBar.isHidden = false
-        //        self.tabBarController?.tabBar.tintColor = UIColor.white
-        //        self.tabBarController?.tabBar.barTintColor = UIColor.black
+        self.tabBarController?.tabBar.tintColor = UIColor.white
+        self.tabBarController?.tabBar.barTintColor = UIColor.black
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width) - 30, height: 80)
@@ -78,10 +80,11 @@ class SaveController: UIViewController {
         collection.delegate = self
         collection.dataSource = self
         collection.backgroundColor = UIColor(named: "backgroundColor")
-        //        collectionView.frame = view.bounds
         collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.isUserInteractionEnabled = true
         
-        view.addSubview(collection)
+        //        view.addSubview(collection)
+        view.insertSubview(collection, at: 0)
         NSLayoutConstraint.activate([
             collection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -89,8 +92,8 @@ class SaveController: UIViewController {
             collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
         ])
         buttonToogler()
-        let path = Bundle.main.path(forResource: "t", ofType: "m4a")
-        print(path)
+        //        let path = Bundle.main.path(forResource: "t", ofType: "m4a")
+        //        print(path)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -153,6 +156,7 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomSaveCell.id, for: indexPath) as! CustomSaveCell
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
+        tabBarController?.tabBar.backgroundColor = .black
         cell.contentView.backgroundColor = UIColor(named: "backCell")
         cell.delegate = self
         
@@ -227,14 +231,17 @@ extension SaveController {
     }
     
     private func share(indexPath: IndexPath) {
-        let cell = collection?.cellForItem(at: indexPath) as? CustomSaveCell
+        _ = collection?.cellForItem(at: indexPath) as? CustomSaveCell
         let t = URL(string: "file:///var/mobile/Containers/Data/Application/3702531B-9120-4247-BFFA-6C2DF71B9021/Documents/BEAAEBA4-D9AA-49B8-918B-E1B4DF8D9512.m4a")
-        let objectsToShare: [Any] = ["fck sharing", t]
+        let objectsToShare: [Any] = ["fck sharing", t! as NSURL]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
     }
     
     private func rename(indexPath: IndexPath) {
+        
+        let cell = collection?.cellForItem(at: indexPath) as? CustomSaveCell
+        cell!.playButton.tag = indexPath.row
         
         let alert = UIAlertController(
             title: "Recording name",
@@ -251,25 +258,36 @@ extension SaveController {
             title: "Save",
             style: .default,
             handler: { _ in
-                let name = alert.textFields![0].text
-                
-                if name == "" {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                    self.info.name = dateFormatter.string(from: self.info.date as Date)
-                } else {
-                    self.info.name = name
+                let nameTF = alert.textFields![0].text
+                if let recordings = self.recordings {
+                    let recording = recordings[indexPath.row]
+                    print(nameTF)
+                    cell!.setValues(name: nameTF ?? "",
+                                    time: recording.length ?? "",
+                                    min: "MIN " + String(recording.min),
+                                    max: "MAX " + String(recording.max),
+                                    avg: "AVG " + String(recording.avg))
+                    
+                    if let unwrapped = nameTF {
+                        
+                        recording.name = unwrapped
+                        
+                        do {
+                            try self.persist.viewContext.save()
+                        } catch {
+                            print(error)
+                        }
+                    } else {
+                        print("Missing name.")
+                    }
                 }
-                self.persist.saveAudio(info: self.info)
-                let url: URL = self.persist.filePath(for: self.info.id.uuidString)!
-                print(url)
             }
         )
         
         alert.addTextField { textField in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-            textField.placeholder = "write"
+            textField.placeholder = "write new name"
         }
         
         alert.addAction(cancel)

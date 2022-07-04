@@ -61,7 +61,7 @@ public class Persist {
     }
     
     /// Rename recently saved audio
-    private func rename(_ initialName: String, _ resultName: String) {
+     func rename(_ initialName: String, _ resultName: String) {
         let fileManager      = FileManager.default
         guard let path       = filePath(for: initialName) else { return }
         guard let resultPath = filePath(for: resultName) else { return }

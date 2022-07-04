@@ -49,10 +49,13 @@ final class Dosimeter: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.tintColor = UIColor.white
+        self.tabBarController?.tabBar.barTintColor = UIColor.black
         recorder.delegate = self
         recorder.avDelegate = self
         
-        tabBarController?.tabBar.isHidden = false
         setup()
         setUpCollection()
         requestPermissions()
@@ -76,19 +79,19 @@ extension Dosimeter {
     
     func setUpCollection() {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+//        layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width) - 15, height: 60)
         layout.minimumLineSpacing = 6
-        collection = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        collection = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         
         guard let collection = collection else { return }
         
         collection.register(DosimeterCell.self, forCellWithReuseIdentifier: DosimeterCell.id)
         collection.delegate = self
         collection.dataSource = self
-        collection.backgroundColor = .black
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = UIColor(named: "backgroundColor")
+        collection.indicatorStyle = .black
         view.addSubview(collection)
         NSLayoutConstraint.activate([
             collection.topAnchor.constraint(equalTo: noiseButton.bottomAnchor, constant: 30),
@@ -149,6 +152,8 @@ extension Dosimeter {
     private func setup() {
         view.backgroundColor = UIColor(named: "backgroundColor")
         noiseButton.setTitle("NOISE", for: .normal)
+        noiseButton.backgroundColor = UIColor(named: "nosha")
+        noiseButton.setTitleColor(UIColor(named: "noshaTitle"), for: .normal)
         noiseButton.addTarget(self, action: #selector(noiseTap), for: .touchUpInside)
         setupCircleView()
         view.addSubview(headerLabel)

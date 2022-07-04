@@ -1,0 +1,149 @@
+"SoundMeterDosimeter" = "Lärmpegelmesser & Dosimeter";
+
+"DetectSoundLevel" = "Lärmpegel messen";
+
+"MeasurementHistory" = "Messverlauf";
+
+"UnlockAllAccess" = "Vollzugriff freischalten";
+
+"Trial7" = "7 Tage gratis testen, danach 3,99 pro Woche";
+
+"Continue" = "Weiter";
+
+"Camera" = "Kamera";
+
+"Location" = "Standort";
+
+"PhotoLibrary" = "Fotos";
+
+"Ok" = "OK";
+ 
+"AllowOnce" = "Einmal erlauben";
+
+"AllowWhile" = "Bei App-Nutzung erlauben";
+
+"and" = "und";
+
+"Allow" = "Erlauben";
+
+"DontAllow" = "Nicht erlauben";
+
+"TermsOfService" = "Service-Bedingungen";
+
+"TermsOfUse" = "Nutzungsbedingungen";
+
+"PrivacyPolice" = "Datenschutz";
+
+"Start7Day" = "7 Tage gratis testen";
+
+"Records" = "Aufnahmen";
+
+"Settings" = "Einstellungen";
+
+"FAQ" = "FAQ";
+
+"Unlockallfeatures" = "Alle Funktionen freischalten";
+
+"Rateus" = "App bewerten";
+
+"Support" = "Support";
+
+"Privacypolicy" = "Datenschutz";
+
+"Sharewithfriends" = "Mit Freunden teilen";
+
+"Darktheme" = "Dunkles Design";
+
+"Dosimeter" = "Dosimeter";
+
+"LikeApp" = "Gefällt Ihnen die App?";
+
+"Yes" = "Ja";
+
+"No" = "Nein";
+
+"UnlockAllAccess" = "Vollzugriff freischalten";
+
+"Week" = "Woche";
+
+"Year" = "Jahr";
+
+"Month" = "Monat";
+
+"Restore" = "Wiederherstellen";
+
+"Maximum" = "Maximum";
+
+"Average" = "Durchschnitt";
+
+"Minimum" = "Minimum ";
+
+"Minute" = "Minute";
+
+"Second" = "Sekunde";
+
+"Hour" = "Stunde";
+
+"Location" = "Standort";
+
+"Date" = "Datum";
+
+"Share" = "Teilen";
+
+"Delete" = "Löschen";
+
+"Edit" = "Bearbeiten";
+
+"DecibelMicro" = "Der Lärmpegelmesser benötigt Zugriff auf das Mikrofon!";
+
+"Required" = "Damit die App den Lärmpegel messen kann.";
+
+"Microphone" = "Mikrofon";
+
+"SetMicro" =  "Bitte erlauben Sie den Zugriff auf das Mikrofon. Gehen Sie hierfür zu den Einstellungen.";
+
+"CameraAcces" = "Der Lärmpegelmesser benötigt Zugriff auf die Kamera!";
+
+"RequiredWork" = "Damit die App Videos aufnehmen und den Lärmpegel messen kann.";
+
+"Camerapermission" = "Kamera-Zugriff";
+
+"CameraSet" = "Bitte erlauben Sie den Zugriff auf die Kamera. Gehen Sie hierfür zu den Einstellungen.";
+
+"AccessPhotos" = "Der Lärmpegelmesser benötigt Zugriff auf Ihre Fotos!";
+
+"RequiredVideo" = "Damit die App den Messwert von Videos und Audios speichern kann.";
+
+"Photolibrarypermission" = "Fotozugriff";
+
+"SetPhoto" = "Bitte erlauben Sie den Zugriff auf Fotos. Gehen Sie hierfür zu den Einstellungen.";
+
+"AllowLocation" = "Der Lärmpegelmesser benötigt Zugriff auf Ihre Standortdaten.";
+
+"CaptureImage" = "Damit die Stadt Ihres Standorts in Fotos angezeigt werden kann.";
+
+"Locationpermission" = "Zugriff auf Standortdaten";
+
+"setLocation" = "Bitte erlauben Sie den Zugriff auf Standortdaten. Gehen Sie hierfür zu den Einstellungen.";
+
+"appWil" = "Mit dieser App können Sie den Geräuschpegel Ihrer Umgebung messen:";
+
+"Unlimitedrecording" = "Unbegrenzte Aufnahme";
+
+"Unlimitedaccess" = "Unbegrenzter Zugriff auf das Dosimeter";
+
+"Unlimitedphotoandvideo" = "Unbegrenzt viele Fotos und Videos";
+
+"noiseData" = "Lärmdaten";
+
+"cancel" = "Abbrechen";
+
+"photo" = "FOTO";
+
+"video" = "VIDEO";
+ 
+"DecibelMeter" = "Lärmpegelmesser";
+
+"recording" = "Aufnahmetitel";
+
+"save" = "Speichern";

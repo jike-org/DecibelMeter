@@ -19,9 +19,7 @@ class TabBar: UITabBarController {
         super.viewWillAppear(animated)
         
         setupView()
-        selectedIndex = 5
-    }
-    
+        selectedIndex = 2    }
 }
 
 
@@ -76,10 +74,15 @@ extension TabBar {
         
         self.tabBarController?.tabBar.tintColor = UIColor.black
         self.tabBarController?.tabBar.barTintColor = UIColor.white
-        self.tabBar.isTranslucent           = true
-//        self.tabBar.barTintColor            = UIColor.white
-//        self.tabBar.tintColor               = .white
+        self.tabBarController?.tabBar.backgroundColor = .clear
+        self.tabBar.isTranslucent = true
         self.tabBar.unselectedItemTintColor = .white
     }
     
+}
+
+extension UIScrollView {
+    func setup() {
+        backgroundColor = .clear
+    }
 }

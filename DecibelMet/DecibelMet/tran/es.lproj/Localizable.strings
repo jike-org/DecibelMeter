@@ -1,0 +1,149 @@
+"SoundMeterDosimeter" = "Medidor de sonido y dosímetro";
+
+"DetectSoundLevel" = "Detectar nivel de sonido";
+
+"MeasurementHistory" = "Historial de mediciones";
+
+"UnlockAllAccess" = "Desbloquee todos los accesos";
+
+"Trial7" = "Comience con una prueba gratuita de 7 días, luego 3,99 por semana";
+
+"Continue" = "Continuar";
+
+"Camera" = "Cámara";
+
+"Location" = "Ubicación";
+
+"PhotoLibrary" = "Librería de fotos";
+
+"Ok" = "Aceptar";
+ 
+"AllowOnce" = "Permitir solo esta vez";
+
+"AllowWhile" = "Permitir mientras la aplicación está en uso";
+
+"and" = "y";
+
+"Allow" = "Permitir";
+
+"DontAllow" = "No permitir";
+
+"TermsOfService" = "Términos de servicio";
+
+"TermsOfUse" = "Términos de uso";
+
+"PrivacyPolice" = "Política de privacidad";
+
+"Start7Day" = "Comience con una prueba gratuita de 7 días";
+
+"Records" = "Registros";
+
+"Settings" = "Ajustes";
+
+"FAQ" = "Preguntas frecuentes";
+
+"Unlockallfeatures" = "Desbloquee todas las funciones";
+
+"Rateus" = "Califíquenos";
+
+"Support" = "Soporte";
+
+"Privacypolicy" = "Política de privacidad";
+
+"Sharewithfriends" = "Compartir con amigos";
+
+"Darktheme" = "Tema oscuro";
+
+"Dosimeter" = "Dosímetro";
+
+"LikeApp" = "¿Te gusta esta aplicación?";
+
+"Yes" = "Sí";
+
+"No" = "No";
+
+"UnlockAllAccess" = "Desbloquee todos los accesos";
+
+"Week" = "Semana";
+
+"Year" = "Año";
+
+"Month" = "Mes";
+
+"Restore" = "Restaurar";
+
+"Maximum" = "Máximo (MAX)";
+
+"Average" = "Promedio (PROM)";
+
+"Minimum" = "Mínimo (MIN)";
+
+"Minute" = "Minuto (min)";
+
+"Second" = "Segundo (seg)";
+
+"Hour" = "Hora (h)";
+
+"Location" = "Ubicación";
+
+"Date" = "Fecha";
+
+"Share" = "Compartir";
+
+"Delete" = "Eliminar";
+
+"Edit" = "Editar";
+
+"DecibelMicro" = "Decibel Meter” necesita acceder al micrófono";
+
+"Required" = "Es necesario para que la aplicación funcione, para medir el nivel de ruido del audio";
+
+"Microphone" = "Micrófono";
+
+"SetMicro" =  "Establezca el permiso de uso del micrófono en los ajustes, para que funcione";
+
+"CameraAcces" = "Decibel Meter” necesita acceder a la cámara";
+
+"RequiredWork" = "Es necesario para que la aplicación funcione, para capturar el nivel de ruido de video y de audio";
+
+"Camerapermission" = "Permiso para cámara";
+
+"CameraSet" = "Establezca el permiso de uso de la cámara en los ajustes, para que funcione";
+
+"AccessPhotos" = "Decibel Meter” necesita acceder a sus fotos";
+
+"RequiredVideo" = "Es necesario para que la aplicación funcione, para guardar el nivel de ruido de video y audio";
+
+"Photolibrarypermission" = "Permiso para librería de fotos";
+
+"SetPhoto" = "Establezca el permiso de uso de la librería de fotos en los ajustes, para que funcione";
+
+"AllowLocation" = "¿Desea permitir que 'Decibel Meter' use su ubicación?";
+
+"CaptureImage" = "Se utiliza para mostrar la ubicación de la ciudad en las imágenes capturadas";
+
+"Locationpermission" = "Permiso para ubicación";
+
+"setLocation" = "Establezca el permiso de uso de la ubicación en los ajustes, para que funcione";
+
+"appWil" = "Esta aplicación lo ayudará a medir el nivel de ruido de su entorno:";
+
+"Unlimitedrecording" = "Grabaciones ilimitadas";
+
+"Unlimitedaccess" = "Acceso ilimitado al Dosímetro";
+
+"Unlimitedphotoandvideo" = "Fotos y videos ilimitados";
+
+"noiseData" = "Datos de ruido";
+
+"cancel" = "Cancelar";
+
+"photo" = "FOTO";
+
+"video" = "VIDEO";
+ 
+"DecibelMeter" = "Decibel Meter";
+
+"recording" = "Nombre de la grabación";
+
+"save" = "Guardar";

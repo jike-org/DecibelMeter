@@ -1,0 +1,149 @@
+"SoundMeterDosimeter" = "Sonomètre et dosimètre";
+
+"DetectSoundLevel" = "Détecte le niveau sonore";
+
+"MeasurementHistory" = "Historique des mesures";
+
+"UnlockAllAccess" = "Déverrouiller tous les accès";
+
+"Trial7" = "Débutez par un essai gratuit de 7 jours, puis payez 3,99 par semaine";
+
+"Continue" = "Continuer";
+
+"Camera" = "Appareil photo";
+
+"Location" = "Localisation";
+
+"PhotoLibrary" = "Photothèque";
+
+"Ok" = "ok";
+ 
+"AllowOnce" = "Autoriser une fois";
+
+"AllowWhile" = "Autoriser lors de l'utilisation de l'appli";
+
+"and" = "et";
+
+"Allow" = "Autoriser";
+
+"DontAllow" = "Ne pas autoriser";
+
+"TermsOfService" = "Conditions d'utilisation";
+
+"TermsOfUse" = "Conditions d'utilisation";
+
+"PrivacyPolice" = "Politique de confidentialité";
+
+"Start7Day" = "Démarrer avec un essai gratuit de 7 jours";
+
+"Records" = "Enregistrements";
+
+"Settings" = "Paramètres";
+
+"FAQ" = "FAQ";
+
+"Unlockallfeatures" = "Déverrouiller toutes les fonctionnalités";
+
+"Rateus" = "Nous évaluer";
+
+"Support" = "Assistance";
+
+"Privacypolicy" = "Politique de confidentialité";
+
+"Sharewithfriends" = "Partager avec des amis";
+
+"Darktheme" = "Thème sombre";
+
+"Dosimeter" = "Dosimètre";
+
+"LikeApp" = "Aimez-vous cette appli ?";
+
+"Yes" = "Oui";
+
+"No" = "Non";
+
+"UnlockAllAccess" = "Déverrouiller tous les accès";
+
+"Week" = "Semaine";
+
+"Year" = "Année";
+
+"Month" = "Mois";
+
+"Restore" = "Restaurer";
+
+"Maximum" = "Maximum";
+
+"Average" = "Moyenne";
+
+"Minimum" = "Minimum";
+
+"Minute" = "Minute";
+
+"Second" = "Seconde";
+
+"Hour" = "Heure";
+
+"Location" = "Localisation";
+
+"Date" = "Date";
+
+"Share" = "Partager";
+
+"Delete" = "Supprimer";
+
+"Edit" = "Modifier";
+
+"DecibelMicro" = "Decibel Meter” souhaite accéder au microphone";
+
+"Required" = "Nécessaire pour le fonctionnement de l'application, afin de mesurer le niveau de bruit audio";
+
+"Microphone" = "Microphone";
+
+"SetMicro" =  "Veuillez paramétrer l'autorisation d'utilisation du microphone dans les paramètres pour le travail";
+
+"CameraAcces" = "Decibel Meter” voudrait accéder à l'appareil photo";
+
+"RequiredWork" = "Nécessaire pour le fonctionnement de l'application, afin de capturer le niveau de bruit vidéo et audio";
+
+"Camerapermission" = "Autorisation de l'appareil photo";
+
+"CameraSet" = "Veuillez définir l'autorisation d'utilisation de de l'appareil photo dans les paramètres pour le travail";
+
+"AccessPhotos" = "Decibel Meter” voudrait accéder à vos photos";
+
+"RequiredVideo" = "Nécessaire pour le fonctionnement de l'application, afin d'enregistrer le niveau de bruit vidéo et audio";
+
+"Photolibrarypermission" = "Autorisation de la photothèque";
+
+"SetPhoto" = "Veuillez définir l'autorisation d'utilisation de la photothèque pour travailler";
+
+"AllowLocation" = "Autoriser « Decibel Meter » à utiliser votre emplacement ?";
+
+"CaptureImage" = "Utilisé pour afficher la localisation de la ville dans les images capturées";
+
+"Locationpermission" = "Autorisation de localisation";
+
+"setLocation" = "Veuillez définir l'autorisation d'utilisation de localisation dans les paramètres pour travailler";
+
+"appWil" = "Cette appli vous aidera à mesurer le niveau sonore de votre environnement :";
+
+"Unlimitedrecording" = "Enregistrement illimité";
+
+"Unlimitedaccess" = "Accès illimité au dosimètre";
+
+"Unlimitedphotoandvideo" = "Photo et vidéo illimitées";
+
+"noiseData" = "Données de bruit";
+
+"cancel" = "Annuler";
+
+"photo" = "PHOTO";
+
+"video" = "VIDÉO";
+ 
+"DecibelMeter" = "Sonomètre";
+
+"recording" = "Nom de l'enregistrement";
+
+"save" = "Enregistrer";
