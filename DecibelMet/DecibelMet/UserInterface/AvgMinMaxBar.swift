@@ -9,14 +9,17 @@ import Foundation
 import UIKit
 
 class AvgMinMaxBar: UIView {
-    
+    // MARK: Localizable
+    var maxL = NSLocalizedString("Maximum", comment: "")
+    var minL = NSLocalizedString("Minimum", comment: "")
+    var avgL = NSLocalizedString("Average", comment: "")
     lazy var avgDecibelLabel = Label(style: .avg, "0")
     lazy var minDecibelLabel = Label(style: .avgMinMaxWord, "0")
     lazy var maxDecibelLabel = Label(style: .avgMinMaxWord, "0")
 
-    lazy var avgLabel = Label(style: .avgMinMax, "AVG")
-    lazy var minLabel = Label(style: .avgMinMax, "MIN")
-    lazy var maxLabel = Label(style: .avgMinMax, "MAX")
+    lazy var avgLabel = Label(style: .avgMinMax, avgL)
+    lazy var minLabel = Label(style: .avgMinMax, minL)
+    lazy var maxLabel = Label(style: .avgMinMax, maxL)
     
     lazy var mainStack: UIStackView = {
         let s = UIStackView()

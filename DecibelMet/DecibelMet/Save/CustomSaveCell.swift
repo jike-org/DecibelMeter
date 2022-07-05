@@ -13,6 +13,11 @@ class CustomSaveCell: SwipeCollectionViewCell {
     
     static let id = "CustomSaveCell"
     
+    // MARK: Localizable
+    var maxL = NSLocalizedString("Maximum", comment: "")
+    var minL = NSLocalizedString("Minimum", comment: "")
+    var avgL = NSLocalizedString("Average", comment: "")
+    
     // MARK: UI elements
     lazy var playButton = Button(style: .playOrPauseCell, nil)
     
@@ -20,12 +25,12 @@ class CustomSaveCell: SwipeCollectionViewCell {
         return playButton.uuid
     }
 
-    private lazy var recordName = Label(style: .recordCell, "Record name")
+     lazy var recordName = Label(style: .recordCell, "Record name")
     private lazy var dateName = Label(style: .cellDate, "26.05.2022")
     private lazy var soundTime = Label(style: .cellDate, "00:15")
-    private lazy var min = Label(style: .minMaxAvgCell, "MIN 20")
-    private lazy var max = Label(style: .minMaxAvgCell, "MAX 75")
-    private lazy var avg = Label(style: .minMaxAvgCell, "AVG 82")
+    private lazy var min = Label(style: .minMaxAvgCell, minL + " 20")
+    private lazy var max = Label(style: .minMaxAvgCell, maxL + " 75")
+    private lazy var avg = Label(style: .minMaxAvgCell, avgL + " 82")
     
     // MARK: Player instance
     private var player: Player!
@@ -46,7 +51,6 @@ class CustomSaveCell: SwipeCollectionViewCell {
         self.max.text = max
         self.avg.text = avg
     }
-
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,7 +73,6 @@ class CustomSaveCell: SwipeCollectionViewCell {
         super.layoutSubviews()
         soundTime.textAlignment = .left
         recordName.textAlignment = .left
-        recordName.textColor = UIColor(named: "saveCell")
         NSLayoutConstraint.activate([
             playButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             playButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -83,7 +86,7 @@ class CustomSaveCell: SwipeCollectionViewCell {
         
             recordName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             recordName.leadingAnchor.constraint(equalTo: playButton.trailingAnchor, constant: 25),
-            recordName.trailingAnchor.constraint(equalTo: dateName.leadingAnchor, constant: 10),
+            recordName.trailingAnchor.constraint(equalTo: dateName.leadingAnchor, constant: -30),
             
             soundTime.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
             soundTime.leadingAnchor.constraint(equalTo: playButton.trailingAnchor, constant: 25),
@@ -91,18 +94,18 @@ class CustomSaveCell: SwipeCollectionViewCell {
             soundTime.heightAnchor.constraint(equalToConstant: 15),
             
             min.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            min.leadingAnchor.constraint(equalTo: soundTime.trailingAnchor, constant: 30),
-            min.widthAnchor.constraint(equalToConstant: 46),
+            min.leadingAnchor.constraint(equalTo: soundTime.trailingAnchor, constant: 20),
+            min.widthAnchor.constraint(equalToConstant: 66),
             min.heightAnchor.constraint(equalToConstant: 15),
             
             avg.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            avg.trailingAnchor.constraint(equalTo: max.leadingAnchor, constant: -40),
-            avg.widthAnchor.constraint(equalToConstant: 46),
+            avg.trailingAnchor.constraint(equalTo: max.leadingAnchor, constant: -30),
+            avg.widthAnchor.constraint(equalToConstant: 66),
             avg.heightAnchor.constraint(equalToConstant: 15),
             
             max.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
             max.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            max.widthAnchor.constraint(equalToConstant: 46),
+            max.widthAnchor.constraint(equalToConstant: 76),
             max.heightAnchor.constraint(equalToConstant: 15),
       
         ])

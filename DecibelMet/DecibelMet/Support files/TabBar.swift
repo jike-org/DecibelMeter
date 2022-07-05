@@ -50,9 +50,7 @@ extension TabBar {
         )
         settings.tabBarItem = settingsIcon
         
-        let camera = CameraController()
-//        camera.pickVideo(from: .camera)
-        camera.openVideoCamera()
+        let camera = PickerViewController()
         let cameraIcon = UITabBarItem(
             title: "",
             image: UIImage(named: "camera"),

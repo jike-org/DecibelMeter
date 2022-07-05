@@ -38,7 +38,7 @@
 
 "Records" = "Records";
 
-"Settings" = "Settings";
+"Settings" = "Setting";
 
 "FAQ" = "FAQ";
 
@@ -72,17 +72,17 @@
 
 "Restore" = "Restore";
 
-"Maximum" = "Maximum (MAX)";
+"Maximum" = "MAX";
 
-"Average" = "Average (AVG)";
+"Average" = "AVG";
 
-"Minimum" = "Minimum (MIN)";
+"Minimum" = "MIN";
 
-"Minute" = "Minute (min)";
+"Minute" = "min";
 
-"Second" = "Second (sec)";
+"Second" = "sec";
 
-"Hour" = "Hour (hr)";
+"Hour" = "hr";
 
 "Location" = "Location";
 

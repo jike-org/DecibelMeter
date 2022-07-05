@@ -72,17 +72,17 @@
 
 "Restore" = "Geri Yükle";
 
-"Maximum" = "Maksimum (MAKS)";
+"Maximum" = "MAKS";
 
-"Average" = "Ortalama (ORT)";
+"Average" = "ORT";
 
-"Minimum" = "Minimum (MİN)";
+"Minimum" = "MİN";
 
-"Minute" = "Dakika (dk)";
+"Minute" = "dk";
 
-"Second" = "Saniye (sn)";
+"Second" = "sn";
 
-"Hour" = "Saat (sa)";
+"Hour" = "sa";
 
 "Location" = "Konum";
 

@@ -1,10 +1,3 @@
-//
-//  Recorder.swift
-//  DecibelMet
-//
-//  Created by Stas Dashkevich on 4.05.22.
-//
-
 import Foundation
 import AVFoundation
 import UIKit
@@ -141,8 +134,7 @@ extension Recorder {
     
     /// Stop recorder
     public func stop() {
-//        print(recorder.url)
-        guard recorder == nil else { return }
+        print(recorder.url)
         recorder.stop()
         recorder = nil
         session  = nil
@@ -158,12 +150,12 @@ extension Recorder {
 extension Recorder {
     
     /// Get average power in dBFS
-     func getDecibels() -> Float {
+    private func getDecibels() -> Float {
         recorder.updateMeters()
         return 96 - abs(recorder.averagePower(forChannel: 0))
     }
     
-    // Starts printing dBFS
+    /// Starts printing dBFS
     public func startMonitoring() {
         if recorder != nil {
             isMonitoring = true

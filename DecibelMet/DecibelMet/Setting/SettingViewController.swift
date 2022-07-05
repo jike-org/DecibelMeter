@@ -11,8 +11,17 @@ import StoreKit
 import MessageUI
 
 class SettingsView: UIViewController {
+    //MARK: Localizable
+    let settings = NSLocalizedString("Settings", comment: "")
+    var darkTheme = NSLocalizedString("Darktheme", comment: "")
+    var shareFriends = NSLocalizedString("Sharewithfriends", comment: "")
+    var termsOfUse = NSLocalizedString("TermsOfUse", comment: "")
+    var privacyPolice = NSLocalizedString("Privacypolicy", comment: "")
+    var support = NSLocalizedString("Support", comment: "")
+    var rateUs = NSLocalizedString("Rateus", comment: "")
+    var faq = NSLocalizedString("FAQ", comment: "")
+    var unlockAll = NSLocalizedString("Unlockallfeatures", comment: "")
     
-    let settings = NSLocalizedString("test", comment: "")
     lazy var titleLabel = Label(style: .titleLabel, settings)
     let cellSpacingHeight: CGFloat = 40
     
@@ -90,7 +99,8 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             reuseIdentifier: "cell",
             icon: ImageView(image: .lock),
             label: Label(style: .tableLabel, "User agreement"),
-            isUsingSwitch: false
+            isUsingSwitch: false,
+            chevron: ImageView(image: .chevron)
         )
         
         switch indexPath.row {
@@ -98,57 +108,65 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .lock),
-                label: Label(style: .tableLabel, "Unlock all features"),
-                isUsingSwitch: false
+                label: Label(style: .tableLabel, unlockAll),
+                isUsingSwitch: false,
+                chevron: ImageView(image: .chevron)
             )
         case 1:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .faq),
-                label: Label(style: .tableLabel, "FAQ"),
-                isUsingSwitch: false
+                label: Label(style: .tableLabel, faq),
+                isUsingSwitch: false,
+                chevron: ImageView(image: .chevron)
             )
         case 2:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .rate),
-                label: Label(style: .tableLabel, "Rate us"),
-                isUsingSwitch: false
+                label: Label(style: .tableLabel, rateUs),
+                isUsingSwitch: false,
+                chevron: ImageView(image: .chevron)
             )
         case 3:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .support),
-                label: Label(style: .tableLabel, "Support"),
-                isUsingSwitch: false
+                label: Label(style: .tableLabel, support),
+                isUsingSwitch: false,
+                chevron: ImageView(image: .chevron)
             )
         case 4:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .privacy),
-                label: Label(style: .tableLabel, "Privacy police"),
-                isUsingSwitch: false
+                label: Label(style: .tableLabel, privacyPolice),
+                isUsingSwitch: false,
+                chevron: ImageView(image: .chevron)
             )
         case 5:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .terms),
-                label: Label(style: .tableLabel, "Terms of use"),
-                isUsingSwitch: false
+                label: Label(style: .tableLabel, termsOfUse),
+                isUsingSwitch: false,
+                chevron: ImageView(image: .chevron)
             )
         case 6:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .share),
-                label: Label(style: .tableLabel, "Share with friends"),
-                isUsingSwitch: false
+                label: Label(style: .tableLabel, shareFriends),
+                isUsingSwitch: false,
+                chevron: ImageView(image: .chevron)
             )
         case 7:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .share),
-                label: Label(style: .tableLabel, "Dark theme"),
-                isUsingSwitch: true
+                label: Label(style: .tableLabel, darkTheme),
+                isUsingSwitch: true,
+                chevron: ImageView(image: .nul)
             )
         default:
             break

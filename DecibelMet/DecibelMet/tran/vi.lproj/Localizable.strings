@@ -72,17 +72,17 @@
 
 "Restore" = "Khôi phục";
 
-"Maximum" = "Tối đa (MAX)";
+"Maximum" = "MAX";
 
-"Average" = "Trung bình (AVG)";
+"Average" = "AVG";
 
-"Minimum" = "Tối thiểu (MIN)";
+"Minimum" = "MIN";
 
-"Minute" = "Phút (min)";
+"Minute" = "min";
 
-"Second" = "Giây (sec)";
+"Second" = "sec";
 
-"Hour" = "Giờ (hr)";
+"Hour" = "hr";
 
 "Location" = "Vị trí";
 

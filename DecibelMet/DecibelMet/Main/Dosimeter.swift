@@ -28,14 +28,18 @@ final class Dosimeter: UIViewController {
     private var precent120 = 0
     private var precent125 = 0
     private var precent130 = 0
+     
+    var second = NSLocalizedString("Second", comment: "")
+    var hour = NSLocalizedString("Hour", comment: "")
+    var minute = NSLocalizedString("Minute", comment: "")
+    var max = NSLocalizedString("Maximum", comment: "")
     //MARK: - Audio recorder / resist
     let recorder = Recorder()
     let persist = Persist()
     var info: RecordInfo!
     
     //MARK: - UI elements
-    let headerLabelText = NSLocalizedString("test", comment: "")
-    lazy var headerLabel = Label(style: .dosimeterHeader, headerLabelText)
+    lazy var headerLabel = Label(style: .dosimeterHeader, NSLocalizedString("Dosimeter", comment: ""))
     lazy var timeLabel = Label(style: .dosimetreTime, "00:00")
     lazy var procentLabel = Label(style: .dosimetreProcentLabel, "0")
     lazy var procentImage = Label(style: .dosimetreProcentImage, "%")
@@ -55,12 +59,12 @@ final class Dosimeter: UIViewController {
         self.tabBarController?.tabBar.barTintColor = UIColor.black
         recorder.delegate = self
         recorder.avDelegate = self
-        
         setup()
         setUpCollection()
         requestPermissions()
         startRecordingAudio()
-        
+        isRecording = true
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,18 +111,17 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
-    
     var items: [DosimeterCell.Item] {
         [
-            .init(db: 130, timeTitle: "MAX 1 min 52 sec", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent130)%"),
-            .init(db: 125, timeTitle: "MAX 3 min 45 sec", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent125)%"),
-            .init(db: 120, timeTitle: "MAX 7 min 30 sec", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent120)%"),
-            .init(db: 115, timeTitle: "MAX 15 minutes", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent115)%"),
-            .init(db: 110, timeTitle: "MAX 30 minutes", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent110)%"),
-            .init(db: 105, timeTitle: "MAX 1 hours", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent105)%"),
-            .init(db: 100, timeTitle: "MAX 2 hours", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent100)%"),
-            .init(db: 95, timeTitle: "MAX 3 hours",  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent95)%"),
-            .init(db: 90, timeTitle: "MAX 4 hours",  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent90)%"),
+            .init(db: 130, timeTitle: "\(max) 1 \(minute) 52 \(second)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent130)%"),
+            .init(db: 125, timeTitle: "\(max) 3 \(minute) 45 \(second)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent125)%"),
+            .init(db: 120, timeTitle: "\(max) 7 \(minute) 30 \(second)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent120)%"),
+            .init(db: 115, timeTitle: "\(max) 15 \(minute)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent115)%"),
+            .init(db: 110, timeTitle: "\(max) 30 \(minute)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent110)%"),
+            .init(db: 105, timeTitle: max + " 1 " + hour, timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent105)%"),
+            .init(db: 100, timeTitle: max + " 2 " + hour, timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent100)%"),
+            .init(db: 95, timeTitle:  max + " 3 " + hour,  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent95)%"),
+            .init(db: 90, timeTitle:  max + " 4 " + hour,  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent90)%"),
         ]
     }
     
@@ -200,7 +203,7 @@ extension Dosimeter {
         if isTap {
             noiseButton.setTitle("NOISE", for: .normal)
             noiseButton.backgroundColor = UIColor(named: "nosha")
-            noiseButton.setTitleColor(UIColor(named: "noshaTitle"), for: .normal)
+            noiseButton.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: .normal)
             isTap = false
         } else {
             noiseButton.setTitle("OSHA", for: .normal)

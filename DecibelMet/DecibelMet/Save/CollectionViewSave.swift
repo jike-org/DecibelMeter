@@ -24,6 +24,14 @@ class SaveController: UIViewController {
     var tagPlaying: Int?
     var tags: [Int] = []
     var session: AVAudioSession!
+  
+    private lazy var headerLabel = Label(style: .dosimetreDecibelLabel, recordL)
+    
+    // MARK: Localizable
+    var maxL = NSLocalizedString("Maximum", comment: "")
+    var minL = NSLocalizedString("Minimum", comment: "")
+    var avgL = NSLocalizedString("Average", comment: "")
+    var recordL = NSLocalizedString("Records", comment: "")
     
     func buttonToogler() {
         for tag in tags {
@@ -84,13 +92,19 @@ class SaveController: UIViewController {
         collection.isUserInteractionEnabled = true
         
         //        view.addSubview(collection)
+        view.addSubview(headerLabel)
         view.insertSubview(collection, at: 0)
         NSLayoutConstraint.activate([
-            collection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collection.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 20),
             collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
+            collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            
+            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+     
+        
         buttonToogler()
         //        let path = Bundle.main.path(forResource: "t", ofType: "m4a")
         //        print(path)
@@ -101,8 +115,9 @@ class SaveController: UIViewController {
         
         guard let result = persist.fetch() else { return }
         recordings = result
-        buttonToogler()
         self.collection?.reloadData()
+        
+        buttonToogler()
     }
     
     
@@ -118,7 +133,6 @@ class SaveController: UIViewController {
         if isPlaying == false {
             let button = sender as! Button
             guard let path = Persist().filePath(for: button.uuid!.uuidString) else { return }
-            print(path)
             isPlaying = true
             cell?.isPlaying = true
             sender.setImage(UIImage(named: "Pause"), for: .normal)
@@ -165,15 +179,14 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
             
             cell.setValues(name: recording.name ?? "",
                            time: recording.length ?? "",
-                           min: "MIN " + String(recording.min),
-                           max: "MAX " + String(recording.max),
-                           avg: "AVG " + String(recording.avg))
+                           min: minL + String(recording.min),
+                           max: maxL + String(recording.max),
+                           avg: avgL + String(recording.avg))
             
             cell.audioID = recording.id
             cell.playButton.uuid = recording.id
-            
-            cell.playButton.addTarget(self, action: #selector(playAudio(_:)), for: .touchUpInside)
         }
+        cell.playButton.addTarget(self, action: #selector(playAudio(_:)), for: .touchUpInside)
         cell.playButton.tag = indexPath.row
         return cell
     }
@@ -195,7 +208,7 @@ extension SaveController: SwipeCollectionViewCellDelegate {
         
         let shareAction = SwipeAction(style: .destructive, title: nil) { action, indexPath in
             // handle action by updating model with deletion
-            self.share(indexPath: indexPath)
+            self.shareAudio(indexPath: indexPath)
         }
         
         deleteAction.backgroundColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
@@ -229,13 +242,18 @@ extension SaveController {
             print(error)
         }
     }
-    
-    private func share(indexPath: IndexPath) {
-        _ = collection?.cellForItem(at: indexPath) as? CustomSaveCell
-        let t = URL(string: "file:///var/mobile/Containers/Data/Application/3702531B-9120-4247-BFFA-6C2DF71B9021/Documents/BEAAEBA4-D9AA-49B8-918B-E1B4DF8D9512.m4a")
-        let objectsToShare: [Any] = ["fck sharing", t! as NSURL]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        self.present(activityVC, animated: true, completion: nil)
+
+    func shareAudio(indexPath: IndexPath) {
+        guard let recordings = recordings else { return }
+        let recording = recordings[indexPath.row]
+        guard let path = persist.filePath(for: recording.id!.uuidString) else { return }
+        
+        let activityVC = UIActivityViewController(
+            activityItems: [path],
+            applicationActivities: nil
+        )
+        
+        present(activityVC, animated: true, completion: nil)
     }
     
     private func rename(indexPath: IndexPath) {
@@ -261,7 +279,6 @@ extension SaveController {
                 let nameTF = alert.textFields![0].text
                 if let recordings = self.recordings {
                     let recording = recordings[indexPath.row]
-                    print(nameTF)
                     cell!.setValues(name: nameTF ?? "",
                                     time: recording.length ?? "",
                                     min: "MIN " + String(recording.min),
@@ -284,10 +301,14 @@ extension SaveController {
             }
         )
         
-        alert.addTextField { textField in
+        alert.addTextField { [self] textField in
             let dateFormatter = DateFormatter()
+            if let recordings = self.recordings {
+            let recording = recordings[indexPath.row]
             dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-            textField.placeholder = "write new name"
+            textField.placeholder = "\(recording.name!)"
+                textField.text = recording.name!
+            }
         }
         
         alert.addAction(cancel)

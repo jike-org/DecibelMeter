@@ -14,6 +14,10 @@ import CoreData
 class RecordView: UIViewController {
     
     private var isRecording = false
+    // MARK: Localizable
+    var max = NSLocalizedString("Maximum", comment: "")
+    var min = NSLocalizedString("Minimum", comment: "")
+    var avg = NSLocalizedString("Average", comment: "")
     
     // MARK: Audio recorder & persist
     let recorder = Recorder()
@@ -127,16 +131,12 @@ class RecordView: UIViewController {
         super.viewDidLoad()
         recorder.delegate = self
         recorder.avDelegate = self
-        //        view.backgroundColor = UIColor(named: "backgroundColor")
         view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = false
         setupConstraint()
-        //        setupView()
-        if Constants().isRecordingAtLaunchEnabled {
-            isRecording = true
-            startRecordingAudio()
-        }
         requestPermissions()
+        isRecording = true
+        startRecordingAudio()
     }
     
     private func requestPermissions() {
@@ -195,26 +195,27 @@ extension RecordView {
                                        style: .cancel,
                                        handler: nil)
             
-            let save = UIAlertAction(title: "Save",
-                                     style: .default) { _ in
+            let save = UIAlertAction(
+                title: "Save",
+                style: .default,
+                handler: { _ in
                 let name = alert.textFields![0].text
                 
                 if name == "" {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                    self.info.name = dateFormatter.string(from: self.info.date as Date)
+                    self.info.name = "Record 1"
                 } else {
                     self.info.name = name
                 }
                 self.persist.saveAudio(info: self.info)
-                let url: URL = self.persist.filePath(for: self.info.id.uuidString)!
-                print(url)
             }
+                )
             
             alert.addTextField { textField in
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                textField.placeholder = "\(dateFormatter.string(from: self.info.date as Date))"
+                textField.placeholder = "Record 1"
                 
             }
             
@@ -275,20 +276,19 @@ extension RecordView {
                     if name == "" {
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                        self.info.name = dateFormatter.string(from: self.info.date as Date)
+                        self.info.name = "Record 1"
                     } else {
                         self.info.name = name
                     }
                     self.persist.saveAudio(info: self.info)
-                    let url: URL = self.persist.filePath(for: self.info.id.uuidString)!
-                    print(url)
                 }
             )
             
             alert.addTextField { textField in
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                textField.placeholder = "\(dateFormatter.string(from: self.info.date as Date))"
+                textField.placeholder = "record 1"
+                textField.text = "Record 1"
             }
             
             alert.addAction(cancel)
@@ -388,77 +388,6 @@ extension RecordView {
 }
 
 extension RecordView {
-    
-    //    private func setupView() {
-    //        setupCircleView()
-    //        view.addSubview(progress)
-    //        view.addSubview(verticalStack)
-    //        verticalStack.addArrangedSubview(decibelLabel)
-    //        verticalStack.addArrangedSubview(timeLabel)
-    //
-    //        if Constants().isBig {
-    //            view.addSubview(avgBar)
-    //            view.addSubview(chart)
-    //        } else {
-    //            view.addSubview(containerForSmallDisplay)
-    //            containerForSmallDisplay.addSubview(avgBar)
-    //        }
-    //
-    //        view.addSubview(recordButton)
-    //
-    //        view.addSubview(resetButton)
-    //
-    //        verticalStack.setCustomSpacing(10, after: decibelLabel)
-    //
-    //        let constraints: [NSLayoutConstraint]
-    //
-    //        let constraintsForBigDisplay = [
-    //            verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
-    //            verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
-    //
-    //            avgBar.topAnchor.constraint(equalTo: backView.topAnchor, constant: 5),
-    //            avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-    //
-    //            chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-    //            chart.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-    //            chart.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-    //            chart.heightAnchor.constraint(equalToConstant: 10),
-    //
-    //            progress.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 10),
-    //            progress.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-    ////            progress.heightAnchor.constraint(equalToConstant: 100),
-    //
-    //            recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-    //            recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-    //
-    //            resetButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-    //            resetButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-    //        ]
-    //
-    //        let constraintsForSmallDisplay = [
-    //            verticalStack.centerYAnchor.constraint(equalTo: progress.centerYAnchor),
-    //            verticalStack.centerXAnchor.constraint(equalTo: progress.centerXAnchor),
-    //
-    //            containerForSmallDisplay.topAnchor.constraint(equalTo: progress.bottomAnchor),
-    //            containerForSmallDisplay.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-    //            containerForSmallDisplay.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-    //            containerForSmallDisplay.bottomAnchor.constraint(equalTo: recordButton.topAnchor),
-    //
-    //            avgBar.centerXAnchor.constraint(equalTo: containerForSmallDisplay.centerXAnchor),
-    //            avgBar.centerYAnchor.constraint(equalTo: containerForSmallDisplay.centerYAnchor, constant: -20),
-    //
-    //            recordButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-    //            recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-    //        ]
-    //
-    //        if Constants().isBig {
-    //            constraints = constraintsForBigDisplay
-    //        } else {
-    //            constraints = constraintsForSmallDisplay
-    //        }
-    //
-    //        NSLayoutConstraint.activate(constraints)
-    //    }
     
     // MARK: Setup circle view
     private func setupCircleView() {

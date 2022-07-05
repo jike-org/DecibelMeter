@@ -72,17 +72,17 @@
 
 "Restore" = "Wiederherstellen";
 
-"Maximum" = "Maximum";
+"Maximum" = "MAX";
 
-"Average" = "Durchschnitt";
+"Average" = "D";
 
-"Minimum" = "Minimum ";
+"Minimum" = "MIN";
 
-"Minute" = "Minute";
+"Minute" = "Min.";
 
-"Second" = "Sekunde";
+"Second" = "Sek.";
 
-"Hour" = "Stunde";
+"Hour" = "Std.";
 
 "Location" = "Standort";
 

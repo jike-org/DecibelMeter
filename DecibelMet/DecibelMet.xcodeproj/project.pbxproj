@@ -331,7 +331,6 @@
 		01D2DCDF28229BC7003AB953 /* DecibelMet */ = {
 			isa = PBXGroup;
 			children = (
-				0175892B2863801D008B4650 /* tran */,
 				01D2DCE028229BC7003AB953 /* AppDelegate.swift */,
 				01D2DCE228229BC7003AB953 /* SceneDelegate.swift */,
 				01B77DF02826935600E0F59F /* Main */,
@@ -346,6 +345,7 @@
 				01D2DCE928229BC9003AB953 /* Assets.xcassets */,
 				01D366ED284F47C70061B7E4 /* Montserrat */,
 				01D2DCEB28229BC9003AB953 /* LaunchScreen.storyboard */,
+				0175892B2863801D008B4650 /* tran */,
 				0178FA88283E6084006C03CC /* DecibelMet.xcdatamodeld */,
 				01D2DCEE28229BC9003AB953 /* Info.plist */,
 			);
@@ -760,7 +760,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 48BKW53X67;
+				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = Access;
@@ -774,6 +774,7 @@
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -781,7 +782,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = stDa.DecibelMet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mindateq.decibelmeter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -797,7 +798,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 48BKW53X67;
+				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = Access;
@@ -811,6 +812,7 @@
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -818,7 +820,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = stDa.DecibelMet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mindateq.decibelmeter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

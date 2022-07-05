@@ -72,17 +72,17 @@
 
 "Restore" = "復元";
 
-"Maximum" = "最大値（MAX）";
+"Maximum" = "MAX";
 
-"Average" = "平均値（AVG）";
+"Average" = "AVG";
 
-"Minimum" = "最小値(MIN)";
+"Minimum" = "MIN";
 
-"Minute" = "分(min)";
+"Minute" = "min";
 
-"Second" = "秒（sec）";
+"Second" = "sec";
 
-"Hour" = "時間(hr)";
+"Hour" = "hr";
 
 "Location" = "位置";
 

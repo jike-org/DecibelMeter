@@ -9,7 +9,6 @@ import Foundation
 import AVFAudio
 import UIKit
 
-
 class Player: NSObject {
     
     var session: AVAudioSession!
@@ -36,5 +35,4 @@ class Player: NSObject {
             print(error)
         }
     }
-    
 }

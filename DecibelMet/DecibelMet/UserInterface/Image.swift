@@ -19,6 +19,7 @@ class ImageView: UIImageView {
         case terms
         case share
         case chevron
+        case nul
     }
     
     init(image: Image) {
@@ -44,6 +45,8 @@ class ImageView: UIImageView {
             self.image = UIImage(named: "share")
         case .chevron:
             self.image = UIImage(named: "chevron")
+        case .nul:
+            print("null")
         }
     }
     

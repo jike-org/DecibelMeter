@@ -19,7 +19,7 @@ enum Theme: Int {
         switch self {
             
         case .device:
-            return .unspecified
+            return .dark
         case .light:
             return .light
         case .dark:

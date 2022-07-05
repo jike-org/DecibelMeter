@@ -26,21 +26,23 @@ class SettingsCell: UITableViewCell {
         }
     }
     
-    init(reuseIdentifier: String, icon: ImageView, label: Label, isUsingSwitch: Bool) {
+    init(reuseIdentifier: String, icon: ImageView, label: Label, isUsingSwitch: Bool, chevron:ImageView ) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
+        _switch?.setOn(true, animated: true)
         _switch?.backgroundColor = .blue
         backgroundColor = .clear
         let selectedBackground = UIView()
         selectedBackground.backgroundColor = UIColor(named: "BackgroundColorTabBar")
         selectedBackgroundView = selectedBackground
         
+        self.chevron = chevron
         self.icon = icon
         self.label = label
         
-        self.label?.textColor = UIColor(named: "t")
+        self.label?.textColor = UIColor(named: "cellDb")
         self.label?.font = UIFont(name: "Montserrat-Medium", size: 20)
-        self.label?.tintColor = UIColor(named: "tint")
+//        self.label?.tintColor = UIColor(named: "tint")
         
         addSubview(self.icon!)
         addSubview(self.label!)
@@ -67,16 +69,18 @@ class SettingsCell: UITableViewCell {
         
         if isUsingSwitch {
             _switch = UISwitch()
-            _switch!.tag = 0
+            _switch!.tag = 1
+            _switch?.setOn(true, animated: true)
+            _switch?.isOn = true
             _switch!.addTarget(self, action: #selector(toogleAutoRecord(_:)), for: .valueChanged)
             
             accessoryView = _switch
             
-            if Constants().isRecordingAtLaunchEnabled {
-                _switch!.setOn(true, animated: true)
-            } else {
-                _switch!.setOn(false, animated: true)
-            }
+//            if Constants().isRecordingAtLaunchEnabled {
+//                _switch!.setOn(true, animated: true)
+//            } else {
+//                _switch!.setOn(false, animated: true)
+//            }
         }
         
         NSLayoutConstraint.activate(constraints)

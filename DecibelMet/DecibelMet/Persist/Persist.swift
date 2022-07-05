@@ -61,25 +61,25 @@ public class Persist {
     }
     
     /// Rename recently saved audio
-     func rename(_ initialName: String, _ resultName: String) {
+    private func rename(_ initialName: String, _ resultName: String) {
         let fileManager      = FileManager.default
         guard let path       = filePath(for: initialName) else { return }
         guard let resultPath = filePath(for: resultName) else { return }
-        
+
         do {
             try fileManager.moveItem(at: path, to: resultPath)
-            
         } catch {
             print("[FAIL] File don't renamed: ")
             print(error)
         }
     }
+    
     /// Finding file path for audio
     public func filePath(for key: String) -> URL? {
         let fileManager = FileManager.default
         
         guard let documentURL = fileManager.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
-
+        
         return documentURL.appendingPathComponent(key + ".m4a")
     }
     

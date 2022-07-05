@@ -53,6 +53,7 @@ class Label: UILabel {
         switch style {
         case .heading:
             font = UIFont(name: "Montserrat-Bold", size: 24)
+            textColor = UIColor(named: "cellDb")
         case .body:
             font = UIFont(name: "OpenSans-Regular", size: 15)
         case .separator:
@@ -65,7 +66,7 @@ class Label: UILabel {
             font = UIFont.systemFont(ofSize: 10)
         case .time:
             font = UIFont(name: "Montserrat-Regular", size: 12)
-            textColor = UIColor(named: "cellTime")
+            textColor = UIColor(named: "cellDb")
         case .avgMinMax:
             font = UIFont.systemFont(ofSize: 10)
             textColor = .white
@@ -74,6 +75,7 @@ class Label: UILabel {
             textAlignment = .right
         case .titleLabel:
             font = UIFont(name: "OpenSans-SemiBold", size: 17)
+            textColor = UIColor(named: "cellDb")
             textAlignment = .left
         case .tableTopText:
             font = UIFont(name: "OpenSans-Regular", size: 20)
@@ -86,15 +88,17 @@ class Label: UILabel {
             font = UIFont(name: "Montserrat-Bold", size: 30.0)
             textColor = UIColor(named: "purple")
         case .cellDate:
-            textColor = UIColor(named: "saveCell")
+            textColor = UIColor(named: "cellDb")
             font = UIFont(name: "Montserrat-Regular", size: 12)
             textAlignment = .right
         case .minMaxAvgCell:
             font = UIFont(name: "Montserrat-Regular", size: 12)
             textAlignment = .left
             layer.opacity = 0.7
+            textColor = UIColor(named: "cellDb")
         case .recordCell:
             font = UIFont(name: "Montserrat-SemiBold", size: 16.0)
+            textColor = UIColor(named: "cellDb")
         case .dosimeterHeader:
             font = UIFont.boldSystemFont(ofSize: 20)
             textColor = UIColor(named: "cellDb")
@@ -121,6 +125,7 @@ class Label: UILabel {
             textColor = UIColor(named: "cellDb")
         case .subscribeSmall:
             font = UIFont(name: "Montserrat-Regular", size: 12.0)
+            textColor = UIColor(named: "cellDb")
         case .timeRecord:
             font = UIFont(name: "Montserrat-Regular", size: 12)
             textColor = .white
