@@ -1,0 +1,149 @@
+"SoundMeterDosimeter" = "Sound Meter & Dosimeter";
+
+"DetectSoundLevel" = "Detect Sound Level";
+
+"MeasurementHistory" = "Measurement History";
+
+"UnlockAllAccess" = "Unlock All Access";
+
+"Trial7" = "Start with a 7-day free trial, then 3.99 per week";
+
+"Continue" = "Continue";
+
+"Camera" = "Camera";
+
+"Location" = "Location";
+
+"PhotoLibrary" = "Photo Library";
+
+"Ok" = "okay";
+ 
+"AllowOnce" = "Allow Once";
+
+"AllowWhile" = "Allow While Using App";
+
+"and" = "and";
+
+"Allow" = "Allow";
+
+"DontAllow" = "Don’t Allow";
+
+"TermsOfService" = "Terms of service";
+
+"TermsOfUse" = "Terms of use";
+
+"PrivacyPolice" = "Privacy policy";
+
+"Start7Day" = "Start with a 7-day free trial";
+
+"Records" = "Records";
+
+"Settings" = "Setting";
+
+"FAQ" = "FAQ";
+
+"Unlockallfeatures" = "Unlock all features";
+
+"Rateus" = "Rate us";
+
+"Support" = "Support";
+
+"Privacypolicy" = "Privacy policy";
+
+"Sharewithfriends" = "Share with friends";
+
+"Darktheme" = "Dark theme";
+
+"Dosimeter" = "Dosimeter";
+
+"LikeApp" = "Do you like this app?";
+
+"Yes" = "Yes";
+
+"No" = "No";
+
+"UnlockAllAccess" = "Unlock All Access";
+
+"Week" = "Week";
+
+"Year" = "Year";
+
+"Month" = "Month";
+
+"Restore" = "Restore";
+
+"Maximum" = "MAX";
+
+"Average" = "AVG";
+
+"Minimum" = "MIN";
+
+"Minute" = "min";
+
+"Second" = "sec";
+
+"Hour" = "hr";
+
+"Location" = "Location";
+
+"Date" = "Date";
+
+"Share" = "Share";
+
+"Delete" = "Delete";
+
+"Edit" = "Edit";
+
+"DecibelMicro" = "Decibel Meter” Would Like to Access the Microphone";
+
+"Required" = "Required for the app to work, in order to measure audio noise level";
+
+"Microphone" = "Microphone";
+
+"SetMicro" =  "Please set microphone usage permission in settings for work";
+
+"CameraAcces" = "Decibel Meter” Would Like to Access the Camera";
+
+"RequiredWork" = "Required for the app to work, in order to capture video and audio noise level";
+
+"Camerapermission" = "Camera permission";
+
+"CameraSet" = "Please set camera usage permission in settings for work";
+
+"AccessPhotos" = "Decibel Meter” Would Like to Access Your Photos";
+
+"RequiredVideo" = "Required for the app to work, in order to save video and audio noise level";
+
+"Photolibrarypermission" = "Photo library permission";
+
+"SetPhoto" = "Please set photo library usage permission in settings for work";
+
+"AllowLocation" = "Allow “Decibel Meter” to use your location?";
+
+"CaptureImage" = "Used to display city location in captured images";
+
+"Locationpermission" = "Location permission";
+
+"setLocation" = "Please set location usage permission in settings for work";
+
+"appWil" = "This app will help you measure the noise level of your environment:";
+
+"Unlimitedrecording" = "Unlimited recording";
+
+"Unlimitedaccess" = "Unlimited access to the Dosimeter";
+
+"Unlimitedphotoandvideo" = "Unlimited photo and video";
+
+"noiseData" = "Noise Data";
+
+"cancel" = "Cancel";
+
+"photo" = "PHOTO";
+
+"video" = "VIDEO";
+ 
+"DecibelMeter" = "Decibel Meter";
+
+"recording" = "Recording name";
+
+"save" = "Save";

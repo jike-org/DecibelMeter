@@ -20,6 +20,7 @@ class ImageView: UIImageView {
         case share
         case chevron
         case nul
+        case darkMode
     }
     
     init(image: Image) {
@@ -47,6 +48,8 @@ class ImageView: UIImageView {
             self.image = UIImage(named: "chevron")
         case .nul:
             print("null")
+        case .darkMode:
+            self.image = UIImage(named: "darkMode")
         }
     }
     

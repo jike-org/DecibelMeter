@@ -12,12 +12,12 @@ class TabBar: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(named: "recordView")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        view.backgroundColor = UIColor(named: "recordView")
         setupView()
         selectedIndex = 2    }
 }
@@ -29,40 +29,40 @@ extension TabBar {
         let saved = SaveController()
         let savedIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "saved"),
-            selectedImage: UIImage(named: "saved")
+            image: UIImage(named: "savedTabBar")?.withRenderingMode(.alwaysOriginal),
+            selectedImage: UIImage(named: "SaveTap")?.withRenderingMode(.alwaysOriginal)
         )
         saved.tabBarItem = savedIcon
         
         let home = RecordView()
         let homeIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "home")?.withRenderingMode(.alwaysOriginal),
-            selectedImage: UIImage(named: "Home")?.withRenderingMode(.alwaysOriginal)
+            image: UIImage(named: "homeTabBar")?.withRenderingMode(.alwaysOriginal),
+            selectedImage: UIImage(named: "homeTap")?.withRenderingMode(.alwaysOriginal)
         )
         home.tabBarItem = homeIcon
         
         let settings = SettingsView()
         let settingsIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "setting")?.withRenderingMode(.alwaysOriginal),
-            selectedImage: UIImage(named: "setting")?.withRenderingMode(.alwaysOriginal)
+            image: UIImage(named: "settingTabBar")?.withRenderingMode(.alwaysOriginal),
+            selectedImage: UIImage(named: "SettingsTap")?.withRenderingMode(.alwaysOriginal)
         )
         settings.tabBarItem = settingsIcon
         
         let camera = PickerViewController()
         let cameraIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "camera"),
-            selectedImage: UIImage(named: "camera")
+            image: UIImage(named: "cameraTabBar")?.withRenderingMode(.alwaysOriginal),
+            selectedImage: UIImage(named: "CameraTap")?.withRenderingMode(.alwaysOriginal)
         )
         camera.tabBarItem = cameraIcon
         
         let faq = Dosimeter()
         let faqIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "faq"),
-            selectedImage: UIImage(named: "faq")
+            image: UIImage(named: "dosimetreTabBar")?.withRenderingMode(.alwaysOriginal),
+            selectedImage: UIImage(named: "DosimetreTap")?.withRenderingMode(.alwaysOriginal)
         )
         faq.tabBarItem = faqIcon
         

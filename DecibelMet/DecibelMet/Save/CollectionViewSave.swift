@@ -177,11 +177,18 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
         if let recordings = self.recordings {
             let recording = recordings[indexPath.row]
             
+            let time = NSDate()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd.MM.YYYY"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            let formatteddate = formatter.string(from: time as Date)
+            
             cell.setValues(name: recording.name ?? "",
                            time: recording.length ?? "",
                            min: minL + String(recording.min),
                            max: maxL + String(recording.max),
-                           avg: avgL + String(recording.avg))
+                           avg: avgL + String(recording.avg),
+                           date:formatteddate)
             
             cell.audioID = recording.id
             cell.playButton.uuid = recording.id
@@ -280,11 +287,18 @@ extension SaveController {
                 let nameTF = alert.textFields![0].text
                 if let recordings = self.recordings {
                     let recording = recordings[indexPath.row]
+                    
+                    let time = NSDate()
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "dd.MM.YYYY"
+                    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+                    let formatteddate = formatter.string(from: time as Date)
+                    
                     cell!.setValues(name: nameTF ?? "",
                                     time: recording.length ?? "",
                                     min: "MIN " + String(recording.min),
                                     max: "MAX " + String(recording.max),
-                                    avg: "AVG " + String(recording.avg))
+                                    avg: "AVG " + String(recording.avg), date: formatteddate)
                     
                     if let unwrapped = nameTF {
                         

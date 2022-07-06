@@ -16,7 +16,7 @@ final class Dosimeter: UIViewController {
     private var collection: UICollectionView?
     private var isTap = false
     private var isRecording = true
-    private let timeValueSubject = CurrentValueSubject<[Int: Double], Never>([:])
+    private let timeValueSubject = CurrentValueSubject<[Int: Int], Never>([:])
     private var totalPrecent = 0
     private var precent90 = 0
     
@@ -188,10 +188,10 @@ extension Dosimeter {
             dbImage.leadingAnchor.constraint(equalTo: decibelLabel.trailingAnchor),
             dbImage.topAnchor.constraint(equalTo: procentLabel.bottomAnchor),
             
-            refreshButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            refreshButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             refreshButton.topAnchor.constraint(equalTo: progress.bottomAnchor, constant: -60),
             
-            noiseButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            noiseButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             noiseButton.topAnchor.constraint(equalTo: progress.bottomAnchor, constant: -60)
         ])
     }
@@ -279,13 +279,14 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         }
         
         var timeDict = timeValueSubject.value
-        func increaseDictValue(_ dict: inout [Int: Double], key: Int) {
+        func increaseDictValue(_ dict: inout [Int: Int], key: Int) {
             let value = dict[key]
-            dict[key] = value == nil ? 0.5 : value! + 0.5
+            dict[key] = value == nil ? 1 : value! + 1
         }
         if (90..<95).contains(decibels) {
             increaseDictValue(&timeDict, key: 95)
             precent90 = Int((timeDict[95]!) / 14400 * 100)
+            
             procentLabel.text = String(totalPrecent)
         }
         if (95..<100).contains(decibels) {
@@ -296,7 +297,6 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         }
         if (105..<110).contains(decibels) {
             increaseDictValue(&timeDict, key: 110)
-           
         }
         if (110..<115).contains(decibels) {
             increaseDictValue(&timeDict, key: 115)

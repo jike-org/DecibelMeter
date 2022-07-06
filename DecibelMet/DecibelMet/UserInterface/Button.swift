@@ -87,7 +87,7 @@ class Button: UIButton {
             backgroundColor = #colorLiteral(red: 0.979583323, green: 0.004220267292, blue: 1, alpha: 1)
             heightAnchor.constraint(equalToConstant: 50).isActive = true
             widthAnchor.constraint(equalToConstant: 50).isActive = true
-            layer.cornerRadius = 20
+            layer.cornerRadius = 25
         case .noise:
             heightAnchor.constraint(equalToConstant: 50).isActive = true
             widthAnchor.constraint(equalToConstant: 100).isActive = true

@@ -43,13 +43,15 @@ class CustomSaveCell: SwipeCollectionViewCell {
         time: String,
         min: String,
         max: String,
-        avg: String
+        avg: String,
+        date: String
     ) {
         self.recordName.text = name
         self.soundTime.text = time
         self.min.text = min
         self.max.text = max
         self.avg.text = avg
+        self.dateName.text = date
     }
     
     override init(frame: CGRect) {

@@ -163,7 +163,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
         case 7:
             cell = SettingsCell(
                 reuseIdentifier: "cell",
-                icon: ImageView(image: .share),
+                icon: ImageView(image: .darkMode),
                 label: Label(style: .tableLabel, darkTheme),
                 isUsingSwitch: true,
                 chevron: ImageView(image: .nul)
