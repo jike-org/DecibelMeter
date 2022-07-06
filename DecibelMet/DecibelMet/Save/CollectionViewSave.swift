@@ -234,6 +234,7 @@ extension SaveController {
         DispatchQueue.main.async { [unowned self] in
             persist.viewContext.delete(recordings![indexPath.row])
             recordings?.remove(at: indexPath.row)
+            self.collection?.reloadData()
         }
         collection!.deleteItems(at: [indexPath])
         do {
