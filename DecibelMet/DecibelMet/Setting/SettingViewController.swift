@@ -187,7 +187,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let vc = OnboardingView()
+            let vc = TrialSubscribe()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         case 1:

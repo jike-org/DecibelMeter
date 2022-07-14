@@ -7,13 +7,16 @@
 
 import Foundation
 import Foundation
+import StoreKit
 import UIKit
 
 class SubscribeViewController: UICollectionViewCell {
     
+    let iapManager = InAppManager.share
     lazy var headingLabel = Label(style: .heading, "UNLOCK")
     lazy var headingLabelAll = Label(style: .heading, "ALL ACCESS")
-    lazy var underLabel = Label(style: .subscribeSmall, "Start with a 7 day trial, then 7.99$ per week")
+    
+    lazy var underLabel = Label(style: .subscribeSmall, "Start with a 7 day trial")
 
     public static let identifier = "SubscribeOne"
     
@@ -33,12 +36,8 @@ class SubscribeViewController: UICollectionViewCell {
         addSubview(headingLabel)
         addSubview(headingLabelAll)
         addSubview(underLabel)
+        backImage.frame = UIScreen.main.bounds
         NSLayoutConstraint.activate([
-            backImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backImage.topAnchor.constraint(equalTo: topAnchor),
-            backImage.bottomAnchor.constraint(equalTo: bottomAnchor,constant: 100),
-            
             headingLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             headingLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 170),
             

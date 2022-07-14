@@ -72,6 +72,7 @@ class SettingsCell: UITableViewCell {
             _switch!.tag = 1
             _switch?.setOn(true, animated: true)
             _switch?.isOn = true
+            _switch?.onTintColor = .blue
             _switch!.addTarget(self, action: #selector(toogleAutoRecord(_:)), for: .valueChanged)
             
             accessoryView = _switch

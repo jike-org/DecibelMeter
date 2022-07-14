@@ -43,7 +43,7 @@ class Button: UIButton {
             setTitleColor(.white, for: .normal)
             titleLabel?.font = titleLabel?.font.withSize(20)
             heightAnchor.constraint(equalToConstant: 60).isActive = true
-            layer.cornerRadius = 12
+            layer.cornerRadius = 15
             gradient.setGradientBackground(view: self)
             layer.masksToBounds = true
         case .link:

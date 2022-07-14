@@ -145,7 +145,7 @@ extension OnboardingView {
 //            print("Close onboarding animation ends")
 //        })
 //
-//        OnboardingManager.shared.isFirstLaunch = true
+        OnboardingManager.shared.isFirstLaunch = true
 //        
         let vc = TabBar()
         vc.modalPresentationStyle = .fullScreen

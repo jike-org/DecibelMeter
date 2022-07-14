@@ -45,7 +45,7 @@ class Label: UILabel {
         self.text     = text
         textColor     = UIColor(named: "saveCell")
         numberOfLines = 1
-        textAlignment = .center
+        textAlignment = .left
 //        tintColor = UIColor(named: "t")
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -71,10 +71,11 @@ class Label: UILabel {
             font = UIFont.systemFont(ofSize: 10)
             textColor = .white
         case .tableLabel:
-            font = UIFont(name: "OpenSans-SemiBold", size: 17)
-            textAlignment = .right
+            font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            textAlignment = .left
         case .titleLabel:
-            font = UIFont(name: "OpenSans-SemiBold", size: 17)
+//            font = UIFont(name: "Montserrat-Medium", size: 20)
+            font = UIFont(name: ".SFUIText-Medium", size: 20)
             textColor = UIColor(named: "cellDb")
             textAlignment = .left
         case .tableTopText:

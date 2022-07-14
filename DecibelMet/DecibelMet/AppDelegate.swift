@@ -7,29 +7,39 @@
 
 import UIKit
 import CoreData
+//import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var orientationLock = UIInterfaceOrientationMask.portrait
+    let launchBefore = UserDefaults.standard.bool(forKey: "LaunchedBefore")
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
             return self.orientationLock
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//
-//        window?.rootViewController = OnboardingView()
-//        if OnboardingManager.shared.isFirstLaunch {
-//            window?.rootViewController = OnboardingView()
-//        } else {
-//            window?.rootViewController = TabBar()
-//        }
-//
-//        window?.makeKeyAndVisible()
-//
+
+//        FirebaseApp.configure()
+        InAppManager.share.setupPurchases { success in
+            if success {
+                print("can make payments")
+                InAppManager.share.getProducts()
+            }
+        }
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        window?.rootViewController = OnboardingView()
+        if OnboardingManager.shared.isFirstLaunch {
+            window?.rootViewController = OnboardingView()
+        } else {
+            window?.rootViewController = TabBar()
+        }
+        
+        window?.makeKeyAndVisible()
+
         
         return true
     }

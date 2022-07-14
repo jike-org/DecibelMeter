@@ -21,13 +21,13 @@ class CollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
         setupLayout()
         
-        self.delegate   = delegate
+        self.delegate = delegate
         self.dataSource = dataSource
         
         backgroundColor = #colorLiteral(red: 0.005383874755, green: 0.01202428713, blue: 0.1731599867, alpha: 1)
         
-        isPagingEnabled                = true
-        showsVerticalScrollIndicator   = false
+        isPagingEnabled = true
+        showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         
         translatesAutoresizingMaskIntoConstraints = false

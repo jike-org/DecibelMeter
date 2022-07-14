@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>784610620701-v2u3g67cf77fo3r9dss7ldgub7000tlf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.784610620701-v2u3g67cf77fo3r9dss7ldgub7000tlf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDtr0LOimO3ezg-8cB4IS6Xt1qIsijti38</string>
+	<key>GCM_SENDER_ID</key>
+	<string>784610620701</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mindateq.decibelmeter</string>
+	<key>PROJECT_ID</key>
+	<string>decibel-a1625</string>
+	<key>STORAGE_BUCKET</key>
+	<string>decibel-a1625.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:784610620701:ios:27f7299e3887ecdac41df4</string>
+</dict>
+</plist>

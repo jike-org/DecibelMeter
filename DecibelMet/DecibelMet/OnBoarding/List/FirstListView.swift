@@ -28,12 +28,8 @@ class FirstListViewController: UICollectionViewCell {
         addSubview(backImage)
         addSubview(headingLabel)
         addSubview(headingLabelMeter)
+        backImage.frame = UIScreen.main.bounds
         NSLayoutConstraint.activate([
-            backImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backImage.topAnchor.constraint(equalTo: topAnchor),
-            backImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
             headingLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             headingLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 170),
             headingLabelMeter.topAnchor.constraint(equalTo: headingLabel.bottomAnchor,constant: 10),

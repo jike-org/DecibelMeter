@@ -64,7 +64,7 @@ final class Dosimeter: UIViewController {
         requestPermissions()
         startRecordingAudio()
         isRecording = true
-    
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +110,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
+       
     }
     var items: [DosimeterCell.Item] {
         [
@@ -120,10 +121,12 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
             .init(db: 110, timeTitle: "\(max) 30 \(minute)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent110)%"),
             .init(db: 105, timeTitle: max + " 1 " + hour, timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent105)%"),
             .init(db: 100, timeTitle: max + " 2 " + hour, timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent100)%"),
-            .init(db: 95, timeTitle:  max + " 3 " + hour,  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent95)%"),
-            .init(db: 90, timeTitle:  max + " 4 " + hour,  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent90)%"),
+            .init(db: 95, timeTitle:  max + " 4 " + hour,  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent95)%"),
+            .init(db: 90, timeTitle:  max + " 8 " + hour,  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent90)%"),
         ]
     }
+    
+  
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DosimeterCell.id, for: indexPath) as! DosimeterCell
@@ -131,6 +134,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.layer.masksToBounds = true
         cell.contentView.backgroundColor = UIColor(named: "backCell")
         cell.configure(item: items[indexPath.row])
+  
         return cell
     }
     
@@ -158,6 +162,7 @@ extension Dosimeter {
         noiseButton.backgroundColor = UIColor(named: "nosha")
         noiseButton.setTitleColor(UIColor(named: "noshaTitle"), for: .normal)
         noiseButton.addTarget(self, action: #selector(noiseTap), for: .touchUpInside)
+        refreshButton.addTarget(self, action: #selector(refreshButtonTap), for: .touchUpInside)
         setupCircleView()
         view.addSubview(headerLabel)
         view.addSubview(progress)
@@ -201,16 +206,32 @@ extension Dosimeter {
     
     @objc func noiseTap() {
         if isTap {
-            noiseButton.setTitle("NOISE", for: .normal)
+            noiseButton.setTitle("OSHA", for: .normal)
             noiseButton.backgroundColor = UIColor(named: "nosha")
             noiseButton.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: .normal)
             isTap = false
         } else {
-            noiseButton.setTitle("OSHA", for: .normal)
+            noiseButton.setTitle("NIOSH", for: .normal)
             noiseButton.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
             noiseButton.setTitleColor(UIColor.white, for: .normal)
             isTap = true
+        
         }
+    }
+    
+    @objc func refreshButtonTap() {
+        recorder.stopMonitoring()
+        recorder.stop()
+        progress.startAngle = -150
+        procentLabel.text = "0"
+        decibelLabel.text = "0"
+        timeLabel.text = "00:00"
+        _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
+            print("Timer fired!")
+            self.startRecordingAudio()
+        }
+        
+        
     }
 }
 // MARK: Setup circle view

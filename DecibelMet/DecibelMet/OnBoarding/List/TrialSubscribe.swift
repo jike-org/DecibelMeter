@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import StoreKit
 
-class SubscribeTwoView: UIViewController {
+class TrialSubscribe: UIViewController {
     
     let iapManager = InAppManager.share
     let lprivacy = NSLocalizedString("PrivacyPolice", comment: "")
@@ -34,9 +34,9 @@ class SubscribeTwoView: UIViewController {
     let product = InAppManager.share.product
     
     
-    lazy var weekSubscribe = Button(style: ._continue, "\(priceStringFor(product: product[2])) / \(lweek)")
-    lazy var mounthSubscribe = Button(style: ._continue, "\(priceStringFor(product:product[0])) / \(lmounth)")
-    lazy var yearSubscribe = Button(style: ._continue, "\(priceStringFor(product:product[4])) / \(lyear)")
+    lazy var weekSubscribe = Button(style: ._continue, "\(priceStringFor(product: product[3])) / \(lweek)")
+    lazy var mounthSubscribe = Button(style: ._continue, "\(priceStringFor(product:product[1])) / \(lmounth)")
+    lazy var yearSubscribe = Button(style: ._continue, "\(priceStringFor(product:product[5])) / \(lyear)")
     lazy var unlimited = Label(style: .timeTitle, "")
     
     override func viewDidLoad() {
@@ -59,7 +59,7 @@ class SubscribeTwoView: UIViewController {
     }
 }
 
-extension SubscribeTwoView {
+extension TrialSubscribe {
     
     func setup() {
         view.backgroundColor = .clear
@@ -79,7 +79,6 @@ extension SubscribeTwoView {
         yearSubscribe.translatesAutoresizingMaskIntoConstraints = false
         mounthSubscribe.translatesAutoresizingMaskIntoConstraints = false
         weekSubscribe.translatesAutoresizingMaskIntoConstraints = false
-        
         hStack.addArrangedSubview(terms)
         hStack.addArrangedSubview(andLabel)
         hStack.addArrangedSubview(privacy)
@@ -112,7 +111,7 @@ extension SubscribeTwoView {
     }
 }
 
-extension SubscribeTwoView {
+extension TrialSubscribe {
     
     @objc func yearSub() {
         iapManager.purchase(productWith: "com.decibelmeter.1ye")

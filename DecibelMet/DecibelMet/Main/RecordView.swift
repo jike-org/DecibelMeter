@@ -10,9 +10,11 @@ import AVFAudio
 import KDCircularProgress
 import Charts
 import CoreData
+import StoreKit
 
 class RecordView: UIViewController {
     
+    let iapManager = InAppManager.share
     private var isRecording = false
     // MARK: Localizable
     var max = NSLocalizedString("Maximum", comment: "")

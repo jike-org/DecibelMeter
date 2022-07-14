@@ -10,4 +10,7 @@ target 'DecibelMet' do
   pod 'Charts'
   pod 'CameraManager'
   pod 'SwipeCellKit'
+  pod 'Firebase'
+  pod 'Firebase/Core'
+  pod 'Firebase/RemoteConfig'
 end
