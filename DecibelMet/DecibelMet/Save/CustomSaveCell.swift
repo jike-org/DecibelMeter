@@ -101,12 +101,12 @@ class CustomSaveCell: SwipeCollectionViewCell {
             min.heightAnchor.constraint(equalToConstant: 15),
             
             avg.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            avg.trailingAnchor.constraint(equalTo: max.leadingAnchor, constant: -30),
+            avg.trailingAnchor.constraint(equalTo: max.leadingAnchor, constant: -15),
             avg.widthAnchor.constraint(equalToConstant: 66),
             avg.heightAnchor.constraint(equalToConstant: 15),
             
             max.topAnchor.constraint(equalTo: recordName.bottomAnchor, constant: 11),
-            max.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            max.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             max.widthAnchor.constraint(equalToConstant: 76),
             max.heightAnchor.constraint(equalToConstant: 15),
       

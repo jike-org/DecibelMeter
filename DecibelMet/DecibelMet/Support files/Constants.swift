@@ -29,6 +29,14 @@ public class Constants {
         }
     }
     
+    public var hasPurchased: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: #function)
+        } set {
+            UserDefaults.standard.setValue(newValue, forKey: #function)
+        }
+    }
+    
     public var isBig: Bool {
         if screenSize.height > 667 {
             return true

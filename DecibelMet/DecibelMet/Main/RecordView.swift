@@ -11,10 +11,14 @@ import KDCircularProgress
 import Charts
 import CoreData
 import StoreKit
+import FirebaseRemoteConfig
 
 class RecordView: UIViewController {
     
+    lazy var showVc = "1"
+    let remoteConfig = RemoteConfig.remoteConfig()
     let iapManager = InAppManager.share
+    var freeSave = 9
     private var isRecording = false
     // MARK: Localizable
     var max = NSLocalizedString("Maximum", comment: "")
@@ -25,8 +29,10 @@ class RecordView: UIViewController {
     let recorder = Recorder()
     let persist = Persist()
     var info: RecordInfo!
+    var recordings: [Record]?
     
     // MARK: UI elements
+    lazy var dbtImage = Label(style: .dbProcentImage, "dB")
     lazy var decibelLabel   = Label(style: .decibelHeading, "0")
     lazy var timeLabel      = Label(style: .timeRecord, "00:00")
     lazy var progress = KDCircularProgress(
@@ -116,18 +122,13 @@ class RecordView: UIViewController {
         let radius: CGFloat = 130
         let size: CGFloat = 130
         button.layer.cornerRadius = radius
-        button.setImage(UIImage(named: "png"), for: .normal)
+        button.setImage(UIImage(named: "playSVG"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        //        setupView()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,20 +137,22 @@ class RecordView: UIViewController {
         view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = false
         setupConstraint()
-        requestPermissions()
-        isRecording = true
-        startRecordingAudio()
+//        requestPermissions()
+//        isRecording = true
+//        startRecordingAudio()
+        
+        guard let result = persist.fetch() else { return }
+        recordings = result
+        freeSave = result.count
     }
     
     private func requestPermissions() {
-        if !Constants().isFirstLaunch {
-            AVAudioSession.sharedInstance().requestRecordPermission { granted in }
-            Constants().isFirstLaunch = true
+        DispatchQueue.main.async {
+            if Constants().isFirstLaunch {
+                AVAudioSession.sharedInstance().requestRecordPermission { granted in }
+                Constants().isFirstLaunch = false
+            }
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
 }
 
@@ -157,12 +160,46 @@ class RecordView: UIViewController {
 extension RecordView {
     
     @objc func startOrStopRecordAction() {
-        if isRecording {
-            isRecording = false
-            stopRecordingAudio()
+        
+        if Constants.shared.isRecordingAtLaunchEnabled {
+            if isRecording {
+                isRecording = false
+                stopRecordingAudio()
+                
+            } else {
+                isRecording = true
+                startRecordingAudio()
+            }
+
         } else {
-            isRecording = true
-            startRecordingAudio()
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(
+                    title: "Microphone permissions denied",
+                    message: "Microphone permissions have been denied for this app. You can change this by going to Settings",
+                    preferredStyle: .alert
+                )
+                
+                let cancelButton = UIAlertAction(
+                    title: "Cancel",
+                    style: .cancel,
+                    handler: nil
+                )
+                
+                let settingsAction = UIAlertAction(
+                    title: "Settings",
+                    style: .default
+                ) { _ in
+                    UIApplication.shared.open(
+                        URL(string: UIApplication.openSettingsURLString)!,
+                        options: [:],
+                        completionHandler: nil)
+                }
+                
+                alertController.addAction(cancelButton)
+                alertController.addAction(settingsAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -189,41 +226,92 @@ extension RecordView {
             avgBar.minDecibelLabel.text = "0"
             avgBar.avgDecibelLabel.text = "0"
             
-            let alert = UIAlertController(title: "save",
-                                          message: nil,
-                                          preferredStyle: .alert)
+            guard let result = persist.fetch() else { return }
+            recordings = result
+            freeSave = result.count
             
-            let cancel = UIAlertAction(title: "Cancel",
-                                       style: .cancel,
-                                       handler: nil)
-            
-            let save = UIAlertAction(
-                title: "Save",
-                style: .default,
-                handler: { _ in
-                let name = alert.textFields![0].text
+            if freeSave >= 3{
+                func fetchValues() {
                 
-                if name == "" {
+                    let setting = RemoteConfigSettings()
+                    setting.minimumFetchInterval = 0
+                    remoteConfig.configSettings = setting
+                }
+                
+                remoteConfig.fetchAndActivate { (status, error) in
+                    
+                    if error !=  nil {
+                        print(error?.localizedDescription)
+                    } else {
+                        if status != .error {
+                            if let stringValue =
+                                self.remoteConfig["availableFreePhoto"].stringValue {
+                                self.freeSave = Int(stringValue)!
+                            }
+                        }
+                        
+                        if status != .error {
+                            if let stringValue1 =
+                                self.remoteConfig["otherScreenNumber"].stringValue {
+                                self.freeSave = Int(stringValue1)!
+                            }
+                        }
+
+                    }
+                }
+                
+                _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
+                    if showVc == "1"{
+                        let vcTwo = SubscribeTwoView()
+                        vcTwo.modalPresentationStyle = .fullScreen
+                        present(vcTwo, animated: true, completion: nil)
+                    } else if showVc == "2" {
+                            let vcTrial = TrialSubscribe()
+                        vcTrial.modalPresentationStyle = .fullScreen
+                        present(vcTrial, animated: true, completion: nil)
+                        }
+
+                })
+                
+            } else {
+                
+                let alert = UIAlertController(title: "save",
+                                              message: nil,
+                                              preferredStyle: .alert)
+                
+                let cancel = UIAlertAction(title: "Cancel",
+                                           style: .cancel,
+                                           handler: nil)
+                
+                let save = UIAlertAction(
+                    title: "Save",
+                    style: .default,
+                    handler: { _ in
+                    let name = alert.textFields![0].text
+                    
+                    if name == "" {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+                        self.info.name = "Record 1"
+                    } else {
+                        self.info.name = name
+                    }
+                    self.persist.saveAudio(info: self.info)
+                }
+                    )
+                
+                alert.addTextField { textField in
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                    self.info.name = "Record 1"
-                } else {
-                    self.info.name = name
+                    textField.placeholder = "Record 1"
+                    
                 }
-                self.persist.saveAudio(info: self.info)
-            }
-                )
-            
-            alert.addTextField { textField in
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                textField.placeholder = "Record 1"
                 
+                alert.addAction(cancel)
+                alert.addAction(save)
+                present(alert, animated: true, completion: nil)
             }
-            
-            alert.addAction(cancel)
-            alert.addAction(save)
-            present(alert, animated: true, completion: nil)
+          
         }
     }
 }
@@ -258,21 +346,67 @@ extension RecordView {
             avgBar.minDecibelLabel.text = "0"
             avgBar.avgDecibelLabel.text = "0"
             
-            let alert = UIAlertController(
-                title: "Recording name",
-                message: nil, preferredStyle: .alert
-            )
+            guard let result = persist.fetch() else { return }
+            recordings = result
+            freeSave = result.count
             
-            let cancel = UIAlertAction(
-                title: "Cancel",
-                style: .cancel,
-                handler: nil
-            )
-            
-            let save = UIAlertAction(
-                title: "Save",
-                style: .default,
-                handler: { _ in
+            if freeSave >= 3{
+                func fetchValues() {
+                
+                    let setting = RemoteConfigSettings()
+                    setting.minimumFetchInterval = 0
+                    remoteConfig.configSettings = setting
+                }
+                
+                remoteConfig.fetchAndActivate { (status, error) in
+                    
+                    if error !=  nil {
+                        print(error?.localizedDescription)
+                    } else {
+                        if status != .error {
+                            if let stringValue =
+                                self.remoteConfig["availableFreePhoto"].stringValue {
+                                self.freeSave = Int(stringValue)!
+                            }
+                        }
+                        
+                        if status != .error {
+                            if let stringValue1 =
+                                self.remoteConfig["otherScreenNumber"].stringValue {
+                                self.freeSave = Int(stringValue1)!
+                            }
+                        }
+
+                    }
+                }
+                
+                _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
+                    if showVc == "1"{
+                        let vcTwo = SubscribeTwoView()
+                        vcTwo.modalPresentationStyle = .fullScreen
+                        present(vcTwo, animated: true, completion: nil)
+                    } else if showVc == "2" {
+                            let vcTrial = TrialSubscribe()
+                        vcTrial.modalPresentationStyle = .fullScreen
+                        present(vcTrial, animated: true, completion: nil)
+                        }
+
+                })
+                
+            } else {
+                
+                let alert = UIAlertController(title: "save",
+                                              message: nil,
+                                              preferredStyle: .alert)
+                
+                let cancel = UIAlertAction(title: "Cancel",
+                                           style: .cancel,
+                                           handler: nil)
+                
+                let save = UIAlertAction(
+                    title: "Save",
+                    style: .default,
+                    handler: { _ in
                     let name = alert.textFields![0].text
                     
                     if name == "" {
@@ -284,19 +418,19 @@ extension RecordView {
                     }
                     self.persist.saveAudio(info: self.info)
                 }
-            )
-            
-            alert.addTextField { textField in
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                textField.placeholder = "record 1"
-                textField.text = "Record 1"
+                    )
+                
+                alert.addTextField { textField in
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+                    textField.placeholder = "Record 1"
+                    
+                }
+                
+                alert.addAction(cancel)
+                alert.addAction(save)
+                present(alert, animated: true, completion: nil)
             }
-            
-            alert.addAction(cancel)
-            alert.addAction(save)
-            
-            present(alert, animated: true, completion: nil)
         }
     }
 }
@@ -305,15 +439,26 @@ extension RecordView {
     
     @objc func startOrStopRecord() {
         if isRecording {
+            recordButton.setImage(UIImage(named: "playSVG"), for: .normal)
             isRecording = false
             stopRecordingAudio()
         } else {
             isRecording = true
             startRecordingAudio()
+            recordButton.setImage(UIImage(named: "stop"), for: .normal)
         }
     }
     
     @objc func resetButtonAction(){
+//        if Constants.shared.isRecordingAtLaunchEnabled {
+//            print("good")
+//        } else {
+//            print("enable reset")
+//            isRecording = false
+//        }
+        
+        
+        
         if isRecording{
             recorder.stopMonitoring()
             recorder.stop()
@@ -324,9 +469,12 @@ extension RecordView {
             avgBar.maxDecibelLabel.text = "0"
             avgBar.minDecibelLabel.text = "0"
             avgBar.avgDecibelLabel.text = "0"
+            recordButton.setImage(UIImage(named: "playSVG"), for: .normal)
+            
         } else {
             print("stop")
         }
+      
     }
 }
 
@@ -335,13 +483,12 @@ extension RecordView {
     
     func setupConstraint() {
         setupCircleView()
+        view.addSubview(dbtImage)
         view.addSubview(chart)
-        view.insertSubview(progress, at: 0)
+        view.addSubview(progress)
         view.addSubview(avgBar)
         view.addSubview(verticalStack)
         view.addSubview(backView)
-        //        view.addSubview(lineView)
-        //        view.bringSubviewToFront(lineView)
         backView.addSubview(recordButton)
         backView.addSubview(resetButton)
         backView.addSubview(saveButton)
@@ -368,7 +515,10 @@ extension RecordView {
             backView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             
             avgBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            avgBar.bottomAnchor.constraint(equalTo: backView.topAnchor, constant: -35),
+            avgBar.bottomAnchor.constraint(equalTo: backView.topAnchor, constant: -25),
+            
+            dbtImage.bottomAnchor.constraint(equalTo: decibelLabel.topAnchor, constant: 10),
+            dbtImage.leadingAnchor.constraint(equalTo: decibelLabel.trailingAnchor),
             
             recordButton.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
             recordButton.centerYAnchor.constraint(equalTo: backView.centerYAnchor),

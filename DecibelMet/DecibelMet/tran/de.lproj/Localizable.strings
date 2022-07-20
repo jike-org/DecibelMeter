@@ -1,12 +1,14 @@
-"SoundMeterDosimeter" = "Lärmpegelmesser & Dosimeter";
+"SoundMeterDosimeter" = "Lärmpegelmesser
+& Dosimeter";
 
-"DetectSoundLevel" = "Lärmpegel messen";
+"DetectSoundLevel" = "Lärmpegel
+messen";
 
 "MeasurementHistory" = "Messverlauf";
 
-"UnlockAllAccess" = "Vollzugriff freischalten";
 
-"Trial7" = "7 Tage gratis testen, danach 3,99 pro Woche";
+
+"Trial7" = " pro Woche";
 
 "Continue" = "Weiter";
 
@@ -62,7 +64,8 @@
 
 "No" = "Nein";
 
-"UnlockAllAccess" = "Vollzugriff freischalten";
+"UnlockAllAccess" = "Vollzugriff
+freischalten";
 
 "Week" = "Woche";
 
@@ -72,17 +75,17 @@
 
 "Restore" = "Wiederherstellen";
 
-"Maximum" = "MAX";
+"Maximum" = "MAX:";
 
-"Average" = "D";
+"Average" = "D:";
 
-"Minimum" = "MIN";
+"Minimum" = "MIN:";
 
-"Minute" = "Min.";
+"Minute" = "Min";
 
-"Second" = "Sek.";
+"Second" = "Sek";
 
-"Hour" = "Std.";
+"Hour" = "Std";
 
 "Location" = "Standort";
 

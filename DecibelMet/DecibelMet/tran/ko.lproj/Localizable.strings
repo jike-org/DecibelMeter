@@ -1,12 +1,14 @@
-"SoundMeterDosimeter" = "소음 측정기 및 선량계";
+"SoundMeterDosimeter" = "소음 측정기
+및 선량계";
 
 "DetectSoundLevel" = "소음 수준 감지";
 
 "MeasurementHistory" = "측정 기록";
 
-"UnlockAllAccess" = "모든 액세스 잠금 해제";
+"UnlockAllAccess" = "모든 액세스
+ 잠금 해제";
 
-"Trial7" = "7일 무료 체험 후, 3.99/주";
+"Trial7" = "/주";
 
 "Continue" = "계속";
 
@@ -62,7 +64,6 @@
 
 "No" = "아니요";
 
-"UnlockAllAccess" = "모든 액세스 잠금 해제";
 
 "Week" = "주";
 
@@ -72,11 +73,11 @@
 
 "Restore" = "복원";
 
-"Maximum" = "최대";
+"Maximum" = "최대:";
 
-"Average" = "평균";
+"Average" = "평균:";
 
-"Minimum" = "최소";
+"Minimum" = "최소:";
 
 "Minute" = "분";
 

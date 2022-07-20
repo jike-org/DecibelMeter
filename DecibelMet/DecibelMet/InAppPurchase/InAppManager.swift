@@ -50,6 +50,18 @@ class InAppManager: NSObject {
         
         paymentQueue.add(payment)
     }
+    
+    public func purchaseWeek(productWith identifier: String) {
+        guard let product = product.filter({ $0.productIdentifier == identifier }).first else { return }
+        
+        let payment = SKPayment(product: product)
+        
+        paymentQueue.add(payment)
+    }
+    
+    public func restoreCompletedTrans() {
+        paymentQueue.restoreCompletedTransactions()
+    }
 }
 
 extension InAppManager: SKPaymentTransactionObserver {
@@ -59,16 +71,33 @@ extension InAppManager: SKPaymentTransactionObserver {
             switch transaction.transactionState {
             case .deferred: break
             case .purchasing: break
-            case .failed: print ("failed pur")
-            case .purchased: print("ok")
-            case .restored: print("restore")
+            case .failed: failed(transaction: transaction)
+            case .purchased: completed(transaction: transaction)
+            case .restored: restored(transaction: transaction)
             @unknown default:
                 print("def")
             }
         }
     }
     
+    private func failed(transaction: SKPaymentTransaction) {
+        if let transError = transaction.error as NSError? {
+            if transError.code != SKError.paymentCancelled.rawValue {
+                print("Ошибка транзакции \(transaction.error!.localizedDescription)")
+            }
+        }
+        
+        paymentQueue.finishTransaction(transaction)
+    }
     
+    private func completed(transaction: SKPaymentTransaction){
+        NotificationCenter.default.post(name: NSNotification.Name(transaction.payment.productIdentifier), object: nil)
+        paymentQueue.finishTransaction(transaction)
+    }
+    
+    private func restored(transaction: SKPaymentTransaction){
+        restoreCompletedTrans()
+    }
 }
 
 

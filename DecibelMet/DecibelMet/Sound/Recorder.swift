@@ -109,7 +109,11 @@ extension Recorder {
         case .undetermined:
             requestPermissions()
         case .denied:
-            delegate?.recorderDidFailToAchievePermission(self)
+            DispatchQueue.main.async {
+                self.delegate?.recorderDidFailToAchievePermission(self)
+
+            }
+            print("denied")
         @unknown default:
             requestPermissions()
         }
@@ -117,25 +121,28 @@ extension Recorder {
     
     private func requestPermissions() {
         AVAudioSession.sharedInstance().requestRecordPermission { granted in
-            if granted {
-                self.startRecording()
-                self.startMonitoring()
-            } else {
-                self.checkPermissionAndStartRecording()
+            DispatchQueue.main.async {
+                if granted {
+                    self.startRecording()
+                    self.startMonitoring()
+                } else {
+                    self.checkPermissionAndStartRecording()
+                }
             }
         }
     }
     
 }
 
-
 // MARK: Stop
 extension Recorder {
     
     /// Stop recorder
     public func stop() {
-        print(recorder.url)
-        recorder.stop()
+        if recorder != nil {
+            recorder.stop()
+        }
+       
         recorder = nil
         session  = nil
         

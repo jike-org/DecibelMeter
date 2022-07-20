@@ -6,7 +6,7 @@
 
 "UnlockAllAccess" = "解锁所有访问";
 
-"Trial7" = "从7天免费试用开始，然后每周3.99";
+"Trial7" = "然后每周";
 
 "Continue" = "继续";
 
@@ -72,11 +72,11 @@
 
 "Restore" = "还原";
 
-"Maximum" = "最大";
+"Maximum" = "最大:";
 
-"Average" = "平均";
+"Average" = "平均:";
 
-"Minimum" = "最小";
+"Minimum" = "最小:";
 
 "Minute" = "分钟(分)";
 

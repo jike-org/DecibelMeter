@@ -41,8 +41,6 @@ class SettingsCell: UITableViewCell {
         self.label = label
         
         self.label?.textColor = UIColor(named: "cellDb")
-        self.label?.font = UIFont(name: "Montserrat-Medium", size: 20)
-//        self.label?.tintColor = UIColor(named: "tint")
         
         addSubview(self.icon!)
         addSubview(self.label!)

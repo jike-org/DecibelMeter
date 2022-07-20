@@ -99,7 +99,7 @@ class DosimeterCell: UICollectionViewCell {
         item
             .timeEvent
             .compactMap { $0[item.db] }
-            .map { "00:" + String($0) }
+            .map { "00" + String($0) }
             .assign(to: \.text, on: time)
             .store(in: &subscriptions)
     }
@@ -109,7 +109,7 @@ extension DosimeterCell {
     struct Item {
         let db: Int
         let timeTitle: String
-        let timeEvent: AnyPublisher<[Int: Int], Never>
+        let timeEvent: AnyPublisher<[Int: Double], Never>
         let procent: String
     }
 }

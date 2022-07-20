@@ -10,13 +10,15 @@ import KDCircularProgress
 import CoreData
 import AVFAudio
 import Combine
+import FirebaseRemoteConfig
 
 final class Dosimeter: UIViewController {
     
+    let remoteConfig = RemoteConfig.remoteConfig()
     private var collection: UICollectionView?
     private var isTap = false
     private var isRecording = true
-    private let timeValueSubject = CurrentValueSubject<[Int: Int], Never>([:])
+    private let timeValueSubject = CurrentValueSubject<[Int: Double], Never>([:])
     private var totalPrecent = 0
     private var precent90 = 0
     
@@ -28,7 +30,7 @@ final class Dosimeter: UIViewController {
     private var precent120 = 0
     private var precent125 = 0
     private var precent130 = 0
-     
+    
     var second = NSLocalizedString("Second", comment: "")
     var hour = NSLocalizedString("Hour", comment: "")
     var minute = NSLocalizedString("Minute", comment: "")
@@ -51,24 +53,75 @@ final class Dosimeter: UIViewController {
         frame: CGRect(x: 0, y: 0, width: view.frame.width / 1.2, height: view.frame.width / 1.2)
     )
     
+    lazy var freeDosimeter: Int = 5
+    lazy var showVc = "1"
+    
+    var t: Int = -2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.tintColor = UIColor.white
-        self.tabBarController?.tabBar.barTintColor = UIColor.black
         recorder.delegate = self
         recorder.avDelegate = self
         setup()
         setUpCollection()
-        requestPermissions()
+//        isRecording = true
         startRecordingAudio()
-        isRecording = true
-        
+     
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setup()
+        
+        func fetchValues() {
+        
+            let setting = RemoteConfigSettings()
+            setting.minimumFetchInterval = 0
+            remoteConfig.configSettings = setting
+        }
+        
+        remoteConfig.fetchAndActivate { (status, error) in
+            
+            if error !=  nil {
+                print(error?.localizedDescription)
+            } else {
+                if status != .error {
+                    if let stringValue =
+                        self.remoteConfig["availableFreeDosimeter"].stringValue {
+                        self.freeDosimeter = Int(stringValue)!
+                        print(self.freeDosimeter)
+                    }
+                    if let stringValue1 =
+                        self.remoteConfig["otherScreenNumber"].stringValue {
+                        self.freeDosimeter = Int(stringValue1)!
+                        print(self.showVc)
+                    }
+                }
+            }
+        }
+        
+        t += 1
+        if t >= freeDosimeter {
+            recorder.stopMonitoring()
+            recorder.stop()
+            progress.startAngle = -150
+            procentLabel.text = "0"
+            decibelLabel.text = "0"
+            timeLabel.text = "00:00"
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
+                if showVc == "1"{
+                    let vcTwo = SubscribeTwoView()
+                    vcTwo.modalPresentationStyle = .fullScreen
+                    present(vcTwo, animated: true, completion: nil)
+                } else if showVc == "2" {
+                        let vcTrial = TrialSubscribe()
+                    vcTrial.modalPresentationStyle = .fullScreen
+                    present(vcTrial, animated: true, completion: nil)
+                    }
+
+            })
+        }
     }
     
     private func requestPermissions() {
@@ -83,7 +136,7 @@ extension Dosimeter {
     
     func setUpCollection() {
         let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .vertical
+        //        layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width) - 15, height: 60)
         layout.minimumLineSpacing = 6
         collection = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
@@ -110,7 +163,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
-       
+        
     }
     var items: [DosimeterCell.Item] {
         [
@@ -126,7 +179,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
         ]
     }
     
-  
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DosimeterCell.id, for: indexPath) as! DosimeterCell
@@ -134,7 +187,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.layer.masksToBounds = true
         cell.contentView.backgroundColor = UIColor(named: "backCell")
         cell.configure(item: items[indexPath.row])
-  
+        
         return cell
     }
     
@@ -196,7 +249,8 @@ extension Dosimeter {
             refreshButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             refreshButton.topAnchor.constraint(equalTo: progress.bottomAnchor, constant: -60),
             
-            noiseButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            noiseButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            noiseButton.widthAnchor.constraint(equalToConstant: 70),
             noiseButton.topAnchor.constraint(equalTo: progress.bottomAnchor, constant: -60)
         ])
     }
@@ -215,11 +269,15 @@ extension Dosimeter {
             noiseButton.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
             noiseButton.setTitleColor(UIColor.white, for: .normal)
             isTap = true
-        
+            
         }
     }
     
     @objc func refreshButtonTap() {
+        
+        if Constants.shared.isRecordingAtLaunchEnabled == false{
+         print("enable")
+            }
         recorder.stopMonitoring()
         recorder.stop()
         progress.startAngle = -150
@@ -230,8 +288,6 @@ extension Dosimeter {
             print("Timer fired!")
             self.startRecordingAudio()
         }
-        
-        
     }
 }
 // MARK: Setup circle view
@@ -276,7 +332,10 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         alertController.addAction(cancelButton)
         alertController.addAction(settingButton)
         
-        self.present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
     }
     
     func recorder(_ recorder: Recorder, didCaptureDecibels decibels: Int) {
@@ -300,36 +359,33 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         }
         
         var timeDict = timeValueSubject.value
-        func increaseDictValue(_ dict: inout [Int: Int], key: Int) {
+        func increaseDictValue(_ dict: inout [Int: Double], key: Int) {
             let value = dict[key]
-            dict[key] = value == nil ? 1 : value! + 1
+            dict[key] = value == nil ? 1 : value! + 0.5
         }
         if (90..<95).contains(decibels) {
-            increaseDictValue(&timeDict, key: 95)
-            precent90 = Int((timeDict[95]!) / 14400 * 100)
-            
-            procentLabel.text = String(totalPrecent)
+            increaseDictValue(&timeDict, key: 90)
         }
         if (95..<100).contains(decibels) {
-            increaseDictValue(&timeDict, key: 100)
+            increaseDictValue(&timeDict, key: 95)
         }
         if (100..<105).contains(decibels) {
-            increaseDictValue(&timeDict, key: 105)
+            increaseDictValue(&timeDict, key: 100)
         }
         if (105..<110).contains(decibels) {
-            increaseDictValue(&timeDict, key: 110)
+            increaseDictValue(&timeDict, key: 105)
         }
         if (110..<115).contains(decibels) {
-            increaseDictValue(&timeDict, key: 115)
+            increaseDictValue(&timeDict, key: 110)
         }
         if (115..<120).contains(decibels) {
-            increaseDictValue(&timeDict, key: 120)
+            increaseDictValue(&timeDict, key: 115)
         }
         if (120..<125).contains(decibels) {
-            increaseDictValue(&timeDict, key: 125)
+            increaseDictValue(&timeDict, key: 120)
         }
         if (125..<130).contains(decibels) {
-            increaseDictValue(&timeDict, key: 130)
+            increaseDictValue(&timeDict, key: 125)
         }
         if (130..<200).contains(decibels) {
             increaseDictValue(&timeDict, key: 200)

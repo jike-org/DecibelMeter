@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010ADB0728832EF90062FD53 /* RateUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010ADB0628832EF90062FD53 /* RateUsVC.swift */; };
 		01156B24287BEB5400D62A1B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01156B23287BEB5400D62A1B /* StoreKit.framework */; };
 		01156B27287BECC000D62A1B /* InAppPurchaseProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01156B26287BECC000D62A1B /* InAppPurchaseProduct.swift */; };
 		01156B29287BEEB700D62A1B /* InAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01156B28287BEEB700D62A1B /* InAppManager.swift */; };
 		01443A4D2830E09100E4D413 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01443A4C2830E09100E4D413 /* OnBoardingView.swift */; };
 		01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01443A502830E0BC00E4D413 /* OnBoardingManager.swift */; };
+		0145FAF62884F32900CF0A70 /* PhotoCameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145FAF52884F32900CF0A70 /* PhotoCameraController.swift */; };
 		01476EBC284A549C0007C006 /* DosimetreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01476EBB284A549C0007C006 /* DosimetreCell.swift */; };
 		0159FAA02863159A0021F895 /* darkLightMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159FA9F2863159A0021F895 /* darkLightMode.swift */; };
 		0159FAA22863164C0021F895 /* MTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159FAA12863164C0021F895 /* MTUserDefaults.swift */; };
@@ -51,7 +53,6 @@
 		01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259B02823FDDA00EBA84C /* ImageView.swift */; };
 		01B3EB7B2822BE8B004001C1 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B3EB7A2822BE8B004001C1 /* UILabel.swift */; };
 		01D2DCE128229BC7003AB953 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE028229BC7003AB953 /* AppDelegate.swift */; };
-		01D2DCE328229BC7003AB953 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE228229BC7003AB953 /* SceneDelegate.swift */; };
 		01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE428229BC7003AB953 /* RecordView.swift */; };
 		01D2DCEA28229BC9003AB953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D2DCE928229BC9003AB953 /* Assets.xcassets */; };
 		01D2DCED28229BC9003AB953 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01D2DCEB28229BC9003AB953 /* LaunchScreen.storyboard */; };
@@ -77,6 +78,7 @@
 		01D36718284F47C70061B7E4 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01D36702284F47C70061B7E4 /* Montserrat-ExtraBoldItalic.ttf */; };
 		01D36719284F47C70061B7E4 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01D36703284F47C70061B7E4 /* OFL.txt */; };
 		01D3671A284F47C70061B7E4 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01D36704284F47C70061B7E4 /* README.txt */; };
+		01DA069D2887797300F13885 /* DeviceEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DA069C2887797300F13885 /* DeviceEx.swift */; };
 		01DDF4822833D6A100CCFDF9 /* SaveControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */; };
 		01E166832832C6D600DBC846 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E166822832C6D600DBC846 /* Image.swift */; };
 		01EB3BD128770304004ED9B8 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01EB3BD028770304004ED9B8 /* GoogleService-Info-2.plist */; };
@@ -85,6 +87,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		010ADB0628832EF90062FD53 /* RateUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUsVC.swift; sourceTree = "<group>"; };
 		01156B23287BEB5400D62A1B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		01156B26287BECC000D62A1B /* InAppPurchaseProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseProduct.swift; sourceTree = "<group>"; };
 		01156B28287BEEB700D62A1B /* InAppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppManager.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		0129EEE12872CE1C0043C7CA /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01443A4C2830E09100E4D413 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		01443A502830E0BC00E4D413 /* OnBoardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingManager.swift; sourceTree = "<group>"; };
+		0145FAF52884F32900CF0A70 /* PhotoCameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCameraController.swift; sourceTree = "<group>"; };
 		01476EBB284A549C0007C006 /* DosimetreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosimetreCell.swift; sourceTree = "<group>"; };
 		0159FA9F2863159A0021F895 /* darkLightMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = darkLightMode.swift; sourceTree = "<group>"; };
 		0159FAA12863164C0021F895 /* MTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.swift; sourceTree = "<group>"; };
@@ -148,7 +152,6 @@
 		01B3EB7A2822BE8B004001C1 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		01D2DCDD28229BC7003AB953 /* DecibelMet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecibelMet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D2DCE028229BC7003AB953 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		01D2DCE228229BC7003AB953 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		01D2DCE428229BC7003AB953 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		01D2DCE928229BC9003AB953 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01D2DCEC28229BC9003AB953 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -175,6 +178,7 @@
 		01D36702284F47C70061B7E4 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		01D36703284F47C70061B7E4 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		01D36704284F47C70061B7E4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		01DA069C2887797300F13885 /* DeviceEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceEx.swift; sourceTree = "<group>"; };
 		01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveControllerInfo.swift; sourceTree = "<group>"; };
 		01E166822832C6D600DBC846 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		01EB3BD028770304004ED9B8 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-2.plist"; path = "../../../../Downloads/GoogleService-Info-2.plist"; sourceTree = "<group>"; };
@@ -288,6 +292,13 @@
 			path = UserInterface;
 			sourceTree = "<group>";
 		};
+		019655952882E92600F04FD9 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		01A259AD2823FD8A00EBA84C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +317,8 @@
 				0180CE352822C2EB00E80380 /* Constants.swift */,
 				0159FA9F2863159A0021F895 /* darkLightMode.swift */,
 				0159FAA12863164C0021F895 /* MTUserDefaults.swift */,
+				010ADB0628832EF90062FD53 /* RateUsVC.swift */,
+				01DA069C2887797300F13885 /* DeviceEx.swift */,
 			);
 			path = "Support files";
 			sourceTree = "<group>";
@@ -329,6 +342,7 @@
 				0185016028579F8F0047F728 /* PlayerViewController.swift */,
 				01A15659286074C8009F880B /* PickerViewController.swift */,
 				01A1565B28607518009F880B /* VideoEditor.swift */,
+				0145FAF52884F32900CF0A70 /* PhotoCameraController.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -365,7 +379,6 @@
 			isa = PBXGroup;
 			children = (
 				01D2DCE028229BC7003AB953 /* AppDelegate.swift */,
-				01D2DCE228229BC7003AB953 /* SceneDelegate.swift */,
 				01B77DF02826935600E0F59F /* Main */,
 				017A4AD9283E454900D4092C /* Persist */,
 				01443A4E2830E0A200E4D413 /* OnBoarding */,
@@ -382,6 +395,7 @@
 				01D2DCEB28229BC9003AB953 /* LaunchScreen.storyboard */,
 				0175892B2863801D008B4650 /* tran */,
 				0178FA88283E6084006C03CC /* DecibelMet.xcdatamodeld */,
+				019655952882E92600F04FD9 /* New Group */,
 				01D2DCEE28229BC9003AB953 /* Info.plist */,
 			);
 			path = DecibelMet;
@@ -608,6 +622,7 @@
 				01A1565C28607518009F880B /* VideoEditor.swift in Sources */,
 				0180CE362822C2EB00E80380 /* Constants.swift in Sources */,
 				01156B29287BEEB700D62A1B /* InAppManager.swift in Sources */,
+				010ADB0728832EF90062FD53 /* RateUsVC.swift in Sources */,
 				01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */,
 				0178FA8A283E6084006C03CC /* DecibelMet.xcdatamodeld in Sources */,
 				019655922880BCDC00F04FD9 /* TrialSubscribe.swift in Sources */,
@@ -619,6 +634,7 @@
 				01476EBC284A549C0007C006 /* DosimetreCell.swift in Sources */,
 				01658FA328324363001336A4 /* FirstListView.swift in Sources */,
 				0159FAA02863159A0021F895 /* darkLightMode.swift in Sources */,
+				01DA069D2887797300F13885 /* DeviceEx.swift in Sources */,
 				01A259A82823DD0900EBA84C /* SaveCell.swift in Sources */,
 				017A4ADD283E458800D4092C /* RecordClass.swift in Sources */,
 				01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */,
@@ -637,8 +653,8 @@
 				01658FA5283245C5001336A4 /* SecondListView.swift in Sources */,
 				01DDF4822833D6A100CCFDF9 /* SaveControllerInfo.swift in Sources */,
 				017A4AE8283E503F00D4092C /* SaveController.swift in Sources */,
-				01D2DCE328229BC7003AB953 /* SceneDelegate.swift in Sources */,
 				01A259A42823DCD300EBA84C /* TabBar.swift in Sources */,
+				0145FAF62884F32900CF0A70 /* PhotoCameraController.swift in Sources */,
 				017A4ADB283E455900D4092C /* Persist.swift in Sources */,
 				0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */,
 				0159FAA22863164C0021F895 /* MTUserDefaults.swift in Sources */,
@@ -812,7 +828,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
@@ -852,7 +868,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;

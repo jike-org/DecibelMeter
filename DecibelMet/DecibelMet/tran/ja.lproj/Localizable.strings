@@ -6,7 +6,7 @@
 
 "UnlockAllAccess" = "すべてのアクセスを解除する";
 
-"Trial7" = "7日間の無料トライアルからスタートし、その後1週間ごとに3.99ドル";
+"Trial7" = "ドル";
 
 "Continue" = "継続";
 
@@ -62,7 +62,6 @@
 
 "No" = "いいえ";
 
-"UnlockAllAccess" = "すべてのアクセスを解除する";
 
 "Week" = "週";
 
@@ -72,11 +71,11 @@
 
 "Restore" = "復元";
 
-"Maximum" = "MAX";
+"Maximum" = "MAX:";
 
-"Average" = "AVG";
+"Average" = "AVG:";
 
-"Minimum" = "MIN";
+"Minimum" = "MIN:";
 
 "Minute" = "min";
 

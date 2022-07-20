@@ -1,12 +1,14 @@
-"SoundMeterDosimeter" = "Fonometro e dosimetro";
+"SoundMeterDosimeter" = "Fonometro
+e dosimetro";
 
-"DetectSoundLevel" = "Rileva il livello acustico";
+"DetectSoundLevel" = "Rileva il
+livello acustico";
 
-"MeasurementHistory" = "Cronologia delle misurazioni";
+"MeasurementHistory" = "Cronologia
+delle misurazioni";
 
-"UnlockAllAccess" = "Sblocca tutti gli accessi";
 
-"Trial7" = "Inizia con una prova gratuita di 7 giorni, poi 3,99 alla settimana";
+"Trial7" = "alla settimana";
 
 "Continue" = "Continua";
 
@@ -62,7 +64,8 @@
 
 "No" = "No";
 
-"UnlockAllAccess" = "Sblocca tutti gli accessi";
+"UnlockAllAccess" = "Sblocca tutti
+ gli accessi";
 
 "Week" = "Settimana";
 
@@ -72,11 +75,11 @@
 
 "Restore" = "Ripristina";
 
-"Maximum" = "MAX";
+"Maximum" = "MAX:";
 
-"Average" = "MED";
+"Average" = "MED:";
 
-"Minimum" = "MIN";
+"Minimum" = "MIN:";
 
 "Minute" = "min";
 

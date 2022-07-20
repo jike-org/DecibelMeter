@@ -1,12 +1,14 @@
-"SoundMeterDosimeter" = "مقياس الصوت ومقياس الجرعة الإشعاعية";
+"SoundMeterDosimeter" = "مقياس الصوت ومقياس
+ الجرعة الإشعاعية";
 
-"DetectSoundLevel" = "اكتشاف مستوى الصوت";
+"DetectSoundLevel" = "اكتشاف
+ مستوى الصوت";
 
-"MeasurementHistory" = "ذاكرة القياس";
+"MeasurementHistory" = "ذاكرة
+القياس";
 
-"UnlockAllAccess" = "إتاحة الوصول الكامل";
 
-"Trial7" = "ابدأ بتجربة مجانية لمدة 7 أيام، وبعد ذلك 3.99 في الأسبوع.";
+"Trial7" = "الأسبوع.";
 
 "Continue" = "متابعة";
 
@@ -62,7 +64,8 @@
 
 "No" = "لا";
 
-"UnlockAllAccess" = "إتاحة الوصول الكامل";
+"UnlockAllAccess" = "إتاحة الوصول
+ الكامل";
 
 "Week" = "أسبوع";
 
@@ -72,7 +75,7 @@
 
 "Restore" = "استعادة";
 
-"Maximum" = "الأقصى";
+"Maximum" = "الأقصى:";
 
 "Average" = "المتوسط";
 

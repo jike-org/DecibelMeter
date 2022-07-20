@@ -1,12 +1,15 @@
-"SoundMeterDosimeter" = "Máy đo âm thanh & Máy đo liều lượng";
+"SoundMeterDosimeter" = "Máy đo âm thanh
+& Máy đo liều lượng";
 
-"DetectSoundLevel" = "Đo độ lớn âm thanh";
+"DetectSoundLevel" = "Đo độ lớn
+âm thanh";
 
 "MeasurementHistory" = "Lịch sử đo";
 
-"UnlockAllAccess" = "Mở khóa mọi quyền truy cập";
+"UnlockAllAccess" = "Mở khóa mọi
+quyền truy cập";
 
-"Trial7" = "Bắt đầu dùng thử miễn phí 7 ngày, sau đó mức phí là 3,99 mỗi tuần";
+"Trial7" = "mỗi tuần";
 
 "Continue" = "Tiếp tục";
 
@@ -62,7 +65,7 @@
 
 "No" = "Không";
 
-"UnlockAllAccess" = "Mở khóa mọi quyền truy cập";
+
 
 "Week" = "Tuần";
 
@@ -72,11 +75,11 @@
 
 "Restore" = "Khôi phục";
 
-"Maximum" = "MAX";
+"Maximum" = "MAX:";
 
-"Average" = "AVG";
+"Average" = "AVG:";
 
-"Minimum" = "MIN";
+"Minimum" = "MIN:";
 
 "Minute" = "min";
 

@@ -1,12 +1,16 @@
-"SoundMeterDosimeter" = "Шумомер и Дозиметр Шума";
+"SoundMeterDosimeter" = "Шумомер
+и Дозиметр Шума";
 
-"DetectSoundLevel" = "Определение Уровня Шума";
+"DetectSoundLevel" = "Определение Уровня
+Шума";
 
-"MeasurementHistory" = "Запись и Сохранение Замеров";
+"MeasurementHistory" = "Запись и
+Сохранение Замеров";
 
-"UnlockAllAccess" = "Разблокировать полный доступ";
+"UnlockAllAccess" = "Разблокировать
+полный доступ";
 
-"Trial7" = "Начните с 7-дневной бесплатной пробной версии, затем 3,99 $ в неделю";
+"Trial7" = " в неделю";
 
 "Subscribe for $3.99 per week (per month, per year)";
 
@@ -68,7 +72,6 @@
 
 "No" = "Нет";
 
-"UnlockAllAccess" = "Разблокировать полный доступ";
 
 "Week" = "Неделя";
 
@@ -78,11 +81,11 @@
 
 "Restore" = "Восстановить";
 
-"Maximum" = "MAX";
+"Maximum" = "MAX:";
 
-"Average" = "AVG";
+"Average" = "AVG:";
 
-"Minimum" = "MIN";
+"Minimum" = "MIN:";
 
 "Minute" = "min";
 

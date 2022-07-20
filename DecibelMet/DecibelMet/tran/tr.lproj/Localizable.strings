@@ -1,12 +1,16 @@
-"SoundMeterDosimeter" = "Ses Ölçer ve Dozimetre";
+"SoundMeterDosimeter" = "Ses Ölçer
+ve Dozimetre";
 
-"DetectSoundLevel" = "Ses Seviyesini Tespit Edin";
+"DetectSoundLevel" = "Ses Seviyesini
+Tespit Edin";
 
-"MeasurementHistory" = "Ölçüm Geçmişi";
+"MeasurementHistory" = "Ölçüm
+Geçmişi";
 
-"UnlockAllAccess" = "Tüm Erişimin Kilidini Aç";
+"UnlockAllAccess" = "Tüm Erişimin
+Kilidini Aç";
 
-"Trial7" = "7 günlük deneme sürümüyle başlayın, sonra haftada 3,99 ödeyin";
+"Trial7" = " ödeyin";
 
 "Continue" = "Devam";
 
@@ -62,7 +66,7 @@
 
 "No" = "Hayır";
 
-"UnlockAllAccess" = "Tüm Erişimin Kilidini Aç";
+
 
 "Week" = "Hafta";
 
@@ -72,11 +76,11 @@
 
 "Restore" = "Geri Yükle";
 
-"Maximum" = "MAKS";
+"Maximum" = "MAKS:";
 
-"Average" = "ORT";
+"Average" = "ORT:";
 
-"Minimum" = "MİN";
+"Minimum" = "MİN:";
 
 "Minute" = "dk";
 

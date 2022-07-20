@@ -14,7 +14,7 @@ import CoreData
 class SaveController: UIViewController {
     
     private var collection: UICollectionView?
-    
+
     let persist = Persist()
     let recorder = Recorder()
     var recordings: [Record]?
@@ -135,14 +135,14 @@ class SaveController: UIViewController {
             guard let path = Persist().filePath(for: button.uuid!.uuidString) else { return }
             isPlaying = true
             cell?.isPlaying = true
-            sender.setImage(UIImage(named: "Pause"), for: .normal)
+            sender.setImage(UIImage(named: "stop"), for: .normal)
             self.tagPlaying = sender.tag
             player = Player()
             player.play(path, delegate: self)
         } else {
             isPlaying = false
             cell?.isPlaying = true
-            sender.setImage(UIImage(named: "Play"), for: .normal)
+            sender.setImage(UIImage(named: "playSVG"), for: .normal)
             player.player.stop()
             player.session = nil
             self.tagPlaying = nil

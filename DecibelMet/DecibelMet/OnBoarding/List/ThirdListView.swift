@@ -11,8 +11,9 @@ import UIKit
 
 class ThirdListViewController: UICollectionViewCell {
 
-    lazy var headingLabel = Label(style: .heading, "MEASUREMENT")
-    lazy var headingLabelHistory = Label(style: .heading, "HISTORY")
+    var lheading = NSLocalizedString("MeasurementHistory", comment: "")
+    lazy var headingLabel = Label(style: .onBoarding, lheading.uppercased())
+//    lazy var headingLabelHistory = Label(style: .onBoarding, "HISTORY")
     public static let identifier = "ThirdView"
     
     lazy var backImage = UIImageView(image: UIImage(named: "03"))
@@ -29,13 +30,13 @@ class ThirdListViewController: UICollectionViewCell {
     func setup() {
         addSubview(backImage)
         addSubview(headingLabel)
-        addSubview(headingLabelHistory)
+//        addSubview(headingLabelHistory)
         backImage.frame = UIScreen.main.bounds
         NSLayoutConstraint.activate([
             headingLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             headingLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 170),
-            headingLabelHistory.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10),
-            headingLabelHistory.centerXAnchor.constraint(equalTo: centerXAnchor)
+//            headingLabelHistory.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10),
+//            headingLabelHistory.centerXAnchor.constraint(equalTo: centerXAnchor)
             ])
     }
 }

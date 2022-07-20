@@ -37,6 +37,14 @@ class Label: UILabel {
         case dbTitel
         case dbImage
         case subscribeSmall
+        case textFAQ
+        case headingFAQ
+        case likeLabel
+        case onBoarding
+        case textSub
+        case acces
+        case settingLabel
+        case dbProcentImage
     }
     
     init(style: LabelStyle, _ text: String?) {
@@ -44,70 +52,67 @@ class Label: UILabel {
         
         self.text     = text
         textColor     = UIColor(named: "saveCell")
-        numberOfLines = 1
         textAlignment = .left
-//        tintColor = UIColor(named: "t")
-        
         translatesAutoresizingMaskIntoConstraints = false
         
         switch style {
         case .heading:
-            font = UIFont(name: "Montserrat-Bold", size: 24)
+            font = UIFont.systemFont(ofSize: 20, weight: .bold)
             textColor = UIColor(named: "cellDb")
         case .body:
-            font = UIFont(name: "OpenSans-Regular", size: 15)
+            font = UIFont.systemFont(ofSize: 15, weight: .regular)
         case .separator:
-            font = UIFont(name: "OpenSans-Regular", size: 12)
+            font = UIFont.systemFont(ofSize: 12, weight: .regular)
             self.text = "|"
         case .decibelHeading:
-            font = UIFont(name: "Montserrat-Medium", size: 40)
+            font = UIFont.systemFont(ofSize: 40, weight: .medium)
             textColor = .white
         case .timeTitle:
             font = UIFont.systemFont(ofSize: 10)
         case .time:
-            font = UIFont(name: "Montserrat-Regular", size: 12)
+            font = UIFont.systemFont(ofSize: 12, weight: .regular)
             textColor = UIColor(named: "cellDb")
         case .avgMinMax:
-            font = UIFont.systemFont(ofSize: 10)
+            font = UIFont.systemFont(ofSize: 10, weight: .light)
+            textAlignment = .center
             textColor = .white
         case .tableLabel:
-            font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            font = UIFont.systemFont(ofSize: 20, weight: .regular)
             textAlignment = .left
         case .titleLabel:
-//            font = UIFont(name: "Montserrat-Medium", size: 20)
-            font = UIFont(name: ".SFUIText-Medium", size: 20)
+            font = UIFont.systemFont(ofSize: 20, weight: .medium)
             textColor = UIColor(named: "cellDb")
             textAlignment = .left
         case .tableTopText:
-            font = UIFont(name: "OpenSans-Regular", size: 20)
+            font = UIFont.systemFont(ofSize: 20, weight: .regular)
         case .tableBottomText:
             font = UIFont.systemFont(ofSize: 8)
         case .avgMinMaxWord:
-            font = UIFont(name: "Montserrat-Light", size: 30.0)
+            font = UIFont.systemFont(ofSize: 30, weight: .light)
             textColor = UIColor(named: "purple")
         case .avg:
-            font = UIFont(name: "Montserrat-Bold", size: 30.0)
+            font = UIFont.systemFont(ofSize: 35, weight: .bold)
             textColor = UIColor(named: "purple")
         case .cellDate:
             textColor = UIColor(named: "cellDb")
-            font = UIFont(name: "Montserrat-Regular", size: 12)
+            font = UIFont.systemFont(ofSize: 12, weight: .regular)
             textAlignment = .right
         case .minMaxAvgCell:
-            font = UIFont(name: "Montserrat-Regular", size: 12)
+            font = UIFont.systemFont(ofSize: 12, weight: .regular)
             textAlignment = .left
             layer.opacity = 0.7
             textColor = UIColor(named: "cellDb")
         case .recordCell:
-            font = UIFont(name: "Montserrat-SemiBold", size: 16.0)
+            font = UIFont.systemFont(ofSize: 16, weight: .semibold)
             textColor = UIColor(named: "cellDb")
         case .dosimeterHeader:
             font = UIFont.boldSystemFont(ofSize: 20)
             textColor = UIColor(named: "cellDb")
         case .dosimetreTime:
-            font = UIFont(name: "Montserrat-Regular", size: 16)
+            font = UIFont.systemFont(ofSize: 16, weight: .regular)
             textColor = UIColor(named: "cellDb")
         case .dosimetreProcentLabel:
-            font = UIFont(name: "Montserrat-Bold", size: 40)
+            font = UIFont.systemFont(ofSize: 40, weight: .bold)
             textColor = UIColor(named: "cellDb")
         case .dosimetreProcentImage:
             font = UIFont.boldSystemFont(ofSize: 17)
@@ -116,20 +121,52 @@ class Label: UILabel {
             font = UIFont.systemFont(ofSize: 13)
             textColor = UIColor(named: "cellDb")
         case .dosimetreDecibelLabel:
-            font = UIFont(name: "Montserrat-Regular", size: 20)
+            font = UIFont.systemFont(ofSize: 20, weight: .regular)
             textColor = UIColor(named: "cellDb")
         case .dbTitel:
-            font = UIFont(name: "Montserrat-SemiBold", size: 16.0)
+            font = UIFont.systemFont(ofSize: 16, weight: .semibold)
             textColor = UIColor(named: "cellDb")
         case .dbImage:
             font = UIFont.systemFont(ofSize: 10)
             textColor = UIColor(named: "cellDb")
         case .subscribeSmall:
-            font = UIFont(name: "Montserrat-Regular", size: 12.0)
+            font = UIFont.systemFont(ofSize: 12, weight: .regular)
             textColor = UIColor(named: "cellDb")
         case .timeRecord:
-            font = UIFont(name: "Montserrat-Regular", size: 12)
+            font = UIFont.systemFont(ofSize: 12, weight: .regular)
             textColor = .white
+            textAlignment = .center
+        case .textFAQ:
+            numberOfLines = 0
+            textColor = UIColor(named: "cellDb")
+            font = UIFont.systemFont(ofSize: 16)
+            textAlignment = .left
+        case .headingFAQ:
+            numberOfLines = 0
+            textColor = UIColor(named: "cellDb")
+            font = UIFont.systemFont(ofSize: 20, weight: .bold)
+            textAlignment = .left
+        case .likeLabel:
+            font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            textAlignment = .center
+        case .onBoarding:
+            textColor = .white
+            font = UIFont.systemFont(ofSize: 20, weight: .bold)
+            numberOfLines = 0
+            textAlignment = .center
+        case .textSub:
+            textColor = .white
+            font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        case .acces:
+            textColor = .white
+            font = UIFont.systemFont(ofSize: 25, weight: .bold)
+            numberOfLines = 0
+            textAlignment = .center
+        case .settingLabel:
+            textColor = .red
+        case .dbProcentImage:
+            font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            textColor = UIColor(named: "cellDb")
         }
     }
     

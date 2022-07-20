@@ -25,6 +25,11 @@ class Button: UIButton {
         case refresh
         case noise
         case chevron
+        case chevronRight
+        case trial
+        case rateus
+        case subscriptionVC
+        case restoreButton
     }
     
     public func setUUID(_ uuid: UUID) {
@@ -97,6 +102,37 @@ class Button: UIButton {
             setImage(UIImage(named: "chevron"), for: .normal)
             heightAnchor.constraint(equalToConstant: 20).isActive = true
             widthAnchor.constraint(equalToConstant: 20).isActive = true
+        case .chevronRight:
+            if  MTUserDefaults.shared.theme == .dark {
+                setImage(UIImage(named: "ChevronLeft"), for: .normal)
+            } else {
+                setImage(UIImage(named: "chevronBlack"), for: .normal)
+            }
+           
+            heightAnchor.constraint(equalToConstant: 20).isActive = true
+            widthAnchor.constraint(equalToConstant: 20).isActive = true
+            
+        case .trial:
+            backgroundColor = .clear
+            setTitle(text, for: .normal)
+            titleLabel?.font = titleLabel?.font.withSize(12)
+            
+            
+        case .rateus:
+            backgroundColor = .clear
+            setTitle(text, for: .normal)
+            setTitleColor(.blue.withAlphaComponent(0.4), for: .normal)
+        case .subscriptionVC:
+            setTitle(text, for: .normal)
+            titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+            tintColor = .systemBlue
+            
+            
+        case .restoreButton:
+            backgroundColor = .clear
+            setTitle(text, for: .normal)
+            titleLabel?.font = titleLabel?.font.withSize(16)
+            tintColor = .white
         }
     }
     

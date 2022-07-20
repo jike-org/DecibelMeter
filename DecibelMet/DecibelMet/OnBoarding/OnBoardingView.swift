@@ -8,14 +8,22 @@
 import Foundation
 import UIKit
 import StoreKit
+import FirebaseRemoteConfig
 
 class OnboardingView: UIViewController {
     
+    let iapManager = InAppManager.share
+    let lprivacy = NSLocalizedString("PrivacyPolice", comment: "")
+    let lrestore = NSLocalizedString("Restore", comment: "")
+    let lterms = NSLocalizedString("TermsOfService", comment: "")
+    let notificationCenter = NotificationCenter.default
     private let app = UIApplication.shared.delegate
     private var currentIndex: IndexPath = .init(index: 0)
+    private let remoteConfig = RemoteConfig.remoteConfig()
+    private var xMarkDelay: Int = 0
+    private var textDelay: Int = 0
     
     // MARK: UI elements
-    // Collection view
     lazy var collectionView = CollectionView(
         delegate: self,
         dataSource: self
@@ -25,46 +33,70 @@ class OnboardingView: UIViewController {
     lazy var stackView = StackView(axis: .horizontal)
     
     // Buttons
-    lazy var closeButton           = Button(style: .close, nil)
-    lazy var continueButton        = Button(style: ._continue, "Continue")
-    lazy var termsOfUseButton      = Button(style: .link, "Terms of service")
-    lazy var privacyPolicyButton   = Button(style: .link, "Privacy Policy")
-    lazy var restorePurchaseButton = Button(style: .link, "and")
+    lazy var spinenr = UIActivityIndicatorView(style: .large)
+    lazy var closeButton = Button(style: .close, nil)
+    lazy var continueButton = Button(style: ._continue, "Continue")
+    lazy var termsOfUseButton = Button(style: .link, lterms)
+    lazy var privacyPolicyButton = Button(style: .link, lprivacy)
+    lazy var andUnderLabel = Button(style: .link, "and")
+    lazy var restoreButton = Button(style: .trial, lrestore)
     
-    // Separators
     lazy var separatorOne = UILabel()
     lazy var separatorTwo = UILabel()
     
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchValues()
         setupView()
+        
+        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.week.rawValue), object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounth.rawValue), object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.year.rawValue), object: nil)
+    }
+    
+    @objc func trialButtonTapped1() {
+        print("купил")
+        Constants.shared.hasPurchased = true
+        
+        let vc = TabBar()
+        vc.modalPresentationStyle = .fullScreen
+        
+        present(vc, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    func rateApp() {
-        SKStoreReviewController.requestReview()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        remoteConfig.fetchAndActivate { (status, error) in
+            
+            if error !=  nil {
+                print(error?.localizedDescription)
+            } else {
+                if status != .error {
+                    if let stringValue =
+                        self.remoteConfig["closeButtonDelay"].stringValue {
+                        self.xMarkDelay = Int(stringValue)!
+                    }
+                }
+            }
+        }
     }
 }
-
 
 // MARK: Setup view
 extension OnboardingView {
     
     func setupView() {
         view.backgroundColor = #colorLiteral(red: 0.003166671842, green: 0.003117467742, blue: 0.1896977425, alpha: 1)
-        
         termsOfUseButton.setTitleColor(UIColor.systemBlue, for: .normal)
-        restorePurchaseButton.setTitleColor(UIColor.white, for: .normal)
+        andUnderLabel.setTitleColor(UIColor.white, for: .normal)
         privacyPolicyButton.setTitleColor(UIColor.systemBlue, for: .normal)
         
         separatorOne.textAlignment = .center
@@ -79,12 +111,22 @@ extension OnboardingView {
         closeButton.layer.zPosition = 10
         closeButton.addTarget(self, action: #selector(closeOnboarding), for: .touchUpInside)
         
-        // MARK: Go to next page
-        continueButton.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
+        restoreButton.isHidden = true
+        restoreButton.layer.zPosition = 1
+        restoreButton.addTarget(self, action: #selector(restoreButtonTapped), for: .touchUpInside)
         
+        // MARK: Go to next page
+        view.addSubview(spinenr)
+        spinenr.layer.zPosition = 1
+        spinenr.translatesAutoresizingMaskIntoConstraints = false
+        spinenr.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinenr.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        continueButton.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
         termsOfUseButton.addTarget(self, action: #selector(getTermsOfUse), for: .touchUpInside)
         privacyPolicyButton.addTarget(self, action: #selector(getPrivacyPolicy), for: .touchUpInside)
-        restorePurchaseButton.addTarget(self, action: #selector(getRestorePurchase), for: .touchUpInside)
+      
+//        trialButton.addTarget(self, action: #selector(trialButtonTapped), for: .touchUpInside)
         
         // MARK: Register slides
         collectionView.register(FirstListViewController.self, forCellWithReuseIdentifier: FirstListViewController.identifier)
@@ -92,13 +134,15 @@ extension OnboardingView {
         collectionView.register(ThirdListViewController.self, forCellWithReuseIdentifier: ThirdListViewController.identifier)
         collectionView.register(SubscribeViewController.self, forCellWithReuseIdentifier: SubscribeViewController.identifier)
         
+        view.addSubview(restoreButton)
         view.addSubview(collectionView)
         view.addSubview(closeButton)
         view.addSubview(continueButton)
         view.addSubview(stackView)
+//        view.addSubview(trialButton)
         stackView.addArrangedSubview(termsOfUseButton)
         stackView.addArrangedSubview(separatorOne)
-        stackView.addArrangedSubview(restorePurchaseButton)
+        stackView.addArrangedSubview(andUnderLabel)
         stackView.addArrangedSubview(separatorTwo)
         stackView.addArrangedSubview(privacyPolicyButton)
         
@@ -107,6 +151,11 @@ extension OnboardingView {
             // MARK: Close button
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            restoreButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            restoreButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            restoreButton.heightAnchor.constraint(equalToConstant: 40),
+            restoreButton.widthAnchor.constraint(equalToConstant: 90),
             
             // MARK: Collection view
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -124,10 +173,7 @@ extension OnboardingView {
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
 
-        
         NSLayoutConstraint.activate(constraints)
-        
-        
     }
     
 }
@@ -136,29 +182,43 @@ extension OnboardingView {
 extension OnboardingView {
     
     @objc func closeOnboarding() {
-//        guard let optionalWindow = app?.window else { return }
-//        guard let window = optionalWindow else { return }
-//
-//        window.rootViewController = TabBar()
-//
-//        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: { completed in
-//            print("Close onboarding animation ends")
-//        })
-//
         OnboardingManager.shared.isFirstLaunch = true
-//        
+        
         let vc = TabBar()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
+    }
+    
+    func fetchValues() {
+    
+        let setting = RemoteConfigSettings()
+        setting.minimumFetchInterval = 0
+        remoteConfig.configSettings = setting
+    }
+    
+    @objc func trialButtonTapped() {
+        print("fknas")
     }
     
     @objc func nextPage() {
         if currentIndex.row < 3 {
             collectionView.scrollToItem(at: IndexPath(arrayLiteral: 0, currentIndex.row + 1), at: .centeredHorizontally, animated: true)
         } else if currentIndex.row == 4 {
-            closeOnboarding()
+            iapManager.purchase(productWith: "com.decibelmeter.1wetr")
+            DispatchQueue.main.async {
+                self.spinenr.startAnimating()
+                _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
+                    self.spinenr.stopAnimating()
+                })
+            }
         } else {
-            closeOnboarding()
+            iapManager.purchase(productWith: "com.decibelmeter.1wetr")
+            DispatchQueue.main.async {
+                self.spinenr.startAnimating()
+                _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
+                    self.spinenr.stopAnimating()
+                })
+            }
         }
     }
     
@@ -176,8 +236,10 @@ extension OnboardingView {
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
-    @objc func getRestorePurchase() {
+    @objc func restoreButtonTapped() {
+        SKPaymentQueue.default().restoreCompletedTransactions()
         
+        print("restored")
     }
     
 }
@@ -205,27 +267,36 @@ extension OnboardingView: UICollectionViewDataSource {
             slide = FirstListViewController.identifier
             termsOfUseButton.isHidden = true
             privacyPolicyButton.isHidden = true
-            restorePurchaseButton.isHidden = true
+            andUnderLabel.isHidden = true
+            restoreButton.isHidden = true
         case 1:
             slide = SecondListViewController.identifier
             termsOfUseButton.isHidden = true
             privacyPolicyButton.isHidden = true
-            restorePurchaseButton.isHidden = true
+            andUnderLabel.isHidden = true
+            restoreButton.isHidden = true
         case 2:
             slide = ThirdListViewController.identifier
             termsOfUseButton.isHidden = true
             privacyPolicyButton.isHidden = true
-            restorePurchaseButton.isHidden = true
+            andUnderLabel.isHidden = true
+            restoreButton.isHidden = true
         case 3:
             slide = SubscribeViewController.identifier
             privacyPolicyButton.isHidden = false
             termsOfUseButton.isHidden = false
-            restorePurchaseButton.isHidden = false
+            andUnderLabel.isHidden = false
+            restoreButton.isHidden = false
+            _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false, block: { Timer in
+                self.closeButton.isHidden = false
+            })
+
         default:
             slide = FirstListViewController.identifier
             termsOfUseButton.isHidden = true
             privacyPolicyButton.isHidden = true
-            restorePurchaseButton.isHidden = true
+            andUnderLabel.isHidden = true
+            restoreButton.isHidden = true
         }
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: slide, for: indexPath)
         return item
@@ -248,16 +319,6 @@ extension OnboardingView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         currentIndex = indexPath
-        
-        if currentIndex.row == 1 {
-            rateApp()
-        }
-        
-        if currentIndex.row == 3 {
-            closeButton.isHidden = false
-        } else {
-            closeButton.isHidden = true
-        }
         
         UIView.transition(with: closeButton, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: { _ in })
     }

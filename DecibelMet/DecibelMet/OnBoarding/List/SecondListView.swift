@@ -11,8 +11,10 @@ import UIKit
 
 class SecondListViewController: UICollectionViewCell {
     
-    lazy var headingLabel = Label(style: .heading, "DETECT SOUND")
-    lazy var headingLabelLevel = Label(style: .heading, "LEVEL")
+    var lHeading = NSLocalizedString("DetectSoundLevel", comment: "")
+    
+    lazy var headingLabel = Label(style: .onBoarding, lHeading.uppercased())
+//    lazy var headingLabelLevel = Label(style: .onBoarding, "LEVEL")
     public static let identifier = "SecondView"
     lazy var backImage = UIImageView(image: UIImage(named: "02"))
     
@@ -28,13 +30,13 @@ class SecondListViewController: UICollectionViewCell {
     func setup() {
         addSubview(backImage)
         addSubview(headingLabel)
-        addSubview(headingLabelLevel)
+//        addSubview(headingLabelLevel)
         backImage.frame = UIScreen.main.bounds
         NSLayoutConstraint.activate([
             headingLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             headingLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 170),
-            headingLabelLevel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10),
-            headingLabelLevel.centerXAnchor.constraint(equalTo: centerXAnchor)
+//            headingLabelLevel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10),
+//            headingLabelLevel.centerXAnchor.constraint(equalTo: centerXAnchor)
             ])
     }
 }
