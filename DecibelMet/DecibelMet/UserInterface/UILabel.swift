@@ -45,6 +45,8 @@ class Label: UILabel {
         case acces
         case settingLabel
         case dbProcentImage
+        case trial
+        case camera
     }
     
     init(style: LabelStyle, _ text: String?) {
@@ -164,9 +166,21 @@ class Label: UILabel {
             textAlignment = .center
         case .settingLabel:
             textColor = .red
+            font = UIFont.systemFont(ofSize: 18, weight: .medium)
+            
         case .dbProcentImage:
             font = UIFont.systemFont(ofSize: 14, weight: .semibold)
             textColor = UIColor(named: "cellDb")
+        case .trial:
+            font = UIFont.systemFont(ofSize: 12, weight: .regular)
+            numberOfLines = 0
+            textColor = .white
+            textAlignment = .center
+        case .camera:
+            font = UIFont.systemFont(ofSize: 13, weight: .medium)
+            textColor = .white
+            textAlignment = .left
+            
         }
     }
     

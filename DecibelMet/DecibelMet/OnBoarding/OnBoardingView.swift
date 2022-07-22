@@ -14,6 +14,7 @@ class OnboardingView: UIViewController {
     
     let iapManager = InAppManager.share
     let lprivacy = NSLocalizedString("PrivacyPolice", comment: "")
+    let land = NSLocalizedString("and", comment: "")
     let lrestore = NSLocalizedString("Restore", comment: "")
     let lterms = NSLocalizedString("TermsOfService", comment: "")
     let notificationCenter = NotificationCenter.default
@@ -38,7 +39,7 @@ class OnboardingView: UIViewController {
     lazy var continueButton = Button(style: ._continue, "Continue")
     lazy var termsOfUseButton = Button(style: .link, lterms)
     lazy var privacyPolicyButton = Button(style: .link, lprivacy)
-    lazy var andUnderLabel = Button(style: .link, "and")
+    lazy var andUnderLabel = Button(style: .link, land)
     lazy var restoreButton = Button(style: .trial, lrestore)
     
     lazy var separatorOne = UILabel()

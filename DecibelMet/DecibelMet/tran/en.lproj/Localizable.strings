@@ -144,7 +144,9 @@ All Access";
 
 "video" = "VIDEO";
  
-"DecibelMeter" = "Decibel Meter";
+"CFBundleDisplayName" = "Decibel Meter";
+
+"CFBundleName" = "Decibel Meter";
 
 "recording" = "Recording name";
 

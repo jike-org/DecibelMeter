@@ -1,0 +1,18 @@
+/* 
+  infoPlist.strings
+  DecibelMet
+
+  Created by Stas Dashkevich on 22.07.22.
+  
+*/
+NSCameraUsageDescriptio = "russian";
+
+NSCameraUsageDescription = "russian";
+
+NSLocationAlwaysUsageDescription = "russian";
+
+NSLocationWhenInUseUsageDescription = "russian";
+
+NSLocationAlwaysAndWhenInUseUsageDescription = "russian";
+
+NSLocationWhenInUseUsageDescription = "russian";

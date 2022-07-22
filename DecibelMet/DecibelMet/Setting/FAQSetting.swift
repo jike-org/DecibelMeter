@@ -75,6 +75,12 @@ class FAQSetting: UIViewController {
 extension FAQSetting {
     
     func setup() {
+        
+        print(view.backgroundColor)
+        onelineView.backgroundColor = UIColor(named: "cellDb")
+        secondlineView.backgroundColor = UIColor(named: "cellDb")
+        thirdlineView.backgroundColor = UIColor(named: "cellDb")
+        
         view.addSubview(scroll)
         view.backgroundColor = UIColor(named: "backgroundColor")
         scroll.addSubview(contentView)
@@ -91,17 +97,7 @@ extension FAQSetting {
         contentView.addSubview(stringLocation)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scroll.translatesAutoresizingMaskIntoConstraints = false
-        
-        if MTUserDefaults.shared.theme == .dark {
-            onelineView.backgroundColor = .white.withAlphaComponent(0.2)
-            secondlineView.backgroundColor = .white.withAlphaComponent(0.2)
-            thirdlineView.backgroundColor = .white.withAlphaComponent(0.2)
-        } else {
-            onelineView.backgroundColor = .black.withAlphaComponent(0.2)
-            secondlineView.backgroundColor = .black.withAlphaComponent(0.2)
-            thirdlineView.backgroundColor = .black.withAlphaComponent(0.2)
-        }
-        
+                
         chevronImage.addTarget(self, action: #selector(chevronTappedd), for: .touchUpInside)
         NSLayoutConstraint.activate([
             

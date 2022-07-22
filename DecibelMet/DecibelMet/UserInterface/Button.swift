@@ -97,18 +97,15 @@ class Button: UIButton {
             heightAnchor.constraint(equalToConstant: 50).isActive = true
             widthAnchor.constraint(equalToConstant: 100).isActive = true
             layer.cornerRadius = 20
-            setTitleColor(.black, for: .normal)
         case .chevron:
             setImage(UIImage(named: "chevron"), for: .normal)
             heightAnchor.constraint(equalToConstant: 20).isActive = true
             widthAnchor.constraint(equalToConstant: 20).isActive = true
         case .chevronRight:
-            if  MTUserDefaults.shared.theme == .dark {
-                setImage(UIImage(named: "ChevronLeft"), for: .normal)
-            } else {
-                setImage(UIImage(named: "chevronBlack"), for: .normal)
-            }
-           
+            setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            tintColor = UIColor(named: "cellDb")
+            
+            
             heightAnchor.constraint(equalToConstant: 20).isActive = true
             widthAnchor.constraint(equalToConstant: 20).isActive = true
             
@@ -116,8 +113,6 @@ class Button: UIButton {
             backgroundColor = .clear
             setTitle(text, for: .normal)
             titleLabel?.font = titleLabel?.font.withSize(12)
-            
-            
         case .rateus:
             backgroundColor = .clear
             setTitle(text, for: .normal)

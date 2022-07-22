@@ -3,12 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>UIAppFonts</key>
-	<array>
-		<string>Montserrat-Medium.ttf</string>
-		<string>Montserrat-Light.ttf</string>
-		<string>Montserrat-Regular.ttf</string>
-		<string>Montserrat-Bold.ttf</string>
-		<string>Montserrat-SemiBold.ttf</string>
-	</array>
+	<array/>
+	<key>NSCameraUsageDescription</key>
+	<string>"fas"</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>"qw"</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>value</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>"ty"</string>
+	<key></key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 </dict>
 </plist>

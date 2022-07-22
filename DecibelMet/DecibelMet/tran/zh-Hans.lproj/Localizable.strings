@@ -143,6 +143,10 @@
  
 "DecibelMeter" = "分贝计";
 
+"CFBundleDisplayName" = "分贝计";
+
+"CFBundleName" = "分贝计";
+
 "recording" = "录制名称";
 
 "save" = "保存";

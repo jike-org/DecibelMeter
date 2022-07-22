@@ -31,6 +31,7 @@ final class Dosimeter: UIViewController {
     private var precent125 = 0
     private var precent130 = 0
     
+    var flag = false
     var second = NSLocalizedString("Second", comment: "")
     var hour = NSLocalizedString("Hour", comment: "")
     var minute = NSLocalizedString("Minute", comment: "")
@@ -179,6 +180,20 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
         ]
     }
     
+    var itemNiosh: [DosimeterCell.Item] {
+        [
+            .init(db: 116, timeTitle: "\(max) 1 \(minute) 52 \(second)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent130)%"),
+            .init(db: 113, timeTitle: "\(max) 3 \(minute) 45 \(second)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent125)%"),
+            .init(db: 110, timeTitle: "\(max) 7 \(minute) 30 \(second)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent120)%"),
+            .init(db: 107, timeTitle: "\(max) 15 \(minute)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent115)%"),
+            .init(db: 104, timeTitle: "\(max) 30 \(minute)", timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent110)%"),
+            .init(db: 103, timeTitle: max + " 1 " + hour, timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent105)%"),
+            .init(db: 100, timeTitle: max + " 2 " + hour, timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent100)%"),
+            .init(db: 97, timeTitle:  max + " 4 " + hour,  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent95)%"),
+            .init(db: 94, timeTitle:  max + " 8 " + hour,  timeEvent: timeValueSubject.eraseToAnyPublisher(), procent: "\(precent90)%"),
+        ]
+    }
+    
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -186,7 +201,14 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
         cell.contentView.backgroundColor = UIColor(named: "backCell")
-        cell.configure(item: items[indexPath.row])
+        if flag == true {
+            cell.configure(item: items[indexPath.row])
+            print("osha")
+        } else {
+            cell.configure(item: itemNiosh[indexPath.row])
+            print("niosh")
+        }
+       
         
         return cell
     }
@@ -262,14 +284,41 @@ extension Dosimeter {
         if isTap {
             noiseButton.setTitle("OSHA", for: .normal)
             noiseButton.backgroundColor = UIColor(named: "nosha")
-            noiseButton.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: .normal)
+            noiseButton.setTitleColor(UIColor(named: "cellDb"), for: .normal)
             isTap = false
+            flag = true
+            timeValueSubject.value = [0:0]
+            collection?.reloadData()
+            recorder.stopMonitoring()
+            recorder.stop()
+            progress.startAngle = -150
+            procentLabel.text = "0"
+            decibelLabel.text = "0"
+            timeLabel.text = "00:00"
+            _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
+                print("Timer fired!")
+                self.startRecordingAudio()
+            }
         } else {
             noiseButton.setTitle("NIOSH", for: .normal)
             noiseButton.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
             noiseButton.setTitleColor(UIColor.white, for: .normal)
+            noiseButton.setTitleColor(UIColor(named: "cellDb"), for: .normal)
             isTap = true
-            
+            flag = false
+            timeValueSubject.value = [0:0]
+            collection?.reloadData()
+            recorder.stopMonitoring()
+            recorder.stop()
+            progress.startAngle = -150
+            procentLabel.text = "0"
+            decibelLabel.text = "0"
+          
+            timeLabel.text = "00:00"
+            _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
+                print("Timer fired!")
+                self.startRecordingAudio()
+            }
         }
     }
     
@@ -283,6 +332,7 @@ extension Dosimeter {
         progress.startAngle = -150
         procentLabel.text = "0"
         decibelLabel.text = "0"
+        timeValueSubject.value = [0:0]
         timeLabel.text = "00:00"
         _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
             print("Timer fired!")
@@ -390,6 +440,36 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         if (130..<200).contains(decibels) {
             increaseDictValue(&timeDict, key: 200)
         }
+        
+        
+        if (90..<95).contains(decibels) {
+            increaseDictValue(&timeDict, key: 94)
+        }
+        if (95..<100).contains(decibels) {
+            increaseDictValue(&timeDict, key: 97)
+        }
+        if (100..<105).contains(decibels) {
+            increaseDictValue(&timeDict, key: 100)
+        }
+        if (105..<110).contains(decibels) {
+            increaseDictValue(&timeDict, key: 103)
+        }
+        if (110..<115).contains(decibels) {
+            increaseDictValue(&timeDict, key: 106)
+        }
+        if (115..<120).contains(decibels) {
+            increaseDictValue(&timeDict, key: 109)
+        }
+        if (120..<125).contains(decibels) {
+            increaseDictValue(&timeDict, key: 112)
+        }
+        if (125..<130).contains(decibels) {
+            increaseDictValue(&timeDict, key: 115)
+        }
+        if (130..<200).contains(decibels) {
+            increaseDictValue(&timeDict, key: 118)
+        }
+        
         totalPrecent = (Int(precent90))
         timeValueSubject.send(timeDict)
         timeLabel.text = "\(strMinutes): \(strSeconds)"

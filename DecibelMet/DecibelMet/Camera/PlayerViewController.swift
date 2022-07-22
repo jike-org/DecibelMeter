@@ -1,10 +1,3 @@
-////
-////  CameraDB.swift
-////  DecibelMet
-////
-////  Created by Stas Dashkevich on 13.06.22.
-////
-//
 //import UIKit
 //import AVKit
 //import Photos
@@ -15,23 +8,18 @@
 //  private var player: AVPlayer!
 //  private var playerLayer: AVPlayerLayer!
 //  
-//    lazy var videoView = createView()
-//    lazy var videoViewTop = createView()
-//    lazy var videoViewBottom = createView()
+//  @IBOutlet weak var videoVew: UIView!
 //    
-//    lazy var button = Button(style: .playOrPause, "Save")
-//  
-//  @IBAction func saveVideoButtonTapped(_ sender: Any) {
-//    PHPhotoLibrary.requestAuthorization { [weak self] status in
-//      switch status {
-//      case .authorized:
-//        self?.saveVideoToPhotos()
-//      default:
-//        print("Photos permissions not granted.")
-//        return
-//      }
-//    }
-//  }
+//    let videoView: UIView = {
+//        let view = UIView()
+//        return view
+//    }()
+//    
+//    let saveVideoButton: UIButton = {
+//        let button = UIButton()
+//        button.backgroundColor = .red
+//        return button
+//    }()
 //  
 //  private func saveVideoToPhotos() {
 //    PHPhotoLibrary.shared().performChanges( {
@@ -51,13 +39,15 @@
 //  
 //  override func viewDidLoad() {
 //    super.viewDidLoad()
-//        setup()
+//        
 //    player = AVPlayer(url: videoURL)
 //    playerLayer = AVPlayerLayer(player: player)
 //    playerLayer.frame = videoView.bounds
 //    videoView.layer.addSublayer(playerLayer)
 //    player.play()
 //    
+//      setup()
+//      
 //    NotificationCenter.default.addObserver(
 //      forName: .AVPlayerItemDidPlayToEndTime,
 //      object: nil,
@@ -68,7 +58,6 @@
 //    super.viewWillAppear(animated)
 //    navigationController?.setNavigationBarHidden(false, animated: animated)
 //  }
-//    
 //  
 //  override func viewDidLayoutSubviews() {
 //    super.viewDidLayoutSubviews()
@@ -89,38 +78,39 @@
 //  }
 //}
 //
-//private extension PlayerViewController {
-//    
-//    func createView() -> UIView {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }
+//extension PlayerViewController {
 //    
 //    func setup() {
-//        view.addSubview(videoViewTop)
-//        view.addSubview(videoViewBottom)
+//        
 //        view.addSubview(videoView)
-//        videoViewBottom.addSubview(button)
+//        view.addSubview(saveVideoButton)
+//        videoView.translatesAutoresizingMaskIntoConstraints = false
+//        saveVideoButton.translatesAutoresizingMaskIntoConstraints = false
+//        saveVideoButton.addTarget(self, action: #selector(saveVideoButonTapped), for: .touchUpInside)
+//        
+//        
 //        NSLayoutConstraint.activate([
-//            videoViewTop.topAnchor.constraint(equalTo: view.topAnchor),
-//            videoViewTop.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            videoViewTop.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            videoViewTop.widthAnchor.constraint(equalToConstant: 90),
-//            
-//            videoViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            videoViewBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            videoViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            videoViewBottom.widthAnchor.constraint(equalToConstant: 90),
-//            
-//            videoView.topAnchor.constraint(equalTo: videoViewTop.bottomAnchor),
+//            videoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            saveVideoButton.topAnchor.constraint(equalTo: view.bottomAnchor),
+//            saveVideoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            saveVideoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            saveVideoButton.heightAnchor.constraint(equalToConstant: 50),
+//            videoView.bottomAnchor.constraint(equalTo: saveVideoButton.topAnchor),
 //            videoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            videoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            videoView.bottomAnchor.constraint(equalTo: videoViewBottom.topAnchor),
-//            
-//            button.centerXAnchor.constraint(equalTo: videoViewBottom.centerXAnchor),
-//            button.centerYAnchor.constraint(equalTo: videoViewBottom.centerYAnchor)
+//            videoView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
 //        ])
 //    }
-//}
+//    
+//   @objc func saveVideoButonTapped(_ sender: Any) {
+//      PHPhotoLibrary.requestAuthorization { [weak self] status in
+//        switch status {
+//        case .authorized:
+//          self?.saveVideoToPhotos()
+//        default:
+//          print("Photos permissions not granted.")
+//          return
+//        }
+//      }
+//    }
 //
+//}

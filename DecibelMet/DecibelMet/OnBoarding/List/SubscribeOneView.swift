@@ -23,7 +23,8 @@ class SubscribeViewController: UICollectionViewCell {
     let product = InAppManager.share.product
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     
-    lazy var trialButton = Button(style: .trial, "\(lTrial) \(priceStringFor(product: product[3])) \(lTrialThen)")
+    
+    lazy var trialButton = Label(style: .trial, "\(lTrial) \n\(priceStringFor(product: product[3])) \(lTrialThen)")
 
     public static let identifier = "SubscribeOne"
     
@@ -67,7 +68,6 @@ class SubscribeViewController: UICollectionViewCell {
         _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false, block: { Timer in
             self.trialButton.isHidden = false
         })
-        trialButton.addTarget(self, action: #selector(trialButtonTapped), for: .touchUpInside)
         addSubview(backImage)
         addSubview(headingLabel)
 //        addSubview(headingLabelAll)

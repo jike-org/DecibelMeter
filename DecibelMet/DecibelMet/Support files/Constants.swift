@@ -21,6 +21,19 @@ public class Constants {
         }
     }
     
+    public var UserThemeDark: Bool {
+        if MTUserDefaults.shared.theme == .dark{
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    public var unlockFull: Bool {
+        
+    }
+
+    
     public var isFirstLaunch: Bool {
         get {
             UserDefaults.standard.bool(forKey: #function)

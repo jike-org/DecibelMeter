@@ -153,7 +153,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .lock),
-                label: Label(style: .tableLabel, unlockAll),
+                label: Label(style: .settingLabel, unlockAll),
                 isUsingSwitch: false,
                 chevron: ImageView(image: .chevron)
             )
@@ -161,7 +161,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .faq),
-                label: Label(style: .tableLabel, faq),
+                label: Label(style: .settingLabel, faq),
                 isUsingSwitch: false,
                 chevron: ImageView(image: .chevron)
             )
@@ -169,7 +169,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .rate),
-                label: Label(style: .tableLabel, rateUs),
+                label: Label(style: .settingLabel, rateUs),
                 isUsingSwitch: false,
                 chevron: ImageView(image: .chevron)
             )
@@ -177,7 +177,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .support),
-                label: Label(style: .tableLabel, support),
+                label: Label(style: .settingLabel, support),
                 isUsingSwitch: false,
                 chevron: ImageView(image: .chevron)
             )
@@ -185,7 +185,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .privacy),
-                label: Label(style: .tableLabel, privacyPolice),
+                label: Label(style: .settingLabel, privacyPolice),
                 isUsingSwitch: false,
                 chevron: ImageView(image: .chevron)
             )
@@ -193,7 +193,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .terms),
-                label: Label(style: .tableLabel, termsOfUse),
+                label: Label(style: .settingLabel, termsOfUse),
                 isUsingSwitch: false,
                 chevron: ImageView(image: .chevron)
             )
@@ -201,7 +201,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .share),
-                label: Label(style: .tableLabel, shareFriends),
+                label: Label(style: .settingLabel, shareFriends),
                 isUsingSwitch: false,
                 chevron: ImageView(image: .chevron)
             )
@@ -209,7 +209,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             cell = SettingsCell(
                 reuseIdentifier: "cell",
                 icon: ImageView(image: .darkMode),
-                label: Label(style: .tableLabel, darkTheme),
+                label: Label(style: .settingLabel, darkTheme),
                 isUsingSwitch: true,
                 chevron: ImageView(image: .nul)
             )
@@ -232,7 +232,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 cell = SettingsCell(
                     reuseIdentifier: "cell",
                     icon: ImageView(image: .faq),
-                    label: Label(style: .tableLabel, faq),
+                    label: Label(style: .settingLabel, faq),
                     isUsingSwitch: false,
                     chevron: ImageView(image: .chevron)
                 )
@@ -240,7 +240,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 cell = SettingsCell(
                     reuseIdentifier: "cell",
                     icon: ImageView(image: .rate),
-                    label: Label(style: .tableLabel, rateUs),
+                    label: Label(style: .settingLabel, rateUs),
                     isUsingSwitch: false,
                     chevron: ImageView(image: .chevron)
                 )
@@ -248,7 +248,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 cell = SettingsCell(
                     reuseIdentifier: "cell",
                     icon: ImageView(image: .support),
-                    label: Label(style: .tableLabel, support),
+                    label: Label(style: .settingLabel, support),
                     isUsingSwitch: false,
                     chevron: ImageView(image: .chevron)
                 )
@@ -256,7 +256,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 cell = SettingsCell(
                     reuseIdentifier: "cell",
                     icon: ImageView(image: .privacy),
-                    label: Label(style: .tableLabel, privacyPolice),
+                    label: Label(style: .settingLabel, privacyPolice),
                     isUsingSwitch: false,
                     chevron: ImageView(image: .chevron)
                 )
@@ -264,7 +264,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 cell = SettingsCell(
                     reuseIdentifier: "cell",
                     icon: ImageView(image: .terms),
-                    label: Label(style: .tableLabel, termsOfUse),
+                    label: Label(style: .settingLabel, termsOfUse),
                     isUsingSwitch: false,
                     chevron: ImageView(image: .chevron)
                 )
@@ -272,7 +272,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 cell = SettingsCell(
                     reuseIdentifier: "cell",
                     icon: ImageView(image: .share),
-                    label: Label(style: .tableLabel, shareFriends),
+                    label: Label(style: .settingLabel, shareFriends),
                     isUsingSwitch: false,
                     chevron: ImageView(image: .chevron)
                 )
@@ -280,7 +280,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 cell = SettingsCell(
                     reuseIdentifier: "cell",
                     icon: ImageView(image: .darkMode),
-                    label: Label(style: .tableLabel, darkTheme),
+                    label: Label(style: .settingLabel, darkTheme),
                     isUsingSwitch: true,
                     chevron: ImageView(image: .nul)
                 )

@@ -99,7 +99,7 @@ class DosimeterCell: UICollectionViewCell {
         item
             .timeEvent
             .compactMap { $0[item.db] }
-            .map { "00" + String($0) }
+            .map { "00:" + String($0) }
             .assign(to: \.text, on: time)
             .store(in: &subscriptions)
     }

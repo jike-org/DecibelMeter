@@ -141,6 +141,7 @@ class RecordView: UIViewController {
 //        isRecording = true
 //        startRecordingAudio()
         
+        
         guard let result = persist.fetch() else { return }
         recordings = result
         freeSave = result.count

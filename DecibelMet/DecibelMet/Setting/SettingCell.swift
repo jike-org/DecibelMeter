@@ -13,6 +13,7 @@ class SettingsCell: UITableViewCell {
     
     private var icon: ImageView?
     private var label: Label?
+    public var flag = true
     public var _switch: UISwitch?
     private lazy var chevron = ImageView(image: .chevron)
     
@@ -68,8 +69,16 @@ class SettingsCell: UITableViewCell {
         if isUsingSwitch {
             _switch = UISwitch()
             _switch!.tag = 1
-            _switch?.setOn(true, animated: true)
-            _switch?.isOn = true
+            if MTUserDefaults.shared.theme != .light {
+                _switch?.setOn(true, animated: true)
+                _switch?.isOn = true
+                flag = true
+            } else {
+                _switch?.setOn(false, animated: true)
+                _switch?.isOn = false
+                flag = false
+            }
+           
             _switch?.onTintColor = .blue
             _switch!.addTarget(self, action: #selector(toogleAutoRecord(_:)), for: .valueChanged)
             

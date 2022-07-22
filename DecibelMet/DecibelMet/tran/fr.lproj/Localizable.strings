@@ -122,7 +122,7 @@ tous les accès";
 
 "SetPhoto" = "Veuillez définir l'autorisation d'utilisation de la photothèque pour travailler";
 
-"AllowLocation" = "Autoriser « Decibel Meter » à utiliser votre emplacement ?";
+"NSLocationWhenInUseUsageDescription" = "Autoriser « Decibel Meter » à utiliser votre emplacement ?";
 
 "CaptureImage" = "Utilisé pour afficher la localisation de la ville dans les images capturées";
 
@@ -147,6 +147,10 @@ tous les accès";
 "video" = "VIDÉO";
  
 "DecibelMeter" = "Sonomètre";
+
+"CFBundleDisplayName" = "Sonomètre计";
+
+"CFBundleName" = "Sonomètre计";
 
 "recording" = "Nom de l'enregistrement";
 
