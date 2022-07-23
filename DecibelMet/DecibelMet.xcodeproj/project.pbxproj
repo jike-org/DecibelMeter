@@ -40,13 +40,9 @@
 		0180CE322822C1ED00E80380 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE312822C1ED00E80380 /* Recorder.swift */; };
 		0180CE362822C2EB00E80380 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE352822C2EB00E80380 /* Constants.swift */; };
 		0180CE382822C73400E80380 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE372822C73400E80380 /* Player.swift */; };
-		0185016128579F8F0047F728 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185016028579F8F0047F728 /* PlayerViewController.swift */; };
 		019655922880BCDC00F04FD9 /* TrialSubscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019655912880BCDC00F04FD9 /* TrialSubscribe.swift */; };
 		019655942880C38300F04FD9 /* FAQSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019655932880C38300F04FD9 /* FAQSetting.swift */; };
-		01A1565A286074C8009F880B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A15659286074C8009F880B /* PickerViewController.swift */; };
-		01A1565C28607518009F880B /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1565B28607518009F880B /* VideoEditor.swift */; };
 		01A259A42823DCD300EBA84C /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A32823DCD200EBA84C /* TabBar.swift */; };
-		01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A52823DCFD00EBA84C /* CameraController.swift */; };
 		01A259AC2823FD8400EBA84C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259AB2823FD8400EBA84C /* SettingViewController.swift */; };
 		01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259AE2823FD9C00EBA84C /* SettingCell.swift */; };
 		01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259B02823FDDA00EBA84C /* ImageView.swift */; };
@@ -57,7 +53,6 @@
 		01D2DCEA28229BC9003AB953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D2DCE928229BC9003AB953 /* Assets.xcassets */; };
 		01D2DCED28229BC9003AB953 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01D2DCEB28229BC9003AB953 /* LaunchScreen.storyboard */; };
 		01DA069D2887797300F13885 /* DeviceEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DA069C2887797300F13885 /* DeviceEx.swift */; };
-		01DA06A2288976EF00F13885 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DA06A1288976EF00F13885 /* CameraManager.swift */; };
 		01DDF4822833D6A100CCFDF9 /* SaveControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */; };
 		01E166832832C6D600DBC846 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E166822832C6D600DBC846 /* Image.swift */; };
 		01EB3BD128770304004ED9B8 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01EB3BD028770304004ED9B8 /* GoogleService-Info-2.plist */; };
@@ -117,13 +112,9 @@
 		0180CE312822C1ED00E80380 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		0180CE352822C2EB00E80380 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0180CE372822C73400E80380 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		0185016028579F8F0047F728 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		019655912880BCDC00F04FD9 /* TrialSubscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialSubscribe.swift; sourceTree = "<group>"; };
 		019655932880C38300F04FD9 /* FAQSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQSetting.swift; sourceTree = "<group>"; };
-		01A15659286074C8009F880B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
-		01A1565B28607518009F880B /* VideoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
 		01A259A32823DCD200EBA84C /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		01A259A52823DCFD00EBA84C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		01A259AB2823FD8400EBA84C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		01A259AE2823FD9C00EBA84C /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		01A259B02823FDDA00EBA84C /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -153,7 +144,6 @@
 		01D2DCEC28229BC9003AB953 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01D2DCEE28229BC9003AB953 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01DA069C2887797300F13885 /* DeviceEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceEx.swift; sourceTree = "<group>"; };
-		01DA06A1288976EF00F13885 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		01DDF4812833D6A100CCFDF9 /* SaveControllerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveControllerInfo.swift; sourceTree = "<group>"; };
 		01E166822832C6D600DBC846 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		01EB3BD028770304004ED9B8 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-2.plist"; path = "../../../../Downloads/GoogleService-Info-2.plist"; sourceTree = "<group>"; };
@@ -319,12 +309,7 @@
 		01B77DEF2826934900E0F59F /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				01A259A52823DCFD00EBA84C /* CameraController.swift */,
-				0185016028579F8F0047F728 /* PlayerViewController.swift */,
-				01A15659286074C8009F880B /* PickerViewController.swift */,
-				01A1565B28607518009F880B /* VideoEditor.swift */,
 				0145FAF52884F32900CF0A70 /* PhotoCameraController.swift */,
-				01DA06A1288976EF00F13885 /* CameraManager.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -542,14 +527,11 @@
 				0180CE322822C1ED00E80380 /* Recorder.swift in Sources */,
 				01E166832832C6D600DBC846 /* Image.swift in Sources */,
 				01156B27287BECC000D62A1B /* InAppPurchaseProduct.swift in Sources */,
-				01A1565A286074C8009F880B /* PickerViewController.swift in Sources */,
 				019655942880C38300F04FD9 /* FAQSetting.swift in Sources */,
 				01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */,
-				01A1565C28607518009F880B /* VideoEditor.swift in Sources */,
 				0180CE362822C2EB00E80380 /* Constants.swift in Sources */,
 				01156B29287BEEB700D62A1B /* InAppManager.swift in Sources */,
 				010ADB0728832EF90062FD53 /* RateUsVC.swift in Sources */,
-				01A259A62823DCFD00EBA84C /* CameraController.swift in Sources */,
 				0178FA8A283E6084006C03CC /* DecibelMet.xcdatamodeld in Sources */,
 				019655922880BCDC00F04FD9 /* TrialSubscribe.swift in Sources */,
 				017A4ADF283E45B400D4092C /* RecordProperty.swift in Sources */,
@@ -566,8 +548,6 @@
 				01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */,
 				0180CE382822C73400E80380 /* Player.swift in Sources */,
 				01443A4D2830E09100E4D413 /* OnBoardingView.swift in Sources */,
-				01DA06A2288976EF00F13885 /* CameraManager.swift in Sources */,
-				0185016128579F8F0047F728 /* PlayerViewController.swift in Sources */,
 				01658FA9283245E0001336A4 /* SubscribeOneView.swift in Sources */,
 				01658FA128324191001336A4 /* Collection.swift in Sources */,
 				01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */,

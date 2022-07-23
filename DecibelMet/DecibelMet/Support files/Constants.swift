@@ -29,9 +29,6 @@ public class Constants {
         }
     }
     
-    public var unlockFull: Bool {
-        
-    }
 
     
     public var isFirstLaunch: Bool {
