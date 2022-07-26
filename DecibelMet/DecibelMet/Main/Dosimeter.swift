@@ -57,7 +57,7 @@ final class Dosimeter: UIViewController {
     
     lazy var freeDosimeter: Int = 5
     lazy var showVc = "1"
-    var t = 0
+    var t = -2
     
     override func viewDidLoad() {
         super.viewDidLoad()

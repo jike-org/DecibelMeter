@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import StoreKit
+import SwiftyStoreKit
 
 class SubscribeTwoView: UIViewController {
     
@@ -230,9 +231,14 @@ extension SubscribeTwoView {
     }
     
     @objc func xMarkCloseVC() {
-        let vc = TabBar()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+       if Constants.shared.isFirstLaunch == false {
+            let vc = TabBar()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+           Constants.shared.isFirstLaunch = true
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     @objc func trialButtonTapped1() {
@@ -242,7 +248,19 @@ extension SubscribeTwoView {
     }
     
     @objc func restoreButtonTapped() {
-        SKPaymentQueue.default().restoreCompletedTransactions()
+//        SKPaymentQueue.default().restoreCompletedTransactions()
+        
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+            }
+            else if results.restoredPurchases.count > 0 {
+                print("Restore Success: \(results.restoredPurchases)")
+            }
+            else {
+                print("Nothing to Restore")
+            }
+        }
     }
 }
 

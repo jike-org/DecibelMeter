@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FirebaseCoreInternal.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FirebaseInstallations.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -80,6 +85,11 @@
 			<false/>
 		</dict>
 		<key>SwiftAlgorithms.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyStoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

@@ -20,7 +20,7 @@
 #import "FirebaseRemoteConfig/Sources/RCNConfigDefines.h"
 #import "FirebaseRemoteConfig/Sources/RCNConfigValue_Internal.h"
 
-#import "FirebaseCore/Sources/Private/FirebaseCoreInternal.h"
+#import "FirebaseCore/Extension/FirebaseCoreInternal.h"
 
 /// Using macro for securely preprocessing string concatenation in query before runtime.
 #define RCNTableNameMain "main"
@@ -214,7 +214,8 @@ static NSArray *RemoteConfigMetadataTableColumnsInOrder() {
     if (!RemoteConfigCreateFilePathIfNotExist(dbPath)) {
       return;
     }
-    int flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE | SQLITE_OPEN_FILEPROTECTION_COMPLETE |
+    int flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE |
+                SQLITE_OPEN_FILEPROTECTION_COMPLETEUNTILFIRSTUSERAUTHENTICATION |
                 SQLITE_OPEN_FULLMUTEX;
     if (sqlite3_open_v2(databasePath, &strongSelf->_database, flags, NULL) == SQLITE_OK) {
       // Always try to create table if not exists for backward compatibility.

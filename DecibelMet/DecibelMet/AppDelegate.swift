@@ -8,6 +8,8 @@
 import UIKit
 import CoreData
 import Firebase
+import SwiftyStoreKit
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -20,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         FirebaseApp.configure()
         InAppManager.share.setupPurchases { success in
             if success {
@@ -32,8 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.overrideUserInterfaceStyle = MTUserDefaults.shared.theme.getUserInterfaceStyle()
         
-        
-        
         window?.rootViewController = OnboardingView()
         if OnboardingManager.shared.isFirstLaunch {
             window?.rootViewController = OnboardingView()
@@ -42,6 +41,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window?.makeKeyAndVisible()
 
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+                for purchase in purchases {
+                    switch purchase.transaction.transactionState {
+                    case .purchased, .restored:
+                        if purchase.needsFinishTransaction {
+                            // Deliver content from server, then:
+                            SwiftyStoreKit.finishTransaction(purchase.transaction)
+                        }
+                        // Unlock content
+                    case .failed, .purchasing, .deferred:
+                        break // do nothing
+                    }
+                }
+            }
         
         return true
     }

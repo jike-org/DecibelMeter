@@ -239,17 +239,17 @@ extension OnboardingView {
         } else {
             let _ = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { [self] Timer in
                 if changeSub == "1"{
-                    Constants.shared.isFirstLaunch = true
+//                    Constants.shared.isFirstLaunch = true
                     let vcTwo = SubscribeTwoView()
                     vcTwo.modalPresentationStyle = .fullScreen
                     present(vcTwo, animated: true, completion: nil)
                 } else if changeSub == "2" {
                         let vcTrial = TrialSubscribe()
-                    Constants.shared.isFirstLaunch = true
+//                    Constants.shared.isFirstLaunch = true
                     vcTrial.modalPresentationStyle = .fullScreen
                     present(vcTrial, animated: true, completion: nil)
                 } else if changeSub == "3" {
-                    Constants.shared.isFirstLaunch = true
+//                    Constants.shared.isFirstLaunch = true
                 let vcTrial = TrialViewController()
                 vcTrial.modalPresentationStyle = .fullScreen
                 present(vcTrial, animated: true, completion: nil)

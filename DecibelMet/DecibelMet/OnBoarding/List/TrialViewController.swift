@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 import StoreKit
+import SwiftyStoreKit
 import FirebaseRemoteConfig
+
 
 class TrialViewController: UIViewController {
     
@@ -166,9 +168,14 @@ extension TrialViewController {
     }
     
     @objc func xMarkTapped() {
-        let vc = TabBar()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+       if Constants.shared.isFirstLaunch == false {
+            let vc = TabBar()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+           Constants.shared.isFirstLaunch = true
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     @objc func privacyTapped() {
@@ -185,7 +192,18 @@ extension TrialViewController {
         
     }
     @objc func restoreTapped() {
-        SKPaymentQueue.default().restoreCompletedTransactions()
+//        SKPaymentQueue.default().restoreCompletedTransactions()
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+            }
+            else if results.restoredPurchases.count > 0 {
+                print("Restore Success: \(results.restoredPurchases)")
+            }
+            else {
+                print("Nothing to Restore")
+            }
+        }
     }
     
     private func priceStringFor(product: SKProduct) -> String {

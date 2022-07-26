@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import StoreKit
+import SwiftyStoreKit
 
 class TrialSubscribe: UIViewController {
     
@@ -240,15 +241,30 @@ extension TrialSubscribe {
     }
     
     @objc func xMarkTapped() {
-        let vc = TabBar()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+       if Constants.shared.isFirstLaunch == false {
+            let vc = TabBar()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+           Constants.shared.isFirstLaunch = true
+        } else {
+            dismiss(animated: true)
+        }
+       
     }
     
     @objc func restoreButtonTapped() {
-        SKPaymentQueue.default().restoreCompletedTransactions()
-        
-        print("restored")
+//        SKPaymentQueue.default().restoreCompletedTransactions()
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+            }
+            else if results.restoredPurchases.count > 0 {
+                print("Restore Success: \(results.restoredPurchases)")
+            }
+            else {
+                print("Nothing to Restore")
+            }
+        }
     }
     
     @objc func trialButtonTapped() {
