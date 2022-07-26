@@ -12,5 +12,6 @@ target 'DecibelMet' do
   pod 'Firebase/RemoteConfig'
   pod 'DKCamera'
   pod 'SwiftyStoreKit'
+  pod 'OpenSSL'
 use_frameworks! :linkage => :static
 end

@@ -9,7 +9,6 @@ import UIKit
 import CoreData
 import Firebase
 import SwiftyStoreKit
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

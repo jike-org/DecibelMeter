@@ -96,6 +96,7 @@ extension InAppManager: SKPaymentTransactionObserver {
     }
     
     private func restored(transaction: SKPaymentTransaction){
+        print("success")
         restoreCompletedTrans()
     }
 }

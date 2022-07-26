@@ -82,6 +82,7 @@ extension TrialViewController {
         continueButton.addTarget(self, action: #selector(continueTapped), for: .touchUpInside)
         terms.addTarget(self, action: #selector(termsTapped), for: .touchUpInside)
         privacy.addTarget(self, action: #selector(privacyTapped), for: .touchUpInside)
+        restore.addTarget(self, action: #selector(restoreTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             
@@ -147,7 +148,6 @@ extension TrialViewController {
                 }
             }
         }
-
         
         let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
             xMark.isHidden = false
@@ -157,7 +157,6 @@ extension TrialViewController {
             startTrial.isHidden = false
         }
     }
-    
 }
 
 extension TrialViewController {

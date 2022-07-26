@@ -231,11 +231,11 @@ extension SubscribeTwoView {
     }
     
     @objc func xMarkCloseVC() {
-       if Constants.shared.isFirstLaunch == false {
+        if Constants.shared.isFirstLaunch == false {
             let vc = TabBar()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
-           Constants.shared.isFirstLaunch = true
+            Constants.shared.isFirstLaunch = true
         } else {
             dismiss(animated: true)
         }
@@ -248,19 +248,19 @@ extension SubscribeTwoView {
     }
     
     @objc func restoreButtonTapped() {
-//        SKPaymentQueue.default().restoreCompletedTransactions()
+        SKPaymentQueue.default().restoreCompletedTransactions()
         
-        SwiftyStoreKit.restorePurchases(atomically: true) { results in
-            if results.restoreFailedPurchases.count > 0 {
-                print("Restore Failed: \(results.restoreFailedPurchases)")
-            }
-            else if results.restoredPurchases.count > 0 {
-                print("Restore Success: \(results.restoredPurchases)")
-            }
-            else {
-                print("Nothing to Restore")
-            }
-        }
+        //        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+        //            if results.restoreFailedPurchases.count > 0 {
+        //                print("Restore Failed: \(results.restoreFailedPurchases)")
+        //            }
+        //            else if results.restoredPurchases.count > 0 {
+        //                print("Restore Success: \(results.restoredPurchases)")
+        //            }
+        //            else {
+        //                print("Nothing to Restore")
+        //            }
+        //        }
     }
 }
 
