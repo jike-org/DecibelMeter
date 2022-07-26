@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  DecibelMet
+
+  Created by Valera Sysov on 25.07.22.
+  
+*/
+NSMicrophoneUsageDescription = "يُرجى تمكين الإذن باستخدام الميكروفون في الإعدادات لكي يعمل التطبيق";
+NSCameraUsageDescription = "يُرجى تمكين الإذن باستخدام الكاميرا في الإعدادات لكي يعمل التطبيق";
+NSPhotoLibraryAddUsageDescription = "يُرجى تمكين الإذن باستخدام معرض الصور في الإعدادات لكي يعمل التطبيق";
+NSLocationWhenInUseUsageDescription = "يُرجى تمكين الإذن باستخدام الموقع في الإعدادات لكي يعمل التطبيق";

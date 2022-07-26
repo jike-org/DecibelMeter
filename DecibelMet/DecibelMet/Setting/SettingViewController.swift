@@ -25,7 +25,7 @@ class SettingsView: UIViewController {
     var faq = NSLocalizedString("FAQ", comment: "")
     var unlockAll = NSLocalizedString("Unlockallfeatures", comment: "")
     var lAcces = NSLocalizedString("", comment: "")
-    private var changeSub: String = "2"
+    private var changeSub: String = "1"
     lazy var titleLabel = Label(style: .titleLabel, settings)
     let cellSpacingHeight: CGFloat = 40
     
@@ -315,7 +315,11 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                     let vcTrial = TrialSubscribe()
                 vcTrial.modalPresentationStyle = .fullScreen
                 present(vcTrial, animated: true, completion: nil)
-                }
+            } else if changeSub == "3" {
+            let vcTrial = TrialViewController()
+            vcTrial.modalPresentationStyle = .fullScreen
+            present(vcTrial, animated: true, completion: nil)
+            }
         case 1:
             let vc = FAQSetting()
             vc.modalPresentationStyle = .fullScreen
@@ -330,8 +334,11 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                     mail.mailComposeDelegate = self
                     let systemVersion = UIDevice.current.systemVersion
                     let devicename = UIDevice.modelName
+                    let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+                    let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
                     mail.setToRecipients(["support@mindateq.io"])
-                    mail.setMessageBody("<p>\(systemVersion) \(devicename)</p>", isHTML: true)
+                    mail.setSubject("Decibel Meter — User Question ")
+                    mail.setMessageBody("<p>\(systemVersion) \(devicename)<p>build Number -  \(appVersion!) (\(buildNumber))</p> </p>", isHTML: true)
                     
                     present(mail, animated: true)
                 } else {

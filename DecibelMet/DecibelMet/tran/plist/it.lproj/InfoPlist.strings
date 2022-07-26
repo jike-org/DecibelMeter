@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  DecibelMet
+
+  Created by Valera Sysov on 25.07.22.
+  
+*/
+NSMicrophoneUsageDescription = "Imposta i permessi per l'utilizzo del microfono nelle impostazioni";
+NSCameraUsageDescription = "Imposta i permessi per l'utilizzo della fotocamera nelle impostazioni";
+NSPhotoLibraryAddUsageDescription = "Imposta i permessi per l'utilizzo della libreria di foto nelle impostazioni";
+NSLocationWhenInUseUsageDescription = "Imposta i permessi per l'utilizzo della localizzazione nelle impostazioni";

@@ -37,7 +37,7 @@ class SubscribeTwoView: UIViewController {
     lazy var subText = Label(style: .textSub, "")
     lazy var subText1 = Label(style: .textSub, "")
     lazy var subText2 = Label(style: .textSub, "")
-    lazy var acces = Label(style: .acces, lAcces)
+    lazy var acces = Label(style: .acces, lAcces.uppercased())
     
     lazy var textView: UIView = {
         let view = UIView()
@@ -230,7 +230,9 @@ extension SubscribeTwoView {
     }
     
     @objc func xMarkCloseVC() {
-        dismiss(animated: true)
+        let vc = TabBar()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     @objc func trialButtonTapped1() {

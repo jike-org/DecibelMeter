@@ -5,14 +5,12 @@
 	<key>UIAppFonts</key>
 	<array/>
 	<key>NSCameraUsageDescription</key>
-	<string>"fas"</string>
+	<string></string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>"qw"</string>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>value</string>
+	<string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>"ty"</string>
-	<key></key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string></string>

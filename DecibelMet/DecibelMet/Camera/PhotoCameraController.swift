@@ -198,7 +198,9 @@ extension PhotoCameraController: UIImagePickerControllerDelegate{
         UIGraphicsEndImageContext()
         UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
         
-        dismiss(animated: true)
+        let vc = TabBar()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
@@ -266,20 +268,21 @@ extension PhotoCameraController: CLLocationManagerDelegate  {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation :CLLocation = locations[0] as CLLocation
-    
+        
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+        geocoder.reverseGeocodeLocation(userLocation) {[self] (placemarks, error) in
             if (error != nil){
                 print("error in reverseGeocode")
+                location.text = "error"
             }
-            let placemark = placemarks! as [CLPlacemark]
-            if placemark.count>0{
-                let placemark = placemarks![0]
-                print(placemark.locality!)
-                print(placemark.administrativeArea!)
-                print(placemark.country!)
-                
-                self.location.text = "\(placemark.locality!), \(placemark.country!)"
+            
+            if placemarks != nil {
+                let placemark = placemarks! as [CLPlacemark]
+                if placemark.count>0{
+                    let placemark = placemarks![0]
+                    self.location.text = "\(placemark.locality!), \(placemark.country!)"
+                    return
+                }
             }
         }
     }

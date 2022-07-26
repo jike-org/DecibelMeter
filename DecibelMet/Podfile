@@ -11,5 +11,5 @@ target 'DecibelMet' do
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
   pod 'DKCamera'
-   pod 'OpenSSL', '~> 1.0'
+
 end

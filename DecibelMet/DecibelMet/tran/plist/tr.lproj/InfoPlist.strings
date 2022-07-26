@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  DecibelMet
+
+  Created by Valera Sysov on 25.07.22.
+  
+*/
+NSMicrophoneUsageDescription = "İşlemin yapılması için lütfen ayarlara giderek mikrofon kullanıma izin verin";
+NSCameraUsageDescription = "İşlemin yapılması için lütfen ayarlara giderek kamera kullanımına izin verin";
+NSPhotoLibraryAddUsageDescription = "İşlemin yapılması için lütfen ayarlara giderek fotoğraf kitaplığı kullanımına izin verin";
+NSLocationWhenInUseUsageDescription = "İşlemin yapılması için lütfen ayarlara giderek konum kullanımına izin verin";

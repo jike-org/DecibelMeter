@@ -31,6 +31,7 @@ final class Dosimeter: UIViewController {
     private var precent125 = 0
     private var precent130 = 0
     
+    var defaults = UserDefaults.standard
     var flag = false
     var second = NSLocalizedString("Second", comment: "")
     var hour = NSLocalizedString("Hour", comment: "")
@@ -56,30 +57,58 @@ final class Dosimeter: UIViewController {
     
     lazy var freeDosimeter: Int = 5
     lazy var showVc = "1"
-    
-    var t: Int = -2
+    var t = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tabBarController?.tabBar.isHidden = false
         recorder.delegate = self
         recorder.avDelegate = self
         setup()
         setUpCollection()
-//        isRecording = true
         startRecordingAudio()
-     
+        remote()
+        
+        if defaults.string(forKey: "dosimeter") == nil {
+            defaults.set(t, forKey: "dosimeter")
+        }
+        
+        t = Int(defaults.string(forKey: "dosimeter")!)!
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        t += 1
+        defaults.set(t, forKey: "dosimeter")
+        headerLabel.text = defaults.string(forKey: "dosimeter")
         
-        func fetchValues() {
-        
-            let setting = RemoteConfigSettings()
-            setting.minimumFetchInterval = 0
-            remoteConfig.configSettings = setting
+        if Int(defaults.string(forKey: "dosimeter")!)! >= freeDosimeter {
+            recorder.stopMonitoring()
+            recorder.stop()
+            progress.startAngle = -150
+            procentLabel.text = "0"
+            decibelLabel.text = "0"
+            timeLabel.text = "00:00"
+            
+            callPurchase()
         }
+    }
+    
+    private func requestPermissions() {
+        if !Constants().isFirstLaunch {
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in }
+            Constants().isFirstLaunch = true
+        }
+    }
+}
+
+extension Dosimeter {
+    
+    func remote() {
+        let setting = RemoteConfigSettings()
+        setting.minimumFetchInterval = 0
+        remoteConfig.configSettings = setting
         
         remoteConfig.fetchAndActivate { (status, error) in
             
@@ -94,46 +123,30 @@ final class Dosimeter: UIViewController {
                     }
                     if let stringValue1 =
                         self.remoteConfig["otherScreenNumber"].stringValue {
-                        self.freeDosimeter = Int(stringValue1)!
-                        print(self.showVc)
+                        self.showVc = (stringValue1)
                     }
                 }
             }
         }
-        
-        t += 1
-        if t >= freeDosimeter {
-            recorder.stopMonitoring()
-            recorder.stop()
-            progress.startAngle = -150
-            procentLabel.text = "0"
-            decibelLabel.text = "0"
-            timeLabel.text = "00:00"
-            
-            _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
-                if showVc == "1"{
-                    let vcTwo = SubscribeTwoView()
-                    vcTwo.modalPresentationStyle = .fullScreen
-                    present(vcTwo, animated: true, completion: nil)
-                } else if showVc == "2" {
-                        let vcTrial = TrialSubscribe()
-                    vcTrial.modalPresentationStyle = .fullScreen
-                    present(vcTrial, animated: true, completion: nil)
-                    }
-
-            })
-        }
     }
     
-    private func requestPermissions() {
-        if !Constants().isFirstLaunch {
-            AVAudioSession.sharedInstance().requestRecordPermission { granted in }
-            Constants().isFirstLaunch = true
-        }
+    func callPurchase() {
+        _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
+            if showVc == "1"{
+                let vcTwo = SubscribeTwoView()
+                vcTwo.modalPresentationStyle = .fullScreen
+                present(vcTwo, animated: true, completion: nil)
+            } else if showVc == "2" {
+                let vcTrial = TrialSubscribe()
+                vcTrial.modalPresentationStyle = .fullScreen
+                present(vcTrial, animated: true, completion: nil)
+            } else if showVc == "3" {
+                let vcTrial = TrialViewController()
+                vcTrial.modalPresentationStyle = .fullScreen
+                present(vcTrial, animated: true, completion: nil)
+            }
+        })
     }
-}
-
-extension Dosimeter {
     
     func setUpCollection() {
         let layout = UICollectionViewFlowLayout()
@@ -203,12 +216,11 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.contentView.backgroundColor = UIColor(named: "backCell")
         if flag == true {
             cell.configure(item: items[indexPath.row])
-            print("osha")
+            
         } else {
             cell.configure(item: itemNiosh[indexPath.row])
-            print("niosh")
         }
-       
+        
         
         return cell
     }
@@ -216,7 +228,6 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedItem = collectionView.cellForItem(at: indexPath)
         selectedItem?.layer.borderColor = UIColor.red.cgColor
-        print(1)
     }
 }
 
@@ -296,7 +307,6 @@ extension Dosimeter {
             decibelLabel.text = "0"
             timeLabel.text = "00:00"
             _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
-                print("Timer fired!")
                 self.startRecordingAudio()
             }
         } else {
@@ -313,10 +323,9 @@ extension Dosimeter {
             progress.startAngle = -150
             procentLabel.text = "0"
             decibelLabel.text = "0"
-          
+            
             timeLabel.text = "00:00"
             _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
-                print("Timer fired!")
                 self.startRecordingAudio()
             }
         }
@@ -325,8 +334,7 @@ extension Dosimeter {
     @objc func refreshButtonTap() {
         
         if Constants.shared.isRecordingAtLaunchEnabled == false{
-         print("enable")
-            }
+        }
         recorder.stopMonitoring()
         recorder.stop()
         progress.startAngle = -150
@@ -335,7 +343,6 @@ extension Dosimeter {
         timeValueSubject.value = [0:0]
         timeLabel.text = "00:00"
         _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
-            print("Timer fired!")
             self.startRecordingAudio()
         }
     }
@@ -362,16 +369,15 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        print("Record finished")
         // FIXME: Unusual
     }
     
     func recorderDidFailToAchievePermission(_ recorder: Recorder) {
-        let alertController = UIAlertController(title: "Microphone permissions denied", message: "Microphone permissions have been denied for this app. You can change this by going to Settings", preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Microphone", comment: ""), message: NSLocalizedString("SetMicro", comment: ""), preferredStyle: .alert)
         
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelButton = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
         
-        let settingButton = UIAlertAction(title: "Settings", style: .default) { _
+        let settingButton = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default) { _
             in
             UIApplication.shared.open(
                 URL(string: UIApplication.openSettingsURLString)!,

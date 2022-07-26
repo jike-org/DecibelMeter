@@ -18,8 +18,10 @@ class RecordView: UIViewController {
     lazy var showVc = "1"
     let remoteConfig = RemoteConfig.remoteConfig()
     let iapManager = InAppManager.share
-    var freeSave = 9
+    var freeSaveRemote = 9
+    var freeSave = 2
     private var isRecording = false
+    
     // MARK: Localizable
     var max = NSLocalizedString("Maximum", comment: "")
     var min = NSLocalizedString("Minimum", comment: "")
@@ -137,10 +139,34 @@ class RecordView: UIViewController {
         view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = false
         setupConstraint()
-//        requestPermissions()
-//        isRecording = true
-//        startRecordingAudio()
         
+        func fetchValues() {
+        
+            let setting = RemoteConfigSettings()
+            setting.minimumFetchInterval = 0
+            remoteConfig.configSettings = setting
+        }
+        
+        remoteConfig.fetchAndActivate { (status, error) in
+            
+            if error !=  nil {
+                print(error?.localizedDescription)
+            } else {
+                if status != .error {
+                    if let stringValue =
+                        self.remoteConfig["availableFreeSave"].stringValue {
+                        self.freeSaveRemote = Int(stringValue)!
+                    }
+                }
+                
+                if status != .error {
+                    if let stringValue1 =
+                        self.remoteConfig["otherScreenNumber"].stringValue {
+                        self.showVc = stringValue1
+                    }
+                }
+            }
+        }
         
         guard let result = persist.fetch() else { return }
         recordings = result
@@ -231,35 +257,8 @@ extension RecordView {
             recordings = result
             freeSave = result.count
             
-            if freeSave >= 3{
-                func fetchValues() {
-                
-                    let setting = RemoteConfigSettings()
-                    setting.minimumFetchInterval = 0
-                    remoteConfig.configSettings = setting
-                }
-                
-                remoteConfig.fetchAndActivate { (status, error) in
-                    
-                    if error !=  nil {
-                        print(error?.localizedDescription)
-                    } else {
-                        if status != .error {
-                            if let stringValue =
-                                self.remoteConfig["availableFreePhoto"].stringValue {
-                                self.freeSave = Int(stringValue)!
-                            }
-                        }
-                        
-                        if status != .error {
-                            if let stringValue1 =
-                                self.remoteConfig["otherScreenNumber"].stringValue {
-                                self.freeSave = Int(stringValue1)!
-                            }
-                        }
-
-                    }
-                }
+            if freeSave >= freeSaveRemote{
+            
                 
                 _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
                     if showVc == "1"{
@@ -351,35 +350,8 @@ extension RecordView {
             recordings = result
             freeSave = result.count
             
-            if freeSave >= 3{
-                func fetchValues() {
-                
-                    let setting = RemoteConfigSettings()
-                    setting.minimumFetchInterval = 0
-                    remoteConfig.configSettings = setting
-                }
-                
-                remoteConfig.fetchAndActivate { (status, error) in
-                    
-                    if error !=  nil {
-                        print(error?.localizedDescription)
-                    } else {
-                        if status != .error {
-                            if let stringValue =
-                                self.remoteConfig["availableFreePhoto"].stringValue {
-                                self.freeSave = Int(stringValue)!
-                            }
-                        }
-                        
-                        if status != .error {
-                            if let stringValue1 =
-                                self.remoteConfig["otherScreenNumber"].stringValue {
-                                self.freeSave = Int(stringValue1)!
-                            }
-                        }
+            if freeSave >= freeSaveRemote{
 
-                    }
-                }
                 
                 _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
                     if showVc == "1"{
@@ -390,8 +362,11 @@ extension RecordView {
                             let vcTrial = TrialSubscribe()
                         vcTrial.modalPresentationStyle = .fullScreen
                         present(vcTrial, animated: true, completion: nil)
-                        }
-
+                    } else if showVc == "3" {
+                    let vcTrial = TrialViewController()
+                    vcTrial.modalPresentationStyle = .fullScreen
+                    present(vcTrial, animated: true, completion: nil)
+                    }
                 })
                 
             } else {
@@ -584,19 +559,19 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
     
     func recorderDidFailToAchievePermission(_ recorder: Recorder) {
         let alertController = UIAlertController(
-            title: "Microphone permissions denied",
-            message: "Microphone permissions have been denied for this app. You can change this by going to Settings",
+            title: NSLocalizedString("Microphone", comment: ""),
+            message: NSLocalizedString("SetMicro", comment: ""),
             preferredStyle: .alert
         )
         
         let cancelButton = UIAlertAction(
-            title: "Cancel",
+            title: NSLocalizedString("cancel", comment: ""),
             style: .cancel,
             handler: nil
         )
         
         let settingsAction = UIAlertAction(
-            title: "Settings",
+            title: NSLocalizedString("Settings", comment: ""),
             style: .default
         ) { _ in
             UIApplication.shared.open(
@@ -610,6 +585,7 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
         
         self.present(alertController, animated: true, completion: nil)
     }
+
     
     func recorder(_ recorder: Recorder, didCaptureDecibels decibels: Int) {
         let degree = 180 / 110

@@ -23,7 +23,7 @@ class SubscribeViewController: UICollectionViewCell {
     let product = InAppManager.share.product
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     
-    
+
     lazy var trialButton = Label(style: .trial, "\(lTrial) \n\(priceStringFor(product: product[3])) \(lTrialThen)")
 
     public static let identifier = "SubscribeOne"
@@ -63,7 +63,7 @@ class SubscribeViewController: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    func setup() {backImage
         trialButton.isHidden = true
         _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false, block: { Timer in
             self.trialButton.isHidden = false

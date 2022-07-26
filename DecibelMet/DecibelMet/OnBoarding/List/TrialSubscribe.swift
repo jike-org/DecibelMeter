@@ -43,7 +43,7 @@ class TrialSubscribe: UIViewController {
     lazy var andLabel = Label(style: .time, land)
     lazy var xMark = Button(style: .close, "X")
     lazy var trialButton = Button(style: .trial, "Start with a 7 day trial, \(priceStringFor(product: product[3])) then per week")
-    lazy var acces = Label(style: .acces, lAcces)
+    lazy var acces = Label(style: .acces, lAcces.uppercased())
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     
     let product = InAppManager.share.product
@@ -240,7 +240,9 @@ extension TrialSubscribe {
     }
     
     @objc func xMarkTapped() {
-        dismiss(animated: true)
+        let vc = TabBar()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     @objc func restoreButtonTapped() {

@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  DecibelMet
+
+  Created by Valera Sysov on 25.07.22.
+  
+*/
+NSMicrophoneUsageDescription = "Vui lòng đặt quyền sử dụng micrô trong phần cài đặt để ứng dụng có thể hoạt động";
+NSCameraUsageDescription = "Vui lòng đặt quyền sử dụng Máy ảnh trong cài đặt để ứng dụng có thể hoạt động";
+NSPhotoLibraryAddUsageDescription = "Vui lòng đặt quyền sử dụng thư viện ảnh trong cài đặt để ứng dụng có thể hoạt động";
+NSLocationWhenInUseUsageDescription = "Vui lòng đặt quyền sử dụng vị trí trong cài đặt để ứng dụng có thể hoạt động";

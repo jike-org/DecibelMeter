@@ -166,7 +166,7 @@ class Label: UILabel {
             textAlignment = .center
         case .settingLabel:
             textColor = .red
-            font = UIFont.systemFont(ofSize: 18, weight: .medium)
+            font = UIFont.systemFont(ofSize: 16.5, weight: .medium)
             
         case .dbProcentImage:
             font = UIFont.systemFont(ofSize: 14, weight: .semibold)

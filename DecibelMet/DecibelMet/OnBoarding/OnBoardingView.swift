@@ -12,6 +12,7 @@ import FirebaseRemoteConfig
 
 class OnboardingView: UIViewController {
     
+    private var changeSub = "1"
     let iapManager = InAppManager.share
     let lprivacy = NSLocalizedString("PrivacyPolice", comment: "")
     let land = NSLocalizedString("and", comment: "")
@@ -36,7 +37,8 @@ class OnboardingView: UIViewController {
     // Buttons
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     lazy var closeButton = Button(style: .close, nil)
-    lazy var continueButton = Button(style: ._continue, "Continue")
+    let lContinue = NSLocalizedString("Continue", comment: "")
+    lazy var continueButton = Button(style: ._continue, lContinue)
     lazy var termsOfUseButton = Button(style: .link, lterms)
     lazy var privacyPolicyButton = Button(style: .link, lprivacy)
     lazy var andUnderLabel = Button(style: .link, land)
@@ -88,6 +90,21 @@ class OnboardingView: UIViewController {
                 }
             }
         }
+        
+        remoteConfig.fetchAndActivate { (status, error) in
+            
+            if error !=  nil {
+                print(error?.localizedDescription)
+            } else {
+                if status != .error {
+                    if let stringValue =
+                        self.remoteConfig["welcomeTourScreenNumber"].stringValue {
+                        self.changeSub = stringValue
+                        print(self.changeSub)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -133,7 +150,7 @@ extension OnboardingView {
         collectionView.register(FirstListViewController.self, forCellWithReuseIdentifier: FirstListViewController.identifier)
         collectionView.register(SecondListViewController.self, forCellWithReuseIdentifier: SecondListViewController.identifier)
         collectionView.register(ThirdListViewController.self, forCellWithReuseIdentifier: ThirdListViewController.identifier)
-        collectionView.register(SubscribeViewController.self, forCellWithReuseIdentifier: SubscribeViewController.identifier)
+//        collectionView.register(SubscribeViewController.self, forCellWithReuseIdentifier: SubscribeViewController.identifier)
         
         view.addSubview(restoreButton)
         view.addSubview(collectionView)
@@ -202,23 +219,41 @@ extension OnboardingView {
     }
     
     @objc func nextPage() {
-        if currentIndex.row < 3 {
+        if currentIndex.row < 2 {
             collectionView.scrollToItem(at: IndexPath(arrayLiteral: 0, currentIndex.row + 1), at: .centeredHorizontally, animated: true)
-        } else if currentIndex.row == 4 {
-            iapManager.purchase(productWith: "com.decibelmeter.1wetr")
-            DispatchQueue.main.async {
-                self.spinenr.startAnimating()
-                _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
-                    self.spinenr.stopAnimating()
-                })
-            }
+        } else if currentIndex.row == 3 {
+
+//            if changeSub == "1"{
+//                let vcTwo = SubscribeTwoView()
+//                vcTwo.modalPresentationStyle = .fullScreen
+//                present(vcTwo, animated: true, completion: nil)
+//            } else if changeSub == "2" {
+//                    let vcTrial = TrialSubscribe()
+//                vcTrial.modalPresentationStyle = .fullScreen
+//                present(vcTrial, animated: true, completion: nil)
+//            } else if changeSub == "3" {
+//            let vcTrial = TrialViewController()
+//            vcTrial.modalPresentationStyle = .fullScreen
+//            present(vcTrial, animated: true, completion: nil)
+//            }
         } else {
-            iapManager.purchase(productWith: "com.decibelmeter.1wetr")
-            DispatchQueue.main.async {
-                self.spinenr.startAnimating()
-                _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
-                    self.spinenr.stopAnimating()
-                })
+            let _ = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { [self] Timer in
+                if changeSub == "1"{
+                    Constants.shared.isFirstLaunch = true
+                    let vcTwo = SubscribeTwoView()
+                    vcTwo.modalPresentationStyle = .fullScreen
+                    present(vcTwo, animated: true, completion: nil)
+                } else if changeSub == "2" {
+                        let vcTrial = TrialSubscribe()
+                    Constants.shared.isFirstLaunch = true
+                    vcTrial.modalPresentationStyle = .fullScreen
+                    present(vcTrial, animated: true, completion: nil)
+                } else if changeSub == "3" {
+                    Constants.shared.isFirstLaunch = true
+                let vcTrial = TrialViewController()
+                vcTrial.modalPresentationStyle = .fullScreen
+                present(vcTrial, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -256,7 +291,7 @@ extension OnboardingView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 4
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -282,15 +317,6 @@ extension OnboardingView: UICollectionViewDataSource {
             privacyPolicyButton.isHidden = true
             andUnderLabel.isHidden = true
             restoreButton.isHidden = true
-        case 3:
-            slide = SubscribeViewController.identifier
-            privacyPolicyButton.isHidden = false
-            termsOfUseButton.isHidden = false
-            andUnderLabel.isHidden = false
-            restoreButton.isHidden = false
-            _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false, block: { Timer in
-                self.closeButton.isHidden = false
-            })
 
         default:
             slide = FirstListViewController.identifier

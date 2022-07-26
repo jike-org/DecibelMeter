@@ -10,6 +10,7 @@ import UIKit
 
 class TabBar: UITabBarController {
     
+    let d = Dosimeter()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupView()

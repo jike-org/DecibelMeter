@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  DecibelMet
+
+  Created by Valera Sysov on 25.07.22.
+  
+*/
+NSMicrophoneUsageDescription = "Пожалуйста, для работы приложения, разрешите доступ к микрофону в настройках" ;
+NSCameraUsageDescription = "Пожалуйста, предоставьте доступ на использование камеры в настройках для работы" ;
+NSLocationWhenInUseUsageDescription = "Пожалуйста, предоставьте доступ на использование Вашего местоположения в настройках для работы" ;
+NSPhotoLibraryAddUsageDescription = "Пожалуйста, предоставьте доступ на использование фото галереи в настройках для работы";

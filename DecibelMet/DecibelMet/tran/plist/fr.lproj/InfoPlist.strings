@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  DecibelMet
+
+  Created by Valera Sysov on 25.07.22.
+  
+*/
+NSMicrophoneUsageDescription = "Veuillez paramétrer l'autorisation d'utilisation du microphone dans les paramètres pour le travail" ;
+NSCameraUsageDescription = "Veuillez définir l'autorisation d'utilisation de de l'appareil photo dans les paramètres pour le travail" ;
+NSPhotoLibraryAddUsageDescription = "Veuillez définir l'autorisation d'utilisation de la photothèque pour travailler";
+NSLocationWhenInUseUsageDescription = "Veuillez définir l'autorisation d'utilisation de localisation dans les paramètres pour travailler" ;
