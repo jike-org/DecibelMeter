@@ -11,7 +11,6 @@ import StoreKit
 import SwiftyStoreKit
 import FirebaseRemoteConfig
 
-
 class TrialViewController: UIViewController {
     
     let iapManager = InAppManager.share
@@ -42,7 +41,6 @@ class TrialViewController: UIViewController {
     lazy var hStack = StackView(axis: .horizontal)
     lazy var bcImage = UIImageView(image: UIImage(named: "04"))
     lazy var spiner = UIActivityIndicatorView(style: .large)
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -4,15 +4,5 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array/>
-	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string></string>
-	<key>CFBundleIdentifier</key>
-	<string></string>
 </dict>
 </plist>

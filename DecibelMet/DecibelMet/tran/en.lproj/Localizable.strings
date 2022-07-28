@@ -4,6 +4,15 @@
 "DetectSoundLevel" = "Detect Sound
 Level";
 
+"SubFor" = "Subscribe for";
+
+"perWeek" = "per week";
+
+"perMounth" = "per month";
+
+"perYear" = "per year";
+
+
 "MeasurementHistory" = "Measurement
  History";
 

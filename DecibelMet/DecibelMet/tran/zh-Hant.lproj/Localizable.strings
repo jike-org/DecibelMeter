@@ -7,6 +7,14 @@ Level";
 "MeasurementHistory" = "Measurement
 History";
 
+"SubFor" = "订阅仅需";
+
+"perWeek" = "/周";
+
+"perMounth" = "/包月";
+
+"perYear" = "/包年";
+
 "Trial7" = "per week";
 
 "Continue" = "Continue";

@@ -36,8 +36,6 @@ class SettingsView: UIViewController {
         
         t.delegate   = self
         t.dataSource = self
-        
-//        t.backgroundColor = .clear
         t.separatorColor  = UIColor(named: "SeparatorColor")
         
         return t
@@ -89,6 +87,7 @@ extension SettingsView {
         view.backgroundColor = UIColor(named: "backgroundColor")
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.backgroundColor = UIColor(named: "backgroundColor")
         
         view.addSubview(titleLabel)
         view.addSubview(tableView)

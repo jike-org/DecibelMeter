@@ -8,6 +8,14 @@
 "UnlockAllAccess" = "모든 액세스
  잠금 해제";
 
+"SubFor" = "에 구독";
+
+"perWeek" = "주당";
+
+"perMounth" = "월간";
+
+"perYear" = "연간";
+
 "Trial7" = "/주";
 
 "Continue" = "계속";

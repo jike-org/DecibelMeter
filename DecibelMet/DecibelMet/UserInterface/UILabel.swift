@@ -114,7 +114,7 @@ class Label: UILabel {
             font = UIFont.systemFont(ofSize: 16, weight: .regular)
             textColor = UIColor(named: "cellDb")
         case .dosimetreProcentLabel:
-            font = UIFont.systemFont(ofSize: 40, weight: .bold)
+            font = UIFont.systemFont(ofSize: 37, weight: .medium)
             textColor = UIColor(named: "cellDb")
         case .dosimetreProcentImage:
             font = UIFont.boldSystemFont(ofSize: 17)
@@ -123,7 +123,7 @@ class Label: UILabel {
             font = UIFont.systemFont(ofSize: 13)
             textColor = UIColor(named: "cellDb")
         case .dosimetreDecibelLabel:
-            font = UIFont.systemFont(ofSize: 20, weight: .regular)
+            font = UIFont.systemFont(ofSize: 17, weight: .regular)
             textColor = UIColor(named: "cellDb")
         case .dbTitel:
             font = UIFont.systemFont(ofSize: 16, weight: .semibold)

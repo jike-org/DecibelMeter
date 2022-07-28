@@ -47,6 +47,7 @@
 		01A259AC2823FD8400EBA84C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259AB2823FD8400EBA84C /* SettingViewController.swift */; };
 		01A259AF2823FD9C00EBA84C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259AE2823FD9C00EBA84C /* SettingCell.swift */; };
 		01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259B02823FDDA00EBA84C /* ImageView.swift */; };
+		01ACC8C7289181CF00E8421E /* CellDosimetre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACC8C6289181CF00E8421E /* CellDosimetre.swift */; };
 		01B3EB7B2822BE8B004001C1 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B3EB7A2822BE8B004001C1 /* UILabel.swift */; };
 		01D2DCE128229BC7003AB953 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE028229BC7003AB953 /* AppDelegate.swift */; };
 		01D2DCE528229BC7003AB953 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2DCE428229BC7003AB953 /* RecordView.swift */; };
@@ -119,6 +120,7 @@
 		01A259AB2823FD8400EBA84C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		01A259AE2823FD9C00EBA84C /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		01A259B02823FDDA00EBA84C /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		01ACC8C6289181CF00E8421E /* CellDosimetre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDosimetre.swift; sourceTree = "<group>"; };
 		01B3EB7A2822BE8B004001C1 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		01D2DCDD28229BC7003AB953 /* DecibelMet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecibelMet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D2DCE028229BC7003AB953 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				017379D22844FA9C00A77E83 /* Dosimeter.swift */,
 				01D2DCE428229BC7003AB953 /* RecordView.swift */,
 				01476EBB284A549C0007C006 /* DosimetreCell.swift */,
+				01ACC8C6289181CF00E8421E /* CellDosimetre.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */,
 				0159FAA22863164C0021F895 /* MTUserDefaults.swift in Sources */,
 				0180CE2C2822C13100E80380 /* StackView.swift in Sources */,
+				01ACC8C7289181CF00E8421E /* CellDosimetre.swift in Sources */,
 				0180CE302822C1B100E80380 /* Gradient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,17 +759,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9BDDA8EA12C71B42D8D70D7E /* Pods-DecibelMet.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-2 AppIcon-1 AppIcon";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = Access;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Access;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = test1;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Test;
@@ -794,17 +803,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A10244827F0588A316D5160 /* Pods-DecibelMet.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-2 AppIcon-1 AppIcon";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = Access;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Access;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = test1;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Test;

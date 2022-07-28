@@ -95,8 +95,9 @@ class Button: UIButton {
             layer.cornerRadius = 25
         case .noise:
             heightAnchor.constraint(equalToConstant: 50).isActive = true
-            widthAnchor.constraint(equalToConstant: 100).isActive = true
-            layer.cornerRadius = 20
+            widthAnchor.constraint(equalToConstant: 50).isActive = true
+            layer.cornerRadius = 25
+            titleLabel?.font = UIFont.systemFont(ofSize: 15)
         case .chevron:
             setImage(UIImage(named: "chevron"), for: .normal)
             heightAnchor.constraint(equalToConstant: 20).isActive = true

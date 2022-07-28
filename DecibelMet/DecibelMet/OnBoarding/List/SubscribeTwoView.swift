@@ -9,9 +9,11 @@ import Foundation
 import UIKit
 import StoreKit
 import SwiftyStoreKit
+import FirebaseRemoteConfig
 
 class SubscribeTwoView: UIViewController {
     
+    var remoteConfig = RemoteConfig.remoteConfig()
     let notificationCenter = NotificationCenter.default
     let iapManager = InAppManager.share
     let lprivacy = NSLocalizedString("PrivacyPolice", comment: "")
@@ -26,7 +28,8 @@ class SubscribeTwoView: UIViewController {
     let lyear = NSLocalizedString("Year", comment: "")
     let lAcces = NSLocalizedString("UnlockAllAccess", comment: "")
     
-    
+    var xMarkDelay = 5
+    var textDelay = 5
     lazy var backgroundViewImage = UIImageView(image: UIImage(named: "04"))
     lazy var hStack = StackView(axis: .horizontal)
     lazy var privacy = Button(style: .subscriptionVC, lprivacy)
@@ -57,12 +60,54 @@ class SubscribeTwoView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        remoteConfigSetup()
         
         notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.week.rawValue), object: nil)
         
         notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounth.rawValue), object: nil)
         
         notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.year.rawValue), object: nil)
+    }
+    
+    func remoteConfigSetup() {
+        let setting = RemoteConfigSettings()
+        setting.minimumFetchInterval = 0
+        remoteConfig.configSettings = setting
+        
+        remoteConfig.fetchAndActivate { (status, error) in
+            
+            if error !=  nil {
+                print(error?.localizedDescription)
+            } else {
+                if status != .error {
+                    if let stringValue =
+                        self.remoteConfig["closeButtonDelay"].stringValue {
+                        print (stringValue)
+                        self.xMarkDelay = Int(stringValue)!
+                    }
+                }
+            }
+            
+            if error !=  nil {
+                print(error?.localizedDescription)
+            } else {
+                if status != .error {
+                    if let stringValue =
+                        self.remoteConfig["textSubscriptionDelay"].stringValue {
+                        print (stringValue)
+                        self.textDelay = Int(stringValue)!
+                    }
+                }
+            }
+        }
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
+            xMark.isHidden = false
+        }
+        
+//        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
+//            s.isHidden = false
+//        }
     }
     
     private func priceStringFor(product: SKProduct) -> String {

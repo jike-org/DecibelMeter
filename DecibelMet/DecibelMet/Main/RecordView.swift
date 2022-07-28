@@ -15,6 +15,8 @@ import FirebaseRemoteConfig
 
 class RecordView: UIViewController {
     
+    var rateUsInt = 0
+    var enterCounter = 0
     lazy var showVc = "1"
     let remoteConfig = RemoteConfig.remoteConfig()
     let iapManager = InAppManager.share
@@ -139,13 +141,44 @@ class RecordView: UIViewController {
         view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = false
         setupConstraint()
+        remoteConfigSetup()
         
-        func fetchValues() {
-        
-            let setting = RemoteConfigSettings()
-            setting.minimumFetchInterval = 0
-            remoteConfig.configSettings = setting
+        if UserDefaults.standard.string(forKey: "enterCounter") == nil {
+            UserDefaults.standard.set(enterCounter, forKey: "enterCounter")
+        } else {
+            enterCounter = Int(UserDefaults.standard.string(forKey: "dosimeter")!)!
         }
+        
+        enterCounter = Int(UserDefaults.standard.string(forKey: "enterCounter")!)!
+        enterCounter += 1
+        UserDefaults.standard.set(enterCounter, forKey: "enterCounter")
+        
+        print(enterCounter)
+        
+        guard let result = persist.fetch() else { return }
+        recordings = result
+        freeSave = result.count
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if rateUsInt == 0 {
+            
+        } else {
+            DispatchQueue.main.async { [self] in
+                if Int(UserDefaults.standard.string(forKey: "enterCounter")!)! == 2 {
+                    rateUs()
+                }
+            }
+            let t = Int(UserDefaults.standard.string(forKey: "enterCounter")!)!
+        }
+    }
+    
+    func remoteConfigSetup() {
+        let setting = RemoteConfigSettings()
+        setting.minimumFetchInterval = 0
+        remoteConfig.configSettings = setting
         
         remoteConfig.fetchAndActivate { (status, error) in
             
@@ -165,12 +198,15 @@ class RecordView: UIViewController {
                         self.showVc = stringValue1
                     }
                 }
+                
+                if status != .error {
+                    if let stringValue2 =
+                        self.remoteConfig["rateUs"].stringValue {
+                        self.rateUsInt = Int(stringValue2)!
+                    }
+                }
             }
         }
-        
-        guard let result = persist.fetch() else { return }
-        recordings = result
-        freeSave = result.count
     }
     
     private func requestPermissions() {
@@ -180,6 +216,12 @@ class RecordView: UIViewController {
                 Constants().isFirstLaunch = false
             }
         }
+    }
+    
+    func rateUs() {
+        let vc = RateUsVC()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
@@ -197,7 +239,7 @@ extension RecordView {
                 isRecording = true
                 startRecordingAudio()
             }
-
+            
         } else {
             DispatchQueue.main.async {
                 let alertController = UIAlertController(
@@ -252,29 +294,72 @@ extension RecordView {
             avgBar.maxDecibelLabel.text = "0"
             avgBar.minDecibelLabel.text = "0"
             avgBar.avgDecibelLabel.text = "0"
-            
+            recordButton.setImage(UIImage(named: "playSVG"), for: .normal)
             guard let result = persist.fetch() else { return }
             recordings = result
             freeSave = result.count
             
-            if freeSave >= freeSaveRemote{
-            
-                
-                _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
-                    if showVc == "1"{
-                        let vcTwo = SubscribeTwoView()
-                        vcTwo.modalPresentationStyle = .fullScreen
-                        present(vcTwo, animated: true, completion: nil)
-                    } else if showVc == "2" {
+            if UserDefaults.standard.bool(forKey: "FullAccess") == false {
+                if freeSave >= freeSaveRemote{
+                    
+                    
+                    _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
+                        if showVc == "1"{
+                            let vcTwo = SubscribeTwoView()
+                            vcTwo.modalPresentationStyle = .fullScreen
+                            present(vcTwo, animated: true, completion: nil)
+                        } else if showVc == "2" {
                             let vcTrial = TrialSubscribe()
-                        vcTrial.modalPresentationStyle = .fullScreen
-                        present(vcTrial, animated: true, completion: nil)
+                            vcTrial.modalPresentationStyle = .fullScreen
+                            present(vcTrial, animated: true, completion: nil)
+                        } else if showVc == "3" {
+                            let vcTrial = TrialViewController()
+                            vcTrial.modalPresentationStyle = .fullScreen
+                            present(vcTrial, animated: true, completion: nil)
                         }
-
-                })
+                    })
+                    
+                } else {
+                    
+                    let alert = UIAlertController(title: "save",
+                                                  message: nil,
+                                                  preferredStyle: .alert)
+                    
+                    let cancel = UIAlertAction(title: "Cancel",
+                                               style: .cancel,
+                                               handler: nil)
+                    
+                    let save = UIAlertAction(
+                        title: "Save",
+                        style: .default,
+                        handler: { _ in
+                            let name = alert.textFields![0].text
+                            
+                            if name == "" {
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+                                self.info.name = "Record 1"
+                            } else {
+                                self.info.name = name
+                            }
+                            self.persist.saveAudio(info: self.info)
+                        }
+                    )
+                    
+                    alert.addTextField { textField in
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+                        textField.placeholder = "Record 1"
+                        
+                    }
+                    
+                    alert.addAction(cancel)
+                    alert.addAction(save)
+                    present(alert, animated: true, completion: nil)
+                }
                 
             } else {
-                
+                print("full access Record view")
                 let alert = UIAlertController(title: "save",
                                               message: nil,
                                               preferredStyle: .alert)
@@ -287,18 +372,18 @@ extension RecordView {
                     title: "Save",
                     style: .default,
                     handler: { _ in
-                    let name = alert.textFields![0].text
-                    
-                    if name == "" {
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                        self.info.name = "Record 1"
-                    } else {
-                        self.info.name = name
+                        let name = alert.textFields![0].text
+                        
+                        if name == "" {
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyy-M-d-HH:mm"
+                            self.info.name = "Record 1"
+                        } else {
+                            self.info.name = name
+                        }
+                        self.persist.saveAudio(info: self.info)
                     }
-                    self.persist.saveAudio(info: self.info)
-                }
-                    )
+                )
                 
                 alert.addTextField { textField in
                     let dateFormatter = DateFormatter()
@@ -311,7 +396,8 @@ extension RecordView {
                 alert.addAction(save)
                 present(alert, animated: true, completion: nil)
             }
-          
+            
+            
         }
     }
 }
@@ -350,63 +436,6 @@ extension RecordView {
             recordings = result
             freeSave = result.count
             
-            if freeSave >= freeSaveRemote{
-
-                
-                _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
-                    if showVc == "1"{
-                        let vcTwo = SubscribeTwoView()
-                        vcTwo.modalPresentationStyle = .fullScreen
-                        present(vcTwo, animated: true, completion: nil)
-                    } else if showVc == "2" {
-                            let vcTrial = TrialSubscribe()
-                        vcTrial.modalPresentationStyle = .fullScreen
-                        present(vcTrial, animated: true, completion: nil)
-                    } else if showVc == "3" {
-                    let vcTrial = TrialViewController()
-                    vcTrial.modalPresentationStyle = .fullScreen
-                    present(vcTrial, animated: true, completion: nil)
-                    }
-                })
-                
-            } else {
-                
-                let alert = UIAlertController(title: "save",
-                                              message: nil,
-                                              preferredStyle: .alert)
-                
-                let cancel = UIAlertAction(title: "Cancel",
-                                           style: .cancel,
-                                           handler: nil)
-                
-                let save = UIAlertAction(
-                    title: "Save",
-                    style: .default,
-                    handler: { _ in
-                    let name = alert.textFields![0].text
-                    
-                    if name == "" {
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                        self.info.name = "Record 1"
-                    } else {
-                        self.info.name = name
-                    }
-                    self.persist.saveAudio(info: self.info)
-                }
-                    )
-                
-                alert.addTextField { textField in
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                    textField.placeholder = "Record 1"
-                    
-                }
-                
-                alert.addAction(cancel)
-                alert.addAction(save)
-                present(alert, animated: true, completion: nil)
-            }
         }
     }
 }
@@ -414,24 +443,58 @@ extension RecordView {
 extension RecordView {
     
     @objc func startOrStopRecord() {
-        if isRecording {
-            recordButton.setImage(UIImage(named: "playSVG"), for: .normal)
-            isRecording = false
-            stopRecordingAudio()
+        
+        guard let result = persist.fetch() else { return }
+        recordings = result
+        freeSave = result.count
+        if UserDefaults.standard.bool(forKey: "FullAccess") == false {
+            if freeSave >= freeSaveRemote{
+                _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
+                    if showVc == "1"{
+                        let vcTwo = SubscribeTwoView()
+                        vcTwo.modalPresentationStyle = .fullScreen
+                        present(vcTwo, animated: true, completion: nil)
+                    } else if showVc == "2" {
+                        let vcTrial = TrialSubscribe()
+                        vcTrial.modalPresentationStyle = .fullScreen
+                        present(vcTrial, animated: true, completion: nil)
+                    } else if showVc == "3" {
+                        let vcTrial = TrialViewController()
+                        vcTrial.modalPresentationStyle = .fullScreen
+                        present(vcTrial, animated: true, completion: nil)
+                    }
+                })
+            }
+            if isRecording {
+                recordButton.setImage(UIImage(named: "playSVG"), for: .normal)
+                isRecording = false
+                stopRecordingAudio()
+            } else {
+                isRecording = true
+                startRecordingAudio()
+                recordButton.setImage(UIImage(named: "stop"), for: .normal)
+            }
         } else {
-            isRecording = true
-            startRecordingAudio()
-            recordButton.setImage(UIImage(named: "stop"), for: .normal)
+            if isRecording {
+                recordButton.setImage(UIImage(named: "playSVG"), for: .normal)
+                isRecording = false
+                stopRecordingAudio()
+            } else {
+                isRecording = true
+                startRecordingAudio()
+                recordButton.setImage(UIImage(named: "stop"), for: .normal)
+            }
+            
         }
     }
     
     @objc func resetButtonAction(){
-//        if Constants.shared.isRecordingAtLaunchEnabled {
-//            print("good")
-//        } else {
-//            print("enable reset")
-//            isRecording = false
-//        }
+        //        if Constants.shared.isRecordingAtLaunchEnabled {
+        //            print("good")
+        //        } else {
+        //            print("enable reset")
+        //            isRecording = false
+        //        }
         
         
         
@@ -450,7 +513,7 @@ extension RecordView {
         } else {
             print("stop")
         }
-      
+        
     }
 }
 
@@ -585,7 +648,7 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
         
         self.present(alertController, animated: true, completion: nil)
     }
-
+    
     
     func recorder(_ recorder: Recorder, didCaptureDecibels decibels: Int) {
         let degree = 180 / 110

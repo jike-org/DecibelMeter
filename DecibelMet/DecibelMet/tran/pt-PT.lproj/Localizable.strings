@@ -4,6 +4,15 @@
 "DetectSoundLevel" = "Detectar o
 Nível do Som";
 
+"SubFor" = "Assine a";
+
+"perWeek" = "por semana";
+
+"perMounth" = "por mês";
+
+"perYear" = "por ano";
+
+
 "MeasurementHistory" = "Histórico
 de Medidas";
 

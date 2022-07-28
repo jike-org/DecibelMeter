@@ -4,6 +4,15 @@
 "DetectSoundLevel" = "Определение Уровня
 Шума";
 
+"SubFor" = "Подписка за";
+
+"perWeek" = "в неделю";
+
+"perMounth" = "в месяц";
+
+"perYear" = "в год";
+
+
 "MeasurementHistory" = "Запись и
 Сохранение Замеров";
 

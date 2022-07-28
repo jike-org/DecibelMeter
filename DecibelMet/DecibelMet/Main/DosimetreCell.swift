@@ -15,7 +15,7 @@ class DosimeterCell: UICollectionViewCell {
     
     // MARK: UI elements
     lazy var timeTitle = Label(style: .time, "MAX: 10 min 58 sec")
-    lazy var dbTitel = Label(style: .dbTitel, "115")
+     var dbTitel = Label(style: .dbTitel, "115")
     lazy var dbImage = Label(style: .dbImage, "dB")
     lazy var procent = Label(style: .time, "100%")
     lazy var time = Label(style: .time, "00:00")
@@ -43,34 +43,68 @@ class DosimeterCell: UICollectionViewCell {
         contentView.addSubview(procent)
         contentView.addSubview(time)
         contentView.addSubview(viewColor)
-        NSLayoutConstraint.activate([
+        
+        if UIScreen.main.bounds.height > 700 {
+            NSLayoutConstraint.activate([
 
-            timeTitle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
-            timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 15),
-            timeTitle.heightAnchor.constraint(equalToConstant: 20),
-            timeTitle.widthAnchor.constraint(equalToConstant: 130),
-            
-            dbTitel.topAnchor.constraint(equalTo: timeTitle.bottomAnchor,constant: 5),
-            dbTitel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            dbTitel.heightAnchor.constraint(equalToConstant: 20),
-            dbTitel.widthAnchor.constraint(equalToConstant: 30),
-            
-            dbImage.topAnchor.constraint(equalTo: timeTitle.bottomAnchor,constant: -1),
-            dbImage.leadingAnchor.constraint(equalTo: dbTitel.trailingAnchor, constant: -4),
-            dbImage.heightAnchor.constraint(equalToConstant: 20),
-            dbImage.widthAnchor.constraint(equalToConstant: 30),
-            
-            procent.topAnchor.constraint(equalTo: timeTitle.topAnchor, constant: 5),
-            procent.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            time.topAnchor.constraint(equalTo: timeTitle.topAnchor, constant: 5),
-            time.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            
-            viewColor.topAnchor.constraint(equalTo: dbImage.bottomAnchor),
-            viewColor.leadingAnchor.constraint(equalTo: dbImage.trailingAnchor, constant: 5),
-            viewColor.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            viewColor.heightAnchor.constraint(equalToConstant: 5)
-        ])
+                timeTitle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
+                timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 15),
+                timeTitle.heightAnchor.constraint(equalToConstant: 20),
+                timeTitle.widthAnchor.constraint(equalToConstant: 130),
+                
+                dbTitel.topAnchor.constraint(equalTo: timeTitle.bottomAnchor,constant: 5),
+                dbTitel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+                dbTitel.heightAnchor.constraint(equalToConstant: 20),
+                dbTitel.widthAnchor.constraint(equalToConstant: 30),
+                
+                dbImage.topAnchor.constraint(equalTo: timeTitle.bottomAnchor,constant: -1),
+                dbImage.leadingAnchor.constraint(equalTo: dbTitel.trailingAnchor, constant: -4),
+                dbImage.heightAnchor.constraint(equalToConstant: 20),
+                dbImage.widthAnchor.constraint(equalToConstant: 30),
+                
+                procent.topAnchor.constraint(equalTo: timeTitle.topAnchor, constant: 5),
+                procent.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                
+                time.topAnchor.constraint(equalTo: timeTitle.topAnchor, constant: 5),
+                time.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+                
+                viewColor.topAnchor.constraint(equalTo: dbTitel.bottomAnchor, constant: -12),
+                viewColor.leadingAnchor.constraint(equalTo: dbImage.trailingAnchor, constant: 5),
+                viewColor.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+                viewColor.heightAnchor.constraint(equalToConstant: 5)
+            ])
+
+        } else {
+            NSLayoutConstraint.activate([
+
+                timeTitle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 1),
+                timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 15),
+                timeTitle.heightAnchor.constraint(equalToConstant: 20),
+                timeTitle.widthAnchor.constraint(equalToConstant: 130),
+                
+                dbTitel.topAnchor.constraint(equalTo: timeTitle.bottomAnchor,constant: 2),
+                dbTitel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+                dbTitel.heightAnchor.constraint(equalToConstant: 20),
+                dbTitel.widthAnchor.constraint(equalToConstant: 30),
+                
+                dbImage.topAnchor.constraint(equalTo: timeTitle.bottomAnchor,constant: -1),
+                dbImage.leadingAnchor.constraint(equalTo: dbTitel.trailingAnchor, constant: -4),
+                dbImage.heightAnchor.constraint(equalToConstant: 20),
+                dbImage.widthAnchor.constraint(equalToConstant: 30),
+                
+                procent.topAnchor.constraint(equalTo: timeTitle.topAnchor, constant: 5),
+                procent.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                
+                time.topAnchor.constraint(equalTo: timeTitle.topAnchor, constant: 5),
+                time.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+                
+                viewColor.topAnchor.constraint(equalTo: dbTitel.topAnchor, constant: 5),
+                viewColor.leadingAnchor.constraint(equalTo: dbImage.trailingAnchor, constant: 5),
+                viewColor.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+                viewColor.heightAnchor.constraint(equalToConstant: 5)
+            ])
+
+        }
     }
     
     required init?(coder: NSCoder) {

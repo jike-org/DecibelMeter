@@ -9,8 +9,15 @@ import Foundation
 import UIKit
 import AVFAudio
 import CoreLocation
+import FirebaseRemoteConfig
 
 class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
+    
+    let remoteConfig = RemoteConfig.remoteConfig()
+    lazy var freeCamera: Int = 3
+    lazy var showVc = "1"
+    var counterCamera = -1
+    var defaults = UserDefaults.standard
     
     var locationManager: CLLocationManager!
     let lnoise = NSLocalizedString("noiseData", comment: "")
@@ -32,7 +39,6 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
     var imageTake: UIImageView!
     var imagePicker: UIImagePickerController!
     let takePhotoButton = Button(style: .restoreButton, "TAKEPHOTO")
-    let savePhotoButton = Button(style: .restoreButton, "TAKEPHOTO")
     
     enum ImageSource {
         case photoLibrary
@@ -41,6 +47,9 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        takePhoto()
+        remote()
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -54,27 +63,46 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
         recorder.delegate = self
         recorder.avDelegate = self
         startRecordingAudio()
-        selectImageFrom(.camera)
+//        selectImageFrom(.camera)
         view.addSubview(takePhotoButton)
-        takePhotoButton.backgroundColor = .cyan
-        //        takePhotoButton.layer.zPosition = 1
+        takePhotoButton.backgroundColor = .white
+        takePhotoButton.tintColor = .black
         takePhotoButton.translatesAutoresizingMaskIntoConstraints = false
         takePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         takePhotoButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        view.addSubview(savePhotoButton)
+        takePhotoButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 40)
         takePhotoButton.addTarget(self, action: #selector(takePhoto), for: .touchUpInside)
-        savePhotoButton.addTarget(self, action: #selector(save), for: .touchUpInside)
         
+        if defaults.string(forKey: "camera") == nil {
+            defaults.set(counterCamera, forKey: "camera")
+        }
+
+        counterCamera = Int(defaults.string(forKey: "camera")!)!
         
     }
-    
+
     //MARK: - Take image
     @objc func takePhoto() {
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            selectImageFrom(.photoLibrary)
-            return
+        counterCamera += 1
+        defaults.set(counterCamera, forKey: "camera")
+        if UserDefaults.standard.bool(forKey: "FullAccess") == false {
+            if counterCamera >= freeCamera {
+                purchasesCall()
+            } else {
+                guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                    selectImageFrom(.photoLibrary)
+                    return
+                }
+                selectImageFrom(.camera)
+            }
+        } else {
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                selectImageFrom(.photoLibrary)
+                return
+            }
+            selectImageFrom(.camera)
         }
-        selectImageFrom(.camera)
+    
     }
     
     func guideForCameraOverlay1() -> UIView {
@@ -90,9 +118,6 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
         guide.addSubview(noiseLevel)
         date.textAlignment = .right
         location.textAlignment = .right
-        //        guide.addSubview(labelMin)
-        //        guide.addSubview(labelAvg)
-        //        guide.addSubview(noiseLevel)
         
         NSLayoutConstraint.activate([
             noiseLevel.topAnchor.constraint(equalTo: guide.safeAreaLayoutGuide.topAnchor, constant: 100),
@@ -137,7 +162,6 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
         return guide
     }
     
-    
     func selectImageFrom(_ source: ImageSource){
         imagePicker =  UIImagePickerController()
         imagePicker.delegate = self
@@ -148,7 +172,6 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
             imagePicker.sourceType = .photoLibrary
         }
         imagePicker.cameraOverlayView = guideForCameraOverlay1()
-        //        imagePicker.cameraOverlayView = guideForCameraOverlay()
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -175,12 +198,57 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
     }
 }
 
+extension PhotoCameraController {
+    func remote() {
+        let setting = RemoteConfigSettings()
+        setting.minimumFetchInterval = 0
+        remoteConfig.configSettings = setting
+        remoteConfig.fetchAndActivate { (status, error) in
+            if error !=  nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                if status != .error {
+                    if let stringValue =
+                        self.remoteConfig["availableFreePhoto"].stringValue {
+                        self.freeCamera = Int(stringValue)!
+                        print(self.freeCamera)
+                    }
+                    if let stringValue1 =
+                        self.remoteConfig["otherScreenNumber"].stringValue {
+                        self.showVc = (stringValue1)
+                    }
+                }
+            }
+        }
+    }
+    
+    func purchasesCall() {
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] Timer in
+            if showVc == "1"{
+                let vcTwo = SubscribeTwoView()
+                vcTwo.modalPresentationStyle = .fullScreen
+                present(vcTwo, animated: true, completion: nil)
+            } else if showVc == "2" {
+                let vcTrial = TrialSubscribe()
+                vcTrial.modalPresentationStyle = .fullScreen
+                present(vcTrial, animated: true, completion: nil)
+            } else if showVc == "3" {
+                let vcTrial = TrialViewController()
+                vcTrial.modalPresentationStyle = .fullScreen
+                present(vcTrial, animated: true, completion: nil)
+            }
+        })
+    }
+    
+}
+
 extension PhotoCameraController: UIImagePickerControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
-        imagePicker.dismiss(animated: true, completion: nil)
-        guard let selectedImage = info[.originalImage] as? UIImage else {
-            print("Image not found!")
+        imagePicker.dismiss(animated: true)
+
+        guard info[.originalImage] is UIImage else {
+          print("Image not found!")
             return
         }
         let keyWindow = UIApplication.shared.connectedScenes
@@ -189,7 +257,7 @@ extension PhotoCameraController: UIImagePickerControllerDelegate{
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first
-        
+
         guard let layer = keyWindow?.layer else { return }
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
@@ -197,15 +265,10 @@ extension PhotoCameraController: UIImagePickerControllerDelegate{
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
-        
-        let vc = TabBar()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
     }
 }
 
 extension PhotoCameraController {
-    
     private func startRecordingAudio() {
         recorder.record(self)
         recorder.startMonitoring()
@@ -225,9 +288,7 @@ extension PhotoCameraController: AVAudioRecorderDelegate, RecorderDelegate {
     
     func recorderDidFailToAchievePermission(_ recorder: Recorder) {
         let alertController = UIAlertController(title: "Microphone permissions denied", message: "Microphone permissions have been denied for this app. You can change this by going to Settings", preferredStyle: .alert)
-        
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
         let settingButton = UIAlertAction(title: "Settings", style: .default) { _
             in
             UIApplication.shared.open(
@@ -235,14 +296,11 @@ extension PhotoCameraController: AVAudioRecorderDelegate, RecorderDelegate {
                 options: [:],
                 completionHandler: nil)
         }
-        
         alertController.addAction(cancelButton)
         alertController.addAction(settingButton)
-        
         DispatchQueue.main.async {
             self.present(alertController, animated: true, completion: nil)
         }
-        
     }
     
     func recorder(_ recorder: Recorder, didCaptureDecibels decibels: Int) {

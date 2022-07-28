@@ -93,11 +93,15 @@ extension InAppManager: SKPaymentTransactionObserver {
     private func completed(transaction: SKPaymentTransaction){
         NotificationCenter.default.post(name: NSNotification.Name(transaction.payment.productIdentifier), object: nil)
         paymentQueue.finishTransaction(transaction)
+        let access = true
+        UserDefaults.standard.set(access, forKey: "FullAccess")
     }
     
     private func restored(transaction: SKPaymentTransaction){
         print("success")
         restoreCompletedTrans()
+        let access = true
+        UserDefaults.standard.set(access, forKey: "FullAccess")
     }
 }
 
