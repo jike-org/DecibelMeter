@@ -23,7 +23,6 @@ class SubscribeViewController: UICollectionViewCell {
     let product = InAppManager.share.product
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     
-
     lazy var trialButton = Label(style: .trial, "\(lTrial) \n\(priceStringFor(product: product[3])) \(lTrialThen)")
 
     public static let identifier = "SubscribeOne"
@@ -34,7 +33,7 @@ class SubscribeViewController: UICollectionViewCell {
         super.init(frame: frame)
         setup()
         
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
         
         func fetchValues() {
         
@@ -46,12 +45,10 @@ class SubscribeViewController: UICollectionViewCell {
         remoteConfig.fetchAndActivate { (status, error) in
             
             if error !=  nil {
-                print(error?.localizedDescription)
             } else {
                 if status != .error {
                     if let stringValue =
                         self.remoteConfig["textSubscriptionDelay"].stringValue {
-                        print (stringValue)
                         self.textDelay = Int(stringValue)!
                     }
                 }
@@ -63,7 +60,7 @@ class SubscribeViewController: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {backImage
+    func setup() {
         trialButton.isHidden = true
         _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false, block: { Timer in
             self.trialButton.isHidden = false
@@ -97,7 +94,6 @@ class SubscribeViewController: UICollectionViewCell {
         numberFormatter.numberStyle = .currency
         numberFormatter.locale = product.priceLocale
         
-        print(numberFormatter.string(from: product.price)!)
         return numberFormatter.string(from: product.price)!
     }
     
@@ -105,8 +101,7 @@ class SubscribeViewController: UICollectionViewCell {
     }
     
     @objc func trialButtonTapped1() {
-        print("купил")
-        Constants.shared.hasPurchased = true
+       
         
     }
 }

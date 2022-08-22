@@ -53,17 +53,14 @@ class OnboardingView: UIViewController {
         fetchValues()
         setupView()
         
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.week.rawValue), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounth.rawValue), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.year.rawValue), object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.week.rawValue), object: nil)
+//        
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounth.rawValue), object: nil)
+//        
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.year.rawValue), object: nil)
     }
     
     @objc func trialButtonTapped1() {
-        print("купил")
-        Constants.shared.hasPurchased = true
-        
         let vc = TabBar()
         vc.modalPresentationStyle = .fullScreen
         
@@ -80,7 +77,6 @@ class OnboardingView: UIViewController {
         remoteConfig.fetchAndActivate { (status, error) in
             
             if error !=  nil {
-                print(error?.localizedDescription)
             } else {
                 if status != .error {
                     if let stringValue =
@@ -94,13 +90,11 @@ class OnboardingView: UIViewController {
         remoteConfig.fetchAndActivate { (status, error) in
             
             if error !=  nil {
-                print(error?.localizedDescription)
             } else {
                 if status != .error {
                     if let stringValue =
                         self.remoteConfig["welcomeTourScreenNumber"].stringValue {
                         self.changeSub = stringValue
-                        print(self.changeSub)
                     }
                 }
             }
@@ -215,7 +209,6 @@ extension OnboardingView {
     }
     
     @objc func trialButtonTapped() {
-        print("fknas")
     }
     
     @objc func nextPage() {
@@ -237,36 +230,46 @@ extension OnboardingView {
 //            present(vcTrial, animated: true, completion: nil)
 //            }
         } else {
-            let _ = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { [self] Timer in
-                if changeSub == "1"{
-//                    Constants.shared.isFirstLaunch = true
+            var r = "1"
+            if let stringValue =
+                self.remoteConfig["welcomeTourScreenNumber"].stringValue {
+                r = stringValue
+            }
+            
+                if r == "2"{
                     let vcTwo = SubscribeTwoView()
                     vcTwo.modalPresentationStyle = .fullScreen
+                    vcTwo.modalTransitionStyle = .crossDissolve
                     present(vcTwo, animated: true, completion: nil)
-                } else if changeSub == "2" {
+                    
+                } else if r == "1" {
                         let vcTrial = TrialSubscribe()
-//                    Constants.shared.isFirstLaunch = true
                     vcTrial.modalPresentationStyle = .fullScreen
+                    vcTrial.modalTransitionStyle = .crossDissolve
                     present(vcTrial, animated: true, completion: nil)
-                } else if changeSub == "3" {
-//                    Constants.shared.isFirstLaunch = true
+                    
+                } else if r == "3" {
                 let vcTrial = TrialViewController()
                 vcTrial.modalPresentationStyle = .fullScreen
+                vcTrial.modalTransitionStyle = .crossDissolve
                 present(vcTrial, animated: true, completion: nil)
-                }
+                    
+                } else {
+                    let vcTrial = TrialSubscribe()
+                vcTrial.modalPresentationStyle = .fullScreen
+                vcTrial.modalTransitionStyle = .crossDissolve
+                present(vcTrial, animated: true, completion: nil)
             }
         }
     }
     
     @objc func getTermsOfUse() {
-        print("Terms of use")
         
         let url = URL(string: "https://www.mindateq.io/terms-of-use")
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     @objc func getPrivacyPolicy() {
-        print("Privacy policy")
         
         let url = URL(string: "https://www.mindateq.io/privacy-policy")
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
@@ -275,7 +278,6 @@ extension OnboardingView {
     @objc func restoreButtonTapped() {
         SKPaymentQueue.default().restoreCompletedTransactions()
         
-        print("restored")
     }
     
 }

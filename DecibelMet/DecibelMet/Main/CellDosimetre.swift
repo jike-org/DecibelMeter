@@ -19,8 +19,8 @@ class CellDosimetre: UICollectionViewCell {
     lazy var dbImage = Label(style: .dbImage, "dB")
     var procent = Label(style: .time, "100%")
     lazy var time = Label(style: .time, "00:00")
-    lazy var viewColor: UIView = {
-        let view = UIView()
+    lazy var viewColor: UIProgressView = {
+        let view = UIProgressView()
         view.backgroundColor = .systemGray
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 3
@@ -133,7 +133,29 @@ class CellDosimetre: UICollectionViewCell {
         item
             .timeEvent
             .compactMap { $0[item.db] }
-            .map { "00:" + String($0) }
+            .map {
+                let minutes = (Int($0) - (Int($0) % 60)) / 60
+                let seconds = Int($0) - (minutes * 60)
+                
+                let strMinutes: String
+                let strSeconds: String
+                
+                if minutes <= 9 {
+                    strMinutes = "0\(minutes)"
+                } else {
+                    strMinutes = "\(minutes)"
+                }
+                
+                if seconds <= 9 {
+                    strSeconds = "0\(seconds)"
+                } else {
+                    strSeconds = "\(seconds)"
+                }
+                
+               let d = "\(strMinutes):\(strSeconds)"
+                return d
+                
+            }
             .assign(to: \.text, on: time)
             .store(in: &subscriptions)
     }

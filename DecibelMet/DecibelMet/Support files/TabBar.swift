@@ -26,32 +26,32 @@ extension TabBar {
         let saved = SaveController()
         let savedIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "savedTabBar"),
-            selectedImage: UIImage(named: "SaveTap")?.withRenderingMode(.alwaysOriginal)
+            image: UIImage(named: "Button2-13"),
+            selectedImage: UIImage(named: "Button2-20")?.withRenderingMode(.alwaysOriginal)
         )
         saved.tabBarItem = savedIcon
         
         let home = RecordView()
         let homeIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "homeTabBar"),
-            selectedImage: UIImage(named: "homeTap")?.withRenderingMode(.alwaysOriginal)
+            image: UIImage(named: "Button2-16"),
+            selectedImage: UIImage(named: "Button2-17")?.withRenderingMode(.alwaysOriginal)
         )
         home.tabBarItem = homeIcon
         
         let settings = SettingsView()
         let settingsIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "settingTabBar"),
-            selectedImage: UIImage(named: "SettingsTap")?.withRenderingMode(.alwaysOriginal)
+            image: UIImage(named: "Button2-14"),
+            selectedImage: UIImage(named: "Button2-19")?.withRenderingMode(.alwaysOriginal)
         )
         settings.tabBarItem = settingsIcon
         
         let camera = PhotoCameraController()
         let cameraIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "cameraTabBar"),
-            selectedImage: UIImage(named: "CameraTap")?.withRenderingMode(.alwaysOriginal)
+            image: UIImage(named: "Button2-15"),
+            selectedImage: UIImage(named: "Button2-18")?.withRenderingMode(.alwaysOriginal)
             
         )
         camera.tabBarItem = cameraIcon
@@ -59,8 +59,8 @@ extension TabBar {
         let faq = Dosimeter()
         let faqIcon = UITabBarItem(
             title: "",
-            image: UIImage(named: "dosimetreTabBar"),
-            selectedImage: UIImage(named: "DosimetreTap")?.withRenderingMode(.alwaysOriginal)
+            image: UIImage(named: "Button2-12"),
+            selectedImage: UIImage(named: "Button2-21")?.withRenderingMode(.alwaysOriginal)
         )
         faq.tabBarItem = faqIcon
         
@@ -69,10 +69,23 @@ extension TabBar {
         viewControllers = views
         
 //        tabBar.backgroundColor = UIColor(named: "backgroundColor")
-        tabBar.tintColor = .black
-        tabBar.barTintColor = .black
+        tabBar.tintColor = .clear
+        tabBar.barTintColor = .clear
         tabBar.isTranslucent = true
     }
     
+}
+
+extension TabBar {
+    func handleDeepLink(_ deepLink: DeepLink) {
+        switch deepLink {
+        case .home:
+            selectedIndex = 2
+            present(TabBar(), animated: true)
+        case .dosimeter:
+            selectedIndex = 5
+            present(TabBar(), animated: true)
+        }
+    }
 }
 

@@ -9,3 +9,4 @@ NSMicrophoneUsageDescription = "Defina a permissão de uso do microfone nos ajus
 NSCameraUsageDescription = "Defina a permissão de uso da câmera nos ajustes para funcionar";
 NSPhotoLibraryAddUsageDescription = "Defina a permissão de uso da Galeria nos ajustes para funcionar";
 NSLocationWhenInUseUsageDescription = "Defina a permissão de uso de localização par funcionar";
+CFBundleDisplayName = "Decibelímetro";

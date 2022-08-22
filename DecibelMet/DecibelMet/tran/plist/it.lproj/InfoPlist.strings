@@ -9,3 +9,4 @@ NSMicrophoneUsageDescription = "Imposta i permessi per l'utilizzo del microfono 
 NSCameraUsageDescription = "Imposta i permessi per l'utilizzo della fotocamera nelle impostazioni";
 NSPhotoLibraryAddUsageDescription = "Imposta i permessi per l'utilizzo della libreria di foto nelle impostazioni";
 NSLocationWhenInUseUsageDescription = "Imposta i permessi per l'utilizzo della localizzazione nelle impostazioni";
+CFBundleDisplayName = "Decibel Meter";

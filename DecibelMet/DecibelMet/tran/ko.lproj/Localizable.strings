@@ -25,9 +25,9 @@
 "Location" = "위치";
 
 "PhotoLibrary" = "사진 라이브러리";
-
+"then" = "それから";
 "Ok" = "확인";
- 
+"trialText" = "7일 무료 체험 후,";
 "AllowOnce" = "한 번 허용";
 
 "AllowWhile" = "앱을 사용하는 동안 허용";
@@ -81,11 +81,15 @@
 
 "Restore" = "복원";
 
-"Maximum" = "최대:";
+"Maximum" = "최대";
+"subNO" = "죄송합니다. 활성 구독이 없습니다.";
 
-"Average" = "평균:";
+"subscription" = "Subscription";
 
-"Minimum" = "최소:";
+"subYES" = "Restored subscription";
+"Average" = "평균";
+
+"Minimum" = "최소";
 
 "Minute" = "분";
 
@@ -128,10 +132,23 @@
 "SetPhoto" = "작업 설정에서 사진 라이브러리 사용 권한을 설정해 주세요";
 
 "AllowLocation" = "“데시벨 미터”에서 사용자의 위치를 사용하도록 허용하시겠습니까?";
-
+"reset" = "초기화";
 "CaptureImage" = "캡처된 이미지에서 도시 위치를 표시하는 데 사용됩니다";
 
 "Locationpermission" = "위치 사용 권한";
+"faq1" = "The sound level meter can measure ambient noise in real time, as well as record and play recordings. For the sound level meter to work and determine the level of detected noise, open access to the microphone of your device. The sound data read by the microphone is expressed in decibels (dB).
+On the main screen, there is the current measurement and multiple controls. The big blue record button (start of measurement) is in the middle.
+MAX — a maximum value in the current measurement.
+AVG — an average value in the current measurement.
+MIN — an minimum average value in the current measurement.";
+
+"faq11" = "How to use the application?";
+"faq22" = "Why doesn't the app measure the noise level and the main screen shows zero?";
+"faq33" = "Why doesn't the app store geo-location information while recording?";
+
+"faq2" = "If instead of measurements you see a zero on the main screen, then you have banned the sound level meter to access your microphone. Go to Settings > Privacy policy > Microphone and allow the program access to the microphone.";
+
+"faq3" = "If the program does not save information on geographical position during recording, it means you have banned to access to geographical location data. Go to Settings > Privacy policy > Location Services and allow the program to access the data.";
 
 "setLocation" = "작업 설정에서 위치 사용 권한을 설정해 주세요";
 

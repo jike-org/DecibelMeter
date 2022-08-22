@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import StoreKit
+import MessageUI
+
 class RateUsVC: UIViewController {
     
     let lYes = NSLocalizedString("Yes", comment: "")
@@ -17,9 +19,20 @@ class RateUsVC: UIViewController {
     lazy var noButton = Button(style: .rateus, lNo)
     lazy var likeLabel = Label(style: .likeLabel, lLike)
     
+    var counterDismiss = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        counterDismiss += 1
+
+        if counterDismiss % 2 == 0 {
+            dismiss(animated: true)
+        }
     }
     
     lazy var mainView: UIView = {
@@ -117,6 +130,28 @@ extension RateUsVC {
     }
     
     @objc func NoTapped() {
-        dismiss(animated: true)
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            let systemVersion = UIDevice.current.systemVersion
+            let devicename = UIDevice.modelName
+            let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            mail.setToRecipients(["support@mindateq.io"])
+            mail.setSubject("Decibel Meter — User Question ")
+            mail.setMessageBody("<p>\(systemVersion) \(devicename)<p>build Number -  \(appVersion!) (\(buildNumber))</p> </p>", isHTML: true)
+            mail.modalPresentationStyle = .fullScreen
+            present(mail, animated: true)
+        } else {
+            
+        }
+//        dismiss(animated: true)
+    }
+}
+
+extension RateUsVC: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }

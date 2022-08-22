@@ -44,7 +44,6 @@ public class Persist {
         do {
             try context.save()
         } catch {
-            print(error)
         }
     }
     
@@ -54,7 +53,6 @@ public class Persist {
             let response = try viewContext.fetch(Record.fetchRequest())
             return response
         } catch {
-            print(error)
         }
         
         return nil
@@ -69,8 +67,6 @@ public class Persist {
         do {
             try fileManager.moveItem(at: path, to: resultPath)
         } catch {
-            print("[FAIL] File don't renamed: ")
-            print(error)
         }
     }
     

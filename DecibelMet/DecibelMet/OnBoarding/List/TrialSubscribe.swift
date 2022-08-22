@@ -5,6 +5,8 @@
 //  Created by Stas Dashkevich on 16.05.22.
 //
 
+// 1 экран
+
 import Foundation
 import UIKit
 import StoreKit
@@ -27,9 +29,17 @@ class TrialSubscribe: UIViewController {
     let lmounth = NSLocalizedString("Month", comment: "")
     let lyear = NSLocalizedString("Year", comment: "")
     let lAcces = NSLocalizedString("UnlockAllAccess", comment: "")
-    
-    var xMarkDelay = 5
-    var textDelay = 5
+    let tTrial = NSLocalizedString("Start7Day", comment: "")
+    let lthen = NSLocalizedString("trialText", comment: "")
+    let lweekPer  = NSLocalizedString("perWeek", comment: "")
+    let small = NSLocalizedString("perWeekSmall", comment: "")
+    let lMounth = NSLocalizedString("perMounth", comment: "")
+    let lYear = NSLocalizedString("perYear", comment: "")
+    let lMounthSmall = NSLocalizedString("perMounthSmall", comment: "")
+    let lYearSmall = NSLocalizedString("perYearSmall", comment: "")
+    var sub = "com.decibelmeter.1wetr"
+    var xMarkDelay = 1
+    var textDelay = 3
     lazy var subText = Label(style: .textSub, "")
     lazy var subText1 = Label(style: .textSub, "")
     lazy var subText2 = Label(style: .textSub, "")
@@ -47,7 +57,7 @@ class TrialSubscribe: UIViewController {
     lazy var terms = Button(style: .subscriptionVC, lterms)
     lazy var andLabel = Label(style: .time, land)
     lazy var xMark = Button(style: .close, "X")
-    lazy var trialButton = Button(style: .trial, "Start with a 7 day trial, \(priceStringFor(product: product[3])) then per week")
+    lazy var trialButton = Button(style: .trial, "")
     lazy var acces = Label(style: .acces, lAcces.uppercased())
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     
@@ -64,11 +74,33 @@ class TrialSubscribe: UIViewController {
         setup()
         remoteConfigSetup()
         
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
+//        
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounthTrial.rawValue), object: nil)
+//        
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.yearTrial.rawValue), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounthTrial.rawValue), object: nil)
+        if UserDefaults.standard.value(forKey: "theme") == nil {
+            let one = 1
+            UserDefaults.standard.set(one, forKey: "theme")
+        }
         
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.yearTrial.rawValue), object: nil)
+        if UserDefaults.standard.value(forKey: "theme") as! Int == 1 {
+            backgroundViewImage.image = UIImage(named: "04")
+            privacy.setTitleColor(.systemBlue, for: .normal)
+            terms.setTitleColor(.systemBlue, for: .normal)
+        }
+        
+        if UserDefaults.standard.value(forKey: "theme") as! Int == 0 {
+            backgroundViewImage.image = UIImage(named: "06")
+            privacy.setTitleColor(.white, for: .normal)
+            terms.setTitleColor(.white, for: .normal)
+            andLabel.textColor = .white
+        }
     }
     
     func remoteConfigSetup() {
@@ -76,39 +108,49 @@ class TrialSubscribe: UIViewController {
         setting.minimumFetchInterval = 0
         remoteConfig.configSettings = setting
         
-        remoteConfig.fetchAndActivate { (status, error) in
-            
-            if error !=  nil {
-                print(error?.localizedDescription)
-            } else {
-                if status != .error {
-                    if let stringValue =
-                        self.remoteConfig["closeButtonDelay"].stringValue {
-                        print (stringValue)
-                        self.xMarkDelay = Int(stringValue)!
+        let queue = DispatchQueue.global(qos: .userInteractive)
+        queue.async{ [self] in
+            remoteConfig.fetchAndActivate { [self] (status, error) in
+                
+                if error !=  nil {
+                   
+                } else {
+                    if status != .error {
+                        if let stringValue =
+                            self.remoteConfig["closeButtonDelay"].stringValue {
+                            self.xMarkDelay = Int(stringValue)!
+                            let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
+                                xMark.isHidden = false
+                            }
+                        }
+                    }
+                }
+                
+                if error !=  nil {
+                    
+                } else {
+                    if status != .error {
+                        if let stringValue =
+                            self.remoteConfig["textSubscriptionDelay"].stringValue {
+                            self.textDelay = Int(stringValue)!
+                            let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
+                                trialButton.isHidden = false
+                            }
+                        }
+                    }
+                }
+                
+                if error !=  nil {
+                
+                } else {
+                    if status != .error {
+                        if let stringValue =
+                            self.remoteConfig["welcomeTourSubscription"].stringValue {
+                            self.sub = String(stringValue)
+                        }
                     }
                 }
             }
-            
-            if error !=  nil {
-                print(error?.localizedDescription)
-            } else {
-                if status != .error {
-                    if let stringValue =
-                        self.remoteConfig["textSubscriptionDelay"].stringValue {
-                        print (stringValue)
-                        self.textDelay = Int(stringValue)!
-                    }
-                }
-            }
-        }
-        
-        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
-            xMark.isHidden = false
-        }
-        
-        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
-            trialButton.isHidden = false
         }
     }
     
@@ -126,6 +168,29 @@ class TrialSubscribe: UIViewController {
 extension TrialSubscribe {
     
     func setup() {
+        xMark.isHidden = true
+        trialButton.isHidden = true
+        
+        if let stringValue =
+            self.remoteConfig["closeButtonDelay"].stringValue {
+            self.xMarkDelay = Int(stringValue)!
+        }
+        
+        if let stringValue =
+            self.remoteConfig["textSubscriptionDelay"].stringValue {
+          
+            self.textDelay = Int(stringValue)!
+        }
+        
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
+            trialButton.isHidden = false
+        }
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
+            xMark.isHidden = false
+        }
+        trialButton.setTitle(tTrial, for: .normal)
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "circle.fill")
         imageAttachment.image = UIImage(systemName: "circle.fill")?.withTintColor(.white)
@@ -250,7 +315,7 @@ extension TrialSubscribe {
     }
     
     @objc func yearSub() {
-        iapManager.purchase(productWith: "com.decibelmeter.1yetr")
+        IAPManager.shared.purchase(purchase: .yearTrial)
         DispatchQueue.main.async {
             self.spinenr.startAnimating()
             _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
@@ -260,7 +325,7 @@ extension TrialSubscribe {
     }
     
     @objc func mounthSub() {
-        iapManager.purchase(productWith: "com.decibelmeter.1motr")
+        IAPManager.shared.purchase(purchase: .mounthTrial)
         DispatchQueue.main.async {
             self.spinenr.startAnimating()
             _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
@@ -270,7 +335,8 @@ extension TrialSubscribe {
     }
     
     @objc func weekSub() {
-        iapManager.purchase(productWith: "com.decibelmeter.1wetr")
+        IAPManager.shared.purchase(purchase: .weekTrial)
+
         DispatchQueue.main.async {
             self.spinenr.startAnimating()
             _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
@@ -280,9 +346,9 @@ extension TrialSubscribe {
     }
     
     @objc func trialButtonTapped1() {
-        print("купил")
-        Constants.shared.hasPurchased = true
-        dismiss(animated: true)
+//        print("купил")
+//        Constants.shared.hasPurchased = true
+//        dismiss(animated: true)
         
     }
     
@@ -299,19 +365,70 @@ extension TrialSubscribe {
     }
     
     @objc func restoreButtonTapped() {
-        SKPaymentQueue.default().restoreCompletedTransactions()
+        let alertController = UIAlertController(title:NSLocalizedString("DecibelMeter", comment: "")  , message: NSLocalizedString("subNO", comment: ""), preferredStyle: .alert)
+        
+        let cancelButton = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelButton)
+        
+        let alertController2 = UIAlertController(title: NSLocalizedString("subYES", comment: ""), message: "A", preferredStyle: .alert)
+        
+        let cancelButton2 = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
+        
+        alertController2.addAction(cancelButton2)
+//        SKPaymentQueue.default().restoreCompletedTransactions()
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else if results.restoredPurchases.count > 0 {
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else {
+            }
+        }
 
     }
     
     @objc func trialButtonTapped() {
-        iapManager.purchase(productWith: "com.decibelmeter.1wetr")
-        DispatchQueue.main.async {
-            self.spinenr.startAnimating()
-            _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
-                self.spinenr.stopAnimating()
-            })
-        }
     }
+//        if sub == "com.decibelmeter.1wetr" {
+//            iapManager.purchase(productWith: "com.decibelmeter.1wetr")
+//            spinenr.startAnimating()
+//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
+//                spinenr.stopAnimating()
+//            }
+//        } else if  sub == "com.decibelmeter.1we" {
+//            iapManager.purchase(productWith: "com.decibelmeter.1we")
+//            spinenr.startAnimating()
+//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
+//                spinenr.stopAnimating()
+//            }
+//        } else if sub == "com.decibelmeter.1mo" {
+//            iapManager.purchase(productWith: "com.decibelmeter.1mo")
+//            spinenr.startAnimating()
+//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
+//                spinenr.stopAnimating()
+//            }
+//        } else if sub == "com.decibelmeter.1ye" {
+//            iapManager.purchase(productWith: "com.decibelmeter.1ye")
+//            spinenr.startAnimating()
+//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
+//                spinenr.stopAnimating()
+//            }
+//        } else if sub == "com.decibelmeter.1yetr" {
+//            iapManager.purchase(productWith: "com.decibelmeter.1yetr")
+//            spinenr.startAnimating()
+//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
+//                spinenr.stopAnimating()
+//            }
+//        } else if sub == "com.decibelmeter.1motr" {
+//            iapManager.purchase(productWith: "com.decibelmeter.1motr")
+//            spinenr.startAnimating()
+//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
+//                spinenr.stopAnimating()
+//            }
+//        }    }
 
 }
 

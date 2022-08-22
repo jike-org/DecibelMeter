@@ -9,3 +9,4 @@ NSMicrophoneUsageDescription = "Пожалуйста, для работы при
 NSCameraUsageDescription = "Пожалуйста, предоставьте доступ на использование камеры в настройках для работы" ;
 NSLocationWhenInUseUsageDescription = "Пожалуйста, предоставьте доступ на использование Вашего местоположения в настройках для работы" ;
 NSPhotoLibraryAddUsageDescription = "Пожалуйста, предоставьте доступ на использование фото галереи в настройках для работы";
+CFBundleDisplayName = "Шумомер";

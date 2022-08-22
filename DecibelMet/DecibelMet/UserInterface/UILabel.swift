@@ -77,12 +77,19 @@ class Label: UILabel {
         case .avgMinMax:
             font = UIFont.systemFont(ofSize: 10, weight: .light)
             textAlignment = .center
-            textColor = .white
+            if UserDefaults.standard.value(forKey: "theme") as! Int == 0 {
+                textColor = .black
+            }
+            
+            if UserDefaults.standard.value(forKey: "theme") as! Int == 1 {
+                textColor = .white
+            }
+           
         case .tableLabel:
             font = UIFont.systemFont(ofSize: 20, weight: .regular)
             textAlignment = .left
         case .titleLabel:
-            font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            font = UIFont.boldSystemFont(ofSize: 20)
             textColor = UIColor(named: "cellDb")
             textAlignment = .left
         case .tableTopText:
@@ -123,7 +130,7 @@ class Label: UILabel {
             font = UIFont.systemFont(ofSize: 13)
             textColor = UIColor(named: "cellDb")
         case .dosimetreDecibelLabel:
-            font = UIFont.systemFont(ofSize: 17, weight: .regular)
+            font = UIFont.systemFont(ofSize: 20, weight: .bold)
             textColor = UIColor(named: "cellDb")
         case .dbTitel:
             font = UIFont.systemFont(ofSize: 16, weight: .semibold)

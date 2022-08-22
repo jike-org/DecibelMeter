@@ -12,16 +12,17 @@ import Charts
 import CoreData
 import StoreKit
 import FirebaseRemoteConfig
+import Photos
 
 class RecordView: UIViewController {
     
     var rateUsInt = 0
-    var enterCounter = 0
-    lazy var showVc = "1"
+    lazy var showVc = "2"
     let remoteConfig = RemoteConfig.remoteConfig()
     let iapManager = InAppManager.share
     var freeSaveRemote = 9
-    var freeSave = 2
+    var freeSave = 3
+    var flag = false
     private var isRecording = false
     
     // MARK: Localizable
@@ -55,7 +56,6 @@ class RecordView: UIViewController {
     
     lazy var chart: BarChartView = {
         let chart = BarChartView()
-        chart.noDataTextColor = .secondarySystemBackground
         chart.noDataText = "Tap the record button to start monitoring."
         
         chart.dragEnabled = true
@@ -82,7 +82,7 @@ class RecordView: UIViewController {
     
     lazy var backView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.1608400345, green: 0.1607262492, blue: 0.1650899053, alpha: 1)
+        
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 18
         return view
@@ -100,7 +100,7 @@ class RecordView: UIViewController {
         let radius: CGFloat = 20
         let size: CGFloat = 45
         button.layer.cornerRadius = radius
-        button.setImage(UIImage(named: "button3-2"), for: .normal)
+    
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -113,7 +113,6 @@ class RecordView: UIViewController {
         let radius: CGFloat = 20
         let size: CGFloat = 45
         button.layer.cornerRadius = radius
-        button.setImage(UIImage(named: "button3-3"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: size).isActive = true
         button.widthAnchor.constraint(equalToConstant: size).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -136,42 +135,92 @@ class RecordView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if UserDefaults.standard.value(forKey: "FullAccess") as! Int != 1 {
+            IAPManager.shared.verifyPurcahse(product: .yearTrial)
+        } else if UserDefaults.standard.value(forKey: "FullAccess") as! Int != 1 {
+            IAPManager.shared.verifyPurcahse(product: .weekTrial)
+        } else if UserDefaults.standard.value(forKey: "FullAccess") as! Int != 1 {
+            IAPManager.shared.verifyPurcahse(product: .mounthTrial)
+        } else if UserDefaults.standard.value(forKey: "FullAccess") as! Int != 1 {
+            IAPManager.shared.verifyPurcahse(product: .year)
+        } else if UserDefaults.standard.value(forKey: "FullAccess") as! Int != 1 {
+            IAPManager.shared.verifyPurcahse(product: .mounth)
+        } else if UserDefaults.standard.value(forKey: "FullAccess") as! Int != 1 {
+            IAPManager.shared.verifyPurcahse(product: .week)
+        }
+       
+      
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+        }
+        catch {
+        }
+        remoteConfigSetup()
         recorder.delegate = self
         recorder.avDelegate = self
-        view.backgroundColor = .black
-        tabBarController?.tabBar.isHidden = false
+     
         setupConstraint()
-        remoteConfigSetup()
-        
-        if UserDefaults.standard.string(forKey: "enterCounter") == nil {
-            UserDefaults.standard.set(enterCounter, forKey: "enterCounter")
-        } else {
-            enterCounter = Int(UserDefaults.standard.string(forKey: "dosimeter")!)!
-        }
-        
-        enterCounter = Int(UserDefaults.standard.string(forKey: "enterCounter")!)!
-        enterCounter += 1
-        UserDefaults.standard.set(enterCounter, forKey: "enterCounter")
-        
-        print(enterCounter)
-        
+      
         guard let result = persist.fetch() else { return }
         recordings = result
         freeSave = result.count
     }
     
+    func rateApp() {
+            SKStoreReviewController.requestReview()
+
+//        } else if let url = URL(string: "itms-apps://itunes.apple.com/app/" + "appId") {
+//            if #available(iOS 10, *) {
+//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//
+//            } else {
+//                UIApplication.shared.openURL(url)
+//            }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if rateUsInt == 0 {
-            
-        } else {
-            DispatchQueue.main.async { [self] in
-                if Int(UserDefaults.standard.string(forKey: "enterCounter")!)! == 2 {
-                    rateUs()
-                }
-            }
-            let t = Int(UserDefaults.standard.string(forKey: "enterCounter")!)!
+        
+        if UserDefaults.standard.value(forKey: "theme") as! Int == 0 {
+            progress.trackColor = #colorLiteral(red: 0.9514784217, green: 0.960873425, blue: 0.978158772, alpha: 1)
+            backView.backgroundColor = #colorLiteral(red: 0.9999999404, green: 0.9999999404, blue: 0.9999999404, alpha: 1)
+            view.backgroundColor = #colorLiteral(red: 0.9514784217, green: 0.960873425, blue: 0.978158772, alpha: 1)
+            saveButton.setNeedsLayout()
+            saveButton.setImage(UIImage(named: "button3-9"), for: .normal)
+            resetButton.setImage(UIImage(named: "button3-10"), for: .normal)
+            decibelLabel.textColor = .black
+            chart.borderColor = .black
+            chart.tintColor = .black
+            chart.gridBackgroundColor = .black
+            chart.noDataTextColor = .black
+            avgBar.minLabel.textColor = .black
+            avgBar.maxLabel.textColor = .black
+            avgBar.avgLabel.textColor = .black
+            timeLabel.textColor = .black
+            progress.layoutIfNeeded()
+           
+        }
+        
+        if UserDefaults.standard.value(forKey: "theme") as! Int == 1 {
+          
+            progress.trackColor = #colorLiteral(red: 0.07064444572, green: 0.07052957267, blue: 0.07489018887, alpha: 1)
+            backView.backgroundColor = #colorLiteral(red: 0.1608400345, green: 0.1607262492, blue: 0.1650899053, alpha: 1)
+            view.backgroundColor = #colorLiteral(red: 0.07064444572, green: 0.07052957267, blue: 0.07489018887, alpha: 1)
+            saveButton.setNeedsLayout()
+            saveButton.setImage(UIImage(named: "saved"), for: .normal)
+            resetButton.setImage(UIImage(named: "button3-8"), for: .normal)
+            decibelLabel.textColor = .white
+            chart.borderColor = .white
+            chart.tintColor = .white
+            chart.gridBackgroundColor = .white
+            chart.noDataTextColor = .white
+            avgBar.minLabel.textColor = .white
+            avgBar.maxLabel.textColor = .white
+            avgBar.avgLabel.textColor = .white
+            timeLabel.textColor = .white
+            progress.layoutIfNeeded()
         }
     }
     
@@ -183,7 +232,6 @@ class RecordView: UIViewController {
         remoteConfig.fetchAndActivate { (status, error) in
             
             if error !=  nil {
-                print(error?.localizedDescription)
             } else {
                 if status != .error {
                     if let stringValue =
@@ -195,7 +243,7 @@ class RecordView: UIViewController {
                 if status != .error {
                     if let stringValue1 =
                         self.remoteConfig["otherScreenNumber"].stringValue {
-                        self.showVc = stringValue1
+                        self.showVc = (stringValue1)
                     }
                 }
                 
@@ -220,7 +268,7 @@ class RecordView: UIViewController {
     
     func rateUs() {
         let vc = RateUsVC()
-        vc.modalPresentationStyle = .fullScreen
+//        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
 }
@@ -244,18 +292,18 @@ extension RecordView {
             DispatchQueue.main.async {
                 let alertController = UIAlertController(
                     title: "Microphone permissions denied",
-                    message: "Microphone permissions have been denied for this app. You can change this by going to Settings",
+                    message: NSLocalizedString("SetMicro", comment: ""),
                     preferredStyle: .alert
                 )
                 
                 let cancelButton = UIAlertAction(
-                    title: "Cancel",
+                    title: NSLocalizedString("cancel", comment: ""),
                     style: .cancel,
                     handler: nil
                 )
                 
                 let settingsAction = UIAlertAction(
-                    title: "Settings",
+                    title: NSLocalizedString("Settings", comment: ""),
                     style: .default
                 ) { _ in
                     UIApplication.shared.open(
@@ -284,7 +332,7 @@ extension RecordView {
                 max: UInt8(recorder.max!),
                 date: Date()
             )
-            
+            isRecording = false
             recorder.stopMonitoring()
             recorder.stop()
             updateChartData()
@@ -299,16 +347,22 @@ extension RecordView {
             recordings = result
             freeSave = result.count
             
-            if UserDefaults.standard.bool(forKey: "FullAccess") == false {
-                if freeSave >= freeSaveRemote{
+            if let stringValue =
+                self.remoteConfig["availableFreeSave"].stringValue {
+                self.freeSaveRemote = Int(stringValue)!
+            }
+            let t = freeSaveRemote
+            
+            if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 0 {
+                if freeSave >= t{
                     
                     
                     _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
-                        if showVc == "1"{
+                        if showVc == "2"{
                             let vcTwo = SubscribeTwoView()
                             vcTwo.modalPresentationStyle = .fullScreen
                             present(vcTwo, animated: true, completion: nil)
-                        } else if showVc == "2" {
+                        } else if showVc == "1" {
                             let vcTrial = TrialSubscribe()
                             vcTrial.modalPresentationStyle = .fullScreen
                             present(vcTrial, animated: true, completion: nil)
@@ -318,19 +372,19 @@ extension RecordView {
                             present(vcTrial, animated: true, completion: nil)
                         }
                     })
-                    
+
                 } else {
                     
-                    let alert = UIAlertController(title: "save",
+                    let alert = UIAlertController(title: NSLocalizedString("save", comment: ""),
                                                   message: nil,
                                                   preferredStyle: .alert)
                     
-                    let cancel = UIAlertAction(title: "Cancel",
+                    let cancel = UIAlertAction(title: NSLocalizedString("cancel", comment: ""),
                                                style: .cancel,
                                                handler: nil)
                     
                     let save = UIAlertAction(
-                        title: "Save",
+                        title: NSLocalizedString("save", comment: ""),
                         style: .default,
                         handler: { _ in
                             let name = alert.textFields![0].text
@@ -338,7 +392,7 @@ extension RecordView {
                             if name == "" {
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                                self.info.name = "Record 1"
+                                self.info.name = "Record \(result.count)"
                             } else {
                                 self.info.name = name
                             }
@@ -349,7 +403,7 @@ extension RecordView {
                     alert.addTextField { textField in
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                        textField.placeholder = "Record 1"
+                        textField.placeholder = "Record \(result.count)"
                         
                     }
                     
@@ -359,17 +413,16 @@ extension RecordView {
                 }
                 
             } else {
-                print("full access Record view")
-                let alert = UIAlertController(title: "save",
+                let alert = UIAlertController(title: NSLocalizedString("save", comment: ""),
                                               message: nil,
                                               preferredStyle: .alert)
                 
-                let cancel = UIAlertAction(title: "Cancel",
+                let cancel = UIAlertAction(title: NSLocalizedString("cancel", comment: ""),
                                            style: .cancel,
                                            handler: nil)
                 
                 let save = UIAlertAction(
-                    title: "Save",
+                    title: NSLocalizedString("save", comment: ""),
                     style: .default,
                     handler: { _ in
                         let name = alert.textFields![0].text
@@ -377,7 +430,7 @@ extension RecordView {
                         if name == "" {
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                            self.info.name = "Record 1"
+                            self.info.name = "Record \(result.count)"
                         } else {
                             self.info.name = name
                         }
@@ -388,7 +441,7 @@ extension RecordView {
                 alert.addTextField { textField in
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyy-M-d-HH:mm"
-                    textField.placeholder = "Record 1"
+                    textField.placeholder = "Record \(result.count)"
                     
                 }
                 
@@ -396,8 +449,6 @@ extension RecordView {
                 alert.addAction(save)
                 present(alert, animated: true, completion: nil)
             }
-            
-            
         }
     }
 }
@@ -447,14 +498,14 @@ extension RecordView {
         guard let result = persist.fetch() else { return }
         recordings = result
         freeSave = result.count
-        if UserDefaults.standard.bool(forKey: "FullAccess") == false {
+        if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 0 {
             if freeSave >= freeSaveRemote{
                 _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
-                    if showVc == "1"{
+                    if showVc == "2"{
                         let vcTwo = SubscribeTwoView()
                         vcTwo.modalPresentationStyle = .fullScreen
                         present(vcTwo, animated: true, completion: nil)
-                    } else if showVc == "2" {
+                    } else if showVc == "1" {
                         let vcTrial = TrialSubscribe()
                         vcTrial.modalPresentationStyle = .fullScreen
                         present(vcTrial, animated: true, completion: nil)
@@ -511,7 +562,6 @@ extension RecordView {
             recordButton.setImage(UIImage(named: "playSVG"), for: .normal)
             
         } else {
-            print("stop")
         }
         
     }
@@ -521,6 +571,54 @@ extension RecordView {
 extension RecordView {
     
     func setupConstraint() {
+        let flag = false
+        if let stringValue2 =
+            self.remoteConfig["rateUs"].stringValue {
+            self.rateUsInt = Int(stringValue2)!
+        }
+      
+  
+        if rateUsInt == 0 {
+            DispatchQueue.main.async { [self] in
+                if Int(UserDefaults.standard.string(forKey: "enterCounter")!)! == 2 {
+                    let count = 3
+                    UserDefaults.standard.set(count, forKey: "enterCounter")
+                    rateApp()
+                    
+//                    DispatchQueue.main.async { [self] in
+//                        let productURL = URL(string: "https://apps.apple.com/us/app/decibel-meter-sound-level-db/id1624503658")
+//
+//                        var components = URLComponents(url: productURL!, resolvingAgainstBaseURL: false)
+//
+//                        components?.queryItems = [
+//                          URLQueryItem(name: "action", value: "write-review")
+//                        ]
+//
+//                        guard let writeReviewURL = components?.url else {
+//                          return
+//                        }
+//
+//                        UIApplication.shared.open(writeReviewURL)
+//
+//                        dismiss(animated: true)
+//                    }
+                }
+            }
+        } else if rateUsInt == 1 {
+          
+                if Int(UserDefaults.standard.string(forKey: "enterCounter")!)! == 2 {
+                    let count = 3
+                    UserDefaults.standard.set(count, forKey: "enterCounter")
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        if flag == false {
+                            flag == true
+                            self.rateUs()
+                    }
+                }
+            }
+        }
+        
         setupCircleView()
         view.addSubview(dbtImage)
         view.addSubview(chart)
@@ -580,6 +678,51 @@ extension RecordView {
 
 extension RecordView {
     
+    func checkPhotoLibraryPermission() {
+        let photos = PHPhotoLibrary.authorizationStatus()
+           if photos == .notDetermined {
+               photoPerm()
+               PHPhotoLibrary.requestAuthorization({status in
+                   if status == .authorized{
+                   } else {
+                       self.photoPerm()
+                   }
+               })
+           } else {
+               DispatchQueue.main.async {
+                   self.photoPerm()
+               }
+           }
+      }
+
+func photoPerm() {
+    let alertController = UIAlertController(
+        title: NSLocalizedString ("photo", comment: ""),
+        message: NSLocalizedString("SetPhoto", comment: ""),
+        preferredStyle: .alert
+    )
+    
+    let cancelButton = UIAlertAction(
+        title: NSLocalizedString("cancel", comment: ""),
+        style: .cancel,
+        handler: nil
+    )
+    
+    let settingsAction = UIAlertAction(
+        title: NSLocalizedString("Settings", comment: ""),
+        style: .default
+    ) { _ in
+        UIApplication.shared.open(
+            URL(string: UIApplication.openSettingsURLString)!,
+            options: [:],
+            completionHandler: nil)
+    }
+    
+    alertController.addAction(cancelButton)
+    alertController.addAction(settingsAction)
+}
+
+    
     // MARK: Setup circle view
     private func setupCircleView() {
         progress.startAngle = -180
@@ -589,7 +732,7 @@ extension RecordView {
         progress.clockwise = true
         progress.roundedCorners = false
         progress.glowMode = .constant
-        progress.trackColor = .black
+        progress.trackColor = #colorLiteral(red: 0.07064444572, green: 0.07052957267, blue: 0.07489018887, alpha: 1)
         progress.set(colors:UIColor.purple, UIColor.blue, UIColor.blue, UIColor.purple)
         progress.center = CGPoint(x: view.center.x, y: view.center.y / 1.0 )
     }
@@ -616,7 +759,6 @@ extension RecordView: AVAudioRecorderDelegate, RecorderDelegate {
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        print("Record finished")
         // FIXME: Unusual
     }
     

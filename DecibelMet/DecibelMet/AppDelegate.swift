@@ -15,19 +15,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var orientationLock = UIInterfaceOrientationMask.portrait
     let launchBefore = UserDefaults.standard.bool(forKey: "LaunchedBefore")
-    
+    var counter = 0
+    var switc = 1
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
             return self.orientationLock
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        
+        
+        if UserDefaults.standard.string(forKey: "enterCounter") == nil {
+            UserDefaults.standard.set(counter, forKey: "enterCounter")
+        } else {
+            counter = Int(UserDefaults.standard.string(forKey: "enterCounter")!)!
+        }
+        counter += 1
+        
+        UserDefaults.standard.set(counter, forKey: "enterCounter")
+        
+        if UserDefaults.standard.value(forKey: "FullAccess") == nil {
+            let setValue = 0
+            UserDefaults.standard.set(setValue, forKey: "FullAccess")
+        }
+            
+        UserDefaults.standard.set(switc, forKey: "theme")
+        
+        
+        
+        
         InAppManager.share.setupPurchases { success in
             if success {
-                print("can make payments")
                 InAppManager.share.getProducts()
             }
         }
+//        if UserDefaults.standard.string(forKey: "enterCounter") == nil {
+//            UserDefaults.standard.set(cou, forKey: "enterCounter")
+//        } else {
+//            enterCounter = Int(UserDefaults.standard.string(forKey: "dosimeter")!)!
+//        }
+//
+//        counter += 1
+//        UserDefaults.standard.set(counter, forKey: "counter")
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.overrideUserInterfaceStyle = MTUserDefaults.shared.theme.getUserInterfaceStyle()
@@ -51,11 +80,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // Unlock content
                     case .failed, .purchasing, .deferred:
                         break // do nothing
+                    @unknown default:
+                        fatalError()
                     }
                 }
             }
+       
         
+       
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        guard let component = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+              let _ = component.host else {
+            return false
+        }
+        
+         return true
     }
 
     // MARK: - Core Data stack

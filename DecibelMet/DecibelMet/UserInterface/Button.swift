@@ -114,6 +114,9 @@ class Button: UIButton {
             backgroundColor = .clear
             setTitle(text, for: .normal)
             titleLabel?.font = titleLabel?.font.withSize(12)
+            titleLabel?.numberOfLines = 0
+            titleLabel?.textAlignment = .center
+            titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         case .rateus:
             backgroundColor = .clear
             setTitle(text, for: .normal)
@@ -129,6 +132,10 @@ class Button: UIButton {
             setTitle(text, for: .normal)
             titleLabel?.font = titleLabel?.font.withSize(16)
             tintColor = .white
+            titleLabel?.textAlignment = .center
+            titleLabel?.numberOfLines = 0
+            titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+            
         }
     }
     

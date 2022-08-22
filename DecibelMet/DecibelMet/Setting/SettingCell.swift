@@ -16,21 +16,27 @@ class SettingsCell: UITableViewCell {
     public var flag = true
     public var _switch: UISwitch?
     private lazy var chevron = ImageView(image: .chevron)
-    
+    var switc = 1
     @objc private func toogleAutoRecord(_ sender: UISwitch) {
+     
         if sender.isOn {
             window?.overrideUserInterfaceStyle = .dark
             print("dark")
+            switc = 1
+            UserDefaults.standard.set(switc, forKey: "theme")
         } else {
             window?.overrideUserInterfaceStyle = .light
             print("light")
+            switc = 0
+            UserDefaults.standard.set(switc, forKey: "theme")
         }
     }
     
     init(reuseIdentifier: String, icon: ImageView, label: Label, isUsingSwitch: Bool, chevron:ImageView ) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
-        _switch?.setOn(true, animated: true)
+      
+      
         _switch?.backgroundColor = .blue
         backgroundColor = .clear
         let selectedBackground = UIView()
@@ -67,17 +73,34 @@ class SettingsCell: UITableViewCell {
         ]
         
         if isUsingSwitch {
+           
             _switch = UISwitch()
-            _switch!.tag = 1
-            if MTUserDefaults.shared.theme != .light {
+//            _switch!.tag = 1
+            
+            
+//            if MTUserDefaults.shared.theme != .light {
+//
+//                _switch?.setOn(false, animated: true)
+//                _switch?.isOn = true
+//                flag = true
+//            } else {
+//
+//                _switch?.setOn(true, animated: true)
+//                _switch?.isOn = false
+//                flag = false
+//            }
+            
+            if  UserDefaults.standard.value(forKey: "theme") as! Int == 1 {
                 _switch?.setOn(true, animated: true)
-                _switch?.isOn = true
-                flag = true
             } else {
                 _switch?.setOn(false, animated: true)
-                _switch?.isOn = false
-                flag = false
             }
+            
+//            if _switch?.isOn == true {
+//
+//            } else {
+//                _switch?.setOn(false, animated: true)
+//            }
            
             _switch?.onTintColor = .blue
             _switch!.addTarget(self, action: #selector(toogleAutoRecord(_:)), for: .valueChanged)

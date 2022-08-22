@@ -9,3 +9,4 @@ NSMicrophoneUsageDescription = "작업 설정에서 마이크 사용 권한을 �
 NSCameraUsageDescription = "작업 설정에서 카메라 사용 권한을 설정해 주세요";
 NSPhotoLibraryAddUsageDescription = "작업 설정에서 사진 라이브러리 사용 권한을 설정해 주세요";
 NSLocationWhenInUseUsageDescription = "작업 설정에서 위치 사용 권한을 설정해 주세요";
+CFBundleDisplayName = "데시벨 미터";

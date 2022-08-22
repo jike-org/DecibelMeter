@@ -4,6 +4,7 @@
 //
 //  Created by Stas Dashkevich on 5.05.22.
 //
+// льготный
 
 import Foundation
 import UIKit
@@ -17,6 +18,7 @@ class SettingsView: UIViewController {
     let notificationCenter = NotificationCenter.default
     let settings = NSLocalizedString("Settings", comment: "")
     var darkTheme = NSLocalizedString("Darktheme", comment: "")
+    var dos = NSLocalizedString("Dosimeter", comment: "")
     var shareFriends = NSLocalizedString("Sharewithfriends", comment: "")
     var termsOfUse = NSLocalizedString("TermsOfUse", comment: "")
     var privacyPolice = NSLocalizedString("Privacypolicy", comment: "")
@@ -26,6 +28,8 @@ class SettingsView: UIViewController {
     var unlockAll = NSLocalizedString("Unlockallfeatures", comment: "")
     var lAcces = NSLocalizedString("", comment: "")
     private var changeSub: String = "1"
+    var rese = NSLocalizedString("reset", comment: "")
+    var rateUsInt = 0
     lazy var titleLabel = Label(style: .titleLabel, settings)
     let cellSpacingHeight: CGFloat = 40
     
@@ -45,11 +49,11 @@ class SettingsView: UIViewController {
         super.viewDidLoad()
         setupView()
         
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounthTrial.rawValue), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.yearTrial.rawValue), object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
+//        
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounthTrial.rawValue), object: nil)
+//        
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.yearTrial.rawValue), object: nil)
         
         func fetchValues() {
         
@@ -61,22 +65,28 @@ class SettingsView: UIViewController {
         remoteConfig.fetchAndActivate { (status, error) in
             
             if error !=  nil {
-                print(error?.localizedDescription)
             } else {
                 if status != .error {
                     if let stringValue =
                         self.remoteConfig["otherScreenNumber"].stringValue {
                         self.changeSub = stringValue
-                        print(self.changeSub)
                     }
                 }
+                
+                if status != .error {
+                    if let stringValue2 =
+                        self.remoteConfig["rateUs"].stringValue {
+                        self.rateUsInt = Int(stringValue2)!
+                    }
+                }
+
             }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(Constants.shared.hasPurchased)
+        view.layoutIfNeeded()
     }
 }
 
@@ -88,7 +98,7 @@ extension SettingsView {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.backgroundColor = UIColor(named: "backgroundColor")
-        
+        tableView.delaysContentTouches = false
         view.addSubview(titleLabel)
         view.addSubview(tableView)
         
@@ -106,8 +116,6 @@ extension SettingsView {
     }
     
     @objc func trialButtonTapped1() {
-        print("купил")
-        Constants.shared.hasPurchased = true
         tableView.reloadData()
         dismiss(animated: true)
     }
@@ -123,10 +131,10 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Constants.shared.hasPurchased == true {
-            return 7
-        } else {
+        if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 1 {
             return 8
+        } else {
+            return 9
         }
    
     }
@@ -145,7 +153,9 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             isUsingSwitch: false,
             chevron: ImageView(image: .nul)
         )
-        if Constants.shared.hasPurchased == false {
+        
+        cell.selectionStyle = .default
+        if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 0 {
         
         switch indexPath.row {
         case 0:
@@ -211,12 +221,21 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 label: Label(style: .settingLabel, darkTheme),
                 isUsingSwitch: true,
                 chevron: ImageView(image: .nul)
-            )
+                )
+                case 8:
+                    cell = SettingsCell(
+                        reuseIdentifier: "cell",
+                        icon: ImageView(image: .refresh),
+                        label: Label(style: .settingLabel,"\(rese) \(dos)"),
+                        isUsingSwitch: false,
+                        chevron: ImageView(image: .chevron)
+                    )
+            
         default:
             break
         }
         }
-            if Constants.shared.hasPurchased == true {
+            if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 1 {
             
             switch indexPath.row {
 //            case 0:
@@ -283,6 +302,14 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                     isUsingSwitch: true,
                     chevron: ImageView(image: .nul)
                 )
+            case 7:
+                cell = SettingsCell(
+                    reuseIdentifier: "cell",
+                    icon: ImageView(image: .refresh),
+                    label: Label(style: .settingLabel, "\(rese) \(dos)"),
+                    isUsingSwitch: false,
+                    chevron: ImageView(image: .nul)
+                )
             default:
                 break
         }
@@ -292,30 +319,60 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     
     
     private func shereAs() {
-        let textToShare = "DecibelMeter"
+        let textToShare = NSLocalizedString("appWil", comment: "")
         
         if let myWebsite = URL(string: "https://apps.apple.com/us/app/decibel-meter-sound-level-db/id1624503658") {
-            let objectsToShare: [Any] = [textToShare, myWebsite]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            let activityVC = UIActivityViewController(activityItems: [textToShare , myWebsite ], applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
+            
         }
-        
-        
     }
+    
+    func rateApp() {
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+
+        } else if let url = URL(string: "itms-apps://itunes.apple.com/app/" + "appId") {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+            } else {
+                let vc = RateUsVC()
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true)
+            }
+        }
+    }
+    
+    private func shareAs() {
+        var textToShare = NSLocalizedString("appWil", comment: "")
+        textToShare += "https://apps.apple.com/us/app/decibel-meter-sound-level-db/id1624503658"
+        
+            let activityVC = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+            
+    }
+    
+    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if Constants.shared.hasPurchased == false {
+        if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 0 {
         switch indexPath.row {
         case 0:
-            if changeSub == "1"{
+            if changeSub == "2"{
                 let vcTwo = SubscribeTwoView()
                 vcTwo.modalPresentationStyle = .fullScreen
                 present(vcTwo, animated: true, completion: nil)
-            } else if changeSub == "2" {
+            } else if changeSub == "1" {
                     let vcTrial = TrialSubscribe()
                 vcTrial.modalPresentationStyle = .fullScreen
                 present(vcTrial, animated: true, completion: nil)
             } else if changeSub == "3" {
             let vcTrial = TrialViewController()
+            vcTrial.modalPresentationStyle = .fullScreen
+            present(vcTrial, animated: true, completion: nil)
+            } else {
+                let vcTrial = TrialSubscribe()
             vcTrial.modalPresentationStyle = .fullScreen
             present(vcTrial, animated: true, completion: nil)
             }
@@ -324,9 +381,32 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         case 2:
-            let vc = RateUsVC()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
+            if rateUsInt == 0 {
+                DispatchQueue.main.async { [self] in
+                    let productURL = URL(string: "https://apps.apple.com/us/app/decibel-meter-sound-level-db/id1624503658")
+                    
+                    var components = URLComponents(url: productURL!, resolvingAgainstBaseURL: false)
+
+                    components?.queryItems = [
+                      URLQueryItem(name: "action", value: "write-review")
+                    ]
+
+                    guard let writeReviewURL = components?.url else {
+                      return
+                    }
+
+                    UIApplication.shared.open(writeReviewURL)
+                    
+                    dismiss(animated: true)
+                }
+            } else {
+                DispatchQueue.main.async { [self] in
+                        let vc = RateUsVC()
+                        vc.modalPresentationStyle = .fullScreen
+                        present(vc, animated: true, completion: nil)
+                }
+            }
+         
         case 3:
                 if MFMailComposeViewController.canSendMail() {
                     let mail = MFMailComposeViewController()
@@ -352,30 +432,70 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         case 6:
+            shareAs()
             shereAs()
+        case 8:
+            let keyWindow = UIApplication.shared.connectedScenes
+                    .filter({$0.activationState == .foregroundActive})
+                    .compactMap({$0 as? UIWindowScene})
+                    .first?.windows
+                    .filter({$0.isKeyWindow}).first
+//            UIApplication.shared.keyWindow?.rootViewController = TabBar()
+            keyWindow?.rootViewController = TabBar()
         default:
             break
         }
         } else {
             switch indexPath.row {
+                
+                
+            
             case 0:
                 let vc = FAQSetting()
                 vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true, completion: nil)
             case 1:
-                let vc = RateUsVC()
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
+                if rateUsInt == 0 {
+                    DispatchQueue.main.async { [self] in
+                        let productURL = URL(string: "https://apps.apple.com/us/app/decibel-meter-sound-level-db/id1624503658")
+                        
+                        var components = URLComponents(url: productURL!, resolvingAgainstBaseURL: false)
+
+                        components?.queryItems = [
+                          URLQueryItem(name: "action", value: "write-review")
+                        ]
+
+                        guard let writeReviewURL = components?.url else {
+                          return
+                        }
+
+                        UIApplication.shared.open(writeReviewURL)
+                        
+                        dismiss(animated: true)
+                    }
+                } else {
+                    DispatchQueue.main.async { [self] in
+                            let vc = RateUsVC()
+                            vc.modalPresentationStyle = .fullScreen
+                            present(vc, animated: true, completion: nil)
+                    }
+                }
+             
             case 2:
                     if MFMailComposeViewController.canSendMail() {
                         let mail = MFMailComposeViewController()
                         mail.mailComposeDelegate = self
+                        let systemVersion = UIDevice.current.systemVersion
+                        let devicename = UIDevice.modelName
+                        let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+                        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
                         mail.setToRecipients(["support@mindateq.io"])
-                        mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
-
+                        mail.setSubject("Decibel Meter — User Question ")
+                        mail.setMessageBody("<p>\(systemVersion) \(devicename)<p>build Number -  \(appVersion!) (\(buildNumber))</p> </p>", isHTML: true)
+                        
                         present(mail, animated: true)
                     } else {
-                        // show failure alert
+                        
                     }
             case 3:
                 if let url = URL(string: "https://www.mindateq.io/privacy-policy") {
@@ -386,7 +506,63 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             case 5:
+                shareAs()
                 shereAs()
+            case 7:
+                let keyWindow = UIApplication.shared.connectedScenes
+                        .filter({$0.activationState == .foregroundActive})
+                        .compactMap({$0 as? UIWindowScene})
+                        .first?.windows
+                        .filter({$0.isKeyWindow}).first
+    //            UIApplication.shared.keyWindow?.rootViewController = TabBar()
+                keyWindow?.rootViewController = TabBar()
+                
+//            case 1:
+//                let vc = FAQSetting()
+//                vc.modalPresentationStyle = .fullScreen
+//                present(vc, animated: true, completion: nil)
+//            case 2:
+//                if rateUsInt == 0 {
+////                    DispatchQueue.main.async { [self] in
+////                        if Int(UserDefaults.standard.string(forKey: "enterCounter")!)! == 2 {
+////                            rateApp()
+////                        }
+////                    }
+//                    rateApp()
+//                } else {
+////                    DispatchQueue.main.async { [self] in
+////                        if Int(UserDefaults.standard.string(forKey: "enterCounter")!)! == 2 {
+////                            let vc = RateUsVC()
+////                            vc.modalPresentationStyle = .fullScreen
+////                            present(vc, animated: true, completion: nil)
+////                        }
+////                    }
+////                    let t = Int(UserDefaults.standard.string(forKey: "enterCounter")!)!
+//                    let vc = RateUsVC()
+//                    vc.modalPresentationStyle = .fullScreen
+//                    present(vc, animated: true, completion: nil)
+//                }
+//            case 3:
+//                    if MFMailComposeViewController.canSendMail() {
+//                        let mail = MFMailComposeViewController()
+//                        mail.mailComposeDelegate = self
+//                        mail.setToRecipients(["support@mindateq.io"])
+//                        mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+//
+//                        present(mail, animated: true)
+//                    } else {
+//                        // show failure alert
+//                    }
+//            case 4:
+//                if let url = URL(string: "https://www.mindateq.io/privacy-policy") {
+//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                }
+//            case 5:
+//                if let url = URL(string: "https://www.mindateq.io/terms-of-use") {
+//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                }
+//            case 5:
+//                shereAs()
             default:
                 break
             }

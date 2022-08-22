@@ -13,7 +13,6 @@ import Combine
 import FirebaseRemoteConfig
 
 final class Dosimeter: UIViewController {
-    
     let dosVC = CellDosimetre()
     let remoteConfig = RemoteConfig.remoteConfig()
     private var collection: UICollectionView?
@@ -51,11 +50,11 @@ final class Dosimeter: UIViewController {
     lazy var timeLabel = Label(style: .dosimetreTime, "00:00")
     lazy var procentLabel = Label(style: .dosimetreProcentLabel, "0")
     lazy var procentImage = Label(style: .dosimetreProcentImage, "%")
-    lazy var decibelLabel = Label(style: .dosimetreDecibelLabel, "132")
-    lazy var dbImage = Label(style: .dosimetredb, "dB")
-    lazy var refreshButton = Button(style: .refresh, nil)
+    lazy var decibelLabel = Label(style: .dosimetreTime, "132")
+    lazy var dbImage = Label(style: .dosimetreTime, "dB")
+//    lazy var refreshButton = Button(style: .refresh, nil)
     lazy var noiseButton = Button(style: .noise,"NIOSH")
-
+    
     lazy var headView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -66,19 +65,19 @@ final class Dosimeter: UIViewController {
         return view
     }()
     
-    lazy var freeDosimeter: Int = 5
-    lazy var showVc = "1"
-    var t = -2
+    lazy var freeDosimeter: Int = 10
+    lazy var showVc = "2"
+    var t = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.tabBar.isHidden = false
+        noiseTap()
         recorder.delegate = self
         recorder.avDelegate = self
         setup()
         setUpCollection()
         secondSetupCollection()
-        startRecordingAudio()
+        //        startRecordingAudio()
         remote()
         
         if defaults.string(forKey: "dosimeter") == nil {
@@ -91,11 +90,19 @@ final class Dosimeter: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if UserDefaults.standard.bool(forKey: "FullAccess") == false {
+        
+        remote()
+        
+        if let stringValue =
+            self.remoteConfig["availableFreeDosimeter"].stringValue {
+            self.freeDosimeter = Int(stringValue)!
+        }
+        
+        if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 0 {
             t += 1
             defaults.set(t, forKey: "dosimeter")
             
-            if Int(defaults.string(forKey: "dosimeter")!)! >= 100 {
+            if Int(defaults.string(forKey: "dosimeter")!)! >= freeDosimeter {
                 recorder.stopMonitoring()
                 recorder.stop()
                 procentLabel.text = "0"
@@ -105,7 +112,13 @@ final class Dosimeter: UIViewController {
                 callPurchase()
             }
         } else {
-            print("full access")
+            
+        }
+        
+        if Constants.shared.delete == true {
+            fixDosimerer()
+            fixDosimererSecond()
+            Constants.shared.delete = false
         }
     }
     
@@ -115,6 +128,8 @@ final class Dosimeter: UIViewController {
             Constants().isFirstLaunch = true
         }
     }
+    
+    
 }
 
 extension Dosimeter {
@@ -127,13 +142,11 @@ extension Dosimeter {
         remoteConfig.fetchAndActivate { (status, error) in
             
             if error !=  nil {
-                print(error?.localizedDescription)
             } else {
                 if status != .error {
                     if let stringValue =
                         self.remoteConfig["availableFreeDosimeter"].stringValue {
                         self.freeDosimeter = Int(stringValue)!
-                        print(self.freeDosimeter)
                     }
                     if let stringValue1 =
                         self.remoteConfig["otherScreenNumber"].stringValue {
@@ -146,11 +159,11 @@ extension Dosimeter {
     
     func callPurchase() {
         _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] Timer in
-            if showVc == "1"{
+            if showVc == "2"{
                 let vcTwo = SubscribeTwoView()
                 vcTwo.modalPresentationStyle = .fullScreen
                 present(vcTwo, animated: true, completion: nil)
-            } else if showVc == "2" {
+            } else if showVc == "1" {
                 let vcTrial = TrialSubscribe()
                 vcTrial.modalPresentationStyle = .fullScreen
                 present(vcTrial, animated: true, completion: nil)
@@ -184,20 +197,20 @@ extension Dosimeter {
         view.addSubview(collection)
         if UIScreen.main.bounds.height > 700 {
             NSLayoutConstraint.activate([
-                collection.topAnchor.constraint(equalTo: refreshButton.bottomAnchor, constant: 12),
+                collection.topAnchor.constraint(equalTo: headView.bottomAnchor, constant: 12),
                 collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 collection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
-
+            
         } else {
             NSLayoutConstraint.activate([
-                collection.topAnchor.constraint(equalTo: headView.bottomAnchor, constant: 10),
+                collection.topAnchor.constraint(equalTo: headView.bottomAnchor, constant: 12),
                 collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 collection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5)
             ])
-
+            
         }
         
         if UIScreen.main.bounds.height > 850 && UIScreen.main.bounds.height < 970 {
@@ -227,14 +240,14 @@ extension Dosimeter {
         view.addSubview(collection)
         if UIScreen.main.bounds.height > 700 {
             NSLayoutConstraint.activate([
-                collection.topAnchor.constraint(equalTo: refreshButton.bottomAnchor, constant: 12),
+                collection.topAnchor.constraint(equalTo: headView.bottomAnchor, constant: 12),
                 collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 collection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             NSLayoutConstraint.activate([
-                collection.topAnchor.constraint(equalTo: headView.bottomAnchor, constant: 10),
+                collection.topAnchor.constraint(equalTo: headView.bottomAnchor, constant: 12),
                 collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 collection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5)
@@ -271,7 +284,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
     
     var itemNiosh: [CellDosimetre.ItemOsha] {
         [
-            .init(db: 109, timeTitle: "\(max) 1 \(minute) 52 \(second)", timeEvent: timeValueSubjectSecond.eraseToAnyPublisher(), procent: "\(precent130)%"),
+            .init(db: 109, timeTitle: "\(max) 1 \(minute) 53 \(second)", timeEvent: timeValueSubjectSecond.eraseToAnyPublisher(), procent: "\(precent130)%"),
             .init(db: 106, timeTitle: "\(max) 3 \(minute) 45 \(second)", timeEvent: timeValueSubjectSecond.eraseToAnyPublisher(), procent: "\(precent125)%"),
             .init(db: 103, timeTitle: "\(max) 7 \(minute) 30 \(second)", timeEvent: timeValueSubjectSecond.eraseToAnyPublisher(), procent: "\(precent120)%"),
             .init(db: 100, timeTitle: "\(max) 15 \(minute)", timeEvent: timeValueSubjectSecond.eraseToAnyPublisher(), procent: "\(precent115)%"),
@@ -282,9 +295,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
             .init(db: 85, timeTitle:  max + " 8 " + hour,  timeEvent: timeValueSubjectSecond.eraseToAnyPublisher(), procent: "\(precent90)%"),
         ]
     }
-    
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == self.Secondcollection {
@@ -293,7 +304,51 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
             cell2.layer.masksToBounds = true
             cell2.contentView.backgroundColor = UIColor(named: "backCell")
             cell2.configure(item: itemNiosh[indexPath.row])
-    
+            
+            switch indexPath.row {
+            case 6:
+                let queue = DispatchQueue.global(qos: .userInteractive)
+                queue.async{ [self] in
+                    Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { Timer in
+                        let indexPath = IndexPath(item: indexPath.row, section: 0)
+                        if String(cell2.time.text!) != "00:00"{
+                            cell2.procent.text = "1%"
+                            cell2.viewColor.setProgress(0.1, animated: true)
+                        }
+                        self.collection?.reloadItems(at: [indexPath])
+                    }
+                }
+                
+            case 7:
+                let queue = DispatchQueue.global(qos: .userInteractive)
+                queue.async{ [self] in
+                    Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { Timer in
+                        let indexPath = IndexPath(item: indexPath.row, section: 0)
+                        if String(cell2.time.text!) != "00:00"{
+                            cell2.procent.text = "1%"
+                            cell2.viewColor.setProgress(0.1, animated: true)
+                        }
+                        self.collection?.reloadItems(at: [indexPath])
+                    }
+                }
+                
+            case 8:
+                let queue = DispatchQueue.global(qos: .userInteractive)
+                queue.async{ [self] in
+                    Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { Timer in
+                        let indexPath = IndexPath(item: indexPath.row, section: 0)
+                        if String(cell2.time.text!) != "00:00"{
+                            cell2.procent.text = "1%"
+                            cell2.viewColor.setProgress(0.1, animated: true)
+                        }
+                        self.collection?.reloadItems(at: [indexPath])
+                    }
+                }
+                
+            default:
+                break
+                
+            }
             return cell2
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DosimeterCell.id, for: indexPath) as! DosimeterCell
@@ -301,7 +356,51 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.layer.masksToBounds = true
             cell.contentView.backgroundColor = UIColor(named: "backCell")
             cell.configure(item: items[indexPath.row])
-        
+            
+            switch indexPath.row {
+            case 6:
+                let queue = DispatchQueue.global(qos: .userInteractive)
+                queue.async{ [self] in
+                    Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { Timer in
+                        let indexPath = IndexPath(item: indexPath.row, section: 0)
+                        if String(cell.time.text!) != "00:00"{
+                            cell.procent.text = "1%"
+                            cell.viewColor.setProgress(0.1, animated: true)
+                        }
+                        self.collection?.reloadItems(at: [indexPath])
+                    }
+                }
+            case 7:
+                let queue = DispatchQueue.global(qos: .userInteractive)
+                queue.async{ [self] in
+                    Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { Timer in
+                        let indexPath = IndexPath(item: indexPath.row, section: 0)
+                        if String(cell.time.text!) != "00:00"{
+                            cell.procent.text = "1%"
+                            cell.viewColor.setProgress(0.1, animated: true)
+                        }
+                        self.collection?.reloadItems(at: [indexPath])
+                    }
+                }
+                
+            case 8:
+                let queue = DispatchQueue.global(qos: .userInteractive)
+                queue.async{ [self] in
+                    Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { Timer in
+                        let indexPath = IndexPath(item: indexPath.row, section: 0)
+                        if String(cell.time.text!) != "00:00"{
+                            cell.procent.text = "1%"
+                            cell.viewColor.setProgress(0.1, animated: true)
+                        }
+                        self.collection?.reloadItems(at: [indexPath])
+                    }
+                }
+     
+            default:
+break
+                
+            }
+            
             return cell
         }
     }
@@ -321,12 +420,11 @@ extension Dosimeter {
     private func setup() {
         timeLabel.layer.opacity = 0.8
         decibelLabel.layer.opacity = 0.8
-        noiseButton.setTitle("OSHA", for: .normal)
+        noiseButton.setTitle("NIOSH", for: .normal)
         noiseButton.backgroundColor = .black
-        noiseButton.setTitleColor(UIColor(named: "cellDb"), for: .normal)
+        noiseButton.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(named: "backgroundColor")
         noiseButton.addTarget(self, action: #selector(noiseTap), for: .touchUpInside)
-        refreshButton.addTarget(self, action: #selector(refreshButtonTap), for: .touchUpInside)
         view.addSubview(headerLabel)
         view.addSubview(headView)
         view.addSubview(timeLabel)
@@ -334,9 +432,8 @@ extension Dosimeter {
         view.addSubview(procentImage)
         view.addSubview(decibelLabel)
         view.addSubview(dbImage)
-        headView.addSubview(refreshButton)
         headView.addSubview(noiseButton)
-        refreshButton.translatesAutoresizingMaskIntoConstraints = false
+       
         NSLayoutConstraint.activate([
             
             headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -347,19 +444,16 @@ extension Dosimeter {
             headView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 5),
             headView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            refreshButton.leadingAnchor.constraint(equalTo: headView.leadingAnchor, constant: 10),
-            refreshButton.topAnchor.constraint(equalTo: headView.topAnchor, constant: 7),
+            procentLabel.leadingAnchor.constraint(equalTo: headView.leadingAnchor, constant: 30),
+            procentLabel.centerYAnchor.constraint(equalTo: headView.centerYAnchor),
             
             noiseButton.trailingAnchor.constraint(equalTo: headView.trailingAnchor, constant: -10),
             noiseButton.topAnchor.constraint(equalTo: headView.topAnchor, constant: 7),
             
-            procentLabel.centerXAnchor.constraint(equalTo: headView.centerXAnchor),
-            procentLabel.centerYAnchor.constraint(equalTo: headView.centerYAnchor),
-            
-            timeLabel.trailingAnchor.constraint(equalTo: procentLabel.leadingAnchor, constant: -40),
+            timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 65),
             timeLabel.topAnchor.constraint(equalTo: procentLabel.topAnchor, constant: 10),
             
-            decibelLabel.leadingAnchor.constraint(equalTo: procentLabel.trailingAnchor, constant: 40),
+            decibelLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -65),
             decibelLabel.topAnchor.constraint(equalTo: procentLabel.topAnchor, constant: 10),
             
             dbImage.leadingAnchor.constraint(equalTo: decibelLabel.trailingAnchor, constant: 5),
@@ -374,9 +468,8 @@ extension Dosimeter {
 extension Dosimeter {
     
     func fixDosimerer() {
+//        viewDidLoad()
         var nulDict = timeValueSubject.value
-//        timeValueSubject.value.removeAll()
-//        timeValueSubject.send(nulDict)
         let queue = DispatchQueue.global(qos: .userInteractive)
         queue.async{ [self] in
             let indexPath8 = IndexPath(item: 8, section: 0)
@@ -403,15 +496,14 @@ extension Dosimeter {
             }
             timeValueSubject.value.removeAll()
             nulDict = timeValueSubject.value
-            print(timeValueSubject.value)
             timeValueSubject.send(nulDict)
         }
     }
     
     func fixDosimererSecond() {
-        var nulDict = timeValueSubject.value
-//        timeValueSubject.value.removeAll()
-//        timeValueSubject.send(nulDict)
+//        viewDidLoad()
+//        viewWillAppear(true)
+        var nulDict = timeValueSubjectSecond.value
         let queue = DispatchQueue.global(qos: .userInteractive)
         queue.async{ [self] in
             let indexPath8 = IndexPath(item: 8, section: 0)
@@ -436,26 +528,25 @@ extension Dosimeter {
                 Secondcollection?.reloadItems(at: [indexPath9])
                 Secondcollection?.reloadData()
             }
-            timeValueSubject.value.removeAll()
-            nulDict = timeValueSubject.value
-            print(timeValueSubject.value)
-            timeValueSubject.send(nulDict)
+            timeValueSubjectSecond .value.removeAll()
+            nulDict = timeValueSubjectSecond.value
+            timeValueSubjectSecond.send(nulDict)
         }
     }
-
+    
     
     @objc func noiseTap() {
         if isTap {
             
-            noiseButton.setTitle("OSHA", for: .normal)
+            noiseButton.setTitle("NIOSH", for: .normal)
             noiseButton.backgroundColor = .black
-            noiseButton.setTitleColor(UIColor(named: "cellDb"), for: .normal)
+            noiseButton.setTitleColor(UIColor(named: "cellDos"), for: .normal)
             isTap = false
             collection!.isHidden = true
             Secondcollection?.isHidden = false
             recorder.stopMonitoring()
             recorder.stop()
-          
+            
             procentLabel.text = "0"
             decibelLabel.text = "0"
             timeLabel.text = "00:00"
@@ -463,41 +554,22 @@ extension Dosimeter {
                 self.startRecordingAudio()
             }
         } else {
-         
-            noiseButton.setTitle("NIOSH", for: .normal)
+            
+            noiseButton.setTitle("OSHA", for: .normal)
             noiseButton.backgroundColor = #colorLiteral(red: 0.137247622, green: 0, blue: 0.956287086, alpha: 1)
             noiseButton.setTitleColor(UIColor.white, for: .normal)
-            noiseButton.setTitleColor(UIColor(named: "cellDb"), for: .normal)
+            noiseButton.setTitleColor(UIColor(named: "cellDos"), for: .normal)
             isTap = true
             Secondcollection?.isHidden = true
             collection?.isHidden = false
             recorder.stopMonitoring()
             recorder.stop()
-           
             procentLabel.text = "0"
             decibelLabel.text = "0"
-            
             timeLabel.text = "00:00"
             _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
                 self.startRecordingAudio()
             }
-        }
-    }
-    
-    @objc func refreshButtonTap() {
-     
-        
-        if Constants.shared.isRecordingAtLaunchEnabled == false{
-        }
-        recorder.stopMonitoring()
-        recorder.stop()
-        fixDosimerer()
-        fixDosimererSecond()
-        procentLabel.text = "0"
-        decibelLabel.text = "0"
-        timeLabel.text = "00:00"
-        _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
-            self.startRecordingAudio()
         }
     }
 }
@@ -535,7 +607,7 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
     }
     
     func recorder(_ recorder: Recorder, didCaptureDecibels decibels: Int) {
-        let degree = 360/96
+//        let degree = 360/96
         let minutes = (recorder.seconds - (recorder.seconds % 60)) / 60
         let seconds = recorder.seconds - (minutes * 60)
         
@@ -554,7 +626,6 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
             strSeconds = "\(seconds)"
         }
         
-        
         var timeDict = timeValueSubject.value
         var secondTimeDict = timeValueSubjectSecond.value
         func increaseDictValue(_ dict: inout [Int: Double], key: Int) {
@@ -569,7 +640,10 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         
         if (90..<95).contains(decibels) {
             increaseDictValue(&timeDict, key: 90)
-            totalPrecent = 1
+            Timer.scheduledTimer(withTimeInterval: 50, repeats: false) { Timer in
+                self.totalPrecent = 1
+            }
+            
         }
         if (95..<100).contains(decibels) {
             increaseDictValue(&timeDict, key: 95)
@@ -597,9 +671,11 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         }
         
         
-        if (80..<88).contains(decibels) {
+        if (85..<88).contains(decibels) {
             increaseDictValueSecond(&secondTimeDict, key: 85)
-            totalPrecent = 1
+            Timer.scheduledTimer(withTimeInterval: 50, repeats: false) { Timer in
+                self.totalPrecent = 1
+            }
         }
         if (88..<91).contains(decibels) {
             increaseDictValueSecond(&secondTimeDict, key: 88)
@@ -629,7 +705,7 @@ extension Dosimeter: AVAudioRecorderDelegate, RecorderDelegate {
         procentLabel.text = "\(totalPrecent)"
         timeValueSubject.send(timeDict)
         timeValueSubjectSecond.send(secondTimeDict)
-        timeLabel.text = "\(strMinutes): \(strSeconds)"
+        timeLabel.text = "\(strMinutes):\(strSeconds)"
         decibelLabel.text = "\(decibels)"
     }
 }

@@ -9,3 +9,5 @@ NSMicrophoneUsageDescription = "Bitte erlauben Sie den Zugriff auf das Mikrofon.
 NSCameraUsageDescription = "Bitte erlauben Sie den Zugriff auf die Kamera. Gehen Sie hierfür zu den Einstellungen.";
 NSPhotoLibraryAddUsageDescription = "Bitte erlauben Sie den Zugriff auf Fotos. Gehen Sie hierfür zu den Einstellungen.";
 NSLocationWhenInUseUsageDescription = "Bitte erlauben Sie den Zugriff auf Standortdaten. Gehen Sie hierfür zu den Einstellungen.";
+CFBundleDisplayName = "Lärmpegelmesser";
+ 

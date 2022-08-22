@@ -9,3 +9,4 @@ NSMicrophoneUsageDescription = "Vui lòng đặt quyền sử dụng micrô tron
 NSCameraUsageDescription = "Vui lòng đặt quyền sử dụng Máy ảnh trong cài đặt để ứng dụng có thể hoạt động";
 NSPhotoLibraryAddUsageDescription = "Vui lòng đặt quyền sử dụng thư viện ảnh trong cài đặt để ứng dụng có thể hoạt động";
 NSLocationWhenInUseUsageDescription = "Vui lòng đặt quyền sử dụng vị trí trong cài đặt để ứng dụng có thể hoạt động";
+CFBundleDisplayName = "Decibel Meter";

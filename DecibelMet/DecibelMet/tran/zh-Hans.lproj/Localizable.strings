@@ -8,6 +8,15 @@
 
 "Trial7" = "然后每周";
 
+"SubFor" = "订阅仅需";
+
+"perWeek" = "/周";
+
+"perMounth" = "/包月";
+
+"perYear" = "/包年";
+
+
 "Continue" = "继续";
 
 "Camera" = "相机";
@@ -15,7 +24,7 @@
 "Location" = "位置";
 
 "PhotoLibrary" = "图库";
-
+"then" = "然后";
 "Ok" = "好";
  
 "AllowOnce" = "允许一次";
@@ -62,6 +71,7 @@
 
 "No" = "否";
 
+"UnlockAllAccess" = "解锁所有访问";
 
 "Week" = "周";
 
@@ -71,20 +81,24 @@
 
 "Restore" = "还原";
 
-"Maximum" = "最大:";
+"Maximum" = "最大";
 
-"Average" = "平均:";
+"Average" = "平均";
 
-"Minimum" = "最小:";
+"Minimum" = "最小";
 
-"Minute" = "分钟(分)";
+"Minute" = "分钟";
 
-"Second" = "秒钟(秒)";
+"Second" = "秒钟";
 
-"Hour" = "小时(时)";
+"Hour" = "小时";
 
 "Location" = "位置";
+"subNO" = "抱歉，您没有有效订阅";
 
+"subscription" = "Subscription";
+"trialText" = "从7天免费试用开始，然后";
+"subYES" = "Restored subscription";
 "Date" = "日期";
 
 "Share" = "分享";
@@ -142,11 +156,20 @@
 "video" = "视频";
  
 "DecibelMeter" = "分贝计";
-
-"CFBundleDisplayName" = "分贝计";
-
-"CFBundleName" = "分贝计";
-
+"reset" = "重置";
 "recording" = "录制名称";
 
 "save" = "保存";
+"faq1" = "The sound level meter can measure ambient noise in real time, as well as record and play recordings. For the sound level meter to work and determine the level of detected noise, open access to the microphone of your device. The sound data read by the microphone is expressed in decibels (dB).
+On the main screen, there is the current measurement and multiple controls. The big blue record button (start of measurement) is in the middle.
+MAX — a maximum value in the current measurement.
+AVG — an average value in the current measurement.
+MIN — an minimum average value in the current measurement.";
+
+"faq11" = "How to use the application?";
+"faq22" = "Why doesn't the app measure the noise level and the main screen shows zero?";
+"faq33" = "Why doesn't the app store geo-location information while recording?";
+
+"faq2" = "If instead of measurements you see a zero on the main screen, then you have banned the sound level meter to access your microphone. Go to Settings > Privacy policy > Microphone and allow the program access to the microphone.";
+
+"faq3" = "If the program does not save information on geographical position during recording, it means you have banned to access to geographical location data. Go to Settings > Privacy policy > Location Services and allow the program to access the data.";

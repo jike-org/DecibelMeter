@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		010ADB0728832EF90062FD53 /* RateUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010ADB0628832EF90062FD53 /* RateUsVC.swift */; };
+		01130D6128ACEF90005DDCCD /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01130D6028ACEF90005DDCCD /* DeepLink.swift */; };
+		01130D6628AF97B9005DDCCD /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01130D6528AF97B9005DDCCD /* IAPManager.swift */; };
 		01156B24287BEB5400D62A1B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01156B23287BEB5400D62A1B /* StoreKit.framework */; };
 		01156B27287BECC000D62A1B /* InAppPurchaseProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01156B26287BECC000D62A1B /* InAppPurchaseProduct.swift */; };
 		01156B29287BEEB700D62A1B /* InAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01156B28287BEEB700D62A1B /* InAppManager.swift */; };
@@ -41,6 +43,7 @@
 		0180CE322822C1ED00E80380 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE312822C1ED00E80380 /* Recorder.swift */; };
 		0180CE362822C2EB00E80380 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE352822C2EB00E80380 /* Constants.swift */; };
 		0180CE382822C73400E80380 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE372822C73400E80380 /* Player.swift */; };
+		0193F34A28A42155008B8F7D /* Trial4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193F34928A42155008B8F7D /* Trial4.swift */; };
 		019655922880BCDC00F04FD9 /* TrialSubscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019655912880BCDC00F04FD9 /* TrialSubscribe.swift */; };
 		019655942880C38300F04FD9 /* FAQSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019655932880C38300F04FD9 /* FAQSetting.swift */; };
 		01A259A42823DCD300EBA84C /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A32823DCD200EBA84C /* TabBar.swift */; };
@@ -63,6 +66,10 @@
 
 /* Begin PBXFileReference section */
 		010ADB0628832EF90062FD53 /* RateUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUsVC.swift; sourceTree = "<group>"; };
+		01130D6028ACEF90005DDCCD /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		01130D6228AD250E005DDCCD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		01130D6328AD250F005DDCCD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		01130D6528AF97B9005DDCCD /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		01156B23287BEB5400D62A1B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		01156B26287BECC000D62A1B /* InAppPurchaseProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseProduct.swift; sourceTree = "<group>"; };
 		01156B28287BEEB700D62A1B /* InAppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppManager.swift; sourceTree = "<group>"; };
@@ -114,6 +121,7 @@
 		0180CE312822C1ED00E80380 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		0180CE352822C2EB00E80380 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0180CE372822C73400E80380 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		0193F34928A42155008B8F7D /* Trial4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trial4.swift; sourceTree = "<group>"; };
 		019655912880BCDC00F04FD9 /* TrialSubscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialSubscribe.swift; sourceTree = "<group>"; };
 		019655932880C38300F04FD9 /* FAQSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQSetting.swift; sourceTree = "<group>"; };
 		01A259A32823DCD200EBA84C /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -168,6 +176,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01130D6428AF971B005DDCCD /* IAPManager */ = {
+			isa = PBXGroup;
+			children = (
+				01130D6528AF97B9005DDCCD /* IAPManager.swift */,
+			);
+			path = IAPManager;
+			sourceTree = "<group>";
+		};
 		01156B25287BEC9600D62A1B /* InAppPurchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +214,7 @@
 				01658FAA283245EB001336A4 /* SubscribeTwoView.swift */,
 				019655912880BCDC00F04FD9 /* TrialSubscribe.swift */,
 				0165FB6B288ED08F0006EBEB /* TrialViewController.swift */,
+				0193F34928A42155008B8F7D /* Trial4.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -287,6 +304,7 @@
 				0159FAA12863164C0021F895 /* MTUserDefaults.swift */,
 				010ADB0628832EF90062FD53 /* RateUsVC.swift */,
 				01DA069C2887797300F13885 /* DeviceEx.swift */,
+				01130D6028ACEF90005DDCCD /* DeepLink.swift */,
 			);
 			path = "Support files";
 			sourceTree = "<group>";
@@ -341,6 +359,7 @@
 		01D2DCDF28229BC7003AB953 /* DecibelMet */ = {
 			isa = PBXGroup;
 			children = (
+				01130D6428AF971B005DDCCD /* IAPManager */,
 				0168694F288AB7890086659E /* AppleIncRootCertificate.cer */,
 				0168694E288AB76D0086659E /* validation */,
 				01D2DCE028229BC7003AB953 /* AppDelegate.swift */,
@@ -451,6 +470,7 @@
 				"zh-HK",
 				"zh-Hant",
 				"pt-BR",
+				"es-419",
 			);
 			mainGroup = 01D2DCD428229BC7003AB953;
 			productRefGroup = 01D2DCDE28229BC7003AB953 /* Products */;
@@ -567,8 +587,11 @@
 				0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */,
 				0159FAA22863164C0021F895 /* MTUserDefaults.swift in Sources */,
 				0180CE2C2822C13100E80380 /* StackView.swift in Sources */,
+				01130D6628AF97B9005DDCCD /* IAPManager.swift in Sources */,
+				0193F34A28A42155008B8F7D /* Trial4.swift in Sources */,
 				01ACC8C7289181CF00E8421E /* CellDosimetre.swift in Sources */,
 				0180CE302822C1B100E80380 /* Gradient.swift in Sources */,
+				01130D6128ACEF90005DDCCD /* DeepLink.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +619,7 @@
 				015ADF172875BED900F73BDB /* zh-HK */,
 				015ADF192875BEEE00F73BDB /* pt-BR */,
 				015ADF1A2875C4EA00F73BDB /* zh-Hant */,
+				01130D6328AD250F005DDCCD /* es-419 */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -630,6 +654,7 @@
 				01DB5F89288FE4F90066E5FA /* ru */,
 				01DB5F8A288FE4F90066E5FA /* fr */,
 				01DB5F8B288FE4F90066E5FA /* pt-PT */,
+				01130D6228AD250E005DDCCD /* es-419 */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -764,20 +789,20 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = .;
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = .;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = .;
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = .;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Access;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = test1;
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Test;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = .;
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -785,7 +810,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -808,20 +833,20 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = .;
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = .;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = .;
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = .;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Access;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = test1;
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Test;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = .;
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -829,7 +854,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

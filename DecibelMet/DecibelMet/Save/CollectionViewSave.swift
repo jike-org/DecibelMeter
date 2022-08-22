@@ -41,23 +41,19 @@ class SaveController: UIViewController {
                 if let tagPlaying = tagPlaying {
                     if tmp.tag == 0 {
                         if tmp.isPlaying {
-                            print("wrong")
                             tmp.isPlaying = false
                             tmp.playButton.setImage(UIImage(named: "png"), for: .normal)
                             if player.player.isPlaying {
                                 player.player.stop()
                             }
                         } else {
-                            print("true")
                             tmp.isPlaying = true
                             tmp.playButton.setImage(UIImage(named: "button3"), for: .normal)
                         }
                     } else if tmp.tag == tagPlaying {
-                        print("true")
                         tmp.isPlaying = true
                         tmp.playButton.setImage(UIImage(named: "button3"), for: .normal)
                     } else {
-                        print("wrong")
                         tmp.isPlaying = false
                         tmp.playButton.setImage(UIImage(named: "png"), for: .normal)
                         if player.player.isPlaying {
@@ -68,13 +64,31 @@ class SaveController: UIViewController {
             }
         }
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        
+        if recordings?.count == 0 {
+            recordings?.removeAll()
+            
+            do {
+                try persist.viewContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.tintColor = UIColor.white
-        self.tabBarController?.tabBar.barTintColor = UIColor.black
+//        do {
+//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+//        }
+//        catch {
+//            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+//        }
+
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width) - 30, height: 80)
@@ -138,12 +152,24 @@ class SaveController: UIViewController {
             sender.setImage(UIImage(named: "stop"), for: .normal)
             self.tagPlaying = sender.tag
             player = Player()
+            
             player.play(path, delegate: self)
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback)
+            } catch(let error) {
+                print(error.localizedDescription)
+            }
         } else {
             isPlaying = false
             cell?.isPlaying = true
             sender.setImage(UIImage(named: "playSVG"), for: .normal)
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback)
+            } catch(let error) {
+                print(error.localizedDescription)
+            }
             player.player.stop()
+            player.player.volume = 1
             player.session = nil
             self.tagPlaying = nil
         }
@@ -152,13 +178,14 @@ class SaveController: UIViewController {
 
 extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if self.recordings != nil {
+            recordings!.reverse()
             self.tags = Array(0..<recordings!.count)
             return recordings!.count
         } else {
@@ -185,9 +212,9 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
             
             cell.setValues(name: recording.name ?? "",
                            time: recording.length ?? "",
-                           min: minL + String(recording.min),
-                           max: maxL + String(recording.max),
-                           avg: avgL + String(recording.avg),
+                           min: minL + ":" + String(recording.min),
+                           max: maxL + ":" + String(recording.max),
+                           avg: avgL + ":" + String(recording.avg),
                            date:formatteddate)
             
             cell.audioID = recording.id
@@ -255,7 +282,6 @@ extension SaveController {
         guard let recordings = recordings else { return }
         let recording = recordings[indexPath.row]
         guard let path = persist.filePath(for: recording.id!.uuidString) else { return }
-        
         let activityVC = UIActivityViewController(
             activityItems: [path],
             applicationActivities: nil
@@ -338,9 +364,7 @@ extension SaveController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {
             buttonToogler()
-            print("VRODE RABOTAET")
         } else {
-            print("NE RABOTAEN BLYAT")
         }
     }
 }

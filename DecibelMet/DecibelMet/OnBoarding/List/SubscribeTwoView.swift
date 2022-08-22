@@ -5,6 +5,8 @@
 //  Created by Stas Dashkevich on 16.05.22.
 //
 
+// 2 экран
+
 import Foundation
 import UIKit
 import StoreKit
@@ -28,8 +30,12 @@ class SubscribeTwoView: UIViewController {
     let lyear = NSLocalizedString("Year", comment: "")
     let lAcces = NSLocalizedString("UnlockAllAccess", comment: "")
     
-    var xMarkDelay = 5
-    var textDelay = 5
+    let tTrial = NSLocalizedString("Start7Day", comment: "")
+    let lthen = NSLocalizedString("then", comment: "")
+    let lweekPer  = NSLocalizedString("perWeek", comment: "")
+    
+    var xMarkDelay = 0
+    var textDelay = 0
     lazy var backgroundViewImage = UIImageView(image: UIImage(named: "04"))
     lazy var hStack = StackView(axis: .horizontal)
     lazy var privacy = Button(style: .subscriptionVC, lprivacy)
@@ -62,11 +68,14 @@ class SubscribeTwoView: UIViewController {
         setup()
         remoteConfigSetup()
         
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.week.rawValue), object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.week.rawValue), object: nil)
+//        
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounth.rawValue), object: nil)
+//        
+//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.year.rawValue), object: nil)
         
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounth.rawValue), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.year.rawValue), object: nil)
+        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
+            xMark.isHidden = false
     }
     
     func remoteConfigSetup() {
@@ -74,40 +83,56 @@ class SubscribeTwoView: UIViewController {
         setting.minimumFetchInterval = 0
         remoteConfig.configSettings = setting
         
-        remoteConfig.fetchAndActivate { (status, error) in
+        remoteConfig.fetchAndActivate { [self] (status, error) in
             
             if error !=  nil {
-                print(error?.localizedDescription)
             } else {
                 if status != .error {
                     if let stringValue =
                         self.remoteConfig["closeButtonDelay"].stringValue {
-                        print (stringValue)
                         self.xMarkDelay = Int(stringValue)!
+                        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
+                            xMark.isHidden = false
+                        }
                     }
                 }
             }
             
             if error !=  nil {
-                print(error?.localizedDescription)
             } else {
                 if status != .error {
                     if let stringValue =
                         self.remoteConfig["textSubscriptionDelay"].stringValue {
-                        print (stringValue)
                         self.textDelay = Int(stringValue)!
+                       
                     }
                 }
             }
         }
-        
-        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
-            xMark.isHidden = false
+       
         }
         
-//        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
-//            s.isHidden = false
-//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if UserDefaults.standard.value(forKey: "theme") == nil {
+            let one = 1
+            UserDefaults.standard.set(one, forKey: "theme")
+        }
+        
+        if UserDefaults.standard.value(forKey: "theme") as! Int == 1 {
+            backgroundViewImage.image = UIImage(named: "04")
+            privacy.setTitleColor(.systemBlue, for: .normal)
+            terms.setTitleColor(.systemBlue, for: .normal)
+        }
+        
+        if UserDefaults.standard.value(forKey: "theme") as! Int == 0 {
+            backgroundViewImage.image = UIImage(named: "06")
+            privacy.setTitleColor(.white, for: .normal)
+            terms.setTitleColor(.white, for: .normal)
+            andLabel.textColor = .white
+        }
     }
     
     private func priceStringFor(product: SKProduct) -> String {
@@ -122,6 +147,12 @@ class SubscribeTwoView: UIViewController {
 extension SubscribeTwoView {
     
     func setup() {
+        
+        xMark.isHidden = true
+        if let stringValue =
+            self.remoteConfig["closeButtonDelay"].stringValue {
+            self.xMarkDelay = Int(stringValue)!
+        }
         
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "circle.fill")
@@ -246,7 +277,7 @@ extension SubscribeTwoView {
     }
     
     @objc func yearSub() {
-        iapManager.purchase(productWith: "com.decibelmeter.1ye")
+        IAPManager.shared.purchase(purchase: .year)
         DispatchQueue.main.async {
             self.spinenr.startAnimating()
             _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
@@ -256,7 +287,7 @@ extension SubscribeTwoView {
     }
     
     @objc func mounthSub() {
-        iapManager.purchase(productWith: "com.decibelmeter.1mo")
+        IAPManager.shared.purchase(purchase: .mounth)
         DispatchQueue.main.async {
             self.spinenr.startAnimating()
             _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
@@ -266,7 +297,7 @@ extension SubscribeTwoView {
     }
     
     @objc func weekSub() {
-        iapManager.purchase(productWith: "com.decibelmeter.1we")
+        IAPManager.shared.purchase(purchase: .week)
         DispatchQueue.main.async {
             self.spinenr.startAnimating()
             _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { Timer in
@@ -287,25 +318,34 @@ extension SubscribeTwoView {
     }
     
     @objc func trialButtonTapped1() {
-        print("купил")
-        Constants.shared.hasPurchased = true
-        dismiss(animated: true)
+//        print("купил")
+//        Constants.shared.hasPurchased = true
+//        dismiss(animated: true)
     }
     
     @objc func restoreButtonTapped() {
-        SKPaymentQueue.default().restoreCompletedTransactions()
+        let alertController = UIAlertController(title: NSLocalizedString("DecibelMeter", comment: ""), message: NSLocalizedString("subNO", comment: ""), preferredStyle: .alert)
         
-        //        SwiftyStoreKit.restorePurchases(atomically: true) { results in
-        //            if results.restoreFailedPurchases.count > 0 {
-        //                print("Restore Failed: \(results.restoreFailedPurchases)")
-        //            }
-        //            else if results.restoredPurchases.count > 0 {
-        //                print("Restore Success: \(results.restoredPurchases)")
-        //            }
-        //            else {
-        //                print("Nothing to Restore")
-        //            }
-        //        }
+        let cancelButton = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelButton)
+        
+        let alertController2 = UIAlertController(title: NSLocalizedString("subscription", comment: ""), message: NSLocalizedString("subYES", comment: ""), preferredStyle: .alert)
+        
+        let cancelButton2 = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
+        
+        alertController2.addAction(cancelButton2)
+//        SKPaymentQueue.default().restoreCompletedTransactions()
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else if results.restoredPurchases.count > 0 {
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else {
+            }
+        }
     }
 }
 

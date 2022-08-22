@@ -9,3 +9,4 @@ NSMicrophoneUsageDescription = "请在设置中设置麦克风使用权限后才
 NSCameraUsageDescription = "请在设置中设置相机使用权限才能运行";
 NSPhotoLibraryAddUsageDescription = "请在设置中设置图库使用权限才能运行";
 NSLocationWhenInUseUsageDescription = "请在设置中设置位置使用权限才能运行";
+CFBundleDisplayName = "分贝计";

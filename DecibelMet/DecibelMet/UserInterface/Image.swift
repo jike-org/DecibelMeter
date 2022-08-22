@@ -21,6 +21,7 @@ class ImageView: UIImageView {
         case chevron
         case nul
         case darkMode
+        case refresh
     }
     
     init(image: Image) {
@@ -50,6 +51,10 @@ class ImageView: UIImageView {
             print("null")
         case .darkMode:
             self.image = UIImage(named: "darkMode")
+        case .refresh:
+            let largeConfig = UIImage.SymbolConfiguration(pointSize: 240, weight: .bold, scale: .medium)
+            self.image = UIImage(systemName: "clock.arrow.2.circlepath")?.withTintColor(.blue).withConfiguration(largeConfig)
+            
         }
     }
     
