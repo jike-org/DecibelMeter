@@ -13,7 +13,6 @@ class FirstListViewController: UICollectionViewCell {
     var lHeading = NSLocalizedString("SoundMeterDosimeter", comment: "")
     
     lazy var headingLabel = Label(style: .onBoarding, lHeading.uppercased())
-//    lazy var headingLabelMeter = Label(style: .onBoarding, "METER")
     public static let identifier = "FirstView"
     lazy var backImage = UIImageView(image: UIImage(named: "01"))
     
@@ -29,13 +28,10 @@ class FirstListViewController: UICollectionViewCell {
     func setup() {
         addSubview(backImage)
         addSubview(headingLabel)
-//        addSubview(headingLabelMeter)
         backImage.frame = UIScreen.main.bounds
         NSLayoutConstraint.activate([
             headingLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             headingLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 170),
-//            headingLabelMeter.topAnchor.constraint(equalTo: headingLabel.bottomAnchor,constant: 10),
-//            headingLabelMeter.centerXAnchor.constraint(equalTo: centerXAnchor)
-            ])
+        ])
     }
 }

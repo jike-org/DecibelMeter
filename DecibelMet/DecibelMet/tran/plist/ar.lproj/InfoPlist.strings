@@ -6,7 +6,7 @@
   
 */
 NSMicrophoneUsageDescription = "يُرجى تمكين الإذن باستخدام الميكروفون في الإعدادات لكي يعمل التطبيق";
-NSCameraUsageDescription = "يُرجى تمكين الإذن باستخدام الكاميرا في الإعدادات لكي يعمل التطبيق";
-NSPhotoLibraryAddUsageDescription = "يُرجى تمكين الإذن باستخدام معرض الصور في الإعدادات لكي يعمل التطبيق";
+NSCameraUsageDescription = "هذا مطلوب لكي يتمكن التطبيق من التقاط مستويات ضوضاء الفيديو والصوت";
+NSPhotoLibraryAddUsageDescription = "هذا مطلوب لكي يتمكن التطبيق من حفظ مستوى ضوضاء الفيديو والصوت";
 NSLocationWhenInUseUsageDescription = "يُرجى تمكين الإذن باستخدام الموقع في الإعدادات لكي يعمل التطبيق";
 CFBundleDisplayName = "Decibel Meter";

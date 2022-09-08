@@ -5,8 +5,8 @@
   Created by Valera Sysov on 25.07.22.
   
 */
-NSMicrophoneUsageDescription = "Vui lòng đặt quyền sử dụng micrô trong phần cài đặt để ứng dụng có thể hoạt động";
-NSCameraUsageDescription = "Vui lòng đặt quyền sử dụng Máy ảnh trong cài đặt để ứng dụng có thể hoạt động";
-NSPhotoLibraryAddUsageDescription = "Vui lòng đặt quyền sử dụng thư viện ảnh trong cài đặt để ứng dụng có thể hoạt động";
-NSLocationWhenInUseUsageDescription = "Vui lòng đặt quyền sử dụng vị trí trong cài đặt để ứng dụng có thể hoạt động";
+NSMicrophoneUsageDescription = "Cần thiết để ứng dụng hoạt động, nhằm đo mức độ tiếng ồn của âm thanh";
+NSCameraUsageDescription = "Cần thiết để ứng dụng hoạt động, nhằm thu hình và đo mức độ tiếng ồn của âm thanh";
+NSPhotoLibraryAddUsageDescription = "Sử dụng để hiển thị vị trí thành phố trong hình ảnh đã chụp";
+NSLocationWhenInUseUsageDescription = "Sử dụng để hiển thị vị trí thành phố trong hình ảnh đã chụp";
 CFBundleDisplayName = "Decibel Meter";

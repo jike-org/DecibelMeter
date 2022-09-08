@@ -5,8 +5,8 @@
   Created by Valera Sysov on 25.07.22.
   
 */
-NSMicrophoneUsageDescription = "Imposta i permessi per l'utilizzo del microfono nelle impostazioni";
-NSCameraUsageDescription = "Imposta i permessi per l'utilizzo della fotocamera nelle impostazioni";
-NSPhotoLibraryAddUsageDescription = "Imposta i permessi per l'utilizzo della libreria di foto nelle impostazioni";
-NSLocationWhenInUseUsageDescription = "Imposta i permessi per l'utilizzo della localizzazione nelle impostazioni";
+NSMicrophoneUsageDescription = "Necessario per il funzionamento dell'app, al fine di misurare il livello di rumore audio";
+NSCameraUsageDescription = "Necessario per il funzionamento dell'app, al fine di acquisire il livello di rumore video e audio";
+NSPhotoLibraryAddUsageDescription = "Necessario per il funzionamento dell'app, al fine di salvare il livello di rumore video e audio";
+NSLocationWhenInUseUsageDescription = "Utilizzato per mostrare la posizione nelle immagini acquisite";
 CFBundleDisplayName = "Decibel Meter";

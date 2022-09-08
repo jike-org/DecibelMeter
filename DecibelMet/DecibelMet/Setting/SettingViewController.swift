@@ -27,7 +27,7 @@ class SettingsView: UIViewController {
     var faq = NSLocalizedString("FAQ", comment: "")
     var unlockAll = NSLocalizedString("Unlockallfeatures", comment: "")
     var lAcces = NSLocalizedString("", comment: "")
-    private var changeSub: String = "1"
+    private var changeSub: String = "2"
     var rese = NSLocalizedString("reset", comment: "")
     var rateUsInt = 0
     lazy var titleLabel = Label(style: .titleLabel, settings)
@@ -48,19 +48,14 @@ class SettingsView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
-//        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounthTrial.rawValue), object: nil)
-//        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.yearTrial.rawValue), object: nil)
-        
-        func fetchValues() {
-        
-            let setting = RemoteConfigSettings()
-            setting.minimumFetchInterval = 0
-            remoteConfig.configSettings = setting
-        }
+        fetchValues()
+    }
+    
+    func fetchValues() {
+    
+        let setting = RemoteConfigSettings()
+        setting.minimumFetchInterval = 0
+        remoteConfig.configSettings = setting
         
         remoteConfig.fetchAndActivate { (status, error) in
             
@@ -68,7 +63,7 @@ class SettingsView: UIViewController {
             } else {
                 if status != .error {
                     if let stringValue =
-                        self.remoteConfig["otherScreenNumber"].stringValue {
+                        self.remoteConfig["settingsScreenNumber"].stringValue {
                         self.changeSub = stringValue
                     }
                 }
@@ -76,20 +71,18 @@ class SettingsView: UIViewController {
                 if status != .error {
                     if let stringValue2 =
                         self.remoteConfig["rateUs"].stringValue {
-                        self.rateUsInt = Int(stringValue2)!
+                        self.rateUsInt = Int(stringValue2) ?? 0
                     }
                 }
-
             }
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.layoutIfNeeded()
     }
 }
-
 
 extension SettingsView {
     
@@ -119,8 +112,7 @@ extension SettingsView {
         tableView.reloadData()
         dismiss(animated: true)
     }
-    
-}
+    }
 
 
 // MARK: Table delegate & datasource
@@ -142,9 +134,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
           return cellSpacingHeight
       }
-    
-    
-    
+   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = SettingsCell(
             reuseIdentifier: "cell",
@@ -228,7 +218,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                         icon: ImageView(image: .refresh),
                         label: Label(style: .settingLabel,"\(rese) \(dos)"),
                         isUsingSwitch: false,
-                        chevron: ImageView(image: .chevron)
+                        chevron: ImageView(image: .nul)
                     )
             
         default:
@@ -238,14 +228,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
             if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 1 {
             
             switch indexPath.row {
-//            case 0:
-//                cell = SettingsCell(
-//                    reuseIdentifier: "cell",
-//                    icon: ImageView(image: .lock),
-//                    label: Label(style: .tableLabel, unlockAll),
-//                    isUsingSwitch: false,
-//                    chevron: ImageView(image: .chevron)
-//                )
+
             case 0:
                 cell = SettingsCell(
                     reuseIdentifier: "cell",
@@ -317,11 +300,10 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
-    private func shereAs() {
+        private func shereAs() {
         let textToShare = NSLocalizedString("appWil", comment: "")
         
-        if let myWebsite = URL(string: "https://apps.apple.com/us/app/decibel-meter-sound-level-db/id1624503658") {
+        if let myWebsite = URL(string: " https://apps.apple.com/app/id1624503658") {
             let activityVC = UIActivityViewController(activityItems: [textToShare , myWebsite ], applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
             
@@ -346,15 +328,13 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     
     private func shareAs() {
         var textToShare = NSLocalizedString("appWil", comment: "")
-        textToShare += "https://apps.apple.com/us/app/decibel-meter-sound-level-db/id1624503658"
+        textToShare += " https://apps.apple.com/app/id1624503658"
         
             let activityVC = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
             
     }
     
-    
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 0 {
         switch indexPath.row {
@@ -397,11 +377,10 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
 
                     UIApplication.shared.open(writeReviewURL)
                     
-                    dismiss(animated: true)
                 }
             } else {
                 DispatchQueue.main.async { [self] in
-                        let vc = RateUsVC()
+                        let vc = RateUsVCSetting()
                         vc.modalPresentationStyle = .fullScreen
                         present(vc, animated: true, completion: nil)
                 }
@@ -440,16 +419,13 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                     .compactMap({$0 as? UIWindowScene})
                     .first?.windows
                     .filter({$0.isKeyWindow}).first
-//            UIApplication.shared.keyWindow?.rootViewController = TabBar()
             keyWindow?.rootViewController = TabBar()
         default:
             break
         }
         } else {
             switch indexPath.row {
-                
-                
-            
+     
             case 0:
                 let vc = FAQSetting()
                 vc.modalPresentationStyle = .fullScreen
@@ -471,11 +447,10 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
 
                         UIApplication.shared.open(writeReviewURL)
                         
-                        dismiss(animated: true)
                     }
                 } else {
                     DispatchQueue.main.async { [self] in
-                            let vc = RateUsVC()
+                            let vc = RateUsVCSetting()
                             vc.modalPresentationStyle = .fullScreen
                             present(vc, animated: true, completion: nil)
                     }
@@ -497,6 +472,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                     } else {
                         
                     }
+                
             case 3:
                 if let url = URL(string: "https://www.mindateq.io/privacy-policy") {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -514,55 +490,8 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
                         .compactMap({$0 as? UIWindowScene})
                         .first?.windows
                         .filter({$0.isKeyWindow}).first
-    //            UIApplication.shared.keyWindow?.rootViewController = TabBar()
                 keyWindow?.rootViewController = TabBar()
                 
-//            case 1:
-//                let vc = FAQSetting()
-//                vc.modalPresentationStyle = .fullScreen
-//                present(vc, animated: true, completion: nil)
-//            case 2:
-//                if rateUsInt == 0 {
-////                    DispatchQueue.main.async { [self] in
-////                        if Int(UserDefaults.standard.string(forKey: "enterCounter")!)! == 2 {
-////                            rateApp()
-////                        }
-////                    }
-//                    rateApp()
-//                } else {
-////                    DispatchQueue.main.async { [self] in
-////                        if Int(UserDefaults.standard.string(forKey: "enterCounter")!)! == 2 {
-////                            let vc = RateUsVC()
-////                            vc.modalPresentationStyle = .fullScreen
-////                            present(vc, animated: true, completion: nil)
-////                        }
-////                    }
-////                    let t = Int(UserDefaults.standard.string(forKey: "enterCounter")!)!
-//                    let vc = RateUsVC()
-//                    vc.modalPresentationStyle = .fullScreen
-//                    present(vc, animated: true, completion: nil)
-//                }
-//            case 3:
-//                    if MFMailComposeViewController.canSendMail() {
-//                        let mail = MFMailComposeViewController()
-//                        mail.mailComposeDelegate = self
-//                        mail.setToRecipients(["support@mindateq.io"])
-//                        mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
-//
-//                        present(mail, animated: true)
-//                    } else {
-//                        // show failure alert
-//                    }
-//            case 4:
-//                if let url = URL(string: "https://www.mindateq.io/privacy-policy") {
-//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                }
-//            case 5:
-//                if let url = URL(string: "https://www.mindateq.io/terms-of-use") {
-//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                }
-//            case 5:
-//                shereAs()
             default:
                 break
             }

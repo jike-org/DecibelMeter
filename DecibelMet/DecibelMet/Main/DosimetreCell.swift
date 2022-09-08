@@ -15,7 +15,7 @@ class DosimeterCell: UICollectionViewCell {
     
     // MARK: UI elements
     lazy var timeTitle = Label(style: .time, "MAX: 10 min 58 sec")
-     var dbTitel = Label(style: .dbTitel, "115")
+    var dbTitel = Label(style: .dbTitel, "115")
     lazy var dbImage = Label(style: .dbImage, "dB")
     lazy var procent = Label(style: .time, "100%")
     lazy var time = Label(style: .time, "00:00")
@@ -34,7 +34,7 @@ class DosimeterCell: UICollectionViewCell {
     var isPlaying: Bool = false
     
     private var subscriptions = Set<AnyCancellable>()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(timeTitle)
@@ -46,7 +46,6 @@ class DosimeterCell: UICollectionViewCell {
         
         if UIScreen.main.bounds.height > 700 {
             NSLayoutConstraint.activate([
-
                 timeTitle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
                 timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 15),
                 timeTitle.heightAnchor.constraint(equalToConstant: 20),
@@ -73,10 +72,10 @@ class DosimeterCell: UICollectionViewCell {
                 viewColor.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
                 viewColor.heightAnchor.constraint(equalToConstant: 5)
             ])
-
+            
         } else {
+            
             NSLayoutConstraint.activate([
-
                 timeTitle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 1),
                 timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 15),
                 timeTitle.heightAnchor.constraint(equalToConstant: 20),
@@ -103,7 +102,6 @@ class DosimeterCell: UICollectionViewCell {
                 viewColor.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
                 viewColor.heightAnchor.constraint(equalToConstant: 5)
             ])
-
         }
     }
     
@@ -113,7 +111,6 @@ class DosimeterCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         subscriptions.removeAll()
     }
     
@@ -153,7 +150,7 @@ class DosimeterCell: UICollectionViewCell {
                     strSeconds = "\(seconds)"
                 }
                 
-               let d = "\(strMinutes):\(strSeconds)"
+                let d = "\(strMinutes):\(strSeconds)"
                 return d
                 
             }

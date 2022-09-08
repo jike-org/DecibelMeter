@@ -55,12 +55,13 @@ class SubscribeTwoView: UIViewController {
         return view
     }()
     
+    let productW = InAppManager.share.productW
+    let productM = InAppManager.share.productM
+    let productY = InAppManager.share.productY
     
-    let product = InAppManager.share.product
-    
-    lazy var weekSubscribe = Button(style: ._continue, "\(priceStringFor(product: product[2])) / \(lweek)")
-    lazy var mounthSubscribe = Button(style: ._continue, "\(priceStringFor(product:product[0])) / \(lmounth)")
-    lazy var yearSubscribe = Button(style: ._continue, "\(priceStringFor(product:product[4])) / \(lyear)")
+    lazy var weekSubscribe = Button(style: ._continue, "")
+    lazy var mounthSubscribe = Button(style: ._continue, "")
+    lazy var yearSubscribe = Button(style: ._continue, "")
     lazy var unlimited = Label(style: .timeTitle, "")
     
     override func viewDidLoad() {
@@ -68,50 +69,42 @@ class SubscribeTwoView: UIViewController {
         setup()
         remoteConfigSetup()
         
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.week.rawValue), object: nil)
-//        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounth.rawValue), object: nil)
-//        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.year.rawValue), object: nil)
-        
         let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
             xMark.isHidden = false
-    }
-    
-    func remoteConfigSetup() {
-        let setting = RemoteConfigSettings()
-        setting.minimumFetchInterval = 0
-        remoteConfig.configSettings = setting
+        }
         
-        remoteConfig.fetchAndActivate { [self] (status, error) in
+        func remoteConfigSetup() {
+            let setting = RemoteConfigSettings()
+            setting.minimumFetchInterval = 0
+            remoteConfig.configSettings = setting
             
-            if error !=  nil {
-            } else {
-                if status != .error {
-                    if let stringValue =
-                        self.remoteConfig["closeButtonDelay"].stringValue {
-                        self.xMarkDelay = Int(stringValue)!
-                        let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
-                            xMark.isHidden = false
+            remoteConfig.fetchAndActivate { [self] (status, error) in
+                
+                if error !=  nil {
+                } else {
+                    if status != .error {
+                        if let stringValue =
+                            self.remoteConfig["closeButtonDelay"].stringValue {
+                            self.xMarkDelay = Int(stringValue)!
+                            let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
+                                xMark.isHidden = false
+                            }
+                        }
+                    }
+                }
+                
+                if error !=  nil {
+                } else {
+                    if status != .error {
+                        if let stringValue =
+                            self.remoteConfig["textSubscriptionDelay"].stringValue {
+                            self.textDelay = Int(stringValue) ?? 0
+                            
                         }
                     }
                 }
             }
-            
-            if error !=  nil {
-            } else {
-                if status != .error {
-                    if let stringValue =
-                        self.remoteConfig["textSubscriptionDelay"].stringValue {
-                        self.textDelay = Int(stringValue)!
-                       
-                    }
-                }
-            }
         }
-       
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,10 +121,60 @@ class SubscribeTwoView: UIViewController {
         }
         
         if UserDefaults.standard.value(forKey: "theme") as! Int == 0 {
-            backgroundViewImage.image = UIImage(named: "06")
+            backgroundViewImage.image = UIImage(named: "08")
             privacy.setTitleColor(.white, for: .normal)
             terms.setTitleColor(.white, for: .normal)
             andLabel.textColor = .white
+        }
+        
+        if Reachability.isConnectedToNetwork(){
+            
+            let queue = DispatchQueue.global()
+            queue.async{ [self] in
+                
+                SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1we"]) { [self] result in
+                    if let product = result.retrievedProducts.first {
+                        let priceString = product.localizedPrice!
+                        print("Product: \(product.localizedDescription), price: \(priceString)")
+                        weekSubscribe.setTitle("\(priceString) / \(lweek)", for: .normal)
+
+                    }
+                    else if let invalidProductId = result.invalidProductIDs.first {
+                    }
+                    else {
+                    }
+                }
+                
+                SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1mo"]) { [self] result in
+                    if let product = result.retrievedProducts.first {
+                        let priceString = product.localizedPrice!
+                        mounthSubscribe.setTitle("\(priceString) / \(lmounth)", for: .normal)
+
+                    }
+                    else if let invalidProductId = result.invalidProductIDs.first {
+                    }
+                    else {
+                    }
+                }
+                
+                SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1ye"]) { [self] result in
+                    if let product = result.retrievedProducts.first {
+                        let priceString = product.localizedPrice!
+                        yearSubscribe.setTitle("\(priceString) / \(lyear)", for: .normal)
+
+                    }
+                    else if let invalidProductId = result.invalidProductIDs.first {
+                    }
+                    else {
+                    }
+                }
+            }
+            
+       
+        } else {
+            weekSubscribe.setTitle("$3.99 / \(lweek)", for: .normal)
+            mounthSubscribe.setTitle("$6.99 / \(lmounth)", for: .normal)
+            yearSubscribe.setTitle("$9.99 / \(lyear)", for: .normal)
         }
     }
     
@@ -140,7 +183,7 @@ class SubscribeTwoView: UIViewController {
         numberFormatter.numberStyle = .currency
         numberFormatter.locale = product.priceLocale
         
-        return numberFormatter.string(from: product.price)!
+        return numberFormatter.string(from: product.price) ?? "??"
     }
 }
 
@@ -151,7 +194,7 @@ extension SubscribeTwoView {
         xMark.isHidden = true
         if let stringValue =
             self.remoteConfig["closeButtonDelay"].stringValue {
-            self.xMarkDelay = Int(stringValue)!
+            self.xMarkDelay = Int(stringValue) ?? 0
         }
         
         let imageAttachment = NSTextAttachment()
@@ -317,35 +360,37 @@ extension SubscribeTwoView {
         }
     }
     
-    @objc func trialButtonTapped1() {
-//        print("купил")
-//        Constants.shared.hasPurchased = true
-//        dismiss(animated: true)
-    }
-    
     @objc func restoreButtonTapped() {
-        let alertController = UIAlertController(title: NSLocalizedString("DecibelMeter", comment: ""), message: NSLocalizedString("subNO", comment: ""), preferredStyle: .alert)
+        
+        let alertController = UIAlertController(title:NSLocalizedString("DecibelMeter", comment: "")  , message: NSLocalizedString("subNO", comment: ""), preferredStyle: .alert)
         
         let cancelButton = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
         
         alertController.addAction(cancelButton)
         
-        let alertController2 = UIAlertController(title: NSLocalizedString("subscription", comment: ""), message: NSLocalizedString("subYES", comment: ""), preferredStyle: .alert)
+        let alertController2 = UIAlertController(title: NSLocalizedString("DecibelMeter", comment: ""), message: NSLocalizedString("subYES", comment: ""), preferredStyle: .alert)
         
         let cancelButton2 = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
         
         alertController2.addAction(cancelButton2)
-//        SKPaymentQueue.default().restoreCompletedTransactions()
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
             if results.restoreFailedPurchases.count > 0 {
-                self.present(alertController, animated: true, completion: nil)
+                
             }
             else if results.restoredPurchases.count > 0 {
-                self.present(alertController, animated: true, completion: nil)
+                let accesss = true
+                UserDefaults.standard.set(accesss, forKey: "FullAccess")
+                self.present(alertController2, animated: true, completion: nil)
+                let _ = Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { Timer in
+                    self.dismiss(animated: true)
+                }
             }
             else {
+                self.present(alertController, animated: true, completion: nil)
             }
         }
+        
+        IAPManager.shared.restorePurchases()
     }
 }
 
@@ -360,7 +405,6 @@ extension NSTextAttachment {
 
 extension SKProduct {
     
-    /// - returns: The cost of the product formatted in the local currency.
     var regularPrice: String? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency

@@ -156,8 +156,11 @@ class Label: UILabel {
             font = UIFont.systemFont(ofSize: 20, weight: .bold)
             textAlignment = .left
         case .likeLabel:
-            font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            font = UIFont.systemFont(ofSize: 18, weight: .semibold)
             textAlignment = .center
+            if Locale.current.languageCode! == "ja" {
+                font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+            }
         case .onBoarding:
             textColor = .white
             font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -187,7 +190,6 @@ class Label: UILabel {
             font = UIFont.systemFont(ofSize: 13, weight: .medium)
             textColor = .white
             textAlignment = .left
-            
         }
     }
     

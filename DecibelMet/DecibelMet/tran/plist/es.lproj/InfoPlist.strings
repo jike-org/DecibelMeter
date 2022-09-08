@@ -1,12 +1,13 @@
-/* 
+/*
   InfoPlist.strings
   DecibelMet
 
   Created by Valera Sysov on 25.07.22.
   
 */
-NSMicrophoneUsageDescription = "Establezca el permiso de uso del micrófono en los ajustes, para que funcione";
-NSCameraUsageDescription = "Establezca el permiso de uso de la cámara en los ajustes, para que funcione";
-NSPhotoLibraryAddUsageDescription = "Establezca el permiso de uso de la librería de fotos en los ajustes, para que funcione";
-NSLocationWhenInUseUsageDescription = "Establezca el permiso de uso de la ubicación en los ajustes, para que funcione";
+
+NSMicrophoneUsageDescription = "Es necesario para que la aplicación funcione, para medir el nivel de ruido del audio";
+NSCameraUsageDescription = "Es necesario para que la aplicación funcione, para capturar el nivel de ruido de video y de audio";
+NSPhotoLibraryAddUsageDescription = "Se utiliza para mostrar la ubicación de la ciudad en las imágenes capturadas";
+NSLocationWhenInUseUsageDescription = "Se utiliza para mostrar la ubicación de la ciudad en las imágenes capturadas";
 CFBundleDisplayName = "Decibel Meter";

@@ -34,7 +34,7 @@ class CellDosimetre: UICollectionViewCell {
     var isPlaying: Bool = false
     
     private var subscriptions = Set<AnyCancellable>()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(timeTitle)
@@ -46,7 +46,6 @@ class CellDosimetre: UICollectionViewCell {
         
         if UIScreen.main.bounds.height > 700 {
             NSLayoutConstraint.activate([
-
                 timeTitle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
                 timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 15),
                 timeTitle.heightAnchor.constraint(equalToConstant: 20),
@@ -73,10 +72,9 @@ class CellDosimetre: UICollectionViewCell {
                 viewColor.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
                 viewColor.heightAnchor.constraint(equalToConstant: 5)
             ])
-
+            
         } else {
             NSLayoutConstraint.activate([
-
                 timeTitle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 1),
                 timeTitle.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,constant: 15),
                 timeTitle.heightAnchor.constraint(equalToConstant: 20),
@@ -103,7 +101,6 @@ class CellDosimetre: UICollectionViewCell {
                 viewColor.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
                 viewColor.heightAnchor.constraint(equalToConstant: 5)
             ])
-
         }
     }
     
@@ -113,7 +110,6 @@ class CellDosimetre: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         subscriptions.removeAll()
     }
     
@@ -152,7 +148,7 @@ class CellDosimetre: UICollectionViewCell {
                     strSeconds = "\(seconds)"
                 }
                 
-               let d = "\(strMinutes):\(strSeconds)"
+                let d = "\(strMinutes):\(strSeconds)"
                 return d
                 
             }

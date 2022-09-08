@@ -31,13 +31,11 @@ class OnboardingView: UIViewController {
         dataSource: self
     )
     
-    // Stack view
     lazy var stackView = StackView(axis: .horizontal)
     
-    // Buttons
+    let lContinue = NSLocalizedString("Continue", comment: "")
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     lazy var closeButton = Button(style: .close, nil)
-    let lContinue = NSLocalizedString("Continue", comment: "")
     lazy var continueButton = Button(style: ._continue, lContinue)
     lazy var termsOfUseButton = Button(style: .link, lterms)
     lazy var privacyPolicyButton = Button(style: .link, lprivacy)
@@ -52,12 +50,6 @@ class OnboardingView: UIViewController {
         super.viewDidLoad()
         fetchValues()
         setupView()
-        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.week.rawValue), object: nil)
-//        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounth.rawValue), object: nil)
-//        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.year.rawValue), object: nil)
     }
     
     @objc func trialButtonTapped1() {
@@ -137,21 +129,17 @@ extension OnboardingView {
         continueButton.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
         termsOfUseButton.addTarget(self, action: #selector(getTermsOfUse), for: .touchUpInside)
         privacyPolicyButton.addTarget(self, action: #selector(getPrivacyPolicy), for: .touchUpInside)
-      
-//        trialButton.addTarget(self, action: #selector(trialButtonTapped), for: .touchUpInside)
-        
+              
         // MARK: Register slides
         collectionView.register(FirstListViewController.self, forCellWithReuseIdentifier: FirstListViewController.identifier)
         collectionView.register(SecondListViewController.self, forCellWithReuseIdentifier: SecondListViewController.identifier)
         collectionView.register(ThirdListViewController.self, forCellWithReuseIdentifier: ThirdListViewController.identifier)
-//        collectionView.register(SubscribeViewController.self, forCellWithReuseIdentifier: SubscribeViewController.identifier)
-        
+
         view.addSubview(restoreButton)
         view.addSubview(collectionView)
         view.addSubview(closeButton)
         view.addSubview(continueButton)
         view.addSubview(stackView)
-//        view.addSubview(trialButton)
         stackView.addArrangedSubview(termsOfUseButton)
         stackView.addArrangedSubview(separatorOne)
         stackView.addArrangedSubview(andUnderLabel)
@@ -159,8 +147,6 @@ extension OnboardingView {
         stackView.addArrangedSubview(privacyPolicyButton)
         
         let constraints = [
-            
-            // MARK: Close button
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
@@ -169,25 +155,20 @@ extension OnboardingView {
             restoreButton.heightAnchor.constraint(equalToConstant: 40),
             restoreButton.widthAnchor.constraint(equalToConstant: 90),
             
-            // MARK: Collection view
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            // MARK: Continue button
             continueButton.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -15),
             continueButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             continueButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            // MARK: Stack view
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
-
         NSLayoutConstraint.activate(constraints)
     }
-    
 }
 
 // MARK: Button actions
@@ -202,13 +183,9 @@ extension OnboardingView {
     }
     
     func fetchValues() {
-    
         let setting = RemoteConfigSettings()
         setting.minimumFetchInterval = 0
         remoteConfig.configSettings = setting
-    }
-    
-    @objc func trialButtonTapped() {
     }
     
     @objc func nextPage() {
@@ -216,24 +193,17 @@ extension OnboardingView {
             collectionView.scrollToItem(at: IndexPath(arrayLiteral: 0, currentIndex.row + 1), at: .centeredHorizontally, animated: true)
         } else if currentIndex.row == 3 {
 
-//            if changeSub == "1"{
-//                let vcTwo = SubscribeTwoView()
-//                vcTwo.modalPresentationStyle = .fullScreen
-//                present(vcTwo, animated: true, completion: nil)
-//            } else if changeSub == "2" {
-//                    let vcTrial = TrialSubscribe()
-//                vcTrial.modalPresentationStyle = .fullScreen
-//                present(vcTrial, animated: true, completion: nil)
-//            } else if changeSub == "3" {
-//            let vcTrial = TrialViewController()
-//            vcTrial.modalPresentationStyle = .fullScreen
-//            present(vcTrial, animated: true, completion: nil)
-//            }
         } else {
             var r = "1"
             if let stringValue =
                 self.remoteConfig["welcomeTourScreenNumber"].stringValue {
                 r = stringValue
+            }
+            
+            if Reachability.isConnectedToNetwork(){
+                print("Internet Connection Available!")
+            }else{
+                r = "1"
             }
             
                 if r == "2"{
@@ -254,12 +224,12 @@ extension OnboardingView {
                 vcTrial.modalTransitionStyle = .crossDissolve
                 present(vcTrial, animated: true, completion: nil)
                     
-                } else {
-                    let vcTrial = TrialSubscribe()
-                vcTrial.modalPresentationStyle = .fullScreen
-                vcTrial.modalTransitionStyle = .crossDissolve
-                present(vcTrial, animated: true, completion: nil)
-            }
+                } else if r == "0" {
+                    Constants.shared.isFirstLaunch = true
+                    let vcTrial = TabBar()
+                    vcTrial.modalPresentationStyle = .fullScreen
+                    present(vcTrial, animated: true, completion: nil)
+                }
         }
     }
     
@@ -277,11 +247,8 @@ extension OnboardingView {
     
     @objc func restoreButtonTapped() {
         SKPaymentQueue.default().restoreCompletedTransactions()
-        
     }
-    
 }
-
 
 // MARK: Collection view data source
 extension OnboardingView: UICollectionViewDataSource {
@@ -330,9 +297,7 @@ extension OnboardingView: UICollectionViewDataSource {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: slide, for: indexPath)
         return item
     }
-    
 }
-
 
 // MARK: Collection view delegate
 extension OnboardingView: UICollectionViewDelegateFlowLayout {

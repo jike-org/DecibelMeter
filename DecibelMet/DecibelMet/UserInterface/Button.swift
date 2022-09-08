@@ -49,8 +49,19 @@ class Button: UIButton {
             titleLabel?.font = titleLabel?.font.withSize(20)
             heightAnchor.constraint(equalToConstant: 60).isActive = true
             layer.cornerRadius = 15
-            gradient.setGradientBackground(view: self)
+           
             layer.masksToBounds = true
+           if  UserDefaults.standard.value(forKey: "theme") as! Int == 0 {
+               backgroundColor = .white
+               setTitleColor(.black, for: .normal)
+               titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+
+            }
+            if  UserDefaults.standard.value(forKey: "theme") as! Int == 1 {
+                gradient.setGradientBackground(view: self)
+             
+             }
+            
         case .link:
             setTitle(text, for: .normal)
             setTitleColor(.gray, for: .normal)
@@ -105,12 +116,9 @@ class Button: UIButton {
         case .chevronRight:
             setImage(UIImage(systemName: "chevron.left"), for: .normal)
             tintColor = UIColor(named: "cellDb")
-            
-            
             heightAnchor.constraint(equalToConstant: 20).isActive = true
             widthAnchor.constraint(equalToConstant: 20).isActive = true
-            
-        case .trial:
+                    case .trial:
             backgroundColor = .clear
             setTitle(text, for: .normal)
             titleLabel?.font = titleLabel?.font.withSize(12)
@@ -125,8 +133,6 @@ class Button: UIButton {
             setTitle(text, for: .normal)
             titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
             tintColor = .systemBlue
-            
-            
         case .restoreButton:
             backgroundColor = .clear
             setTitle(text, for: .normal)
@@ -135,7 +141,6 @@ class Button: UIButton {
             titleLabel?.textAlignment = .center
             titleLabel?.numberOfLines = 0
             titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-            
         }
     }
     

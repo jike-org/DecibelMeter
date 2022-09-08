@@ -75,43 +75,19 @@ class SettingsCell: UITableViewCell {
         if isUsingSwitch {
            
             _switch = UISwitch()
-//            _switch!.tag = 1
-            
-            
-//            if MTUserDefaults.shared.theme != .light {
-//
-//                _switch?.setOn(false, animated: true)
-//                _switch?.isOn = true
-//                flag = true
-//            } else {
-//
-//                _switch?.setOn(true, animated: true)
-//                _switch?.isOn = false
-//                flag = false
-//            }
+
             
             if  UserDefaults.standard.value(forKey: "theme") as! Int == 1 {
                 _switch?.setOn(true, animated: true)
             } else {
                 _switch?.setOn(false, animated: true)
             }
-            
-//            if _switch?.isOn == true {
-//
-//            } else {
-//                _switch?.setOn(false, animated: true)
-//            }
            
             _switch?.onTintColor = .blue
             _switch!.addTarget(self, action: #selector(toogleAutoRecord(_:)), for: .valueChanged)
             
             accessoryView = _switch
             
-//            if Constants().isRecordingAtLaunchEnabled {
-//                _switch!.setOn(true, animated: true)
-//            } else {
-//                _switch!.setOn(false, animated: true)
-//            }
         }
         
         NSLayoutConstraint.activate(constraints)

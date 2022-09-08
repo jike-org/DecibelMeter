@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 public class Constants {
     
     public static let shared = Constants()
@@ -28,9 +27,7 @@ public class Constants {
             return false
         }
     }
-    
 
-    
     public var isFirstLaunch: Bool {
         get {
             UserDefaults.standard.bool(forKey: #function)
@@ -62,9 +59,7 @@ public class Constants {
             UserDefaults.standard.setValue(newValue, forKey: #function)
         }
     }
-    
-    
-    
+
     func setExpireDate() {
         let today = Date()
         
@@ -74,7 +69,6 @@ public class Constants {
         cloudStore2.set(expirationDate, forKey: "expDate")
         cloudStore2.synchronize()
         
-        // create default container cloudKit
         let cloudStore = NSUbiquitousKeyValueStore.default
 
         if let expirationDate = cloudStore.object(forKey: "expDate") {
@@ -111,5 +105,4 @@ public class Constants {
     public var screenSize: CGSize {
         return UIScreen.main.bounds.size
     }
-    
 }

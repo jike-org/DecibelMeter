@@ -1,8 +1,8 @@
 //
-//  RateUsVC.swift
+//  SettingRateUS.swift
 //  DecibelMet
 //
-//  Created by Stas Dashkevich on 16.07.22.
+//  Created by Stas Dashkevich on 24.08.22.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import MessageUI
 import FirebaseRemoteConfig
 import StoreKit
 
-class RateUsVC: UIViewController {
+class RateUsVCSetting: UIViewController {
     
     let lYes = NSLocalizedString("Yes", comment: "")
     let lNo = NSLocalizedString("No", comment: "")
@@ -81,7 +81,7 @@ class RateUsVC: UIViewController {
     }()
 }
 
-extension RateUsVC {
+extension RateUsVCSetting {
     
     func setup() {
         
@@ -129,11 +129,25 @@ extension RateUsVC {
     }
 }
 
-extension RateUsVC {
+extension RateUsVCSetting {
     
     @objc func YesTapped() {
-        dismiss(animated: true)
-            SKStoreReviewController.requestReview()
+       
+            dismiss(animated: true)
+            DispatchQueue.main.async {
+                let productURL = URL(string: "https://apps.apple.com/us/app/decibel-meter-sound-level-db/id1624503658")
+                
+                var components = URLComponents(url: productURL!, resolvingAgainstBaseURL: false)
+
+                components?.queryItems = [
+                  URLQueryItem(name: "action", value: "write-review")
+                ]
+
+                guard let writeReviewURL = components?.url else {
+                  return
+                }
+                UIApplication.shared.open(writeReviewURL)
+            }
         }
     
     @objc func NoTapped() {
@@ -155,7 +169,7 @@ extension RateUsVC {
     }
 }
 
-extension RateUsVC: MFMailComposeViewControllerDelegate {
+extension RateUsVCSetting: MFMailComposeViewControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)

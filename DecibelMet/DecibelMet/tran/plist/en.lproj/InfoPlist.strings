@@ -6,8 +6,8 @@
   
 */
 
-NSMicrophoneUsageDescription = "Please set microphone usage permission in settings for work" ;
-NSCameraUsageDescription = "Please set camera usage permission in settings for work" ;
-NSLocationWhenInUseUsageDescription = "Please set location usage permission in settings for work" ;
-NSPhotoLibraryAddUsageDescription = "Please set photo library usage permission in settings for work";
+NSMicrophoneUsageDescription = "Required for the app to work, in order to measure audio noise level" ;
+NSCameraUsageDescription = "Required for the app to work, in order to capture video and audio noise level" ;
+NSLocationWhenInUseUsageDescription = "Used to display city location in captured images" ;
+NSPhotoLibraryAddUsageDescription = "Required for the app to work, in order to save video and audio noise level";
 CFBundleDisplayName = "Decibel Meter";

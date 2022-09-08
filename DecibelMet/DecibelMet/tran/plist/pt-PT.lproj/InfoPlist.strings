@@ -5,8 +5,8 @@
   Created by Valera Sysov on 25.07.22.
   
 */
-NSMicrophoneUsageDescription = "Defina a permissão de uso do microfone nos ajustes para funcionar";
-NSCameraUsageDescription = "Defina a permissão de uso da câmera nos ajustes para funcionar";
-NSPhotoLibraryAddUsageDescription = "Defina a permissão de uso da Galeria nos ajustes para funcionar";
-NSLocationWhenInUseUsageDescription = "Defina a permissão de uso de localização par funcionar";
+NSMicrophoneUsageDescription = "Necessário para o app funcionar e medir o nível de ruído";
+NSCameraUsageDescription = "Necessário para o app funcionar e para poder capturar o nível de ruído em vídeo e áudio";
+NSPhotoLibraryAddUsageDescription = "Usado para exibir a cidade nas imagens capturadas";
+NSLocationWhenInUseUsageDescription = "Usado para exibir a cidade nas imagens capturadas";
 CFBundleDisplayName = "Decibelímetro";

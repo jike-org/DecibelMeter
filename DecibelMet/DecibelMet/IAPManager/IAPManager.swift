@@ -75,12 +75,10 @@ class NetworkActivityIndicatorManager : NSObject {
                         SwiftyStoreKit.finishTransaction(purchase.transaction)
                         let access = true
                         UserDefaults.standard.set(access, forKey: "FullAccess")
-                        print("RES is = \(String(describing: UserDefaults.standard.value(forKey: "FullAccess")))")
 
                     }
                     let access = true
                     UserDefaults.standard.set(access, forKey: "FullAccess")
-                    print("RES is = \(String(describing: UserDefaults.standard.value(forKey: "FullAccess")))")
 
                 case .error(let error):
                     switch error.code {
@@ -140,13 +138,11 @@ class NetworkActivityIndicatorManager : NSObject {
                     print("Verify receipt success: \(receipt)")
                     let access = true
                     UserDefaults.standard.set(access, forKey: "FullAccess")
-                    print("RES is = \(String(describing: UserDefaults.standard.value(forKey: "FullAccess")))")
 
                 case .error(let error):
                     print("Verify receipt failed: \(error)")
                     let accesss = false
                     UserDefaults.standard.set(accesss, forKey: "FullAccess")
-                    print("RES is = \(String(describing: UserDefaults.standard.value(forKey: "FullAccess")))")
 
                     self.fetchUpdatedReciept()
                 }
@@ -163,7 +159,6 @@ class NetworkActivityIndicatorManager : NSObject {
                 case .success(let receipt):
                     let productId = self.bundleID + "." + product.rawValue
                    
-                    // Verify the purchase of a Subscription
                     let purchaseResult = SwiftyStoreKit.verifySubscription(
                         ofType: .autoRenewable, // or .nonRenewing (see below)
                         productId: productId,
@@ -174,17 +169,14 @@ class NetworkActivityIndicatorManager : NSObject {
                         print("\(productId) is valid until \(expiryDate)\n\(items)\n")
                         let access = 1
                         UserDefaults.standard.set(access, forKey: "FullAccess")
-                        print("RES is = \(String(describing: UserDefaults.standard.value(forKey: "FullAccess")))")
 
                     case .expired(let expiryDate, let items):
                         let access = false
                         UserDefaults.standard.set(access, forKey: "FullAccess")
-                        print("RES is = \(String(describing: UserDefaults.standard.value(forKey: "FullAccess")))")
 
                         print("\(productId) is expired since \(expiryDate)\n\(items)\n")
                     case .notPurchased:
                        
-                        print("RES is = \(String(describing: UserDefaults.standard.value(forKey: "FullAccess")))")
 
                         print("The user has never purchased \(productId)")
                     }
@@ -194,6 +186,5 @@ class NetworkActivityIndicatorManager : NSObject {
                     self.fetchUpdatedReciept()
                 }
             }
-       
-        }
+    }
 }

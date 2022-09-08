@@ -40,6 +40,7 @@ final class Dosimeter: UIViewController {
     var hour = NSLocalizedString("Hour", comment: "")
     var minute = NSLocalizedString("Minute", comment: "")
     var max = NSLocalizedString("Maximum", comment: "")
+    
     //MARK: - Audio recorder / resist
     let recorder = Recorder()
     let persist = Persist()
@@ -52,7 +53,6 @@ final class Dosimeter: UIViewController {
     lazy var procentImage = Label(style: .dosimetreProcentImage, "%")
     lazy var decibelLabel = Label(style: .dosimetreTime, "132")
     lazy var dbImage = Label(style: .dosimetreTime, "dB")
-//    lazy var refreshButton = Button(style: .refresh, nil)
     lazy var noiseButton = Button(style: .noise,"NIOSH")
     
     lazy var headView: UIView = {
@@ -77,7 +77,6 @@ final class Dosimeter: UIViewController {
         setup()
         setUpCollection()
         secondSetupCollection()
-        //        startRecordingAudio()
         remote()
         
         if defaults.string(forKey: "dosimeter") == nil {
@@ -90,12 +89,10 @@ final class Dosimeter: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        remote()
-        
+                
         if let stringValue =
             self.remoteConfig["availableFreeDosimeter"].stringValue {
-            self.freeDosimeter = Int(stringValue)!
+            self.freeDosimeter = Int(stringValue) ?? 10
         }
         
         if UserDefaults.standard.value(forKey: "FullAccess") as! Int == 0 {
@@ -128,8 +125,6 @@ final class Dosimeter: UIViewController {
             Constants().isFirstLaunch = true
         }
     }
-    
-    
 }
 
 extension Dosimeter {
@@ -146,7 +141,7 @@ extension Dosimeter {
                 if status != .error {
                     if let stringValue =
                         self.remoteConfig["availableFreeDosimeter"].stringValue {
-                        self.freeDosimeter = Int(stringValue)!
+                        self.freeDosimeter = Int(stringValue) ?? 10
                     }
                     if let stringValue1 =
                         self.remoteConfig["otherScreenNumber"].stringValue {
@@ -397,8 +392,7 @@ extension Dosimeter: UICollectionViewDelegate, UICollectionViewDataSource {
                 }
      
             default:
-break
-                
+                break
             }
             
             return cell
@@ -420,6 +414,7 @@ extension Dosimeter {
     private func setup() {
         timeLabel.layer.opacity = 0.8
         decibelLabel.layer.opacity = 0.8
+        dbImage.layer.opacity = 0.8
         noiseButton.setTitle("NIOSH", for: .normal)
         noiseButton.backgroundColor = .black
         noiseButton.setTitleColor(.white, for: .normal)
@@ -457,7 +452,7 @@ extension Dosimeter {
             decibelLabel.topAnchor.constraint(equalTo: procentLabel.topAnchor, constant: 10),
             
             dbImage.leadingAnchor.constraint(equalTo: decibelLabel.trailingAnchor, constant: 5),
-            dbImage.topAnchor.constraint(equalTo: decibelLabel.topAnchor, constant: 2),
+            dbImage.topAnchor.constraint(equalTo: decibelLabel.topAnchor),
             
             procentImage.topAnchor.constraint(equalTo: procentLabel.topAnchor),
             procentImage.leadingAnchor.constraint(equalTo: procentLabel.trailingAnchor)
@@ -550,7 +545,7 @@ extension Dosimeter {
             procentLabel.text = "0"
             decibelLabel.text = "0"
             timeLabel.text = "00:00"
-            _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
+            _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
                 self.startRecordingAudio()
             }
         } else {
@@ -567,7 +562,7 @@ extension Dosimeter {
             procentLabel.text = "0"
             decibelLabel.text = "0"
             timeLabel.text = "00:00"
-            _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+            _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
                 self.startRecordingAudio()
             }
         }

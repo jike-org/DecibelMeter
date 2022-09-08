@@ -93,7 +93,6 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
        
         
         if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized {
-            // Already Authorized
           
                 guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
                     selectImageFrom(.photoLibrary)
@@ -103,7 +102,6 @@ class PhotoCameraController: UIViewController, UINavigationControllerDelegate  {
                 selectImageFrom(.camera)
             }
              
-            
         } else {
             AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [self] (granted: Bool) -> Void in
                if granted == true {
@@ -232,13 +230,6 @@ extension PhotoCameraController {
         } else {
             Constants.shared.cameraPermission = true
             cameraAlert()
-//                AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
-//               if granted == true {
-//                   print("grant")
-//               } else {
-//                   print("NONgrant")
-//               }
-//           })
         }
     }
     
@@ -315,9 +306,7 @@ extension PhotoCameraController {
             print("Location services are not enabled")
         }
     }
-    
-
-    
+ 
     func checkPhotoLibraryPermission() {
         if #available(iOS 14, *) {
             switch PHPhotoLibrary.authorizationStatus(for: .addOnly) {
@@ -390,9 +379,7 @@ extension PhotoCameraController {
             }
         }
     }
-    
-    
-    
+ 
     func purchasesCall() {
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] Timer in
             if showVc == "1"{
@@ -410,7 +397,6 @@ extension PhotoCameraController {
             }
         })
     }
-    
 }
 
 extension PhotoCameraController: UIImagePickerControllerDelegate{

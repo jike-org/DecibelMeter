@@ -6,8 +6,8 @@
   
 */
 
-NSMicrophoneUsageDescription = "Please set microphone usage permission in settings for work" ;
-NSCameraUsageDescription = "Please set camera usage permission in settings for work" ;
-NSLocationWhenInUseUsageDescription = "Please set location usage permission in settings for work" ;
-NSPhotoLibraryAddUsageDescription = "Please set photo library usage permission in settings for work";
+NSMicrophoneUsageDescription = "本应用运行要求，目的是测量音频噪声水平";
+NSCameraUsageDescription = "本应用运行要求，目的是获取视频和音频的噪音水平";
+NSPhotoLibraryAddUsageDescription = "本应用运行要求，目的是保存视频和音频的噪音水平";
+NSLocationWhenInUseUsageDescription = "用于显示所拍摄图像中城市的位置";
 CFBundleDisplayName = "分贝计";

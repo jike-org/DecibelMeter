@@ -34,7 +34,7 @@ class TrialSubscribe: UIViewController {
     let lweekPer  = NSLocalizedString("perWeek", comment: "")
     let small = NSLocalizedString("perWeekSmall", comment: "")
     let lMounth = NSLocalizedString("perMounth", comment: "")
-    let lYear = NSLocalizedString("perYear", comment: "")
+//    let lYear = NSLocalizedString("perYear", comment: "")
     let lMounthSmall = NSLocalizedString("perMounthSmall", comment: "")
     let lYearSmall = NSLocalizedString("perYearSmall", comment: "")
     var sub = "com.decibelmeter.1wetr"
@@ -50,6 +50,10 @@ class TrialSubscribe: UIViewController {
         return view
     }()
     
+    let productWT = InAppManager.share.productWT
+    let productMT = InAppManager.share.productMT
+    let productYT = InAppManager.share.productYT
+    
     lazy var backgroundViewImage = UIImageView(image: UIImage(named: "04"))
     lazy var hStack = StackView(axis: .horizontal)
     lazy var privacy = Button(style: .subscriptionVC, lprivacy)
@@ -61,24 +65,17 @@ class TrialSubscribe: UIViewController {
     lazy var acces = Label(style: .acces, lAcces.uppercased())
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     
-    let product = InAppManager.share.product
     
-    
-    lazy var weekSubscribe = Button(style: ._continue, "\(priceStringFor(product: product[3])) / \(lweek)")
-    lazy var mounthSubscribe = Button(style: ._continue, "\(priceStringFor(product:product[1])) / \(lmounth)")
-    lazy var yearSubscribe = Button(style: ._continue, "\(priceStringFor(product:product[5])) / \(lyear)")
+  
+    lazy var weekSubscribe = Button(style: ._continue, "")
+    lazy var mounthSubscribe = Button(style: ._continue, "")
+    lazy var yearSubscribe = Button(style: ._continue, "")
     lazy var unlimited = Label(style: .timeTitle, "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         remoteConfigSetup()
-        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
-//        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.mounthTrial.rawValue), object: nil)
-//        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.yearTrial.rawValue), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,14 +93,62 @@ class TrialSubscribe: UIViewController {
         }
         
         if UserDefaults.standard.value(forKey: "theme") as! Int == 0 {
-            backgroundViewImage.image = UIImage(named: "06")
+            backgroundViewImage.image = UIImage(named: "08")
             privacy.setTitleColor(.white, for: .normal)
             terms.setTitleColor(.white, for: .normal)
             andLabel.textColor = .white
         }
+        
+        if Reachability.isConnectedToNetwork(){
+            let queue = DispatchQueue.global(qos: .default)
+            queue.async{ [self] in
+                
+                SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1wetr"]) { [self] result in
+                    if let product = result.retrievedProducts.first {
+                        let priceString = product.localizedPrice!
+                        print("Product: \(product.localizedDescription), price: \(priceString)")
+                        weekSubscribe.setTitle("\(priceString) / \(lweek)", for: .normal)
+
+                    }
+                    else if let invalidProductId = result.invalidProductIDs.first {
+                    }
+                    else {
+                    }
+                }
+                
+                SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1motr"]) { [self] result in
+                    if let product = result.retrievedProducts.first {
+                        let priceString = product.localizedPrice!
+                        mounthSubscribe.setTitle("\(priceString) / \(lmounth)", for: .normal)
+
+                    }
+                    else if let invalidProductId = result.invalidProductIDs.first {
+                    }
+                    else {
+                    }
+                }
+                
+                SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1yetr"]) { [self] result in
+                    if let product = result.retrievedProducts.first {
+                        let priceString = product.localizedPrice!
+                        yearSubscribe.setTitle("\(priceString) / \(lyear)", for: .normal)
+
+                    }
+                    else if let invalidProductId = result.invalidProductIDs.first {
+                    }
+                    else {
+                    }
+                }
+            }
+        } else {
+            weekSubscribe.setTitle("$3.99 / \(lweek)", for: .normal)
+            mounthSubscribe.setTitle("$6.99 / \(lmounth)", for: .normal)
+            yearSubscribe.setTitle("$9.99 / \(lyear)", for: .normal)
+        }
     }
     
     func remoteConfigSetup() {
+        
         let setting = RemoteConfigSettings()
         setting.minimumFetchInterval = 0
         remoteConfig.configSettings = setting
@@ -118,7 +163,7 @@ class TrialSubscribe: UIViewController {
                     if status != .error {
                         if let stringValue =
                             self.remoteConfig["closeButtonDelay"].stringValue {
-                            self.xMarkDelay = Int(stringValue)!
+                            self.xMarkDelay = Int(stringValue) ?? 0
                             let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
                                 xMark.isHidden = false
                             }
@@ -132,7 +177,7 @@ class TrialSubscribe: UIViewController {
                     if status != .error {
                         if let stringValue =
                             self.remoteConfig["textSubscriptionDelay"].stringValue {
-                            self.textDelay = Int(stringValue)!
+                            self.textDelay = Int(stringValue) ?? 0
                             let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
                                 trialButton.isHidden = false
                             }
@@ -150,6 +195,18 @@ class TrialSubscribe: UIViewController {
                         }
                     }
                 }
+                
+                if Reachability.isConnectedToNetwork(){
+                }else{
+                    xMarkDelay = 0
+                    textDelay = 0
+                    let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
+                        trialButton.isHidden = false
+                    }
+                    let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
+                        xMark.isHidden = false
+                    }
+                }
             }
         }
     }
@@ -160,28 +217,30 @@ class TrialSubscribe: UIViewController {
         numberFormatter.numberStyle = .currency
         numberFormatter.locale = product.priceLocale
         
-        print(numberFormatter.string(from: product.price)!)
-        return numberFormatter.string(from: product.price)!
+        return numberFormatter.string(from: product.price) ?? "??"
     }
 }
 
 extension TrialSubscribe {
     
     func setup() {
+        
+       
+        
+        
         xMark.isHidden = true
         trialButton.isHidden = true
         
         if let stringValue =
             self.remoteConfig["closeButtonDelay"].stringValue {
-            self.xMarkDelay = Int(stringValue)!
+            self.xMarkDelay = Int(stringValue) ?? 0
         }
         
         if let stringValue =
             self.remoteConfig["textSubscriptionDelay"].stringValue {
           
-            self.textDelay = Int(stringValue)!
+            self.textDelay = Int(stringValue) ?? 0
         }
-        
         
         let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
             trialButton.isHidden = false
@@ -233,7 +292,6 @@ extension TrialSubscribe {
         weekSubscribe.addTarget(self, action: #selector(weekSub), for: .touchUpInside)
         xMark.addTarget(self, action: #selector(xMarkTapped), for: .touchUpInside)
         restore.addTarget(self, action: #selector(restoreButtonTapped), for: .touchUpInside)
-        trialButton.addTarget(self, action: #selector(trialButtonTapped), for: .touchUpInside)
         privacy.addTarget(self, action: #selector(privacyTap), for: .touchUpInside)
         terms.addTarget(self, action: #selector(termsTap), for: .touchUpInside)
         hStack.spacing = 10
@@ -295,7 +353,6 @@ extension TrialSubscribe {
             
             subText2.topAnchor.constraint(equalTo: subText1.bottomAnchor, constant: 10),
             subText2.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 10),
-            
         ])
     }
 }
@@ -345,13 +402,6 @@ extension TrialSubscribe {
         }
     }
     
-    @objc func trialButtonTapped1() {
-//        print("купил")
-//        Constants.shared.hasPurchased = true
-//        dismiss(animated: true)
-        
-    }
-    
     @objc func xMarkTapped() {
        if Constants.shared.isFirstLaunch == false {
             let vc = TabBar()
@@ -364,71 +414,36 @@ extension TrialSubscribe {
        
     }
     
-    @objc func restoreButtonTapped() {
-        let alertController = UIAlertController(title:NSLocalizedString("DecibelMeter", comment: "")  , message: NSLocalizedString("subNO", comment: ""), preferredStyle: .alert)
-        
-        let cancelButton = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
-        
-        alertController.addAction(cancelButton)
-        
-        let alertController2 = UIAlertController(title: NSLocalizedString("subYES", comment: ""), message: "A", preferredStyle: .alert)
-        
-        let cancelButton2 = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
-        
-        alertController2.addAction(cancelButton2)
-//        SKPaymentQueue.default().restoreCompletedTransactions()
-        SwiftyStoreKit.restorePurchases(atomically: true) { results in
-            if results.restoreFailedPurchases.count > 0 {
-                self.present(alertController, animated: true, completion: nil)
+        @objc func restoreButtonTapped() {
+            
+            let alertController = UIAlertController(title:NSLocalizedString("DecibelMeter", comment: "")  , message: NSLocalizedString("subNO", comment: ""), preferredStyle: .alert)
+            
+            let cancelButton = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
+            
+            alertController.addAction(cancelButton)
+            
+            let alertController2 = UIAlertController(title: NSLocalizedString("DecibelMeter", comment: ""), message: NSLocalizedString("subYES", comment: ""), preferredStyle: .alert)
+            
+            let cancelButton2 = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil)
+            
+            alertController2.addAction(cancelButton2)
+            SwiftyStoreKit.restorePurchases(atomically: true) { results in
+                if results.restoreFailedPurchases.count > 0 {
+
+                }
+                else if results.restoredPurchases.count > 0 {
+                    let accesss = true
+                    UserDefaults.standard.set(accesss, forKey: "FullAccess")
+                    self.present(alertController2, animated: true, completion: nil)
+                    let _ = Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { Timer in
+                        self.dismiss(animated: true)
+                    }
+                }
+                else {
+                    self.present(alertController, animated: true, completion: nil)
+                }
             }
-            else if results.restoredPurchases.count > 0 {
-                self.present(alertController, animated: true, completion: nil)
-            }
-            else {
-            }
+            
+            IAPManager.shared.restorePurchases()
         }
-
-    }
-    
-    @objc func trialButtonTapped() {
-    }
-//        if sub == "com.decibelmeter.1wetr" {
-//            iapManager.purchase(productWith: "com.decibelmeter.1wetr")
-//            spinenr.startAnimating()
-//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
-//                spinenr.stopAnimating()
-//            }
-//        } else if  sub == "com.decibelmeter.1we" {
-//            iapManager.purchase(productWith: "com.decibelmeter.1we")
-//            spinenr.startAnimating()
-//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
-//                spinenr.stopAnimating()
-//            }
-//        } else if sub == "com.decibelmeter.1mo" {
-//            iapManager.purchase(productWith: "com.decibelmeter.1mo")
-//            spinenr.startAnimating()
-//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
-//                spinenr.stopAnimating()
-//            }
-//        } else if sub == "com.decibelmeter.1ye" {
-//            iapManager.purchase(productWith: "com.decibelmeter.1ye")
-//            spinenr.startAnimating()
-//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
-//                spinenr.stopAnimating()
-//            }
-//        } else if sub == "com.decibelmeter.1yetr" {
-//            iapManager.purchase(productWith: "com.decibelmeter.1yetr")
-//            spinenr.startAnimating()
-//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
-//                spinenr.stopAnimating()
-//            }
-//        } else if sub == "com.decibelmeter.1motr" {
-//            iapManager.purchase(productWith: "com.decibelmeter.1motr")
-//            spinenr.startAnimating()
-//            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
-//                spinenr.stopAnimating()
-//            }
-//        }    }
-
 }
-

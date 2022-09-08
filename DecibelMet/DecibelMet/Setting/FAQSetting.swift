@@ -49,7 +49,7 @@ final class FAQSetting: UIViewController {
     
     lazy var thirdlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white.withAlphaComponent(0.2)
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -94,7 +94,7 @@ final class FAQSetting: UIViewController {
     private func setupViews(){
         onelineView.backgroundColor = UIColor(named: "cellDb")
         secondlineView.backgroundColor = UIColor(named: "cellDb")
-        thirdlineView.backgroundColor = UIColor(named: "cellDb")
+        thirdlineView.backgroundColor = .clear
         
         contentView.addSubview(howToUse)
         NSLayoutConstraint.activate([

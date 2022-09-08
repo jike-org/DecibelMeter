@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        
         if UserDefaults.standard.string(forKey: "enterCounter") == nil {
             UserDefaults.standard.set(counter, forKey: "enterCounter")
         } else {
@@ -41,12 +40,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         UserDefaults.standard.set(switc, forKey: "theme")
         
-        
-        
-        
         InAppManager.share.setupPurchases { success in
             if success {
-                InAppManager.share.getProducts()
+                InAppManager.share.getProductsM()
+                InAppManager.share.getProductsMT()
+                InAppManager.share.getProductsW()
+                InAppManager.share.getProductsMT()
+                InAppManager.share.getProductsY()
+                InAppManager.share.getProductsYT()
+            }
+        }
+        
+        SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1we"]) { [self] result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+                print("Product: \(product.localizedDescription), price: \(priceString)")
+
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+            }
+            else {
+            }
+        }
+        
+        SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1mo"]) { [self] result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+            }
+            else {
+            }
+        }
+        
+        SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1ye"]) { [self] result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+            }
+            else {
+            }
+        }
+        SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1wetr"]) { [self] result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+            }
+            else {
+            }
+        }
+        
+        SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1motr"]) { [self] result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+            }
+            else {
+            }
+        }
+        
+        SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1yetr"]) { [self] result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+            }
+            else {
             }
         }
 //        if UserDefaults.standard.string(forKey: "enterCounter") == nil {
@@ -85,8 +152,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
-       
-        
        
         return true
     }

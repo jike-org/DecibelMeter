@@ -13,7 +13,14 @@ class InAppManager: NSObject {
     
     private override init() {}
     
-    var product: [SKProduct] = []
+    var productW: [SKProduct] = []
+    var productWT: [SKProduct] = []
+    
+    var productM: [SKProduct] = []
+    var productMT: [SKProduct] = []
+    
+    var productY: [SKProduct] = []
+    var productYT: [SKProduct] = []
     
     let paymentQueue = SKPaymentQueue.default()
     
@@ -26,19 +33,64 @@ class InAppManager: NSObject {
         callBack(false)
     }
     
-    public func getProducts() {
-        let identifiers: Set = [
-            InAppPurchaseProduct.weekk.rawValue,
-            InAppPurchaseProduct.weekTriall.rawValue,
-
-            InAppPurchaseProduct.mounthh.rawValue,
-            InAppPurchaseProduct.mounthTriall.rawValue,
-
-            InAppPurchaseProduct.yearr.rawValue,
-            InAppPurchaseProduct.yearTriall.rawValue,
+    public func getProductsW() {
+        let identifiersW: Set = [
+            InAppPurchaseProductW.weekk.rawValue,
+        
         ]
 
-        let productRequest = SKProductsRequest(productIdentifiers: identifiers)
+        let productRequest = SKProductsRequest(productIdentifiers: identifiersW)
+        productRequest.delegate = self
+        productRequest.start()
+    }
+    
+    public func getProductsWT() {
+        let identifiersWT: Set = [
+            InAppPurchaseProductWT.weekTriall.rawValue,
+        ]
+
+        let productRequest = SKProductsRequest(productIdentifiers: identifiersWT)
+        productRequest.delegate = self
+        productRequest.start()
+    }
+    
+    public func getProductsM() {
+        let identifiersM: Set = [
+            InAppPurchaseProductM.mounthh.rawValue,
+          
+        ]
+
+        let productRequest = SKProductsRequest(productIdentifiers: identifiersM)
+        productRequest.delegate = self
+        productRequest.start()
+    }
+    
+    public func getProductsMT() {
+        let identifiersMT: Set = [
+            InAppPurchaseProductMT.mounthTriall.rawValue,
+        ]
+
+        let productRequest = SKProductsRequest(productIdentifiers: identifiersMT)
+        productRequest.delegate = self
+        productRequest.start()
+    }
+    
+    public func getProductsY() {
+        let identifiersY: Set = [
+            InAppPurchaseProductY.yearr.rawValue,
+        ]
+
+        let productRequest = SKProductsRequest(productIdentifiers: identifiersY)
+        productRequest.delegate = self
+        productRequest.start()
+    }
+    
+    public func getProductsYT() {
+        let identifiersYT: Set = [
+            InAppPurchaseProductYT.yearTriall.rawValue,
+        ]
+
+        let productRequest = SKProductsRequest(productIdentifiers: identifiersYT)
         productRequest.delegate = self
         productRequest.start()
     }
@@ -79,21 +131,54 @@ class InAppManager: NSObject {
     }
 
     
-    public func purchase(productWith identifier: String) {
-        guard let product = product.filter({ $0.productIdentifier == identifier }).first else { return }
+    public func purchaseW(productWith identifier1: String) {
+        guard let product = productW.filter({ $0.productIdentifier == identifier1 }).first else { return }
         
         let payment = SKPayment(product: product)
         
         paymentQueue.add(payment)
     }
     
-    public func purchaseWeek(productWith identifier: String) {
-        guard let product = product.filter({ $0.productIdentifier == identifier }).first else { return }
+    public func purchaseWT(productWith identifier2: String) {
+        guard let product = productWT.filter({ $0.productIdentifier == identifier2 }).first else { return }
         
         let payment = SKPayment(product: product)
         
         paymentQueue.add(payment)
     }
+    
+    
+    public func purchaseM(productWith identifier3: String) {
+        guard let product = productM.filter({ $0.productIdentifier == identifier3 }).first else { return }
+        
+        let payment = SKPayment(product: product)
+        
+        paymentQueue.add(payment)
+    }
+    public func purchaseMT(productWith identifier4: String) {
+        guard let product = productMT.filter({ $0.productIdentifier == identifier4 }).first else { return }
+        
+        let payment = SKPayment(product: product)
+        
+        paymentQueue.add(payment)
+    }
+    
+    public func purchaseY(productWith identifier5: String) {
+        guard let product = productY.filter({ $0.productIdentifier == identifier5 }).first else { return }
+        
+        let payment = SKPayment(product: product)
+        
+        paymentQueue.add(payment)
+    }
+    public func purchaseYT(productWith identifier6: String) {
+        guard let product = productYT.filter({ $0.productIdentifier == identifier6 }).first else { return }
+        
+        let payment = SKPayment(product: product)
+        
+        paymentQueue.add(payment)
+    }
+    
+ 
     
     public func restoreCompletedTrans() {
         paymentQueue.restoreCompletedTransactions()
@@ -131,8 +216,7 @@ extension InAppManager: SKPaymentTransactionObserver {
         paymentQueue.finishTransaction(transaction)
 
         setExpireDate()
-        let access = true
-        UserDefaults.standard.set(access, forKey: "FullAccess")
+       
     }
     
     private func restored(transaction: SKPaymentTransaction){
@@ -147,8 +231,22 @@ extension InAppManager: SKPaymentTransactionObserver {
 
 extension InAppManager: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        self.product = response.products
-        product.forEach { print($0.localizedTitle)}
+        self.productW = response.products
+        productW.forEach { print($0.localizedTitle)}
+        self.productWT = response.products
+        productWT.forEach { print($0.localizedTitle)}
+        
+        self.productM = response.products
+        productM.forEach { print($0.localizedTitle)}
+        self.productMT = response.products
+        productMT.forEach { print($0.localizedTitle)}
+        
+        self.productY = response.products
+        productY.forEach { print($0.localizedTitle)}
+        self.productYT = response.products
+        productYT.forEach { print($0.localizedTitle)}
+        
+        
     }
     
 }

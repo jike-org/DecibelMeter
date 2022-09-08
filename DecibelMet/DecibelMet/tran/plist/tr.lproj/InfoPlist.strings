@@ -5,8 +5,8 @@
   Created by Valera Sysov on 25.07.22.
   
 */
-NSMicrophoneUsageDescription = "İşlemin yapılması için lütfen ayarlara giderek mikrofon kullanıma izin verin";
-NSCameraUsageDescription = "İşlemin yapılması için lütfen ayarlara giderek kamera kullanımına izin verin";
-NSPhotoLibraryAddUsageDescription = "İşlemin yapılması için lütfen ayarlara giderek fotoğraf kitaplığı kullanımına izin verin";
-NSLocationWhenInUseUsageDescription = "İşlemin yapılması için lütfen ayarlara giderek konum kullanımına izin verin";
+NSMicrophoneUsageDescription = "Uygulamanın ses gürültü seviyesini ölçebilmesi için gereklidir";
+NSCameraUsageDescription = "Uygulamanın video çekebilmesi ve ses gürültü seviyesini ölçebilmesi için gereklidir";
+NSPhotoLibraryAddUsageDescription = "Uygulamanın video kaydedebilmesi ve ses gürültü seviyesini ölçebilmesi için gereklidir";
+NSLocationWhenInUseUsageDescription = "Çekilen görüntülerde şehir konumunu görüntülemek için kullanılır";
 CFBundleDisplayName = "Desibel Ölçer";

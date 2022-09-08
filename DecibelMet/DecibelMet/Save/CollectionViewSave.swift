@@ -82,12 +82,6 @@ class SaveController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        do {
-//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
-//        }
-//        catch {
-//            print("Setting category to AVAudioSessionCategoryPlayback failed.")
-//        }
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -105,7 +99,6 @@ class SaveController: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.isUserInteractionEnabled = true
         
-        //        view.addSubview(collection)
         view.addSubview(headerLabel)
         view.insertSubview(collection, at: 0)
         NSLayoutConstraint.activate([
@@ -120,8 +113,7 @@ class SaveController: UIViewController {
      
         
         buttonToogler()
-        //        let path = Bundle.main.path(forResource: "t", ofType: "m4a")
-        //        print(path)
+ 
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -178,10 +170,6 @@ class SaveController: UIViewController {
 
 extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if self.recordings != nil {
@@ -224,7 +212,6 @@ extension SaveController: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.playButton.tag = indexPath.row
         return cell
     }
-    
 }
 
 extension SaveController: SwipeCollectionViewCellDelegate {

@@ -17,10 +17,16 @@ class TrialViewController: UIViewController {
     
     let iapManager = IAPManager.shared
     let remoteConfig = RemoteConfig.remoteConfig()
-    let product = InAppManager.share.product
     var xMarkDelay = 0
     var textDelay = 0
     var sub = "com.decibelmeter.1wetr"
+    
+    let productW = InAppManager.share.productW
+    let productM = InAppManager.share.productM
+    let productY = InAppManager.share.productY
+    let productWT = InAppManager.share.productWT
+    let productMT = InAppManager.share.productMT
+    let productYT = InAppManager.share.productYT
 
     
     //MARK: - Localizable
@@ -81,7 +87,7 @@ extension TrialViewController {
         }
         
         if UserDefaults.standard.value(forKey: "theme") as! Int == 0 {
-            bcImage.image = UIImage(named: "05")
+            bcImage.image = UIImage(named: "08")
             privacy.setTitleColor(.white, for: .normal)
             terms.setTitleColor(.white, for: .normal)
             andLabel.textColor = .white
@@ -101,59 +107,355 @@ extension TrialViewController {
         }
        
         if t == "com.decibelmeter.1wetr" {
-            if  Locale.current.languageCode! == "tr" || Locale.current.languageCode! == "ko" {
-                startTrial.text = "\(lthen) \(small) \(priceStringFor(product: product[3])) ödeyin "
+            if  Locale.current.languageCode! == "tr"{
+                let q = DispatchQueue.global(qos: .userInteractive)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1wetr"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lthen)  \(priceString) \(lweekPer)"
+
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
+            } else if  Locale.current.languageCode! == "ko" {
+                
+                let q = DispatchQueue.global(qos: .userInteractive)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1wetr"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text =  "\(lthen) \(priceString) \(lweekPer)"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             }
                 else {
-                startTrial.text =  "\(lthen) \(priceStringFor(product: product[3])) \(lweekPer)"
+               
             }
         } else if  t == "com.decibelmeter.1we" {
             
-            if  Locale.current.languageCode! == "tr" || Locale.current.languageCode! == "ko" {
-                startTrial.text = "\(lweekPer) \(priceStringFor(product: product[2])) \(NSLocalizedString("SubFor", comment: ""))"
+            if  Locale.current.languageCode! == "tr" {
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1we"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lweekPer) \(priceString) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             } else if   Locale.current.languageCode! == "ja" {
-                startTrial.text = " \(priceStringFor(product: product[2])) \(lweekPer) \(NSLocalizedString("SubFor", comment: ""))"
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1we"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = " \(priceString) \(lweekPer) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
+            } else if Locale.current.languageCode! == "ko" {
+                let q = DispatchQueue.global(qos: .userInteractive)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1we"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lweekPer) \(priceString) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             }
               else {
-                startTrial.text = " \(NSLocalizedString("SubFor", comment: "")) \(priceStringFor(product: product[2])) \(lweekPer)"
+                  let q = DispatchQueue.global(qos: .default)
+                  q.async {
+                      [self] in
+                      SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1we"]) { [self] result in
+                          if let product = result.retrievedProducts.first {
+                              let priceString = product.localizedPrice!
+                              startTrial.text = " \(NSLocalizedString("SubFor", comment: "")) \(priceString) \(lweekPer)"
+                          }
+                          else if let invalidProductId = result.invalidProductIDs.first {
+                          }
+                          else {
+                          }
+                      }
+
+                  }
             }
          
         } else if t == "com.decibelmeter.1mo" {
-            if  Locale.current.languageCode! == "tr" || Locale.current.languageCode! == "ko" {
-                DispatchQueue.main.async { [self] in
-                    startTrial.text = "\(lMounth) \(priceStringFor(product: product[0])) \(NSLocalizedString("SubFor", comment: ""))"
+            if  Locale.current.languageCode! == "tr" {
+              
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1mo"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lMounth) \(priceString) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
                 }
-            }else if   Locale.current.languageCode! == "ja" {
-                startTrial.text = " \(priceStringFor(product: product[0])) \(lMounth) \(NSLocalizedString("SubFor", comment: ""))"
+            } else if   Locale.current.languageCode! == "ja" {
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1mo"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = " \(priceString) \(lMounth) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
+            } else if  Locale.current.languageCode! == "ko" {
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1mo"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lMounth) \(priceString) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             }
             else {
-                startTrial.text = " \(NSLocalizedString("SubFor", comment: "")) \(priceStringFor(product: product[0])) \(lMounth)"
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1mo"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = " \(NSLocalizedString("SubFor", comment: "")) \(priceString) \(lMounth)"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             }
             
         } else if t == "com.decibelmeter.1ye" {
             
-            if   Locale.current.languageCode! == "tr" || Locale.current.languageCode! == "ko" {
-                DispatchQueue.main.async { [self] in
-                    startTrial.text = "\(lYear) \(priceStringFor(product: product[4])) \(NSLocalizedString("SubFor", comment: ""))"
+            if   Locale.current.languageCode! == "tr" {
+              
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1ye"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lYear) \(priceString) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
                 }
             } else if   Locale.current.languageCode! == "ja" {
-                startTrial.text = " \(priceStringFor(product: product[4])) \(lYear) \(NSLocalizedString("SubFor", comment: ""))"
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1ye"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = " \(priceString) \(lYear) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
+            } else if Locale.current.languageCode! == "ko" {
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1ye"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lYear) \(priceString) \(NSLocalizedString("SubFor", comment: ""))"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             }
             
             else {
-                startTrial.text = " \(NSLocalizedString("SubFor", comment: "")) \(priceStringFor(product: product[4])) \(lYear)"
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1ye"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = " \(NSLocalizedString("SubFor", comment: "")) \(priceString) \(lYear)"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             }
         } else if t == "com.decibelmeter.1yetr" {
             if  Locale.current.languageCode! == "tr"{
-                startTrial.text = "\(lthen) \(smallYear) \(priceStringFor(product: product[5])) ödeyin "
-            } else {
-                startTrial.text =  "\(lthen) \(priceStringFor(product: product[5])) \(lYear)"
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1yetr"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lthen) \(smallYear) \(priceString) ödeyin "
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
+            } else if  Locale.current.languageCode! == "ko" {
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1yetr"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lthen)  \(priceString) \(lYear) "
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
+            }
+            
+            else {
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1yetr"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text =  "\(lthen) \(priceString) \(lYear)"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             }
         } else if t == "com.decibelmeter.1motr" {
             if  Locale.current.languageCode! == "tr"{
-                startTrial.text = "\(lthen) \(smallMounth) \(priceStringFor(product: product[1])) ödeyin "
-            } else {
-                startTrial.text =  "\(lthen) \(priceStringFor(product: product[1])) \(lMounth)"
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1motr"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lthen) \(smallMounth) \(priceString) ödeyin "
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
+            } else if  Locale.current.languageCode! == "ko" {
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1motr"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text = "\(lthen)  \(priceString) \(lMounth) "
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
+            }
+            
+            else {
+                let q = DispatchQueue.global(qos: .default)
+                q.async {
+                    [self] in
+                    SwiftyStoreKit.retrieveProductsInfo(["com.decibelmeter.1motr"]) { [self] result in
+                        if let product = result.retrievedProducts.first {
+                            let priceString = product.localizedPrice!
+                            startTrial.text =  "\(lthen) \(priceString) \(lMounth)"
+                        }
+                        else if let invalidProductId = result.invalidProductIDs.first {
+                        }
+                        else {
+                        }
+                    }
+
+                }
             }
         } else {
             let vc = TrialSubscribe()
@@ -267,10 +569,18 @@ extension TrialViewController {
                 }
             }
         }
-        
-       
-        
-     
+        if Reachability.isConnectedToNetwork(){
+            print("Internet Connection Available!")
+        }else{
+            xMarkDelay = 0
+            textDelay = 0
+            let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(textDelay), repeats: false) { [self] Timer in
+                startTrial.isHidden = false
+            }
+            let _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(xMarkDelay), repeats: false) { [self] Timer in
+                xMark.isHidden = false
+            }
+        }
     }
 }
 
@@ -312,7 +622,6 @@ extension TrialViewController {
             }
         }
    
-        
         if t == "com.decibelmeter.1wetr" {
             iapManager.purchase(purchase: .weekTrial)
             spiner.startAnimating()
@@ -321,6 +630,7 @@ extension TrialViewController {
             }
         } else if  t == "com.decibelmeter.1we" {
             iapManager.purchase(purchase: .week)
+            
             spiner.startAnimating()
             let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [self] Timer in
                 spiner.stopAnimating()
@@ -351,8 +661,8 @@ extension TrialViewController {
                 spiner.stopAnimating()
             }
         }
-        
     }
+    
     @objc func restoreTapped() {
         
         let alertController = UIAlertController(title:NSLocalizedString("DecibelMeter", comment: "")  , message: NSLocalizedString("subNO", comment: ""), preferredStyle: .alert)
@@ -368,28 +678,22 @@ extension TrialViewController {
         alertController2.addAction(cancelButton2)
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
             if results.restoreFailedPurchases.count > 0 {
-                print("Restore Failed: \(results.restoreFailedPurchases)")
 
             }
             else if results.restoredPurchases.count > 0 {
-                self.present(alertController, animated: true, completion: nil)
-                Constants.shared.hasPurchased = false
-
+                let accesss = true
+                UserDefaults.standard.set(accesss, forKey: "FullAccess")
+                self.present(alertController2, animated: true, completion: nil)
+                let _ = Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { Timer in
+                    self.dismiss(animated: true)
+                }
             }
             else {
-                print("Nothing to Restore")
+                self.present(alertController, animated: true, completion: nil)
             }
         }
         
         IAPManager.shared.restorePurchases()
-        
-        if Constants.shared.hasPurchased == true {
-            self.present(alertController2, animated: true, completion: nil)
-        } else {
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
-
         
     }
     
@@ -401,6 +705,4 @@ extension TrialViewController {
         
         return numberFormatter.string(from: product.price)!
     }
-    
-    
 }

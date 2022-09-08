@@ -5,8 +5,8 @@
   Created by Valera Sysov on 25.07.22.
   
 */
-NSMicrophoneUsageDescription = "Veuillez paramétrer l'autorisation d'utilisation du microphone dans les paramètres pour le travail" ;
-NSCameraUsageDescription = "Veuillez définir l'autorisation d'utilisation de de l'appareil photo dans les paramètres pour le travail" ;
-NSPhotoLibraryAddUsageDescription = "Veuillez définir l'autorisation d'utilisation de la photothèque pour travailler";
-NSLocationWhenInUseUsageDescription = "Veuillez définir l'autorisation d'utilisation de localisation dans les paramètres pour travailler" ;
+NSMicrophoneUsageDescription = "Nécessaire pour le fonctionnement de l'application, afin de mesurer le niveau de bruit audio";
+NSCameraUsageDescription = "Nécessaire pour le fonctionnement de l'application, afin de capturer le niveau de bruit vidéo et audio" ;
+NSPhotoLibraryAddUsageDescription = "Utilisé pour afficher la localisation de la ville dans les images capturées";
+NSLocationWhenInUseUsageDescription = "Utilisé pour afficher la localisation de la ville dans les images capturées";
 CFBundleDisplayName = "Sonomètre";

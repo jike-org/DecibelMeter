@@ -15,10 +15,8 @@ class TabBar: UITabBarController {
         super.viewWillAppear(animated)
         setupView()
         selectedIndex = 2
-        
     }
 }
-
 
 extension TabBar {
     
@@ -68,12 +66,11 @@ extension TabBar {
         
         viewControllers = views
         
-//        tabBar.backgroundColor = UIColor(named: "backgroundColor")
         tabBar.tintColor = .clear
         tabBar.barTintColor = .clear
+        tabBar.backgroundColor = #colorLiteral(red: 0.07064444572, green: 0.07052957267, blue: 0.07489018887, alpha: 1)
         tabBar.isTranslucent = true
     }
-    
 }
 
 extension TabBar {

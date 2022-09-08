@@ -9,8 +9,6 @@ public protocol RecorderDelegate: NSObject, AVAudioRecorderDelegate {
     func recorder(_ recorder: Recorder, didCaptureDecibels decibels: Int)
     func recorder(_ recorder: Recorder, didFinishRecording info: RecordInfo)
 }
-
-
 /// Audio recorder
 public class Recorder {
     
@@ -23,7 +21,6 @@ public class Recorder {
     public var seconds: Int = 0
     
     public var decibels: [Int] = Array(repeating: 0, count: 60)
-    
     /// Calculate average noise level
     public var avg: Int? {
         if decibelsForMath.count != 0 {
@@ -131,7 +128,6 @@ extension Recorder {
             }
         }
     }
-    
 }
 
 // MARK: Stop
@@ -149,7 +145,6 @@ extension Recorder {
         decibelsForMath = []
         decibels        = Array(repeating: 0, count: 60)
     }
-    
 }
 
 
@@ -192,5 +187,4 @@ extension Recorder {
             timer.invalidate()
         }
     }
-    
 }

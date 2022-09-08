@@ -20,10 +20,9 @@ class SubscribeViewController: UICollectionViewCell {
     let notificationCenter = NotificationCenter.default
     let iapManager = InAppManager.share
     lazy var headingLabel = Label(style: .onBoarding, lHeading.uppercased())
-    let product = InAppManager.share.product
     lazy var spinenr = UIActivityIndicatorView(style: .large)
     
-    lazy var trialButton = Label(style: .trial, "\(lTrial) \n\(priceStringFor(product: product[3])) \(lTrialThen)")
+    lazy var trialButton = Label(style: .trial, "")
 
     public static let identifier = "SubscribeOne"
     
@@ -32,8 +31,6 @@ class SubscribeViewController: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        
-//        notificationCenter.addObserver(self, selector: #selector(trialButtonTapped1), name: NSNotification.Name(InAppPurchaseProduct.weekTrial.rawValue), object: nil)
         
         func fetchValues() {
         
@@ -67,7 +64,6 @@ class SubscribeViewController: UICollectionViewCell {
         })
         addSubview(backImage)
         addSubview(headingLabel)
-//        addSubview(headingLabelAll)
         addSubview(trialButton)
         backImage.frame = UIScreen.main.bounds
         backImage.addSubview(spinenr)
@@ -77,10 +73,7 @@ class SubscribeViewController: UICollectionViewCell {
         NSLayoutConstraint.activate([
             headingLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             headingLabel.bottomAnchor.constraint(equalTo: trialButton.topAnchor, constant: -30),
-            
-//            headingLabelAll.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10),
-//            headingLabelAll.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
+
             trialButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -180),
             trialButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             trialButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
@@ -95,14 +88,6 @@ class SubscribeViewController: UICollectionViewCell {
         numberFormatter.locale = product.priceLocale
         
         return numberFormatter.string(from: product.price)!
-    }
-    
-    @objc func trialButtonTapped() {
-    }
-    
-    @objc func trialButtonTapped1() {
-       
-        
     }
 }
 

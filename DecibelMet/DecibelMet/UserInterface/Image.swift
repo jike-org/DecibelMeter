@@ -54,7 +54,6 @@ class ImageView: UIImageView {
         case .refresh:
             let largeConfig = UIImage.SymbolConfiguration(pointSize: 240, weight: .bold, scale: .medium)
             self.image = UIImage(systemName: "clock.arrow.2.circlepath")?.withTintColor(.blue).withConfiguration(largeConfig)
-            
         }
     }
     

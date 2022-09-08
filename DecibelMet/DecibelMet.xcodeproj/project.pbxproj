@@ -27,6 +27,8 @@
 		01658FAB283245EB001336A4 /* SubscribeTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01658FAA283245EB001336A4 /* SubscribeTwoView.swift */; };
 		0165FB6C288ED0900006EBEB /* TrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0165FB6B288ED08F0006EBEB /* TrialViewController.swift */; };
 		01686950288AB78D0086659E /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0168694F288AB7890086659E /* AppleIncRootCertificate.cer */; };
+		01703D8E28B3D1AA00228465 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01703D8D28B3D1AA00228465 /* InternetConnection.swift */; };
+		01703D9228B5177A00228465 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01703D9128B5177A00228465 /* StoreManager.swift */; };
 		017379D32844FA9C00A77E83 /* Dosimeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017379D22844FA9C00A77E83 /* Dosimeter.swift */; };
 		0175892E28638037008B4650 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0175893028638037008B4650 /* Localizable.strings */; };
 		0176C5BA2840F9830074B8D5 /* CollectionViewSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176C5B92840F9830074B8D5 /* CollectionViewSave.swift */; };
@@ -36,6 +38,7 @@
 		017A4ADD283E458800D4092C /* RecordClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4ADC283E458800D4092C /* RecordClass.swift */; };
 		017A4ADF283E45B400D4092C /* RecordProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4ADE283E45B400D4092C /* RecordProperty.swift */; };
 		017A4AE1283E45CC00D4092C /* RecordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017A4AE0283E45CC00D4092C /* RecordInfo.swift */; };
+		0180A84F28B64B9B007C1BE7 /* SettingRateUS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180A84E28B64B9B007C1BE7 /* SettingRateUS.swift */; };
 		0180CE2A2822C10C00E80380 /* AvgMinMaxBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE292822C10C00E80380 /* AvgMinMaxBar.swift */; };
 		0180CE2C2822C13100E80380 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE2B2822C13100E80380 /* StackView.swift */; };
 		0180CE2E2822C19200E80380 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE2D2822C19200E80380 /* Button.swift */; };
@@ -43,7 +46,6 @@
 		0180CE322822C1ED00E80380 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE312822C1ED00E80380 /* Recorder.swift */; };
 		0180CE362822C2EB00E80380 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE352822C2EB00E80380 /* Constants.swift */; };
 		0180CE382822C73400E80380 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180CE372822C73400E80380 /* Player.swift */; };
-		0193F34A28A42155008B8F7D /* Trial4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193F34928A42155008B8F7D /* Trial4.swift */; };
 		019655922880BCDC00F04FD9 /* TrialSubscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019655912880BCDC00F04FD9 /* TrialSubscribe.swift */; };
 		019655942880C38300F04FD9 /* FAQSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019655932880C38300F04FD9 /* FAQSetting.swift */; };
 		01A259A42823DCD300EBA84C /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A259A32823DCD200EBA84C /* TabBar.swift */; };
@@ -81,7 +83,6 @@
 		0129EEDC2872CDE40043C7CA /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0129EEDD2872CDEF0043C7CA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0129EEDE2872CE020043C7CA /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		0129EEDF2872CE0C0043C7CA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0129EEE02872CE130043C7CA /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0129EEE12872CE1C0043C7CA /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01443A4C2830E09100E4D413 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
@@ -104,6 +105,10 @@
 		01658FAA283245EB001336A4 /* SubscribeTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeTwoView.swift; sourceTree = "<group>"; };
 		0165FB6B288ED08F0006EBEB /* TrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialViewController.swift; sourceTree = "<group>"; };
 		0168694F288AB7890086659E /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
+		01703D8D28B3D1AA00228465 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
+		01703D8F28B423B800228465 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01703D9028B423B800228465 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		01703D9128B5177A00228465 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		017379D22844FA9C00A77E83 /* Dosimeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dosimeter.swift; sourceTree = "<group>"; };
 		0175892F28638037008B4650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0175893228638056008B4650 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -114,6 +119,7 @@
 		017A4ADC283E458800D4092C /* RecordClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecordClass.swift; path = DecibelMet/Persist/Model/RecordClass.swift; sourceTree = SOURCE_ROOT; };
 		017A4ADE283E45B400D4092C /* RecordProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordProperty.swift; sourceTree = "<group>"; };
 		017A4AE0283E45CC00D4092C /* RecordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInfo.swift; sourceTree = "<group>"; };
+		0180A84E28B64B9B007C1BE7 /* SettingRateUS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRateUS.swift; sourceTree = "<group>"; };
 		0180CE292822C10C00E80380 /* AvgMinMaxBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgMinMaxBar.swift; sourceTree = "<group>"; };
 		0180CE2B2822C13100E80380 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		0180CE2D2822C19200E80380 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -121,7 +127,6 @@
 		0180CE312822C1ED00E80380 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		0180CE352822C2EB00E80380 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0180CE372822C73400E80380 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		0193F34928A42155008B8F7D /* Trial4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trial4.swift; sourceTree = "<group>"; };
 		019655912880BCDC00F04FD9 /* TrialSubscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialSubscribe.swift; sourceTree = "<group>"; };
 		019655932880C38300F04FD9 /* FAQSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQSetting.swift; sourceTree = "<group>"; };
 		01A259A32823DCD200EBA84C /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -144,7 +149,6 @@
 		01DB5F7E288FE4F90066E5FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01DB5F7F288FE4F90066E5FA /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		01DB5F80288FE4F90066E5FA /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		01DB5F81288FE4F90066E5FA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01DB5F82288FE4F90066E5FA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01DB5F83288FE4F90066E5FA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01DB5F84288FE4F90066E5FA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -214,7 +218,6 @@
 				01658FAA283245EB001336A4 /* SubscribeTwoView.swift */,
 				019655912880BCDC00F04FD9 /* TrialSubscribe.swift */,
 				0165FB6B288ED08F0006EBEB /* TrialViewController.swift */,
-				0193F34928A42155008B8F7D /* Trial4.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -303,8 +306,11 @@
 				0159FA9F2863159A0021F895 /* darkLightMode.swift */,
 				0159FAA12863164C0021F895 /* MTUserDefaults.swift */,
 				010ADB0628832EF90062FD53 /* RateUsVC.swift */,
+				0180A84E28B64B9B007C1BE7 /* SettingRateUS.swift */,
 				01DA069C2887797300F13885 /* DeviceEx.swift */,
 				01130D6028ACEF90005DDCCD /* DeepLink.swift */,
+				01703D8D28B3D1AA00228465 /* InternetConnection.swift */,
+				01703D9128B5177A00228465 /* StoreManager.swift */,
 			);
 			path = "Support files";
 			sourceTree = "<group>";
@@ -462,7 +468,6 @@
 				ja,
 				ko,
 				"pt-PT",
-				es,
 				tr,
 				vi,
 				"en-AU",
@@ -471,6 +476,7 @@
 				"zh-Hant",
 				"pt-BR",
 				"es-419",
+				es,
 			);
 			mainGroup = 01D2DCD428229BC7003AB953;
 			productRefGroup = 01D2DCDE28229BC7003AB953 /* Products */;
@@ -551,12 +557,14 @@
 				01E166832832C6D600DBC846 /* Image.swift in Sources */,
 				01156B27287BECC000D62A1B /* InAppPurchaseProduct.swift in Sources */,
 				019655942880C38300F04FD9 /* FAQSetting.swift in Sources */,
+				0180A84F28B64B9B007C1BE7 /* SettingRateUS.swift in Sources */,
 				01A259B12823FDDA00EBA84C /* ImageView.swift in Sources */,
 				0180CE362822C2EB00E80380 /* Constants.swift in Sources */,
 				01156B29287BEEB700D62A1B /* InAppManager.swift in Sources */,
 				010ADB0728832EF90062FD53 /* RateUsVC.swift in Sources */,
 				0178FA8A283E6084006C03CC /* DecibelMet.xcdatamodeld in Sources */,
 				019655922880BCDC00F04FD9 /* TrialSubscribe.swift in Sources */,
+				01703D8E28B3D1AA00228465 /* InternetConnection.swift in Sources */,
 				017A4ADF283E45B400D4092C /* RecordProperty.swift in Sources */,
 				0180CE2E2822C19200E80380 /* Button.swift in Sources */,
 				01A259AC2823FD8400EBA84C /* SettingViewController.swift in Sources */,
@@ -565,6 +573,7 @@
 				01476EBC284A549C0007C006 /* DosimetreCell.swift in Sources */,
 				01658FA328324363001336A4 /* FirstListView.swift in Sources */,
 				0159FAA02863159A0021F895 /* darkLightMode.swift in Sources */,
+				01703D9228B5177A00228465 /* StoreManager.swift in Sources */,
 				01DA069D2887797300F13885 /* DeviceEx.swift in Sources */,
 				017A4ADD283E458800D4092C /* RecordClass.swift in Sources */,
 				01443A512830E0BC00E4D413 /* OnBoardingManager.swift in Sources */,
@@ -588,7 +597,6 @@
 				0159FAA22863164C0021F895 /* MTUserDefaults.swift in Sources */,
 				0180CE2C2822C13100E80380 /* StackView.swift in Sources */,
 				01130D6628AF97B9005DDCCD /* IAPManager.swift in Sources */,
-				0193F34A28A42155008B8F7D /* Trial4.swift in Sources */,
 				01ACC8C7289181CF00E8421E /* CellDosimetre.swift in Sources */,
 				0180CE302822C1B100E80380 /* Gradient.swift in Sources */,
 				01130D6128ACEF90005DDCCD /* DeepLink.swift in Sources */,
@@ -611,7 +619,6 @@
 				0129EEDC2872CDE40043C7CA /* ja */,
 				0129EEDD2872CDEF0043C7CA /* ko */,
 				0129EEDE2872CE020043C7CA /* pt-PT */,
-				0129EEDF2872CE0C0043C7CA /* es */,
 				0129EEE02872CE130043C7CA /* tr */,
 				0129EEE12872CE1C0043C7CA /* vi */,
 				015ADF152875BEC100F73BDB /* en-AU */,
@@ -620,6 +627,7 @@
 				015ADF192875BEEE00F73BDB /* pt-BR */,
 				015ADF1A2875C4EA00F73BDB /* zh-Hant */,
 				01130D6328AD250F005DDCCD /* es-419 */,
+				01703D9028B423B800228465 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -643,7 +651,6 @@
 				01DB5F7E288FE4F90066E5FA /* en */,
 				01DB5F7F288FE4F90066E5FA /* zh-HK */,
 				01DB5F80288FE4F90066E5FA /* en-GB */,
-				01DB5F81288FE4F90066E5FA /* es */,
 				01DB5F82288FE4F90066E5FA /* it */,
 				01DB5F83288FE4F90066E5FA /* ko */,
 				01DB5F84288FE4F90066E5FA /* zh-Hant */,
@@ -655,6 +662,7 @@
 				01DB5F8A288FE4F90066E5FA /* fr */,
 				01DB5F8B288FE4F90066E5FA /* pt-PT */,
 				01130D6228AD250E005DDCCD /* es-419 */,
+				01703D8F28B423B800228465 /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -789,20 +797,20 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = .;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required for the app to work, in order to capture video and audio noise level";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = .;
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = .;
-				INFOPLIST_KEY_NSLocationUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = .;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Used to display city location in captured images";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Used to display city location in captured images";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Used to display city location in captured images";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Required for the app to work, in order to save video and audio noise level";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Access;
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = test1;
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = .;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Required for the app to work, in order to save video and audio noise level";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Required for the app to work, in order to save video and audio noise level";
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -815,7 +823,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindateq.decibelmeter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -833,20 +841,20 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = 2Q42SUF3JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DecibelMet/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = .;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required for the app to work, in order to capture video and audio noise level";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = .;
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = .;
-				INFOPLIST_KEY_NSLocationUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = .;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Used to display city location in captured images";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Used to display city location in captured images";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Used to display city location in captured images";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Required for the app to work, in order to save video and audio noise level";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Access;
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = test1;
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = .;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Required for the app to work, in order to save video and audio noise level";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Required for the app to work, in order to save video and audio noise level";
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -859,7 +867,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindateq.decibelmeter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

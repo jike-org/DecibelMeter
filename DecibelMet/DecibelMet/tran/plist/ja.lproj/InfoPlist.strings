@@ -5,8 +5,8 @@
   Created by Valera Sysov on 25.07.22.
   
 */
-NSMicrophoneUsageDescription = "作業用のマイク使用許可設定をお願いします";
-NSCameraUsageDescription = "仕事で使用する場合は、設定でカメラの使用を許可してください";
-NSPhotoLibraryAddUsageDescription = "作業用のフォトライブラリの使用許可を設定する必要があります";
-NSLocationWhenInUseUsageDescription = "仕事で使う場合は、設定で位置情報の利用を許可してください";
+NSMicrophoneUsageDescription = "音声のノイズレベルを測定するため、アプリの動作に必要です";
+NSCameraUsageDescription = "アプリを動作させるために必要な、ビデオとオーディオのノイズレベルをキャプチャするため";
+NSPhotoLibraryAddUsageDescription = "アプリの動作に必要な、ビデオとオーディオのノイズレベルを保存するため"; 
+NSLocationWhenInUseUsageDescription = "撮影した画像に都市の位置情報を表示するために使用します";
 CFBundleDisplayName = "デシベルメーター";

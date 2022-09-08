@@ -93,8 +93,6 @@ extension SaveControllerInfo {
             backButton.widthAnchor.constraint(equalToConstant: 10),
             backButton.heightAnchor.constraint(equalToConstant: 10),
             
-            // value
-            
             durationValue.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             durationValue.topAnchor.constraint(equalTo: durationLabel.topAnchor),
             durationValue.widthAnchor.constraint(equalToConstant: widthCommon),
@@ -125,8 +123,6 @@ extension SaveControllerInfo {
             maxValue.widthAnchor.constraint(equalToConstant: widthCommon),
             maxValue.heightAnchor.constraint(equalToConstant: heightCommon),
             
-            
-            // main ui
             mainInfoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mainInfoLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 70),
             mainInfoLabel.widthAnchor.constraint(equalToConstant: 90),
